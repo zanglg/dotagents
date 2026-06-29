@@ -1,0 +1,36 @@
+# Operating system metadata
+.DS_Store
+Thumbs.db
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# Logs and scratch output
+*.log
+logs/
+tmp/
+temp/
+
+# Dependency and tool caches
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# Local agent/tool state
+.codex/
+.cache/
