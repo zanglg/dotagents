@@ -1,0 +1,4 @@
+interface:
+  display_name: "Understand Codebase"
+  short_description: "Build mental models for large codebases"
+  default_prompt: "Use $understand-codebase to study this codebase component and explain its abstractions, boundaries, data structures, lifecycles, and execution paths."
