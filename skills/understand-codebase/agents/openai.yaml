@@ -1,4 +1,4 @@
 interface:
   display_name: "Understand Codebase"
   short_description: "Prioritize and analyze complex codebases"
-  default_prompt: "Use $concept-prioritization to scope this target, identify source-validated P0/P1 concepts, then run the applicable understand-codebase analysis facets."
+  default_prompt: "Use $understand-codebase to scope this target; first apply the grouped concept-prioritization protocol, then run the applicable foundational analysis facets."
