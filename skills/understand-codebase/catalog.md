@@ -1,10 +1,12 @@
 # Skill Catalog
 
-## Entry Skill
+## Discovery Entry Point
 
 | Skill | Purpose | Required output |
 | --- | --- | --- |
-| `understand-codebase` | Define the target boundary, perform broad concept discovery, validate candidate concepts locally, and produce a study plan. | `target-brief.md`, `concept-priority-map.md`, initial evidence records, facet order. |
+| `concept-prioritization` | Define the target boundary, perform broad concept discovery, validate candidate concepts locally, and produce a study plan. | `target-brief.md`, `concept-priority-map.md`, initial evidence records, facet order. |
+
+`understand-codebase` remains a broad compatibility skill at the group root. The staged foundational workflow begins with `concept-prioritization`.
 
 ## Foundational Facets
 
