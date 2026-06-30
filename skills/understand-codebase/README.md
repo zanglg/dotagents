@@ -1,6 +1,6 @@
 # Understand Codebase Skill Family
 
-This directory groups reusable Skills for building an evidence-backed model of a codebase target. The first implementation phase deliberately focuses on four foundational research facets rather than attempting to generate a final document or cover every engineering concern.
+This directory groups reusable Skills for building an evidence-backed model of a codebase target. The first implementation phase deliberately focuses on a small discovery step plus four foundational research facets, rather than attempting to generate a final document or cover every engineering concern.
 
 ## Current Scope
 
@@ -14,12 +14,14 @@ A future phase may add runtime-path, concurrency-and-lifetime, failure-recovery,
 
 ## Starting a Study
 
-1. Start with `SKILL.md` to bound the target and create `target-brief.md` plus `concept-priority-map.md`.
+1. Run `concept-prioritization` to create `target-brief.md` and `concept-priority-map.md`.
 2. Run `data-model-analysis`.
 3. Run `lifecycle-analysis` using the data-model material.
 4. Run `interface-analysis` using the data-model and lifecycle material.
 5. Run `execution-context-analysis` using all previous material.
 6. Preserve evidence records, cross-facet references, and text diagram sources in the study output.
+
+`SKILL.md` at this directory's root remains the existing broad umbrella skill for compatibility. The staged foundational workflow starts with `concept-prioritization`.
 
 The required output contract is in `shared/references/research-material-contract.md`.
 
