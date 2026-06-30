@@ -1,4 +1,4 @@
 interface:
   display_name: "Understand Codebase"
-  short_description: "Build mental models for large codebases"
-  default_prompt: "Use $understand-codebase to study this codebase component and explain its abstractions, boundaries, data structures, lifecycles, and execution paths."
+  short_description: "Prioritize and analyze complex codebases"
+  default_prompt: "Use $concept-prioritization to scope this target, identify source-validated P0/P1 concepts, then run the applicable understand-codebase analysis facets."
