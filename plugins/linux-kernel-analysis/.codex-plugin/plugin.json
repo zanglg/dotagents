@@ -1,0 +1,37 @@
+{
+  "name": "linux-kernel-analysis",
+  "version": "0.1.0",
+  "description": "Source-grounded workflows for multi-perspective analysis of Linux kernel modules, drivers, and subsystems.",
+  "author": {
+    "name": "Zang Leigang",
+    "url": "https://github.com/zanglg"
+  },
+  "homepage": "https://github.com/zanglg/dotagents/tree/dev/plugins/linux-kernel-analysis",
+  "repository": "https://github.com/zanglg/dotagents",
+  "license": "MIT",
+  "keywords": [
+    "linux",
+    "kernel",
+    "source-analysis",
+    "drivers",
+    "subsystems"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Linux Kernel Analysis",
+    "shortDescription": "Analyze Linux kernel code with specialized methods.",
+    "longDescription": "A family of source-grounded workflows for analyzing Linux kernel contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance, with explicit source-version, architecture, and platform boundaries.",
+    "developerName": "Zang Leigang",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Analyze"
+    ],
+    "websiteURL": "https://github.com/zanglg/dotagents",
+    "defaultPrompt": [
+      "Analyze this Linux kernel subsystem from source.",
+      "Trace the execution-context handoffs in this driver.",
+      "Build a validation plan for these kernel claims."
+    ]
+  }
+}

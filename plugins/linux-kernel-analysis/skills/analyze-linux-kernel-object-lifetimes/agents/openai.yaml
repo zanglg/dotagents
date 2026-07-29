@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kernel Object Lifetimes"
+  short_description: "Analyze objects, ownership, and lifetimes"
+  default_prompt: "Use $analyze-linux-kernel-object-lifetimes to trace the core objects and their ownership lifecycles."

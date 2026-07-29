@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kernel Performance"
+  short_description: "Analyze performance mechanisms and tradeoffs"
+  default_prompt: "Use $analyze-linux-kernel-performance to derive and validate this kernel path's performance model."

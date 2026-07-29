@@ -1,6 +1,7 @@
 # dotagents
 
-Portable content for a personal `.agents` workspace.
+Portable plugins, skills, and agent-facing content for a personal `.agents`
+workspace.
 
 This repository is intended to hold durable, reusable agent-facing assets such as
 skills, workflow scaffolding, templates, and project instructions. It should stay
@@ -8,7 +9,9 @@ small, auditable, and safe to copy between machines.
 
 ## What Belongs Here
 
-- Reusable skills under `skills/<skill-name>/`
+- Reusable skills grouped under `plugins/<plugin-name>/skills/<skill-name>/`
+- Skills-only plugins with `.codex-plugin/plugin.json`
+- A Git-backed marketplace at `.agents/plugins/marketplace.json`
 - Agent instructions and workflow notes
 - Templates, references, and scripts owned by a specific skill
 - Documentation that explains how the workspace is organized
@@ -24,6 +27,9 @@ small, auditable, and safe to copy between machines.
 
 ```text
 .
+|-- .agents/
+|   `-- plugins/
+|       `-- marketplace.json
 |-- .github/
 |   `-- pull_request_template.md
 |-- AGENTS.md          # Instructions for agents working in this repository
@@ -32,32 +38,49 @@ small, auditable, and safe to copy between machines.
 |-- LICENSE            # MIT License
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
-`-- skills/
-    `-- .gitkeep       # Placeholder for reusable skills
+`-- plugins/
+    `-- linux-kernel-analysis/
+        |-- .codex-plugin/plugin.json
+        |-- scripts/validate.sh
+        `-- skills/
+            |-- analyze-linux-kernel/
+            |-- analyze-linux-kernel-context-handoffs/
+            `-- ...
 ```
 
-Each reusable skill should live in its own directory:
+Each reusable skill should live inside the plugin that owns it:
 
 ```text
-skills/<skill-name>/
+plugins/<plugin-name>/skills/<skill-name>/
 |-- SKILL.md
+|-- agents/openai.yaml
 |-- references/
 |-- scripts/
-|-- assets/
-`-- templates/
+`-- assets/
 ```
 
 Only add supporting directories when the skill actually needs them. Keep files
 near the skill that owns them so future agents can audit and update the content
 without searching the whole workspace.
 
-## Adding A Skill
+## Adding a Plugin or Skill
 
-1. Create `skills/<skill-name>/SKILL.md`.
-2. Describe when the skill should be used and how to use it.
-3. Put supporting scripts, references, templates, or assets beside that skill.
-4. Run the smallest relevant validation for any executable content.
-5. Review `git status --short` before committing.
+1. Create or select `plugins/<plugin-name>/`.
+2. Keep its `.codex-plugin/plugin.json` name aligned with the plugin directory.
+3. Create `skills/<skill-name>/SKILL.md` inside the plugin.
+4. Put supporting scripts, references, or assets beside the owning skill.
+5. Add the plugin to `.agents/plugins/marketplace.json`.
+6. Run the plugin and skill validators.
+7. Review `git status --short` before committing.
+
+## Installing from This Repository
+
+Add this repository as a Git-backed marketplace, then install the desired
+plugin from the `dotagents` marketplace. Pin a tag or commit for reproducible
+use; use the `dev` branch only while testing unreleased changes.
+
+The first available plugin is `linux-kernel-analysis`, a family of coordinated
+and specialist workflows for source-grounded Linux kernel analysis.
 
 ## Contribution Conventions
 

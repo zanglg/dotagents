@@ -23,8 +23,10 @@ and easy to audit.
 - Prefer plain text and Markdown for durable documentation.
 - Use ASCII unless an existing file or user-facing content clearly calls for
   another character set.
-- When adding a reusable skill, put it under `skills/<skill-name>/` with a
-  `SKILL.md` entrypoint.
+- Package related reusable skills under
+  `plugins/<plugin-name>/skills/<skill-name>/` with a `SKILL.md` entrypoint.
+- Keep `.agents/plugins/marketplace.json` aligned with plugin manifests.
+- Use verb-led names for skills and noun-phrase names for plugins.
 - Keep supporting files near the skill that owns them, such as `scripts/`,
   `references/`, `assets/`, or templates.
 - Update `CHANGELOG.md` and `VERSION` when a change is intended as a notable
@@ -43,3 +45,6 @@ git status --short
 For documentation-only changes, manually review Markdown for clarity and broken
 relative links. For scripts or generated assets, run the smallest relevant local
 check and record it in the final response.
+
+For plugin changes, run the plugin's validation script when present. Otherwise
+run the staged `validate_plugin.py` and `quick_validate.py` helpers directly.

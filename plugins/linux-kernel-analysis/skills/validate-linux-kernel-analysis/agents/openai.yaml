@@ -1,0 +1,4 @@
+interface:
+  display_name: "Validate Kernel Analysis"
+  short_description: "Design source and runtime validation plans"
+  default_prompt: "Use $validate-linux-kernel-analysis to turn kernel-analysis claims into targeted validation experiments."

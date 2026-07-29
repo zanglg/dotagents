@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kernel Failure Recovery"
+  short_description: "Analyze errors, retries, and recovery"
+  default_prompt: "Use $analyze-linux-kernel-failure-recovery to trace error classification and recovery paths."
