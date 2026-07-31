@@ -6,7 +6,7 @@
 - Common carriers
 - Wait and wakeup
 - Block completion
-- Architecture and platform checks
+- Architecture and platform seams
 - Semantic traps
 
 ## Generic proof record
@@ -20,7 +20,7 @@ Handoff mechanism:
 Logical operation/object:
 Selection condition:
 Continuation:
-Evidence class:
+Evidence class: SOURCE | DERIVATION | UNRESOLVED
 ```
 
 When an API may invoke inline or defer, create one record for each reachable
@@ -63,10 +63,10 @@ makes progress possible.
 ## Block completion
 
 An ops binding such as `.complete = foo_complete` proves only callback identity.
-Find the target commit's indirect `mq_ops->complete` invocation and the path
+Find the mainline source's indirect `mq_ops->complete` invocation and the path
 that reaches it.
 
-For `blk_mq_complete_request()`-style flows, test all material selectors:
+For `blk_mq_complete_request()`-style flows, trace all material selectors:
 
 - current CPU and `rq->mq_hctx->cpumask`;
 - queue completion-affinity flags;
@@ -94,15 +94,15 @@ sequenceDiagram
     end
 ```
 
-This is a search pattern, not a claim about every kernel version.
+This is a source search pattern, not a universal path claim.
 
-## Architecture and platform checks
+## Architecture and platform seams
 
-For arm64, cross into architecture code only far enough to establish IRQ/IPI
-entry or architecture-specific context semantics. For QEMU `virt`, distinguish
-generic Linux behavior from GIC and emulated-device behavior. A QEMU device
-model may explain which interrupt occurs, but the selected kernel source
-determines how Linux routes the continuation.
+When carrier semantics cross into architecture or platform code, follow the
+mainline source only far enough to establish the IRQ/IPI entry, low-level
+primitive, or callback seam. If the user does not specify an architecture or
+platform, retain materially different mainline implementations. Do not infer
+firmware, controller, or hardware behavior that source does not encode.
 
 ## Semantic traps
 

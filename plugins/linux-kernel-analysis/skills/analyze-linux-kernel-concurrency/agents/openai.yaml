@@ -1,4 +1,4 @@
 interface:
   display_name: "Kernel Concurrency"
   short_description: "Analyze shared state and synchronization"
-  default_prompt: "Use $analyze-linux-kernel-concurrency to map shared-state protection and memory ordering."
+  default_prompt: "Use $analyze-linux-kernel-concurrency to map shared-state protection and memory ordering in mainline source."

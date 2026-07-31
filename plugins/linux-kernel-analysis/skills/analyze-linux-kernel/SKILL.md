@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel
-description: Coordinate a source-grounded, multi-perspective analysis of a Linux kernel module, driver, or subsystem. Use for broad requests to understand architecture, objects, request journeys, state and path selection, execution contexts, concurrency, finite resources, failure recovery, performance, or runtime validation as one coherent model. Prefer a specialist analyze-linux-kernel-* skill when the user asks for only one perspective.
+description: Coordinate a source-only, multi-perspective static analysis of mainline Linux kernel code. Use for broad requests to understand subsystem architecture, boundary contracts, objects, request journeys, state and path selection, execution contexts, concurrency, finite resources, failure recovery, or performance mechanisms as one coherent model. Prefer a specialist analyze-linux-kernel-* skill when the user asks for only one perspective. Exclude out-of-tree modules, downstream or vendor kernels, builds, tracing, benchmarks, and runtime validation.
 ---
 
 # Analyze Linux Kernel
@@ -10,7 +10,7 @@ specialist methods in this plugin. Do not imitate every specialist with shallow
 checklists. Establish shared inputs once, run only the perspectives required by
 the question, and reconcile their outputs.
 
-Read [integration-contract.md](references/integration-contract.md) before
+Read [analysis-contract.md](references/analysis-contract.md) before
 starting. Read [report-shapes.md](references/report-shapes.md) when selecting
 the final artifact.
 
@@ -18,19 +18,13 @@ the final artifact.
 
 Before analyzing behavior:
 
-1. Resolve the actual source repository, requested ref, and exact commit.
-2. If no ref is specified, use tag `v7.1`; do not silently substitute another
-   version.
-3. Resolve architecture and platform. Default to `arm64` and QEMU `virt` only
-   when the user did not specify alternatives.
-4. State the module/subsystem boundary and one or more logical operations.
-5. Record relevant configuration, device capability, and runtime assumptions.
-6. If the target tree or required ref is unavailable, report the limitation and
-   distinguish API-based inference from source-confirmed behavior.
-
-Treat compilation, `compile_commands.json`, tracing, and QEMU runs as optional
-validation. Use them only when available and when they materially improve
-confidence.
+1. Confirm that the target belongs to mainline Linux source.
+2. State the subsystem boundary and one or more logical operations.
+3. Apply only constraints the user supplies.
+4. Otherwise retain materially different source-reachable alternatives and
+   name their selectors.
+5. Separate direct source claims, cross-source derivations, and unresolved
+   selectors.
 
 ## Select perspectives
 
@@ -46,7 +40,6 @@ Choose the smallest set that answers the request:
 | Tags, budgets, queue depth, backpressure, restart | `analyze-linux-kernel-resource-flow` |
 | Errors, timeout, retry, reset, cancellation, teardown | `analyze-linux-kernel-failure-recovery` |
 | Cache, batching, affinity, latency/throughput tradeoffs | `analyze-linux-kernel-performance` |
-| Source checks, tracing, sanitizers, QEMU experiments | `validate-linux-kernel-analysis` |
 
 For a broad subsystem analysis, normally work in this dependency order:
 
@@ -55,8 +48,7 @@ For a broad subsystem analysis, normally work in this dependency order:
 3. states and paths;
 4. context handoffs;
 5. concurrency and resource flow;
-6. failure recovery and performance;
-7. targeted validation.
+6. failure recovery and performance.
 
 Skip perspectives that do not affect the user's question. Revisit an earlier
 perspective when a later result exposes a missing object, path, or carrier.
@@ -65,18 +57,18 @@ perspective when a later result exposes a missing object, path, or carrier.
 
 Keep one compact ledger across perspectives:
 
-- source baseline: repository, ref, commit, configuration;
+- target mainline component and user-supplied constraints;
 - canonical object and operation names;
 - claim ID and claim text;
-- evidence class: `FACT`, `INFERENCE`, or `UNKNOWN`;
-- source anchors: path plus symbol or key expression;
-- architecture/platform applicability;
+- evidence class: `SOURCE`, `DERIVATION`, or `UNRESOLVED`;
+- symbol-based source anchors: path plus symbol or key expression;
+- architecture, configuration, and platform applicability where source exposes
+  alternatives;
 - conditions that select the behavior;
-- unresolved question or validation proposal.
+- unresolved selector or missing mainline source.
 
-Use source code at the target commit as the authority for actual behavior.
-Documentation and commit history may explain intent but must not override the
-selected source.
+Use mainline source as the authority for behavior. Documentation and commit
+history may explain intent but must not override source.
 
 ## Reconcile specialist outputs
 
@@ -91,10 +83,9 @@ Do not concatenate independent reports. Cross-check at least these joins:
   teardown ownership;
 - every performance claim states which path, carrier, resource, and workload
   make it relevant;
-- every dynamic experiment maps to a specific unresolved claim.
 
-When specialists disagree, return to the shared source anchors and runtime
-conditions. Preserve multiple reachable variants rather than forcing one
+When specialists disagree, return to the shared source anchors and selection
+conditions. Preserve multiple source-reachable variants rather than forcing one
 universal path.
 
 ## Produce the integrated result
@@ -106,12 +97,13 @@ understand visually.
 
 Always include:
 
-1. baseline and scope;
-2. source-confirmed architecture and ordinary journey;
+1. scope and user-supplied constraints;
+2. source-derived component architecture and ordinary journey;
 3. selected specialist findings;
 4. cross-perspective invariants and decision points;
-5. architecture and QEMU/platform boundaries where relevant;
-6. unresolved questions and proportionate validation options.
+5. configuration, architecture, and platform alternatives where source makes
+   them relevant;
+6. unresolved selectors and source limitations.
 
 Keep detailed call graphs, exhaustive field inventories, and speculative
 performance claims out unless explicitly requested.

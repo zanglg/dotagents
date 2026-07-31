@@ -4,6 +4,27 @@ All notable changes to this repository are documented in this file.
 
 This project follows Semantic Versioning and uses Conventional Commits.
 
+## [Unreleased]
+
+### Changed
+
+- Restricted `linux-kernel-analysis` to source-only static analysis of mainline
+  Linux.
+- Removed default kernel version, architecture, platform, and environment
+  assumptions; apply those constraints only when the user supplies them.
+- Defined boundary-contract categories, source/derivation limits, and
+  symbol-based source anchors shared by all specialist skills.
+- Aligned the plugin version with the repository content version.
+- Documented that the incomplete plugin remains on `dev` until it is ready for
+  stable use.
+
+### Removed
+
+- Runtime-validation skill and all build, boot, tracing, benchmarking,
+  instrumentation, and experiment guidance.
+- Generated plugin-local validation script; repository validation uses the
+  standard plugin and skill validators directly.
+
 ## [0.2.0] - 2026-07-29
 
 ### Added

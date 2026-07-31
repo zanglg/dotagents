@@ -1,4 +1,4 @@
 interface:
   display_name: "Kernel State and Paths"
   short_description: "Analyze state machines and path selection"
-  default_prompt: "Use $analyze-linux-kernel-state-paths to derive state transitions and path-selection decisions."
+  default_prompt: "Use $analyze-linux-kernel-state-paths to derive state transitions and path-selection decisions from mainline source."

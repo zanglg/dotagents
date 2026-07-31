@@ -10,10 +10,10 @@
 
 Use for one operation or one disputed claim:
 
-1. Baseline and conclusion
+1. Scope and conclusion
 2. Short source path
 3. One diagram or table if needed
-4. Evidence anchors
+4. Symbol-based source anchors
 5. Conditions and unresolved questions
 
 ## Subsystem learning document
@@ -31,7 +31,7 @@ Use for broad understanding:
 9. Completion, failure, and recovery
 10. Performance model
 11. Architecture and platform differences
-12. Validation plan and unknowns
+12. Source limitations and unresolved selectors
 
 Prefer these high-value visuals when the source supports them:
 
@@ -42,14 +42,13 @@ Prefer these high-value visuals when the source supports them:
 
 ## Investigation handoff
 
-Use when analysis cannot be completed in the current environment:
+Use when source alone cannot establish a requested conclusion:
 
 ```text
-Established facts:
+Established source claims:
 Open claim:
 Why unresolved:
-Required source/configuration/runtime data:
-Smallest next experiment:
-Expected observations:
-How each observation changes the conclusion:
+Relevant source alternatives:
+Selector not determined by source:
+User-supplied constraint needed to narrow the answer:
 ```

@@ -41,7 +41,6 @@ small, auditable, and safe to copy between machines.
 `-- plugins/
     `-- linux-kernel-analysis/
         |-- .codex-plugin/plugin.json
-        |-- scripts/validate.sh
         `-- skills/
             |-- analyze-linux-kernel/
             |-- analyze-linux-kernel-context-handoffs/
@@ -80,7 +79,12 @@ plugin from the `dotagents` marketplace. Pin a tag or commit for reproducible
 use; use the `dev` branch only while testing unreleased changes.
 
 The first available plugin is `linux-kernel-analysis`, a family of coordinated
-and specialist workflows for source-grounded Linux kernel analysis.
+and specialist workflows for source-only static analysis of mainline Linux
+kernel code.
+
+The plugin is still under development on `dev`. Keep it there while its scope
+and methods are being completed; consider promotion to `main` only after it is
+ready for stable use.
 
 ## Contribution Conventions
 

@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-concurrency
-description: Analyze Linux kernel shared-state concurrency, synchronization domains, lock and lock-order rules, atomic operations, RCU, memory ordering, wait/wakeup pairing, and sleep-versus-atomic context constraints. Use for race, deadlock, stale-read, publication, lost-wakeup, lock protection, or memory-visibility questions. Require known objects, paths, and execution carriers where possible. Exclude general object-lifetime, path-selection, and performance analysis except where they determine correctness.
+description: Analyze shared-state concurrency, synchronization domains, lock and lock-order rules, atomic operations, RCU, memory ordering, wait/wakeup pairing, and sleep-versus-atomic context constraints in mainline Linux kernel source. Use for race, deadlock, stale-read, publication, lost-wakeup, lock protection, or memory-visibility questions. Require known objects, paths, and execution carriers where possible. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, and general object-lifetime, path-selection, or performance analysis except where they determine correctness.
 ---
 
 # Analyze Linux Kernel Concurrency
@@ -8,16 +8,18 @@ description: Analyze Linux kernel shared-state concurrency, synchronization doma
 Start from shared state and competing carriers, not from a list of lock calls.
 Determine which synchronization relation makes each access safe and visible.
 
-## Fix the baseline and claim
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define the claim
 
 State the suspected property: race freedom, exclusion, ordering, publication,
 wait/wakeup correctness, lock order, or allowed sleeping. Define the logical
 operation and reachable carriers. If carrier identity is unresolved, use
 `analyze-linux-kernel-context-handoffs` first or preserve it as an uncertainty.
+Apply user-supplied source constraints; otherwise retain source-visible
+configuration and architecture alternatives.
 
 ## Build a shared-state inventory
 
@@ -80,9 +82,9 @@ For each publication/observation pair:
 5. determine whether control dependencies or relaxed atomics are sufficient;
 6. separate compiler ordering, CPU ordering, and device/DMA ordering.
 
-For arm64, verify architecture-sensitive assumptions against generic memory
-model rules and arm64 primitives. Do not infer physical-device DMA behavior
-from QEMU `virt` observations alone.
+When an assumption is architecture-sensitive, compare generic memory-model
+rules with each relevant mainline architecture implementation. Do not infer
+external device or DMA behavior that source does not encode.
 
 ## Analyze wait and wakeup
 
@@ -92,16 +94,17 @@ for lost wakeups, missed state changes, and teardown wakeups.
 
 ## Evidence and output
 
-Mark claims `FACT`, `INFERENCE`, or `UNKNOWN`. Treat sanitizer or lockdep output
-as configuration-specific runtime evidence, not a proof that other paths are
-safe.
+Mark claims `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Do not treat the absence of
+an obvious conflicting access as proof; enumerate the searched object, field,
+and callback surfaces.
 
 Return:
 
-1. baseline and correctness claim;
+1. scope, user-supplied constraints, and correctness claim;
 2. carrier/shared-state access matrix;
 3. field-to-protection matrix;
 4. lock-order graph when relevant;
 5. publication/observation and wait/wakeup pairs;
 6. established invariants and counterexample paths;
-7. unresolved risks and targeted lockdep/KCSAN/KASAN or tracing proposals.
+7. unresolved risks, missing source anchors, and selectors not determined by
+   source.

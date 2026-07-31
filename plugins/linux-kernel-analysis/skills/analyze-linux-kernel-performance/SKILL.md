@@ -1,30 +1,31 @@
 ---
 name: analyze-linux-kernel-performance
-description: Build a source-grounded performance model for Linux kernel modules and subsystems, covering fast/slow paths, cachelines, per-CPU data, batching, merging, plugging, queueing, CPU affinity, NUMA, polling, interrupt moderation, contention, latency, throughput, fairness, and scalability. Use when the question asks why code is shaped for performance, which tradeoff a mechanism makes, or how to validate a suspected bottleneck. Do not present code shape as measured performance or run benchmarks without defining workload and environment.
+description: Build a source-derived performance model for mainline Linux kernel code, covering fast/slow paths, cachelines, per-CPU data, batching, merging, plugging, queueing, CPU affinity, NUMA, polling, interrupt moderation, contention, latency, throughput, fairness, and scalability. Use when the question asks why code is shaped for performance, which tradeoff a mechanism makes, or where source indicates a possible bottleneck. Exclude out-of-tree modules, downstream or vendor kernels, benchmarks, measurements, runtime validation, and claims of observed performance.
 ---
 
 # Analyze Linux Kernel Performance
 
-Derive performance hypotheses from reachable source paths, then separate intent,
-cost model, and measured evidence. Never turn an optimization-looking construct
-into a proven speedup without observation.
+Derive performance hypotheses from source-reachable paths, then separate
+mechanism, intent, and cost model. Never turn an optimization-looking construct
+into a proven speedup or bottleneck.
 
-## Fix the baseline and workload
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define the operation and workload dimensions
 
 Define:
 
 - logical operation and reachable path;
-- workload size, concurrency, queue depth, locality, and read/write mix;
-- metric: latency distribution, throughput, CPU cost, fairness, or scalability;
-- comparison baseline;
-- hardware or QEMU limitation.
+- relevant workload dimensions such as size, concurrency, queue depth,
+  locality, and read/write mix;
+- metric implied by the question: latency, throughput, CPU cost, fairness, or
+  scalability;
+- comparison mechanism or path.
 
-QEMU `virt` is useful for control-flow and instrumentation experiments but is
-not evidence of physical-device performance.
+Apply concrete workload, architecture, topology, or device values only when the
+user supplies them. Otherwise express tradeoffs parametrically.
 
 ## Derive the cost model
 
@@ -34,72 +35,74 @@ For ordinary, fast, slow, fallback, and recovery paths inventory:
 - locks, atomics, barriers, and cacheline sharing;
 - per-CPU and NUMA-local versus remote access;
 - scheduler, IRQ, IPI, softirq, worker, and task wakeup transitions;
-- queueing delay and service time;
+- queueing delay and service time contributors represented in source;
 - batching, merge, plug, coalescing, and amortization;
 - copy, map, DMA, flush, and device round trips;
-- polling versus interrupt costs;
+- polling versus interrupt mechanisms;
 - linear scans, retries, and contention points.
 
-Tie every cost to a reachable selector from state/path analysis and an actual
-carrier from handoff analysis.
+Tie every cost to a source-reachable selector from state/path analysis and a
+carrier from handoff analysis. Do not assign numeric cost or frequency unless
+the user supplies it as an assumption.
 
 ## Recover performance intent carefully
 
 Use names, comments, code shape, documentation, and commit messages to propose
-intent. Classify it as an inference until a source comment or history explicitly
-states it. The target source decides mechanism; history explains tradeoffs.
+intent. Use `SOURCE` only when current mainline source or in-tree documentation
+states the intent; otherwise use `DERIVATION`. Use the
+`PERFORMANCE-HYPOTHESIS` claim kind for predicted effects. Mainline source
+decides mechanism; history can explain context without overriding it.
 
 For each mechanism state:
 
 1. expected benefit;
 2. paid cost;
-3. workload where benefit dominates;
-4. workload where it can regress;
+3. workload region where benefit is expected to dominate;
+4. workload region where it may regress;
 5. fairness or tail-latency consequence;
-6. configuration/topology dependency;
-7. observable counters or tracepoints.
+6. configuration or topology dependency;
+7. symbol-based source anchors supporting the mechanism and selectors.
 
 ## Analyze topology
 
 Map CPU affinity, hardware queues, per-CPU state, NUMA nodes, IRQ targets,
-completion CPU, and submitter CPU. Distinguish:
+completion CPU, and submitter CPU when represented in source. Distinguish:
 
 - cache locality from execution affinity;
 - load distribution from ordering guarantees;
 - fewer handoffs from lower end-to-end latency;
 - throughput batching from tail-latency improvement;
-- QEMU virtual topology from physical topology.
+- source-defined topology from properties of a particular running system.
 
-## Design proportionate measurement
+## Bound the static model
 
-Do not benchmark merely because tools are available. Form a falsifiable
-hypothesis, choose controlled workloads, record configuration, and select the
-smallest observations:
-
-- tracepoints/ftrace for path and latency decomposition;
-- perf or BPF for CPU, cache, lock, and scheduling cost;
-- subsystem counters for queue depth, merge, retry, or completion behavior;
-- repeated runs and distributions rather than a single number.
-
-Separate instrumentation overhead and warmup. Compare equivalent paths and
-state what a negative result would mean.
+State which costs are structurally present, which depend on path frequency or
+contention, and which depend on hardware or workload properties not encoded in
+source. Preserve competing hypotheses when source alone cannot rank them. Do
+not add benchmark commands, instrumentation plans, expected measurements, or
+claims about real-world magnitude.
 
 ## Evidence and output
 
-Classify:
+Use the shared evidence classes `SOURCE`, `DERIVATION`, and `UNRESOLVED`.
+Separately classify the claim kind:
 
-- `FACT-SOURCE`: mechanism is in target code;
-- `INTENT`: explicitly documented design goal;
-- `HYPOTHESIS`: predicted performance effect;
-- `MEASURED`: observed under stated environment/workload;
-- `UNKNOWN`: missing selector, topology, or measurement.
+- `MECHANISM`: source structure and selectors;
+- `INTENT`: an explicitly documented design goal or a clearly labeled derived
+  interpretation;
+- `PERFORMANCE-HYPOTHESIS`: a conditional benefit, cost, bottleneck, or
+  regression derived from the mechanism.
+
+Use `UNRESOLVED` when source does not determine frequency, magnitude, topology,
+or external-device cost.
 
 Return:
 
-1. baseline, workload, and metric;
+1. scope, user-supplied constraints, workload dimensions, and metric;
 2. reachable path cost table;
 3. topology/affinity map where relevant;
 4. mechanism-benefit-cost matrix;
 5. bottleneck and regression hypotheses;
-6. measurement plan or results with limitations;
-7. conclusions separated by source, intent, hypothesis, and observation.
+6. source limitations and unresolved selectors;
+7. conclusions separated by mechanism, documented or derived intent, and
+   performance hypothesis.

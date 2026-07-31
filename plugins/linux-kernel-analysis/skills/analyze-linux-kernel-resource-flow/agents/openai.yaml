@@ -1,4 +1,4 @@
 interface:
   display_name: "Kernel Resource Flow"
   short_description: "Analyze finite resources and backpressure"
-  default_prompt: "Use $analyze-linux-kernel-resource-flow to trace resource acquisition, backpressure, and restart."
+  default_prompt: "Use $analyze-linux-kernel-resource-flow to trace source-defined resource acquisition, backpressure, and restart in mainline Linux."

@@ -1,4 +1,4 @@
 interface:
   display_name: "Analyze Linux Kernel"
-  short_description: "Coordinate a complete Linux kernel analysis"
-  default_prompt: "Use $analyze-linux-kernel to build a source-grounded multi-perspective analysis of this kernel subsystem."
+  short_description: "Coordinate mainline kernel source analysis"
+  default_prompt: "Use $analyze-linux-kernel to build a source-only multi-perspective analysis of this mainline kernel subsystem."

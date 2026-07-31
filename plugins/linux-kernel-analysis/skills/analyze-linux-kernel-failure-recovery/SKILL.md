@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-failure-recovery
-description: Analyze Linux kernel failure classification and recovery paths, including error status, timeout, retry, requeue, reset, cancellation, abort, partial completion, hot unplug, suspend/resume, degraded mode, and teardown. Use when the question asks how an operation fails, who completes it, whether it is retried, how normal state is restored, or how recovery interacts with in-flight work and resources. Exclude broad lifetime, lock, and performance audits except where they are required to judge recovery.
+description: Analyze failure classification and recovery paths in mainline Linux kernel source, including error status, timeout, retry, requeue, reset, cancellation, abort, partial completion, hot unplug, suspend/resume, degraded mode, and teardown. Use when the question asks how an operation fails, who completes it, whether it is retried, how normal state is restored, or how recovery interacts with in-flight work and resources. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, and broad lifetime, lock, or performance audits except where required to judge recovery.
 ---
 
 # Analyze Linux Kernel Failure Recovery
@@ -8,14 +8,16 @@ description: Analyze Linux kernel failure classification and recovery paths, inc
 Treat recovery as a stateful path with ownership and completion obligations, not
 as a list of error codes.
 
-## Fix the baseline and failure scenario
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define the failure scenario
 
-Define the logical operation, injection point or observed symptom, and success
-contract that recovery is meant to restore.
+Define the logical operation, source-visible failure point or user-described
+symptom, and success contract that recovery is meant to restore. Apply
+user-supplied source constraints; otherwise retain source-reachable recovery
+alternatives.
 
 ## Classify failure signals
 
@@ -82,15 +84,16 @@ Examples:
 
 ## Evidence and output
 
-Mark claims `FACT`, `INFERENCE`, or `UNKNOWN`. Cite detection, classification,
-decision, recovery action, resource handling, and final completion.
+Mark claims `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Cite detection,
+classification, decision, recovery action, resource handling, and final
+completion by path and symbol.
 
 Return:
 
-1. baseline and failure scenarios;
+1. scope, user-supplied constraints, and failure scenarios;
 2. error/status classification table;
 3. Failure/Recovery State Graph;
 4. retry/reset/cancel decision matrix;
 5. ownership, resource, and completion ledger;
 6. normal-state re-entry and escalation conditions;
-7. invariants, ambiguous late paths, and targeted fault-injection proposals.
+7. invariants, ambiguous late paths, and selectors not determined by source.

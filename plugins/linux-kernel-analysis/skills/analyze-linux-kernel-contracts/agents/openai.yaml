@@ -1,4 +1,4 @@
 interface:
   display_name: "Kernel Contracts"
   short_description: "Analyze contracts, boundaries, and layering"
-  default_prompt: "Use $analyze-linux-kernel-contracts to map this kernel component's contracts and boundaries."
+  default_prompt: "Use $analyze-linux-kernel-contracts to map this mainline kernel component's source-defined contracts and boundaries."

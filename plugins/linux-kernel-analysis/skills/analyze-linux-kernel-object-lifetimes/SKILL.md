@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-object-lifetimes
-description: Analyze Linux kernel object models, relationships, ownership, reference acquisition and release, publication, lifetime states, deferred destruction, and teardown. Use when the question concerns who owns an object, how requests or devices outlive a call stack, refcount/RCU/kref rules, initialization and unwind, in-flight references, or safe removal. Exclude detailed execution-context topology, lock correctness, state/path policy, and performance analysis except where needed to establish lifetime.
+description: Analyze object models, relationships, ownership, reference acquisition and release, publication, lifetime states, deferred destruction, and teardown in mainline Linux kernel source. Use when the question concerns who owns an object, how requests or devices outlive a call stack, refcount/RCU/kref rules, initialization and unwind, in-flight references, or safe removal. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, detailed execution-context topology, lock correctness, state/path policy, and performance analysis except where needed to establish lifetime.
 ---
 
 # Analyze Linux Kernel Object Lifetimes
@@ -10,15 +10,16 @@ and destruction. Model both memory lifetime and semantic lifetime; an allocated
 object can already be unusable, and a removed object can remain allocated while
 references drain.
 
-## Fix the baseline and roots
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define roots
 
 Choose the logical operation and root objects. Start from objects visible at
 public entry points, registered with a subsystem, or embedded in a device,
-request, socket, inode, queue, or per-CPU container.
+request, socket, inode, queue, or per-CPU container. Apply user-supplied source
+constraints; otherwise retain source-visible variants.
 
 ## Build the object inventory
 
@@ -89,12 +90,12 @@ whether new producers have been disabled.
 
 ## Evidence and output
 
-Mark each claim `FACT`, `INFERENCE`, or `UNKNOWN`. Cite path plus symbol for
-allocation, publication, transfer, withdrawal, drain, and destruction.
+Mark each claim `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Cite path plus symbol
+for allocation, publication, transfer, withdrawal, drain, and destruction.
 
 Return:
 
-1. baseline and root objects;
+1. scope, user-supplied constraints, and root objects;
 2. object relationship table or graph;
 3. lifetime state graph for each primary object;
 4. ownership-transfer ledger;

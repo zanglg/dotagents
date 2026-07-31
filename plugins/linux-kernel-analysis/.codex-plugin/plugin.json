@@ -1,7 +1,7 @@
 {
   "name": "linux-kernel-analysis",
-  "version": "0.1.0",
-  "description": "Source-grounded workflows for multi-perspective analysis of Linux kernel modules, drivers, and subsystems.",
+  "version": "0.2.0",
+  "description": "Source-only workflows for multi-perspective static analysis of mainline Linux kernel code.",
   "author": {
     "name": "Zang Leigang",
     "url": "https://github.com/zanglg"
@@ -19,8 +19,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Linux Kernel Analysis",
-    "shortDescription": "Analyze Linux kernel code with specialized methods.",
-    "longDescription": "A family of source-grounded workflows for analyzing Linux kernel contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance, with explicit source-version, architecture, and platform boundaries.",
+    "shortDescription": "Statically analyze mainline Linux kernel source.",
+    "longDescription": "A family of source-only workflows for static analysis of mainline Linux kernel boundary contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance mechanisms.",
     "developerName": "Zang Leigang",
     "category": "Developer Tools",
     "capabilities": [
@@ -29,9 +29,9 @@
     ],
     "websiteURL": "https://github.com/zanglg/dotagents",
     "defaultPrompt": [
-      "Analyze this Linux kernel subsystem from source.",
-      "Trace the execution-context handoffs in this driver.",
-      "Build a validation plan for these kernel claims."
+      "Analyze this mainline Linux kernel subsystem from source.",
+      "Trace the source-defined execution-context handoffs in this mainline driver.",
+      "Derive the boundary contracts of this mainline kernel component."
     ]
   }
 }

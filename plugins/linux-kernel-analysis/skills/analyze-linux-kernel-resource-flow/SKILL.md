@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-resource-flow
-description: Analyze finite-resource flow and backpressure in Linux kernel modules and subsystems, including tags, budgets, descriptors, queue depth, credits, tokens, memory pools, admission, throttling, waiting, release, wakeup, restart, fairness, and starvation. Use when the question asks why work cannot proceed, who owns a scarce resource, how pressure propagates, or what restarts stalled producers. Exclude general lifetime, concurrency, error recovery, and performance analysis except where required to establish the resource loop.
+description: Analyze finite-resource flow and backpressure in mainline Linux kernel source, including tags, budgets, descriptors, queue depth, credits, tokens, memory pools, admission, throttling, waiting, release, wakeup, restart, fairness, and starvation. Use when the question asks why work cannot proceed, who owns a scarce resource, how pressure propagates, or what restarts stalled producers. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, and general lifetime, concurrency, error-recovery, or performance analysis except where required to establish the resource loop.
 ---
 
 # Analyze Linux Kernel Resource Flow
@@ -9,14 +9,16 @@ Trace every finite resource through acquire, consume, hold, release, and
 restart. Model backpressure as a closed control loop rather than a single
 failure return.
 
-## Fix the baseline and workload
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define the flow
 
 Define the producer, consumer, logical operation, workload class, and resource
-whose exhaustion matters.
+whose exhaustion matters. Apply user-supplied source or workload constraints;
+otherwise describe the workload dimensions encoded by admission and fairness
+policy without inventing concrete values.
 
 ## Inventory finite resources
 
@@ -90,12 +92,13 @@ Examples:
 
 ## Evidence and output
 
-Mark claims `FACT`, `INFERENCE`, or `UNKNOWN`. Cite capacity definition,
-acquire, exhaustion, release, and restart symbols.
+Mark claims `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Cite capacity definition,
+acquire, exhaustion, release, and restart by path and symbol.
 
 Return:
 
-1. baseline, workload, and resource inventory;
+1. scope, user-supplied constraints, workload dimensions, and resource
+   inventory;
 2. resource ownership table;
 3. Resource Flow Graph;
 4. Backpressure Loop with carriers and mechanisms;

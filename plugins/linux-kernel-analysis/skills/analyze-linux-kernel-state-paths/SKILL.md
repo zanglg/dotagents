@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-state-paths
-description: Derive Linux kernel state machines, branch decisions, request classifications, configuration and capability gates, fast/slow paths, fallback paths, and key invariants from source. Use when the question asks what states exist, why one path is chosen, how flags/opcodes/capabilities influence behavior, or how a logical operation moves through phases such as flush, retry, or completion. Exclude execution-carrier analysis, ownership teardown, lock audits, and measured performance except where needed to explain a decision.
+description: Derive state machines, branch decisions, request classifications, configuration and capability gates, fast/slow paths, fallback paths, and key invariants from mainline Linux kernel source. Use when the question asks what states exist, why one path is chosen, how flags/opcodes/capabilities influence behavior, or how a logical operation moves through phases such as flush, retry, or completion. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, execution-carrier analysis, ownership teardown, lock audits, and measured performance.
 ---
 
 # Analyze Linux Kernel State and Paths
@@ -9,14 +9,16 @@ Model why execution takes a path and how state changes along it. A call graph
 shows possible calls; this method establishes reachable paths and their
 selection conditions for the target operation.
 
-## Fix the target
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified.
+## Define the target
 
 Choose one logical operation or split unrelated operations. Define its initial
-inputs, externally visible completion, and important alternate outcomes.
+inputs, externally visible completion, and important alternate outcomes. Apply
+user-supplied source constraints; otherwise retain every materially different
+source-reachable path.
 
 ## Discover state and selectors
 
@@ -26,13 +28,13 @@ Search for:
   counters;
 - all writes to each state-bearing field;
 - predicates and helper functions used in branches;
-- Kconfig and runtime capability checks;
+- Kconfig and dynamic capability checks;
 - queue, device, topology, and request-mode selectors;
 - retry/requeue values that encode control flow rather than final failure.
 
 For each selector, trace its provenance. Do not label a branch
 “configuration-dependent” without naming the config, capability, field, or
-runtime condition.
+dynamic condition represented in source.
 
 ## Derive the state machine
 
@@ -59,7 +61,7 @@ For every materially different path record:
 - decision symbol and expression;
 - inputs and where they were set;
 - selected branch;
-- configuration/device/runtime conditions;
+- configuration, architecture, device, and dynamic conditions;
 - next state and next boundary function;
 - whether it is mechanism, policy, fallback, or optimization.
 
@@ -83,12 +85,12 @@ partial completion, timeout, cancellation, device removal, suspend, and polling.
 
 ## Evidence and output
 
-Mark conclusions `FACT`, `INFERENCE`, or `UNKNOWN`. Cite state writes, selection
-expressions, and terminal actions by path and symbol.
+Mark conclusions `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Cite state writes,
+selection expressions, and terminal actions by path and symbol.
 
 Return:
 
-1. baseline and logical operation;
+1. scope, user-supplied constraints, and logical operation;
 2. state/selector inventory;
 3. state transition graph;
 4. decision graph or path matrix;

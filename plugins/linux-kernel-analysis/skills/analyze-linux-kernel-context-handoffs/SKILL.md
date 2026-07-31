@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel-context-handoffs
-description: Analyze Linux kernel module, driver, or subsystem source to identify execution carriers, context entries and continuations, and asynchronous handoffs. Use for IRQ, threaded IRQ, softirq/NAPI, task context, workqueue, kernel thread, timer/hrtimer, RCU, wait/wakeup, completion, IPI, block-layer, networking, and indirect subsystem callbacks. Follow callback binding and invocation across source directories, resolve runtime branch conditions, and produce a focused Mermaid Context Handoff Graph. Exclude detailed intra-context call graphs, object lifetime, teardown, and race or locking audits.
+description: Analyze mainline Linux kernel source to identify execution carriers, context entries and continuations, and asynchronous handoffs. Use for IRQ, threaded IRQ, softirq/NAPI, task context, workqueue, kernel thread, timer/hrtimer, RCU, wait/wakeup, completion, IPI, block-layer, networking, and indirect subsystem callbacks. Follow callback binding and invocation across source directories, preserve source-reachable selection alternatives, and produce a focused Mermaid Context Handoff Graph. Exclude out-of-tree modules, downstream or vendor kernels, runtime validation, detailed intra-context call graphs, object lifetime, teardown, and race or locking audits.
 ---
 
 # Analyze Linux Kernel Context Handoffs
@@ -13,14 +13,15 @@ Read [carrier-patterns.md](references/carrier-patterns.md) when the target uses
 indirect callbacks, block completion, NAPI, timers, RCU, wakeups, or
 configuration-dependent carriers.
 
-## Fix the baseline and operation
+Read the shared
+[static analysis contract](../analyze-linux-kernel/references/analysis-contract.md)
+before starting.
 
-Resolve repository, ref, exact commit, configuration, architecture, and
-platform. Default to Linux `v7.1`, `arm64`, and QEMU `virt` only when
-unspecified. Never use another kernel version silently.
+## Define the operation
 
 Define the module/subsystem boundary and one logical operation. Split unrelated
-operations into separate focused graphs.
+operations into separate focused graphs. Apply user-supplied source constraints;
+otherwise retain every materially different source-reachable carrier.
 
 ## Use the carrier model
 
@@ -65,7 +66,8 @@ For each callback with an unproven carrier, build a four-anchor proof:
 3. **carrier**: the context-defining entry or scheduling mechanism that reaches
    the invocation;
 4. **selection**: the configuration, topology, flags, CPU relation, polling
-   mode, or runtime branch that makes this carrier reachable.
+   mode, or dynamic branch represented in source that makes this carrier
+   reachable.
 
 Search by callback field and type, not only by implementation name. Cross source
 directories when the owning subsystem invokes the callback. Stop once carrier,
@@ -98,7 +100,7 @@ For every edge record:
 7. proof anchors.
 
 A synchronous subsystem callback remains in the caller's carrier. Registration
-is a possible entry, not the runtime handoff. Wakeup makes a task runnable; it
+is a possible entry, not a handoff. Wakeup makes a task runnable; it
 does not execute the task directly. A blocked and resumed task remains the same
 lane.
 
@@ -119,19 +121,19 @@ loop, and `par` only for materially concurrent paths.
 
 ## Evidence and output
 
-Classify each lane and edge as `FACT`, `INFERENCE`, or `UNKNOWN`. For a runtime
-fact, state the observed configuration and trace evidence. Prefer source path
-plus symbol over line numbers.
+Classify each lane and edge as `SOURCE`, `DERIVATION`, or `UNRESOLVED`. Use
+source path plus symbol or key expression for every proof anchor.
 
 Return:
 
-1. baseline, scope, and crossed infrastructure;
+1. scope, user-supplied constraints, and crossed infrastructure;
 2. context inventory with entry/continuation and proof status;
 3. focused Mermaid Context Handoff Graph;
 4. handoff ledger with the seven edge fields above;
-5. materially different runtime alternatives;
+5. materially different source-reachable alternatives;
 6. unresolved carrier or selection questions;
-7. the smallest dynamic checks when source alone cannot select a path.
+7. the source-visible selector and user-supplied constraint needed to narrow an
+   unresolved path.
 
 Refer ownership, teardown, shared-state correctness, and detailed synchronous
 call chains to their dedicated analyses.

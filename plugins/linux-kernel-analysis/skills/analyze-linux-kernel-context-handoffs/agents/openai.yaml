@@ -1,4 +1,4 @@
 interface:
   display_name: "Kernel Context Handoffs"
   short_description: "Trace execution carriers and async handoffs"
-  default_prompt: "Use $analyze-linux-kernel-context-handoffs to trace execution carriers and asynchronous continuations."
+  default_prompt: "Use $analyze-linux-kernel-context-handoffs to trace source-defined carriers and asynchronous continuations in mainline Linux."
