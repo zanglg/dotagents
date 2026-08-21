@@ -43,6 +43,7 @@ small, auditable, and safe to copy between machines.
         |-- .codex-plugin/plugin.json
         `-- skills/
             |-- analyze-linux-kernel/
+            |-- author-linux-kernel-book/
             |-- analyze-linux-kernel-context-handoffs/
             `-- ...
 ```
@@ -80,7 +81,8 @@ use; use the `dev` branch only while testing unreleased changes.
 
 The first available plugin is `linux-kernel-analysis`, a family of coordinated
 and specialist workflows for source-only static analysis of mainline Linux
-kernel code.
+kernel code, plus a publication workflow for validated Markdown and Typst
+learning books with compiled PDF and ZIP deliverables.
 
 The plugin is still under development on `dev`. Keep it there while its scope
 and methods are being completed; consider promotion to `main` only after it is

@@ -28,7 +28,11 @@ If the supplied source is outside this scope, identify the boundary and ask for
 the corresponding mainline source or state that the target is unsupported.
 
 Perform source-only static analysis. Do not build, boot, instrument, benchmark,
-trace, or propose runtime experiments.
+trace, or use runtime experiments as evidence in an analysis result. A separate
+publication workflow may author labs as explicitly unverified validation plans,
+or report tests that were actually performed under the user's authorization and
+available environment. Those labs never upgrade static source claims into
+runtime facts by themselves.
 
 ## Analysis inputs
 

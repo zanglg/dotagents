@@ -6,6 +6,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Added
+
+- Added `author-linux-kernel-book` for converting source-grounded analysis into
+  a reader-oriented Markdown and Typst book project with a compiled PDF, global
+  README, validation report, and deterministic ZIP release.
+- Added a reusable Typst layout, publication contract, content model, generic
+  book validator, and deterministic archive packager.
+
 ### Changed
 
 - Restricted `linux-kernel-analysis` to source-only static analysis of mainline
@@ -17,6 +25,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Aligned the plugin version with the repository content version.
 - Documented that the incomplete plugin remains on `dev` until it is ready for
   stable use.
+- Routed durable book and series requests from the analysis coordinator to the
+  publication workflow while preserving source-only evidence boundaries.
 
 ### Removed
 

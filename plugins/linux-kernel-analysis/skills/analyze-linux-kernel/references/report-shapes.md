@@ -4,6 +4,7 @@
 
 - Focused answer
 - Subsystem learning document
+- Published learning book
 - Investigation handoff
 
 ## Focused answer
@@ -39,6 +40,14 @@ Prefer these high-value visuals when the source supports them:
 - object relationship/lifetime graph;
 - path-selection or state graph;
 - context handoff graph.
+
+## Published learning book
+
+Use `author-linux-kernel-book` when the user requests a durable book or series
+rather than one learning document. It owns the reader-oriented manuscript,
+source companion, labs, solutions, global README, Markdown/Typst parity, PDF,
+validation report, and ZIP release contract. The analysis skills continue to
+own source claims and evidence ledgers.
 
 ## Investigation handoff
 

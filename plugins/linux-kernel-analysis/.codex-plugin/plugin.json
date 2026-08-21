@@ -1,7 +1,7 @@
 {
   "name": "linux-kernel-analysis",
-  "version": "0.2.0",
-  "description": "Source-only workflows for multi-perspective static analysis of mainline Linux kernel code.",
+  "version": "0.3.0",
+  "description": "Source-grounded workflows for analyzing mainline Linux kernel code and publishing validated learning books.",
   "author": {
     "name": "Zang Leigang",
     "url": "https://github.com/zanglg"
@@ -13,14 +13,16 @@
     "linux",
     "kernel",
     "source-analysis",
+    "typst",
+    "technical-writing",
     "drivers",
     "subsystems"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Linux Kernel Analysis",
-    "shortDescription": "Statically analyze mainline Linux kernel source.",
-    "longDescription": "A family of source-only workflows for static analysis of mainline Linux kernel boundary contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance mechanisms.",
+    "shortDescription": "Analyze kernel source and publish learning books.",
+    "longDescription": "A family of source-grounded workflows for static analysis of mainline Linux kernel boundary contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance mechanisms, plus publication of validated Markdown and Typst learning books with PDF and ZIP deliverables.",
     "developerName": "Zang Leigang",
     "category": "Developer Tools",
     "capabilities": [
@@ -31,7 +33,8 @@
     "defaultPrompt": [
       "Analyze this mainline Linux kernel subsystem from source.",
       "Trace the source-defined execution-context handoffs in this mainline driver.",
-      "Derive the boundary contracts of this mainline kernel component."
+      "Derive the boundary contracts of this mainline kernel component.",
+      "Turn this source analysis into a validated Markdown and Typst kernel learning book."
     ]
   }
 }
