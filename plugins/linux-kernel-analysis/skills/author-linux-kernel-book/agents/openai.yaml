@@ -1,4 +1,4 @@
 interface:
   display_name: "Author Linux Kernel Book"
   short_description: "Build source-grounded kernel learning books"
-  default_prompt: "Use $author-linux-kernel-book to turn this mainline Linux kernel topic into a validated Markdown and Typst book package with PDF and ZIP deliverables."
+  default_prompt: "Use $author-linux-kernel-book to turn this mainline Linux kernel topic into a validated Markdown book with a global README, source companion, labs, and complete solutions."

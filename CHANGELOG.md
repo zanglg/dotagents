@@ -9,10 +9,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
 ### Added
 
 - Added `author-linux-kernel-book` for converting source-grounded analysis into
-  a reader-oriented Markdown and Typst book project with a compiled PDF, global
-  README, validation report, and deterministic ZIP release.
-- Added a reusable Typst layout, publication contract, content model, generic
-  book validator, and deterministic archive packager.
+  a reader-oriented Markdown book project with a global README, source
+  companion, labs, complete solutions, and validation report.
+- Added a Markdown content model, deliverable contract, and book validator.
 
 ### Changed
 
@@ -26,7 +25,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Documented that the incomplete plugin remains on `dev` until it is ready for
   stable use.
 - Routed durable book and series requests from the analysis coordinator to the
-  publication workflow while preserving source-only evidence boundaries.
+  Markdown authoring workflow while preserving source-only evidence boundaries.
+- Corrected the book workflow to use Markdown as its only output format.
 
 ### Removed
 
@@ -34,6 +34,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
   instrumentation, and experiment guidance.
 - Generated plugin-local validation script; repository validation uses the
   standard plugin and skill validators directly.
+- Temporary Typst, PDF, and ZIP requirements, Typst template, and archive
+  packager from the book-authoring experiment.
 
 ## [0.2.0] - 2026-07-29
 

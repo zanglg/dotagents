@@ -1,13 +1,13 @@
 ---
 name: author-linux-kernel-book
-description: "Author and publish a source-grounded mainline Linux kernel learning book or multi-volume series. Use when the requested result is a durable book project rather than a focused answer: reader-oriented Markdown, source companion material, labs and solutions, an equivalent Typst edition, a compiled and visually checked PDF, a global README, a validation report, and a complete ZIP archive. Use the specialist analyze-linux-kernel-* skills for the underlying source claims. Exclude ordinary one-off source questions, downstream/vendor kernels, and claims of kernel build or runtime validation that were not actually performed."
+description: "Author a source-grounded mainline Linux kernel learning book or multi-volume series as maintainable Markdown. Use when the requested result is a durable book project rather than a focused answer: reader-oriented manuscript chapters, source companion material, labs and complete solutions, a global README and table of contents, and a Markdown validation report. Use the specialist analyze-linux-kernel-* skills for the underlying source claims. Exclude ordinary one-off source questions, non-Markdown publication formats, downstream/vendor kernels, and claims of kernel build or runtime validation that were not actually performed."
 ---
 
 # Author Linux Kernel Book
 
-Turn verified source analysis into a maintainable learning product. Organize the
-reader's progression around understanding and modification ability, not around
-coverage statistics or repeated audit checklists.
+Turn verified source analysis into a maintainable Markdown learning product.
+Organize the reader's progression around understanding and modification ability,
+not around coverage statistics or repeated audit checklists.
 
 Read these resources as the work reaches each stage:
 
@@ -15,8 +15,6 @@ Read these resources as the work reaches each stage:
   planning or changing the artifact tree.
 - Read [content-model.md](references/content-model.md) before drafting or
   converting audit-style material into chapters.
-- Read [typst-publishing.md](references/typst-publishing.md) before creating the
-  Typst edition, compiling PDF, validating, or packaging.
 
 ## Lock the source contract
 
@@ -41,15 +39,16 @@ evidence.
 
 ## Separate the product layers
 
-Maintain four distinct layers:
+Maintain these distinct Markdown layers:
 
 - `manuscript/`: reader-facing narrative and progressive source reading;
 - `source-companion/`: exhaustive anchors, fields, branches, ledgers, and
   evidence that would interrupt the narrative;
-- `labs/` and `solutions/`: executable exercises, expected results, cleanup,
-  complete reasoning, wrong implementations, and review criteria;
-- `authoring/`: content manifest, writing rules, generation inputs, and
-  validation metadata.
+- `labs/` and `solutions/`: executable instructions, embedded programs and
+  patches, expected results, cleanup, complete reasoning, wrong
+  implementations, and review criteria;
+- `glossary/`: terms shared across chapters and volumes;
+- `authoring/`: Markdown writing rules and validation notes.
 
 When starting from an audit or deconstruction report, freeze it as evidence or
 source-companion material. Rewrite the manuscript around learning questions;
@@ -73,53 +72,57 @@ Avoid identical mechanical sections in every chapter. Explain every selected
 source window completely; do not end with placeholders such as "continue along
 the source" or "left for the reader".
 
-## Keep Markdown and Typst synchronized
+## Use the global README as the publication spine
 
-Use one ordered content manifest as the publication spine. Each chapter entry
-must name its stable ID, title, Markdown path, Typst path, and shared content
-ID. Prefer generating both editions from normalized chapter data. If either
-edition is edited directly, update the shared content ID only after checking
-semantic parity.
+Keep `README.md` at the book root as the single ordered table of contents. It
+must link every manuscript chapter with repository-relative links and explain
+how the manuscript, source companion, labs, solutions, and glossary relate.
+Each reader-facing page must be reachable from an index or neighboring page.
 
-Typst is a real edition, not a screenshot container. Use native page layout,
-tables, callouts, code blocks, paths, and simple exact diagrams when they improve
-print readability. Preserve the same claims, examples, source anchors, exercises,
-and answers as Markdown even when the presentation differs.
+Use stable directory and file slugs so links survive title edits. Keep examples,
+programs, commands, patches, Mermaid diagrams, and exact tables in Markdown
+fences or native Markdown constructs. Do not create parallel editions or
+generated publication artifacts unless the user explicitly starts a different
+workflow.
 
-## Finish the complete package
+## Finish the Markdown project
 
-Do not declare completion from manuscript count alone. The required release
-set is:
+Do not declare completion from manuscript count alone. The required set is:
 
-1. complete ZIP archive;
-2. compiled Typst PDF;
-3. global `README.md` and full table of contents;
-4. `typst/book.typ` entrypoint and included Typst sources;
-5. `validation-report.md` with passed checks and explicit unverified boundaries.
+1. global `README.md` and complete table of contents;
+2. complete `manuscript/**/*.md` chapters;
+3. matching `source-companion/**/*.md` evidence;
+4. `labs/**/*.md`, `solutions/**/*.md`, and `glossary/**/*.md`;
+5. `validation-report.md` with passed checks and explicit unverified
+   boundaries.
 
-Compile the PDF for real. Render and inspect representative pages and then a
-whole-book contact sheet or equivalent page sweep. Check the cover, table of
-contents, volume boundaries, dense tables, long code, diagrams, CJK glyphs when
-used, headers/footers, and final page. A successful compiler exit is not visual
-QA.
+Run the bundled validator from this skill directory:
 
-Run the bundled validator and deterministic packager as described in
-[typst-publishing.md](references/typst-publishing.md). Re-run validation after
-the final archive exists, and record SHA-256 checksums. Remove temporary
-binaries, renders, and caches from the release tree.
+```sh
+python3 scripts/validate_markdown_book.py <book-root> \
+  --commit <full-40-hex-commit> \
+  --write-report <book-root>/validation-report.md
+```
+
+The validator requires a Markdown-only project tree, checks the global table of
+contents, relative links, fenced blocks, fixed-commit source anchors, and
+unfinished placeholders. Re-run it after the last content change. Remove
+temporary binaries, caches, and generated non-Markdown files from the book
+tree.
 
 ## Report the result
 
-Lead with the actual artifacts. For a Chinese response, use a `主要交付物`
-section; otherwise use `Primary deliverables`. Link the ZIP, PDF, global README,
-Typst entrypoint, and validation report. Then state:
+Lead with the actual Markdown artifacts. For a Chinese response, use a
+`主要交付物` section; otherwise use `Primary deliverables`. Link the global
+README, manuscript entry, source companion entry, labs and solutions entries,
+and validation report. Then state:
 
-- volumes, chapters, source anchors, diagrams, and page count;
+- volumes, chapters, source anchors, diagrams, and Markdown file count;
 - checks actually run and their outcomes;
 - repository, tag/ref, and full commit analyzed;
 - kernel builds, resolved configuration, runtime tests, or platform validation
   that were not performed.
 
 Never claim an artifact exists until it is present and readable. Never claim a
-PDF was compiled, pages inspected, a lab run, a patch applied, or an archive
-validated unless that action completed successfully.
+lab ran, a patch applied, a kernel built, or runtime behavior was observed unless
+that action completed successfully.

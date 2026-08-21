@@ -1,7 +1,7 @@
 {
   "name": "linux-kernel-analysis",
-  "version": "0.3.0",
-  "description": "Source-grounded workflows for analyzing mainline Linux kernel code and publishing validated learning books.",
+  "version": "0.3.1",
+  "description": "Source-grounded workflows for analyzing mainline Linux kernel code and authoring validated Markdown learning books.",
   "author": {
     "name": "Zang Leigang",
     "url": "https://github.com/zanglg"
@@ -13,7 +13,6 @@
     "linux",
     "kernel",
     "source-analysis",
-    "typst",
     "technical-writing",
     "drivers",
     "subsystems"
@@ -21,8 +20,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Linux Kernel Analysis",
-    "shortDescription": "Analyze kernel source and publish learning books.",
-    "longDescription": "A family of source-grounded workflows for static analysis of mainline Linux kernel boundary contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance mechanisms, plus publication of validated Markdown and Typst learning books with PDF and ZIP deliverables.",
+    "shortDescription": "Analyze kernel source and author Markdown books.",
+    "longDescription": "A family of source-grounded workflows for static analysis of mainline Linux kernel boundary contracts, object lifetimes, state and path selection, execution-context handoffs, concurrency, resource flow, failure recovery, and performance mechanisms, plus authoring validated Markdown learning books with a global README, source companion, labs, and complete solutions.",
     "developerName": "Zang Leigang",
     "category": "Developer Tools",
     "capabilities": [
@@ -34,7 +33,7 @@
       "Analyze this mainline Linux kernel subsystem from source.",
       "Trace the source-defined execution-context handoffs in this mainline driver.",
       "Derive the boundary contracts of this mainline kernel component.",
-      "Turn this source analysis into a validated Markdown and Typst kernel learning book."
+      "Turn this source analysis into a validated Markdown kernel learning book."
     ]
   }
 }

@@ -20,7 +20,7 @@ Keep these jobs separate:
 | Source companion | Where is the proof and what was omitted? | Anchors, field ledgers, branch matrices, callbacks, Kconfig, teardown proofs |
 | Labs | How can I observe or challenge the model? | Programs, commands, patches, traces, expected results, cleanup |
 | Solutions | How should I reason about the change? | Full answers, wrong implementations, review, validation matrix |
-| Authoring | How is the product generated and checked? | Manifest, content IDs, templates, generation and validation rules |
+| Authoring | How is the product maintained and checked? | Writing standard, global contents, update and validation rules |
 
 An audit report may become the source companion. It does not become a
 manuscript merely by adding chapter numbers, uniform headings, or more prose.
@@ -126,11 +126,10 @@ Use a visual only when it makes relationships easier to understand:
 - sequence diagram for cross-carrier handoffs;
 - table for exact mappings, selectors, and repeated field comparisons.
 
-Keep Mermaid diagrams focused in Markdown. In Typst, redraw simple exact paths,
-tables, callouts, and state summaries natively when that improves print quality.
-For diagrams whose semantics cannot be preserved reliably, use a reproducible
-vector conversion rather than a raster screenshot and record the generation
-step.
+Keep Mermaid diagrams focused and readable in Markdown. Prefer Markdown tables
+for exact mappings and repeated-field comparisons. Put the semantic explanation
+next to the visual so the chapter remains useful in renderers that do not
+execute Mermaid.
 
 Label generic Linux, architecture-specific, and platform/device nodes. Mark
 derived relationships as derived. A wakeup edge is notification and later

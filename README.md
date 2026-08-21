@@ -81,8 +81,8 @@ use; use the `dev` branch only while testing unreleased changes.
 
 The first available plugin is `linux-kernel-analysis`, a family of coordinated
 and specialist workflows for source-only static analysis of mainline Linux
-kernel code, plus a publication workflow for validated Markdown and Typst
-learning books with compiled PDF and ZIP deliverables.
+kernel code, plus an authoring workflow for validated Markdown learning books
+with a global README, source companion, labs, and complete solutions.
 
 The plugin is still under development on `dev`. Keep it there while its scope
 and methods are being completed; consider promotion to `main` only after it is

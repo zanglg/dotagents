@@ -1,6 +1,6 @@
 ---
 name: analyze-linux-kernel
-description: Coordinate a source-only, multi-perspective static analysis of mainline Linux kernel code. Use for broad requests to understand subsystem architecture, boundary contracts, objects, request journeys, state and path selection, execution contexts, concurrency, finite resources, failure recovery, or performance mechanisms as one coherent model. Prefer a specialist analyze-linux-kernel-* skill for one perspective and author-linux-kernel-book for a durable book, Typst, PDF, or ZIP publication. Exclude out-of-tree modules, downstream or vendor kernels, kernel builds, tracing, benchmarks, and runtime validation.
+description: Coordinate a source-only, multi-perspective static analysis of mainline Linux kernel code. Use for broad requests to understand subsystem architecture, boundary contracts, objects, request journeys, state and path selection, execution contexts, concurrency, finite resources, failure recovery, or performance mechanisms as one coherent model. Prefer a specialist analyze-linux-kernel-* skill for one perspective and author-linux-kernel-book for a durable Markdown book or series. Exclude out-of-tree modules, downstream or vendor kernels, kernel builds, tracing, benchmarks, and runtime validation.
 ---
 
 # Analyze Linux Kernel
@@ -14,10 +14,9 @@ Read [analysis-contract.md](references/analysis-contract.md) before
 starting. Read [report-shapes.md](references/report-shapes.md) when selecting
 the final artifact.
 
-If the requested result is a book, multi-volume learning series, Markdown and
-Typst publication, compiled PDF, or complete release archive, use
-`author-linux-kernel-book` for product structure and release validation. This
-skill and its specialists remain the evidence-producing layer.
+If the requested result is a durable Markdown book or multi-volume learning
+series, use `author-linux-kernel-book` for product structure and validation.
+This skill and its specialists remain the evidence-producing layer.
 
 ## Establish the analysis contract
 
