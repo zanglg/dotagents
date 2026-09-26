@@ -31,8 +31,8 @@ Apply decisions in this order:
 
 White space defines structure.
 Neutral tones define hierarchy.
-Muted tones distinguish local semantic groups.
-Blue defines focus.
+A single muted accent family provides optional emphasis.
+Border weight and line style define focus.
 Lines define relationships.
 Position defines architecture.
 
@@ -150,20 +150,23 @@ Never choose a small fixed box first and then force text into it.
 If the diagram does not fit, prefer a larger canvas before reducing text below
 the recommended readable sizes.
 
-### 5. Assign local semantic tones
+### 5. Decide whether an accent family is needed
 
-Only after structure is clear, identify the minimum number of semantic groups
-whose distinction would materially improve reading speed.
+Only after structure is clear, decide whether chromatic color would materially
+improve reading speed.
 
-Assign those groups to the available muted tones.
+If color is useful, choose one low-saturation accent family for the entire
+figure. Use neutral surfaces, tint strength, border weight, labels, and
+containment to distinguish additional groups.
 
-Tone meaning is local to the current diagram. No tone has a permanent technical
-meaning across diagrams.
+Accent-family choice is local to the current diagram. No family has a permanent
+technical meaning across diagrams.
 
 ### 6. Add relationship semantics
 
 Choose solid, dashed, or dotted lines according to relationship meaning.
-Use the focus blue only for current or active paths.
+Use the selected accent family only for current or active paths when chromatic
+emphasis is needed.
 
 ### 7. Validate
 
@@ -474,7 +477,7 @@ Use color only when neutral hierarchy is insufficient.
 | Normal | #66737F | 1.6 px | solid |
 | Weak or optional | #7D8892 | 1.4 px | dashed |
 | Contextual or logical | #7D8892 | 1.4 px | dotted |
-| Active path | #4F6F8F | 1.9 px | solid |
+| Active path | selected accent, default #667F8D | 1.9 px | solid |
 | Error path | #875C5C | 1.7 px | solid or dashed as appropriate |
 | Guide line | #7D8892 | 1.2 to 1.3 px | solid or dotted |
 
@@ -619,11 +622,12 @@ background behind the label is acceptable.
 
 ### Focus annotation
 
-When an annotation directly explains the active path:
+When an annotation directly explains the active path, use the selected accent
+family:
 
-- fill: #E8EEF4
-- border: #4F6F8F
-- text: #39566F
+- fill: selected accent fill, default #E7EDF0
+- border: selected accent, default #667F8D
+- text: selected accent text, default #506976
 - border width: about 1.3 px
 
 Annotations should explain the diagram, not compete with its primary entities.
@@ -637,7 +641,7 @@ Recommended fills:
 | Empty | #FFFFFF |
 | Ordinary allocated | #F2F5F7 |
 | Semantic memory region | choose a local muted tone, often Teal when appropriate |
-| Current range | #E8EEF4 |
+| Current range | selected accent fill, default #E7EDF0 |
 | Consumed | #F2F5F7 plus hatch |
 | Invalid | #F6ECEC |
 
@@ -647,10 +651,11 @@ Ordinary boundary:
 
 Current boundary:
 
-#4F6F8F
+selected accent, default #667F8D
 
 Addresses, offsets, indexes, and raw values should normally use monospace text
-in #5F6B76. Current addresses or indexes may use #39566F.
+in #626A70. Current addresses or indexes may use the selected accent text,
+default #506976.
 
 Prefer a neutral hatch for consumed ranges instead of inventing another color.
 
@@ -664,7 +669,7 @@ Pointer semantics:
 | Pointer | Appearance |
 | --- | --- |
 | Normal | solid #66737F |
-| Current | solid #4F6F8F |
+| Current | solid selected accent, default #667F8D |
 | Weak | dashed #7D8892 |
 | Invalid | #875C5C, dashed or solid according to meaning |
 
@@ -745,13 +750,9 @@ Good visual classes include concepts such as:
 
 - entity
 - container
-- tone-blue
-- tone-green
-- tone-sand
-- tone-violet
-- tone-teal
-- tone-slate
-- tone-amber
+- tone-accent
+- tone-accent-soft
+- tone-neutral
 - state-active
 - state-error
 - connector-normal
