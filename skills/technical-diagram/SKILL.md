@@ -509,21 +509,23 @@ Large subsystem or section containers should visually recede.
 Preferred:
 
 - fill #FFFFFF, or
-- fill #F8FAFB when a light surface is needed
-- border #CBD2D8
-- structural width about 1.35 px
+- fill #FAFBFB when a light surface is needed
+- border #C9CFD3
+- structural width about 1.2 px
 
-Do not fill an entire large subsystem with a semantic tone merely because its
+Do not fill an entire large subsystem with an accent merely because its
 contained entities share a group.
 
-Put most semantic color on the entities themselves.
+Keep chromatic color sparse. If a container itself needs emphasis, prefer the
+lightest fill from the selected accent family or a restrained accent border
+rather than a strongly tinted background.
 
 For neutral nesting, prefer:
 
 #FFFFFF
--> #F8FAFB
--> #F2F5F7
--> #E9EEF2
+-> #FAFBFB
+-> #F4F6F7
+-> #ECEFF1
 
 Use color only when neutral hierarchy is insufficient.
 
@@ -629,8 +631,8 @@ Use small, simple filled triangular arrowheads.
 
 Recommended nominal size:
 
-- length: 7 px
-- width: 6 px
+- length: 6 px
+- width: 5 px
 
 Arrowheads use the same color as their connector.
 
@@ -649,10 +651,11 @@ Some contextual guide lines and containment guides may omit arrowheads.
 
 Prefer:
 
-- stroke-linecap: round
-- stroke-linejoin: round
+- stroke-linecap: butt for ordinary orthogonal connectors
+- stroke-linejoin: round or miter, used consistently
 
-This softens line geometry without making the figure decorative.
+Use rounded caps only when they materially improve a dense or curved routing
+field. Keep line endings visually quiet.
 
 ## Connector labels
 
@@ -664,7 +667,7 @@ Relationship labels should normally:
 - avoid overlapping the line
 - avoid colored pill backgrounds
 
-If a dense connector field makes text hard to read, a small white or #F8FAFB
+If a dense connector field makes text hard to read, a small white or #FAFBFB
 background behind the label is acceptable.
 
 ## Annotations
@@ -851,7 +854,7 @@ Those belong to diagram content, not the visual style system.
 For version 0.1.1, prefer literal CSS values in the SVG style element rather than
 requiring CSS custom properties.
 
-For example, a tone class should resolve directly to its fill and stroke values.
+For example, an accent class should resolve directly to its fill and stroke values.
 
 This maximizes compatibility with SVG renderers and conversion tools.
 
