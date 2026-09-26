@@ -5,7 +5,7 @@ description: Create clean, restrained, publication-quality technical diagrams an
 
 # Technical Diagram
 
-Version: 0.1.1
+Version: 0.1.2
 Status: experimental
 
 This skill defines visual grammar, not domain ontology.
@@ -44,6 +44,10 @@ can express more clearly.
 
 ## Overall visual character
 
+Default to an editorial technical figure rather than a UI-style engineering
+dashboard. The default visual language should feel restrained, serious, and
+publication-ready.
+
 The result should feel like:
 
 - systems-paper figures
@@ -52,6 +56,9 @@ The result should feel like:
 - editorial technical figures with a deliberate visual axis
 - precise engineering documentation
 
+Use the documentation / UI-neutral variant only when the user explicitly asks
+for a slide-like, dashboard-like, or product-documentation presentation.
+
 It should not feel like:
 
 - a marketing presentation
@@ -59,8 +66,13 @@ It should not feel like:
 - a colorful infographic
 - a card-heavy product UI
 
-Keep the canvas predominantly white. Use low-saturation color only where it
-materially improves comprehension.
+Keep the canvas predominantly white. Default to neutral surfaces plus at most
+one muted accent family. Use additional semantic tones only when they encode a
+real distinction that position, labels, containment, or line style cannot
+express clearly.
+
+Color should feel close to neutral. If a fill is noticeable before the structure
+is noticeable, it is too strong.
 
 Do not use:
 
@@ -192,17 +204,18 @@ Avoid abrupt jumps from white to medium or dark gray.
 
 ### Muted tone palette
 
-These are visual resources only. They do not have permanent domain meanings.
+These are deliberately near-neutral visual resources. They do not have
+permanent domain meanings.
 
 | Tone | Fill | Border | Accent |
 | --- | --- | --- | --- |
-| Blue | #EAF0F5 | #B7C8D7 | #506E87 |
-| Green | #EAF3EF | #B6CDBF | #557664 |
-| Sand | #F4EEE7 | #D6C5B3 | #806A52 |
-| Violet | #F1EDF3 | #CBBFD1 | #705F78 |
-| Teal | #E8F2F1 | #AECBC8 | #4D7470 |
-| Slate | #EDF0F4 | #BEC7D1 | #596A7B |
-| Amber | #F5F1E5 | #D9CCA8 | #7B704C |
+| Blue | #F1F5F8 | #C8D4DE | #607689 |
+| Green | #F1F6F3 | #C9D7CF | #63796D |
+| Sand | #F7F4EF | #D9D0C4 | #7A7063 |
+| Violet | #F5F3F6 | #D5CFD8 | #766E7C |
+| Teal | #F0F6F5 | #C7D7D5 | #607C79 |
+| Slate | #F2F4F6 | #CBD2D9 | #63717E |
+| Amber | #F7F5EF | #DCD5C4 | #7B7462 |
 
 Do not assume, for example, that green always means queues or sand always means
 drivers. The model must infer the local grouping from the current diagram.
@@ -212,22 +225,27 @@ drivers. The model must infer the local grouping from the current diagram.
 For each diagram:
 
 1. Start neutral.
-2. Identify the minimum useful number of semantic groups.
-3. Assign muted tones only to groups that benefit from fast visual distinction.
-4. Keep the same local group on the same tone.
-5. Prefer layout and containment before adding another tone.
+2. Use zero or one muted accent family by default.
+3. Add a second semantic tone only when it materially reduces reading effort.
+4. Add a third tone only when the diagram contains a real third taxonomy that
+   cannot be expressed cleanly by position, containment, labels, or line style.
+5. Keep the same local group on the same tone.
 6. Do not create one color per object.
 7. Nested objects do not automatically require a new color.
-8. Use no more than 4 to 6 semantic tones in a figure unless there is a strong
-   reason to exceed that range.
+8. More diagram complexity is not a reason to add more colors.
 
 Typical usage:
 
-- simple figure: 1 to 3 tones
-- medium figure: 2 to 4 tones
-- complex figure: 3 to 6 tones
+- simple figure: neutral only, or neutral plus 1 tone
+- medium figure: neutral plus 1 tone
+- complex figure: neutral plus 1 to 2 tones
+- exceptional taxonomy-heavy figure: up to 3 tones
 
-The palette should usually occupy less area than the white and neutral surfaces.
+Treat more than 3 semantic tones as a design warning that requires a strong
+reason.
+
+The palette should occupy much less visual area than the white and neutral
+surfaces.
 
 ### Visual area balance
 
@@ -246,6 +264,10 @@ intended viewing size.
 State semantics are global and may remain stable across domains.
 
 ### Active or current
+
+Use focus color sparingly. In static architecture diagrams, do not introduce an
+active/current treatment unless the figure actually depicts a current state,
+selected object, or active path.
 
 Use for:
 
@@ -291,15 +313,7 @@ Do not use red merely to increase visual variety.
 
 Choose one primary text profile per figure and use it consistently.
 
-Documentation / UI-neutral profile:
-
-- IBM Plex Sans
-- Inter
-- Helvetica Neue
-- Arial
-- sans-serif fallback
-
-Editorial / academic profile:
+Editorial / academic profile — default:
 
 - Source Serif 4
 - Charter
@@ -307,9 +321,21 @@ Editorial / academic profile:
 - Times New Roman
 - serif fallback
 
-Use the editorial profile when the target is a systems paper, textbook, or
-publication-style figure and the serif face remains readable at the intended
-size. Do not mix serif and sans-serif merely to add visual variety.
+Use this profile by default for architecture, systems, kernel, firmware, memory,
+and data-structure figures intended to look like a paper or textbook figure.
+
+Documentation / UI-neutral profile — opt in when appropriate:
+
+- IBM Plex Sans
+- Inter
+- Helvetica Neue
+- Arial
+- sans-serif fallback
+
+Use the documentation profile when the user explicitly asks for a slide-like,
+dashboard-like, web-product, or UI-neutral engineering-documentation style.
+
+Do not mix serif and sans-serif merely to add visual variety.
 
 For structures, fields, addresses, offsets, code-like names, and values, prefer:
 
@@ -438,7 +464,9 @@ Inside a focal container, do not box every subordinate concept by default.
 Prefer typography, spacing, or a light divider when another nested rectangle
 would make the figure feel like a card UI.
 
-Put most semantic color on the entities themselves.
+Put most semantic color on a small number of focal entities. Supporting entities
+should usually remain white or neutral rather than each receiving their own
+tone.
 
 For neutral nesting, prefer:
 
@@ -506,28 +534,52 @@ tone.
 
 ## Routing geometry
 
+The default connector is a straight line. Routing should look engineered rather
+than decorative.
+
 Prefer routing in this order:
 
-1. horizontal straight line
-2. vertical straight line
-3. orthogonal polyline with 90-degree turns
-4. curve only when necessary
+1. straight line when source and target can be connected cleanly
+2. one-bend orthogonal polyline when a straight line would cross content or
+   create an awkward attachment point
+3. a simple two-segment orthogonal route when one bend is insufficient
+4. a single shallow curve only when it expresses one smooth directional change
+   more clearly than an elbow
 
-Use curves sparingly for:
+Prefer the primary reading direction for long relationships. Short local
+vertical lines are normal when they directly connect stacked entities, but avoid
+using long bare vertical connectors as the default way to cross multiple
+regions.
 
-- avoiding crowded regions
-- long cross-layer references
-- a small number of back edges
-- pointer graphs where orthogonal routing would create more crossings
+A permitted curve should resemble one restrained arc or one smooth bend. It may
+be useful for:
 
-Do not use decorative curves on normal architecture relationships.
+- a centered fan-out or fan-in
+- connecting a central object to a laterally offset lower or upper object
+- avoiding one crowded region without introducing several orthogonal elbows
+- a small number of long cross-layer references where a shallow arc improves
+  separation
 
-Short, symmetric diagonal connectors are acceptable when they make a centered
-fan-out or fan-in composition clearer and avoid unnecessary orthogonal bends.
-Reduce long diagonal lines and use them only when they improve the composition.
-Prefer orthogonal routes for long connections.
+Do not use:
+
+- S-shaped connectors
+- serpentine or multi-inflection curves
+- curves with several bends
+- decorative waves
+- a curved route when a single clean straight or elbow route is equally clear
+
+When a bend is needed and a curve offers no clear readability advantage, prefer
+the orthogonal polyline because it feels more precise and serious.
+
+Short, symmetric diagonal straight connectors are acceptable when they make a
+centered fan-out or fan-in clearer. Reduce long diagonal lines and use them only
+when they improve the composition.
 
 ### Connection points
+
+Prefer connector paths with zero or one directional change. Two changes are
+acceptable when required by obstacle avoidance; more than two should trigger a
+layout reconsideration.
 
 Attach connectors preferentially at the center of:
 
@@ -580,7 +632,8 @@ This softens line geometry without making the figure decorative.
 
 Relationship labels should normally:
 
-- use 13 to 14 px sans-serif text
+- use 13 to 14 px text from the figure's primary text profile, or monospace for
+  literal function / field / API names
 - use #5F6B76
 - sit approximately 4 to 8 px away from the connector
 - avoid overlapping the line
@@ -673,7 +726,7 @@ Pointer color describes relationship state, not target category.
 
 ## Portable SVG profile
 
-Version 0.1.1 is portable SVG first.
+Version 0.1.2 is portable SVG first.
 
 Do not add editor-specific namespaces or metadata.
 
@@ -779,7 +832,7 @@ Those belong to diagram content, not the visual style system.
 
 ### SVG styles
 
-For version 0.1.1, prefer literal CSS values in the SVG style element rather than
+For version 0.1.2, prefer literal CSS values in the SVG style element rather than
 requiring CSS custom properties.
 
 For example, a tone class should resolve directly to its fill and stroke values.
@@ -844,12 +897,14 @@ When asked to create a technical diagram:
 
 1. infer the local semantic groups from the user's content
 2. choose the composition strategy and primary visual axis
-3. choose the minimum useful tone mapping
+3. start from neutral surfaces and decide whether one accent tone is actually
+   needed
 4. establish typography and text bounds
 5. size boxes around text and hierarchy
 6. establish subsystem layout and overall balance
 7. reserve space for legends and auxiliary annotations when needed
-8. route connectors
+8. route connectors with straight lines first, then minimal-bend polylines, and
+   only rarely a single shallow curve
 9. add active or error state only if semantically justified
 10. enlarge the canvas when needed rather than squeezing content
 11. produce editable vector SVG when SVG is requested
@@ -888,7 +943,10 @@ Before finalizing, verify all of the following.
 
 - Is the canvas predominantly white?
 - Are large containers neutral?
-- Is semantic color concentrated on entities rather than giant background areas?
+- Would neutral-only rendering still preserve the primary structure?
+- Is there a clear reason for every semantic tone that is present?
+- Is the figure using neutral plus no more than 1 to 2 tones in ordinary cases?
+- Are supporting entities left neutral rather than colored individually?
 - Is the number of tones minimal?
 - Does every local tone mapping remain consistent?
 - Is blue focus used only for active or current state?
@@ -915,7 +973,13 @@ Before finalizing, verify all of the following.
 - Are arrowheads small and consistent?
 - Do connectors avoid passing through text?
 - Are crossings minimized?
-- Are curves used only when they improve clarity?
+- Could each connector be a straight line?
+- If not, could it use a single orthogonal bend?
+- Are routes with more than two directional changes eliminated?
+- Are long bare vertical connectors avoided when they merely bridge distant
+  regions?
+- If a curve is used, is it a single shallow arc with one directional change?
+- Are S-curves, serpentine routes, and decorative waves absent?
 
 ### SVG portability
 
@@ -927,23 +991,31 @@ Before finalizing, verify all of the following.
 - Does the SVG use standard elements and standard styling?
 - Is the file understandable and editable without a specific editor?
 
-## Version 0.1.1 notes
+## Version 0.1.2 notes
 
-This patch refines visual composition rather than domain semantics.
+This patch makes the default visual language more specific and reproducible.
+It refines visual composition rather than domain semantics.
 
-Changes from 0.1.0:
+Changes from 0.1.1:
 
-- add an editorial / academic serif typography profile alongside the existing
-  sans-serif documentation profile
-- add explicit guidance for implicit visual axes, centered compositions,
-  symmetry, and balanced asymmetry
-- allow focal components to differ in size from their peers when hierarchy
-  benefits
-- replace color-area percentages with qualitative visual-balance guidance
-- add placement rules for legends and auxiliary panels
-- permit short purposeful diagonal connectors in centered fan-out or fan-in
-  compositions
-- discourage unnecessary nested boxes inside already-clear containers
+- make the editorial / academic technical profile the default for systems,
+  architecture, kernel, firmware, memory, and data-structure figures
+- make the sans-serif documentation / UI-neutral profile an explicit opt-in
+  variant when that presentation is requested
+- move to a neutral-first palette with materially lower-saturation semantic
+  tones
+- reduce ordinary color usage to neutral plus 0 to 2 semantic tones; more than
+  3 tones now requires an exceptional justification
+- make straight connectors the default
+- prefer a one-bend orthogonal polyline when a straight connector is blocked
+- allow only a restrained single shallow curve when one smooth directional
+  change is clearer than an elbow
+- explicitly reject S-curves, serpentine routes, and multi-inflection connector
+  shapes
+- discourage long bare vertical connectors that cross multiple visual regions
+- strengthen connector QA around bend count and curve shape
+- keep supporting entities neutral so hierarchy comes primarily from layout,
+  whitespace, typography, borders, and connector geometry
 
 During trial use, continue observing:
 
