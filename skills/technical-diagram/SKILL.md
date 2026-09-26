@@ -5,7 +5,7 @@ description: Create clean, restrained, publication-quality technical diagrams an
 
 # Technical Diagram
 
-Version: 0.1.1
+Version: 0.1.0
 Status: experimental
 
 This skill defines visual grammar, not domain ontology.
@@ -30,16 +30,14 @@ Apply decisions in this order:
 8. decoration
 
 White space defines structure.
-Neutral tones and luminance define hierarchy.
-Typography and border weight define emphasis.
-A single low-chroma accent family may establish focus or one local distinction.
+Neutral tones define hierarchy.
+Muted tones distinguish local semantic groups.
+Blue defines focus.
 Lines define relationships.
 Position defines architecture.
 
-Color must not carry information that layout, labels, line style, luminance, or
-containment can express more clearly.
-
-The figure should remain structurally understandable in grayscale.
+Color must not carry information that layout, labels, line style, or containment
+can express more clearly.
 
 ## Overall visual character
 
@@ -49,7 +47,6 @@ The result should feel like:
 - kernel or firmware documentation
 - technical textbook illustrations
 - precise engineering documentation
-- restrained research-report graphics
 
 It should not feel like:
 
@@ -57,34 +54,9 @@ It should not feel like:
 - an enterprise dashboard
 - a colorful infographic
 - a card-heavy product UI
-- a multi-hue architecture poster
 
-Keep the canvas predominantly white or near-white. The first visual impression
-should be structure, not color.
-
-### Academic visual profile
-
-Prefer a restrained, publication-oriented visual language.
-
-Create hierarchy primarily through:
-
-- whitespace
-- alignment
-- containment
-- luminance
-- typography
-- border weight
-- line style
-
-Treat chromatic color as a secondary channel.
-
-A single figure should normally use no more than one chromatic hue family.
-Different lightness values within that family are allowed. Error or warning
-color is the only routine exception, and only when the underlying content
-actually contains an error, invalid state, or warning.
-
-Use large tinted areas only at very low saturation. Slightly stronger chroma is
-acceptable for small borders, arrows, or focal marks.
+Keep the canvas predominantly white. Use low-saturation color only where it
+materially improves comprehension.
 
 Do not use:
 
@@ -93,16 +65,11 @@ Do not use:
 - glow
 - 3D effects
 - skeuomorphism
-- glass effects
 - decorative illustrations
 - large rounded cards
 - saturated categorical palettes
-- multiple competing hue families
 - large colored subsystem backgrounds
 - ornamental icons unless the diagram specifically requires them
-
-Do not add color merely to make the figure look richer. A neutral figure is a
-valid and often preferable result.
 
 ## Workflow
 
@@ -163,39 +130,20 @@ Never choose a small fixed box first and then force text into it.
 If the diagram does not fit, prefer a larger canvas before reducing text below
 the recommended readable sizes.
 
-### 5. Select a restrained accent family
+### 5. Assign local semantic tones
 
-Only after structure is clear, decide whether chromatic color materially
-improves reading speed.
+Only after structure is clear, identify the minimum number of semantic groups
+whose distinction would materially improve reading speed.
 
-Start neutral.
+Assign those groups to the available muted tones.
 
-If color is useful, choose one low-chroma accent family for the entire figure
-and use lighter or darker variants of that same family.
-
-Do not assign a separate hue to each semantic group.
-
-Distinguish groups first through:
-
-- position
-- containment
-- neutral surface depth
-- border treatment
-- line style
-- labels
-
-Tone meaning is local to the current diagram. No accent family has a permanent
-technical meaning across diagrams.
+Tone meaning is local to the current diagram. No tone has a permanent technical
+meaning across diagrams.
 
 ### 6. Add relationship semantics
 
 Choose solid, dashed, or dotted lines according to relationship meaning.
-
-Use the selected figure accent only for current, active, or deliberately
-emphasized paths. If no chromatic accent is needed, keep relationships neutral.
-
-Do not introduce a second accent hue merely to distinguish another relationship
-type.
+Use the focus blue only for current or active paths.
 
 ### 7. Validate
 
@@ -208,84 +156,73 @@ Run the QA checklist at the end of this document before finalizing.
 | Role | Value |
 | --- | --- |
 | Canvas | #FFFFFF |
-| Surface 1 | #FAFBFB |
-| Surface 2 | #F4F6F7 |
-| Surface 3 | #ECEFF1 |
-| Normal border | #C9CFD3 |
-| Strong border | #98A2AA |
-| Primary text | #23282D |
-| Secondary text | #5F686F |
-| Muted text | #6D7882 |
-| Normal connector | #667078 |
+| Surface 1 | #F8FAFB |
+| Surface 2 | #F2F5F7 |
+| Surface 3 | #E9EEF2 |
+| Normal border | #CBD2D8 |
+| Strong border | #9AA6B2 |
+| Primary text | #20262D |
+| Secondary text | #5F6B76 |
+| Muted text | #7D8892 |
+| Normal connector | #66737F |
 
 Never use pure black as the default text color.
 
 Neutral depth should progress gradually:
 
-#FFFFFF -> #FAFBFB -> #F4F6F7 -> #ECEFF1
+#FFFFFF -> #F8FAFB -> #F2F5F7 -> #E9EEF2
 
 Avoid abrupt jumps from white to medium or dark gray.
 
-Small informative text should remain clearly readable on its actual background.
-Do not use very light gray merely to make metadata feel secondary.
+### Muted tone palette
 
-### Accent family palette
+These are visual resources only. They do not have permanent domain meanings.
 
-These are alternative figure-level accent families. Choose at most one family
-for an ordinary figure.
-
-| Family | Fill | Border | Accent |
+| Tone | Fill | Border | Accent |
 | --- | --- | --- | --- |
-| Blue-gray | #E9EEF1 | #B7C2C9 | #607987 |
-| Sage | #ECF0EC | #BCC6BE | #64766A |
-| Sepia | #F1EEE9 | #CBC2B7 | #786D60 |
-| Teal-gray | #E9F0EF | #B8C8C5 | #5D7773 |
-| Violet-gray | #EFEDF0 | #C6C0C8 | #726A75 |
+| Blue | #EAF0F5 | #B7C8D7 | #506E87 |
+| Green | #EAF3EF | #B6CDBF | #557664 |
+| Sand | #F4EEE7 | #D6C5B3 | #806A52 |
+| Violet | #F1EDF3 | #CBBFD1 | #705F78 |
+| Teal | #E8F2F1 | #AECBC8 | #4D7470 |
+| Slate | #EDF0F4 | #BEC7D1 | #596A7B |
+| Amber | #F5F1E5 | #D9CCA8 | #7B704C |
 
-These colors are visual resources only. They do not have permanent domain
-meanings.
+Do not assume, for example, that green always means queues or sand always means
+drivers. The model must infer the local grouping from the current diagram.
 
-Do not combine several families simply because the diagram contains several
-semantic categories.
-
-If the figure does not benefit from chromatic emphasis, use only the neutral
-foundation.
-
-### Accent assignment policy
+### Semantic tone assignment policy
 
 For each diagram:
 
 1. Start neutral.
-2. Add chromatic color only when it materially improves scanning or focus.
-3. If color is used, choose one accent family for the figure.
-4. Distinguish semantic groups first with position, containment, luminance, and
-   labels.
-5. Reuse light, border, and accent variants from the selected family rather
-   than adding new hues.
+2. Identify the minimum useful number of semantic groups.
+3. Assign muted tones only to groups that benefit from fast visual distinction.
+4. Keep the same local group on the same tone.
+5. Prefer layout and containment before adding another tone.
 6. Do not create one color per object.
-7. Nested objects do not automatically require color.
-8. Complexity alone does not justify additional hue families.
-9. Error or warning red is an exception only when semantically necessary.
+7. Nested objects do not automatically require a new color.
+8. Use no more than 4 to 6 semantic tones in a figure unless there is a strong
+   reason to exceed that range.
 
 Typical usage:
 
-- simple figure: neutral only, or one accent family
-- medium figure: neutral plus one accent family
-- complex figure: still prefer neutral plus one accent family
+- simple figure: 1 to 3 tones
+- medium figure: 2 to 4 tones
+- complex figure: 3 to 6 tones
+
+The palette should usually occupy less area than the white and neutral surfaces.
 
 ### Recommended area balance
 
 Approximate target:
 
-- white and neutral surfaces: 80 to 90 percent
-- lightly tinted accent surfaces: 8 to 18 percent
-- stronger accent strokes or marks: 2 to 6 percent
+- white and neutral surfaces: 65 to 75 percent
+- muted semantic entity fills: 20 to 28 percent
+- active focus accents: 3 to 5 percent
 - error or warning color: below 2 percent
 
 These are visual balance targets, not geometric requirements.
-
-Large areas should have the lowest chroma. Small focal marks may use somewhat
-stronger chroma.
 
 ## State semantics
 
@@ -303,29 +240,20 @@ Use for:
 - current data path
 - immediate focus
 
-Use the selected figure accent family. If the figure has no established accent
-family, Blue-gray is the default restrained focus family.
-
-Default Blue-gray focus values:
-
 | Property | Value |
 | --- | --- |
-| Fill when needed | #E9EEF1 |
-| Border | #607987 |
-| Text | #4C626D |
-| Connector | #607987 |
+| Fill when needed | #E8EEF4 |
+| Border | #4F6F8F |
+| Text | #39566F |
+| Connector | #4F6F8F |
 
-If an entity already has a lightly tinted accent fill, preserve that fill when
-possible and indicate active state primarily with the stronger border and
-connector.
+If an entity already has a local semantic fill, preserve that fill when possible
+and indicate active state primarily with the blue border and blue connector.
 
-This keeps two visual dimensions separate:
+This keeps two dimensions separate:
 
-- fill answers: what local region or grouping does this belong to?
-- border and line answer: what is active or emphasized now?
-
-Do not introduce blue into a figure that already uses another accent family.
-Use that figure's selected accent instead.
+- fill answers: what group is this in?
+- border and line answer: what is active now?
 
 ### Error or invalid
 
@@ -368,47 +296,15 @@ Do not convert text to paths.
 
 | Role | Size | Weight |
 | --- | --- | --- |
-| Figure title | 24 to 26 px | 600 |
-| Section title | 18 to 20 px | 600 |
-| Entity title | 15 to 16 px | 500 |
+| Figure title | 26 to 28 px | 600 |
+| Section title | 19 to 21 px | 600 |
+| Entity title | 16 to 17 px | 600 |
 | Field or code | 14 to 15 px | 400 |
 | Relationship label | 13 to 14 px | 400 or 500 |
 | Annotation | 13 to 14 px | 400 |
 | Weak metadata | 12 to 13 px | 400 |
 
 Prefer no more than four visually dominant size levels in one figure.
-
-Use bold text sparingly. Hierarchy should be visible without making most entity
-labels bold.
-
-### Text density
-
-Prefer concise noun phrases over prose.
-
-For ordinary entities:
-
-- use 1 to 3 lines of text
-- prefer roughly 2 to 5 words per line
-- keep the entity name visually dominant
-- omit descriptive sentences unless they are essential to understanding
-- move longer explanation to an annotation, caption, or surrounding document
-
-For containers:
-
-- prefer a one-line title
-- allow at most one short qualifier when necessary
-
-For connector labels:
-
-- prefer 1 to 3 words
-- avoid sentence-like labels
-
-Weak metadata, badges, status chips, owner labels, and UI-like field stacks
-should be omitted by default. Include them only when they encode information
-that the figure itself must communicate.
-
-A diagram should help establish a mental model, not reproduce the surrounding
-prose.
 
 ### Text rules
 
@@ -425,20 +321,17 @@ Do not merge multiple independent labels into one oversized text object.
 
 | Measurement | Recommended value |
 | --- | --- |
-| Entity horizontal padding | 12 to 14 px |
-| Entity vertical padding | 10 to 12 px |
-| Entity title to body gap | 8 to 10 px |
-| Field line height | 18 to 20 px |
-| Minimum safe inner clearance | 10 px |
-| Section padding | 18 to 22 px |
+| Entity horizontal padding | 16 px |
+| Entity vertical padding | 14 to 16 px |
+| Entity title to body gap | 10 to 12 px |
+| Field line height | 20 to 22 px |
+| Minimum safe inner clearance | 12 px |
+| Section padding | 20 to 24 px |
 
 Text must not touch or cross borders.
 
 When exact rendered text measurements are available, use them to determine box
-size. When they are not available, err on the side of slightly larger boxes.
-
-Avoid presentation-style oversized padding. The figure should feel compact and
-publication-oriented while remaining readable.
+size. When they are not available, err on the side of larger boxes.
 
 ### Spacing scale
 
@@ -451,12 +344,12 @@ Prefer:
 - 24 px
 - 32 px
 - 48 px
+- 64 px
 
 Keep distances within a group smaller than distances between subsystems.
 
 Do not try to fill the whole canvas. Empty white regions are part of the visual
-structure, but whitespace should clarify grouping rather than create a luxury
-presentation aesthetic.
+structure.
 
 ## Borders
 
@@ -464,43 +357,23 @@ presentation aesthetic.
 
 | Border role | Width |
 | --- | --- |
-| Very light separator | 0.75 to 0.8 px |
-| Normal entity | 1.0 to 1.1 px |
-| Structural container | 1.2 px |
-| Active entity | 1.4 to 1.5 px |
-| Error entity | 1.4 px |
+| Very light separator | 0.8 px |
+| Normal entity | 1.2 px |
+| Structural container | 1.35 px |
+| Active entity | 1.7 px |
+| Error entity | 1.5 px |
 
 ### Corner radius
 
 | Object | Radius |
 | --- | --- |
-| Normal entity | 2 to 3 px |
-| Large container | 2 to 4 px |
-| Array or memory cell | 0 to 2 px |
-| Annotation box | 2 to 3 px |
-
-Square corners are acceptable.
+| Normal entity | 4 px |
+| Large container | 5 px |
+| Array or memory cell | 2 to 4 px |
+| Annotation box | 4 px |
 
 Keep technical diagrams close to rectilinear geometry.
-Avoid pill shapes, soft cards, and large UI-like radii.
-
-### Boundary discipline
-
-Do not draw a box around every concept.
-
-Use a visible boundary only when it encodes at least one of:
-
-- entity identity
-- containment
-- a meaningful structural unit
-- a range, memory region, or addressable object
-- a deliberately emphasized state
-
-Plain labels, actors, intermediate concepts, and relationship names may remain
-unboxed.
-
-Avoid repeated card framing where whitespace and alignment already communicate
-the grouping.
+Avoid pill shapes and large card-like radii.
 
 ## Containers
 
@@ -509,23 +382,21 @@ Large subsystem or section containers should visually recede.
 Preferred:
 
 - fill #FFFFFF, or
-- fill #FAFBFB when a light surface is needed
-- border #C9CFD3
-- structural width about 1.2 px
+- fill #F8FAFB when a light surface is needed
+- border #CBD2D8
+- structural width about 1.35 px
 
-Do not fill an entire large subsystem with an accent merely because its
+Do not fill an entire large subsystem with a semantic tone merely because its
 contained entities share a group.
 
-Keep chromatic color sparse. If a container itself needs emphasis, prefer the
-lightest fill from the selected accent family or a restrained accent border
-rather than a strongly tinted background.
+Put most semantic color on the entities themselves.
 
 For neutral nesting, prefer:
 
 #FFFFFF
--> #FAFBFB
--> #F4F6F7
--> #ECEFF1
+-> #F8FAFB
+-> #F2F5F7
+-> #E9EEF2
 
 Use color only when neutral hierarchy is insufficient.
 
@@ -535,12 +406,12 @@ Use color only when neutral hierarchy is insufficient.
 
 | Relationship | Color | Width | Style |
 | --- | --- | --- | --- |
-| Normal | #667078 | 1.3 px | solid |
-| Weak or optional | #6D7882 | 1.15 px | dashed |
-| Contextual or logical | #6D7882 | 1.15 px | dotted |
-| Active path | selected accent, default #607987 | 1.5 px | solid |
-| Error path | #875C5C | 1.4 px | solid or dashed as appropriate |
-| Guide line | #6D7882 | 1.0 px | solid or dotted |
+| Normal | #66737F | 1.6 px | solid |
+| Weak or optional | #7D8892 | 1.4 px | dashed |
+| Contextual or logical | #7D8892 | 1.4 px | dotted |
+| Active path | #4F6F8F | 1.9 px | solid |
+| Error path | #875C5C | 1.7 px | solid or dashed as appropriate |
+| Guide line | #7D8892 | 1.2 to 1.3 px | solid or dotted |
 
 ### Dash patterns
 
@@ -578,14 +449,11 @@ Use dotted lines for:
 - explanatory logical mappings
 - non-owning conceptual relations
 
-Use the selected accent only when the relationship itself is active or
-deliberately emphasized.
+Use blue solid lines only when the relationship itself is active or currently
+being emphasized.
 
-Do not introduce a different hue for data, control, async, ownership, or other
-relationship categories when line style and labels can express the distinction.
-
-Do not color a connector merely because the connected entity has an accent
-fill.
+Do not color a connector merely because the connected entity has a semantic
+tone.
 
 ## Routing geometry
 
@@ -631,8 +499,8 @@ Use small, simple filled triangular arrowheads.
 
 Recommended nominal size:
 
-- length: 6 px
-- width: 5 px
+- length: 7 px
+- width: 6 px
 
 Arrowheads use the same color as their connector.
 
@@ -651,51 +519,47 @@ Some contextual guide lines and containment guides may omit arrowheads.
 
 Prefer:
 
-- stroke-linecap: butt for ordinary orthogonal connectors
-- stroke-linejoin: round or miter, used consistently
+- stroke-linecap: round
+- stroke-linejoin: round
 
-Use rounded caps only when they materially improve a dense or curved routing
-field. Keep line endings visually quiet.
+This softens line geometry without making the figure decorative.
 
 ## Connector labels
 
 Relationship labels should normally:
 
 - use 13 to 14 px sans-serif text
-- use #5F686F
+- use #5F6B76
 - sit approximately 4 to 8 px away from the connector
 - avoid overlapping the line
 - avoid colored pill backgrounds
 
-If a dense connector field makes text hard to read, a small white or #FAFBFB
+If a dense connector field makes text hard to read, a small white or #F8FAFB
 background behind the label is acceptable.
 
 ## Annotations
 
 ### Ordinary annotation
 
-- text: #5F686F
+- text: #5F6B76
 - fill: none or white
-- border: none or #C9CFD3 at about 0.9 px
+- border: none or #CBD2D8 at about 1 px
 
 ### Weak annotation
 
-- text: #6D7882
+- text: #7D8892
 - no border by default
 
 ### Focus annotation
 
 When an annotation directly explains the active path:
 
-- fill: selected accent fill, default #E9EEF1
-- border: selected accent, default #607987
-- text: selected accent text, default #4C626D
-- border width: about 1.1 px
+- fill: #E8EEF4
+- border: #4F6F8F
+- text: #39566F
+- border width: about 1.3 px
 
 Annotations should explain the diagram, not compete with its primary entities.
-
-Keep annotations concise. Prefer a short phrase or one compact sentence. Longer
-explanation belongs in the figure caption or surrounding document.
 
 ## Memory, array, and range diagrams
 
@@ -704,50 +568,44 @@ Recommended fills:
 | State | Fill |
 | --- | --- |
 | Empty | #FFFFFF |
-| Ordinary allocated | #F4F6F7 |
-| Semantic memory region | selected accent fill when color is needed |
-| Current range | selected accent fill, default #E9EEF1 |
-| Consumed | #F4F6F7 plus hatch |
+| Ordinary allocated | #F2F5F7 |
+| Semantic memory region | choose a local muted tone, often Teal when appropriate |
+| Current range | #E8EEF4 |
+| Consumed | #F2F5F7 plus hatch |
 | Invalid | #F6ECEC |
 
 Ordinary boundary:
 
-#C9CFD3
+#CBD2D8
 
 Current boundary:
 
-selected accent, default #607987
+#4F6F8F
 
 Addresses, offsets, indexes, and raw values should normally use monospace text
-in #5F686F. Current addresses or indexes may use the selected accent text.
+in #5F6B76. Current addresses or indexes may use #39566F.
 
 Prefer a neutral hatch for consumed ranges instead of inventing another color.
 
-Do not use different hues for adjacent memory regions unless the user explicitly
-requires a categorical color encoding.
-
 ## Pointer and object graphs
 
-Keep objects neutral or use the single selected accent family sparingly.
-
+Keep objects neutral or locally tone-grouped.
 Do not assign one unique color to each node.
 
 Pointer semantics:
 
 | Pointer | Appearance |
 | --- | --- |
-| Normal | solid #667078 |
-| Current | solid selected accent, default #607987 |
-| Weak | dashed #6D7882 |
+| Normal | solid #66737F |
+| Current | solid #4F6F8F |
+| Weak | dashed #7D8892 |
 | Invalid | #875C5C, dashed or solid according to meaning |
 
 Pointer color describes relationship state, not target category.
 
-Prefer spatial grouping, labels, and line style over additional node colors.
-
 ## Portable SVG profile
 
-Version 0.1.1 is portable SVG first.
+Version 0.1.0 is portable SVG first.
 
 Do not add editor-specific namespaces or metadata.
 
@@ -820,11 +678,13 @@ Good visual classes include concepts such as:
 
 - entity
 - container
-- surface-neutral-1
-- surface-neutral-2
-- accent-fill
-- accent-border
-- accent-text
+- tone-blue
+- tone-green
+- tone-sand
+- tone-violet
+- tone-teal
+- tone-slate
+- tone-amber
 - state-active
 - state-error
 - connector-normal
@@ -851,10 +711,10 @@ Those belong to diagram content, not the visual style system.
 
 ### SVG styles
 
-For version 0.1.1, prefer literal CSS values in the SVG style element rather than
+For version 0.1.0, prefer literal CSS values in the SVG style element rather than
 requiring CSS custom properties.
 
-For example, an accent class should resolve directly to its fill and stroke values.
+For example, a tone class should resolve directly to its fill and stroke values.
 
 This maximizes compatibility with SVG renderers and conversion tools.
 
@@ -891,21 +751,21 @@ Preferred response to insufficient space:
 Readable text and correct box sizing take priority over a predetermined image
 dimension.
 
-## Local accent mapping example
+## Local semantic mapping example
 
-The style system does not assign technical meaning to colors.
+The style system does not know what technical entities mean.
 
-A figure may locally choose Blue-gray as its accent family and use:
+A diagram may locally decide:
 
-- neutral surfaces for ordinary structure
-- Blue-gray fill for one emphasized region
-- Blue-gray accent stroke for the current object or active path
-- error red only for a real invalid or failure state
+- Group A -> Blue
+- Group B -> Green
+- Group C -> Sand
+- Group D -> Violet
 
-Another figure may choose Sage instead.
+A different diagram may reuse those tones for entirely different semantic
+groups.
 
-Do not use Blue-gray, Sage, Sepia, Teal-gray, and Violet-gray simultaneously to
-represent unrelated categories in one ordinary figure.
+The only requirement is internal consistency within the current figure.
 
 The model should be able to use this skill for unrelated technical subjects
 without extending the global palette vocabulary.
@@ -914,17 +774,16 @@ without extending the global palette vocabulary.
 
 When asked to create a technical diagram:
 
-1. infer the entities, relationships, and containment from the user's content
-2. establish typography and concise labels
-3. size boxes around text
-4. establish subsystem layout using neutral structure first
-5. decide whether chromatic color is necessary
-6. if needed, select one low-chroma accent family for the figure
-7. route connectors with line style carrying relationship semantics
-8. add active or error state only if semantically justified
-9. enlarge the canvas when needed rather than squeezing content
-10. produce editable vector SVG when SVG is requested
-11. validate the result against the QA checklist
+1. infer the local semantic groups from the user's content
+2. choose the minimum useful tone mapping
+3. establish typography and text bounds
+4. size boxes around text
+5. establish subsystem layout
+6. route connectors
+7. add active or error state only if semantically justified
+8. enlarge the canvas when needed rather than squeezing content
+9. produce editable vector SVG when SVG is requested
+10. validate the result against the QA checklist
 
 When the user supplies their own explicit visual constraints, follow them unless
 they conflict with the requested output format or make the diagram unreadable.
@@ -940,45 +799,39 @@ Before finalizing, verify all of the following.
 - Are different subsystems separated by meaningful whitespace?
 - Is containment understandable without color?
 - Would the main architecture remain understandable in grayscale?
-- Are boundaries used only where they encode real structure?
 
 ### Text
 
 - Does every text block fit fully inside its border?
-- Is there at least about 10 px of safe inner clearance where practical?
-- Do ordinary entities usually contain no more than 1 to 3 lines?
-- Are labels mostly short noun phrases rather than explanatory prose?
-- Have unnecessary metadata, badges, and UI-like field stacks been removed?
+- Is there at least about 12 px of safe inner clearance where practical?
+- Are field lists using readable line height?
 - Are logical multiline labels represented as single text objects?
 - Is the text still readable at normal viewing scale?
 
 ### Color
 
-- Is the canvas predominantly white or neutral?
+- Is the canvas predominantly white?
 - Are large containers neutral?
-- Does the figure use at most one chromatic accent family, apart from a
-  semantically necessary warning or error?
-- Are large tinted surfaces very low saturation?
-- Is hierarchy carried primarily by structure and luminance rather than hue?
-- Is stronger chroma concentrated in small focal marks?
+- Is semantic color concentrated on entities rather than giant background areas?
+- Is the number of tones minimal?
+- Does every local tone mapping remain consistent?
+- Is blue focus used only for active or current state?
 - Is error color used only for real error or invalid state?
-- Does the figure avoid looking multicolored at first glance?
 
 ### Borders and geometry
 
-- Are normal entity borders visually light?
-- Are structural borders only slightly stronger?
-- Are active borders emphasized without becoming heavy?
-- Are corner radii small or square?
+- Are normal entity borders about 1.2 px?
+- Are structural container borders about 1.35 px?
+- Are active borders about 1.7 px?
+- Are corner radii small?
 - Does the figure avoid UI-card styling?
-- Could any boxed concept be clearer as plain text plus alignment?
 
 ### Connectors
 
 - Are normal relationships solid?
 - Are optional or weak relationships dashed?
 - Are contextual relationships dotted?
-- Is the selected accent reserved for genuinely active or emphasized paths?
+- Is the active path the only ordinary use of blue connectors?
 - Are arrowheads small and consistent?
 - Do connectors avoid passing through text?
 - Are crossings minimized?
@@ -994,29 +847,18 @@ Before finalizing, verify all of the following.
 - Does the SVG use standard elements and standard styling?
 - Is the file understandable and editable without a specific editor?
 
-## Version 0.1.1 notes
+## Version 0.1.0 notes
 
-Version 0.1.1 is an aesthetic refinement of the experimental visual system.
+This is intentionally an experimental first version.
 
-The primary changes are:
+During trial use, prioritize observing:
 
-- a more academic and publication-oriented visual profile
-- neutral-first composition with at most one chromatic accent family per figure
-- lower-saturation large-area fills
-- stronger reliance on luminance, spacing, typography, and border weight
-- reduced node text density and less explanatory prose inside boxes
-- less UI-card framing and smaller corner radii
-- lighter borders and connectors
-- improved muted-text readability
-- accent-aware active-state styling that does not introduce a second hue family
-
-Continue to prioritize observing:
-
-- whether diagrams remain readable when mostly neutral
-- whether text-density limits remove useful information or improve scanability
-- whether the single-accent rule needs narrowly defined exceptions
-- whether routing and containment remain clear without categorical colors
+- which constraints are repeatedly violated by generated diagrams
+- whether the palette needs adjustment
+- whether text sizing rules need stronger measurement requirements
+- whether routing rules need additional patterns
 - whether SVG portability requirements are too strict or too loose
+- whether recurring use cases justify supporting reference files or validators
 
 Do not expand the style vocabulary merely because a new technical domain is
 introduced. Add a new global rule only when it represents a reusable visual
