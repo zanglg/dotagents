@@ -5,7 +5,7 @@ description: Create clean, restrained, publication-quality technical diagrams an
 
 # Technical Diagram
 
-Version: 0.1.0
+Version: 0.1.1
 Status: experimental
 
 This skill defines visual grammar, not domain ontology.
@@ -32,9 +32,12 @@ Apply decisions in this order:
 White space defines structure.
 Neutral tones define hierarchy.
 Muted tones distinguish local semantic groups.
-Blue defines focus.
+Borders and connectors define focus.
 Lines define relationships.
-Position defines architecture.
+Position and visual balance define architecture.
+
+Focus should be expressed primarily through position, border weight, and
+connector emphasis. Do not rely on a blue fill alone.
 
 Color must not carry information that layout, labels, line style, or containment
 can express more clearly.
@@ -46,6 +49,7 @@ The result should feel like:
 - systems-paper figures
 - kernel or firmware documentation
 - technical textbook illustrations
+- editorial technical figures with a deliberate visual axis
 - precise engineering documentation
 
 It should not feel like:
@@ -111,6 +115,18 @@ Use:
 - connectors
 
 to express the architecture before introducing color.
+
+When the subject supports it, establish a strong implicit visual axis or
+compositional center. Mirrored peer groups may flank a focal center, but do not
+force symmetry when the content does not support it.
+
+Use equal dimensions for true peers when that improves scanning. Do not
+normalize every box to the same size. Focal containers and central objects may
+be larger when hierarchy or content justifies it.
+
+Preserve balance even when the composition is intentionally asymmetric.
+Auxiliary elements such as legends and notes must not accidentally read as an
+additional peer component.
 
 ### 4. Determine text sizing before box sizing
 
@@ -213,16 +229,17 @@ Typical usage:
 
 The palette should usually occupy less area than the white and neutral surfaces.
 
-### Recommended area balance
+### Visual area balance
 
-Approximate target:
+Use these as visual heuristics rather than geometric targets:
 
-- white and neutral surfaces: 65 to 75 percent
-- muted semantic entity fills: 20 to 28 percent
-- active focus accents: 3 to 5 percent
-- error or warning color: below 2 percent
+- white and neutral surfaces should clearly dominate the figure
+- muted semantic fills should occupy a minority of the canvas
+- focus accents should be sparse and concentrated
+- error or warning color should remain exceptional
 
-These are visual balance targets, not geometric requirements.
+Do not optimize a diagram to fixed color-area percentages. Judge balance at the
+intended viewing size.
 
 ## State semantics
 
@@ -272,13 +289,27 @@ Do not use red merely to increase visual variety.
 
 ### Font families
 
-For titles, section headings, labels, and annotations, prefer:
+Choose one primary text profile per figure and use it consistently.
+
+Documentation / UI-neutral profile:
 
 - IBM Plex Sans
 - Inter
 - Helvetica Neue
 - Arial
 - sans-serif fallback
+
+Editorial / academic profile:
+
+- Source Serif 4
+- Charter
+- Georgia
+- Times New Roman
+- serif fallback
+
+Use the editorial profile when the target is a systems paper, textbook, or
+publication-style figure and the serif face remains readable at the intended
+size. Do not mix serif and sans-serif merely to add visual variety.
 
 For structures, fields, addresses, offsets, code-like names, and values, prefer:
 
@@ -351,6 +382,15 @@ Keep distances within a group smaller than distances between subsystems.
 Do not try to fill the whole canvas. Empty white regions are part of the visual
 structure.
 
+### Box proportions
+
+Use repeated dimensions to reinforce peer relationships, not as a blanket grid
+rule.
+
+Allow focal or central components to be larger than surrounding peers when
+doing so strengthens hierarchy. Avoid making every object the same width and
+height when that produces a dashboard-like or spreadsheet-like rhythm.
+
 ## Borders
 
 ### Widths
@@ -388,6 +428,15 @@ Preferred:
 
 Do not fill an entire large subsystem with a semantic tone merely because its
 contained entities share a group.
+
+Wide layer containers may span most of the canvas when they express a real
+architectural layer. Keep their fill nearly white, keep their border quiet, and
+anchor the section title consistently so whitespace remains the dominant
+separator.
+
+Inside a focal container, do not box every subordinate concept by default.
+Prefer typography, spacing, or a light divider when another nested rectangle
+would make the figure feel like a card UI.
 
 Put most semantic color on the entities themselves.
 
@@ -473,7 +522,10 @@ Use curves sparingly for:
 
 Do not use decorative curves on normal architecture relationships.
 
-Reduce long diagonal lines. Prefer orthogonal routes for long connections.
+Short, symmetric diagonal connectors are acceptable when they make a centered
+fan-out or fan-in composition clearer and avoid unnecessary orthogonal bends.
+Reduce long diagonal lines and use them only when they improve the composition.
+Prefer orthogonal routes for long connections.
 
 ### Connection points
 
@@ -561,6 +613,22 @@ When an annotation directly explains the active path:
 
 Annotations should explain the diagram, not compete with its primary entities.
 
+## Legends and auxiliary elements
+
+Prefer direct labels when a separate legend is unnecessary.
+
+When a legend is needed:
+
+- make it visually smaller and lighter than primary entities
+- place it outside subsystem interiors when practical, or reserve a dedicated
+  margin for it
+- align it to the outer layout grid
+- avoid a corner placement that makes an otherwise balanced composition feel
+  bottom-heavy or side-heavy
+- do not style it so similarly to entities that it reads as another component
+
+The same rules apply to scale keys, notation keys, and other auxiliary panels.
+
 ## Memory, array, and range diagrams
 
 Recommended fills:
@@ -605,7 +673,7 @@ Pointer color describes relationship state, not target category.
 
 ## Portable SVG profile
 
-Version 0.1.0 is portable SVG first.
+Version 0.1.1 is portable SVG first.
 
 Do not add editor-specific namespaces or metadata.
 
@@ -711,7 +779,7 @@ Those belong to diagram content, not the visual style system.
 
 ### SVG styles
 
-For version 0.1.0, prefer literal CSS values in the SVG style element rather than
+For version 0.1.1, prefer literal CSS values in the SVG style element rather than
 requiring CSS custom properties.
 
 For example, a tone class should resolve directly to its fill and stroke values.
@@ -775,15 +843,17 @@ without extending the global palette vocabulary.
 When asked to create a technical diagram:
 
 1. infer the local semantic groups from the user's content
-2. choose the minimum useful tone mapping
-3. establish typography and text bounds
-4. size boxes around text
-5. establish subsystem layout
-6. route connectors
-7. add active or error state only if semantically justified
-8. enlarge the canvas when needed rather than squeezing content
-9. produce editable vector SVG when SVG is requested
-10. validate the result against the QA checklist
+2. choose the composition strategy and primary visual axis
+3. choose the minimum useful tone mapping
+4. establish typography and text bounds
+5. size boxes around text and hierarchy
+6. establish subsystem layout and overall balance
+7. reserve space for legends and auxiliary annotations when needed
+8. route connectors
+9. add active or error state only if semantically justified
+10. enlarge the canvas when needed rather than squeezing content
+11. produce editable vector SVG when SVG is requested
+12. validate the result against the QA checklist
 
 When the user supplies their own explicit visual constraints, follow them unless
 they conflict with the requested output format or make the diagram unreadable.
@@ -795,8 +865,12 @@ Before finalizing, verify all of the following.
 ### Structure
 
 - Is there one clear primary reading direction?
+- Is there a clear visual axis or compositional center where appropriate?
 - Are related entities grouped spatially?
 - Are different subsystems separated by meaningful whitespace?
+- Are true peers visually consistent without forcing every box to be identical?
+- Is deliberate asymmetry still compositionally balanced?
+- Are legends and auxiliary elements visually subordinate?
 - Is containment understandable without color?
 - Would the main architecture remain understandable in grayscale?
 
@@ -806,6 +880,8 @@ Before finalizing, verify all of the following.
 - Is there at least about 12 px of safe inner clearance where practical?
 - Are field lists using readable line height?
 - Are logical multiline labels represented as single text objects?
+- Is one primary typography profile used consistently?
+- If a serif profile is used, is it still readable at normal viewing scale?
 - Is the text still readable at normal viewing scale?
 
 ### Color
@@ -824,6 +900,10 @@ Before finalizing, verify all of the following.
 - Are structural container borders about 1.35 px?
 - Are active borders about 1.7 px?
 - Are corner radii small?
+- Are box proportions driven by hierarchy and peer relationships rather than a
+  uniform grid?
+- Are subordinate concepts left unboxed when another rectangle would add no
+  useful structure?
 - Does the figure avoid UI-card styling?
 
 ### Connectors
@@ -847,11 +927,25 @@ Before finalizing, verify all of the following.
 - Does the SVG use standard elements and standard styling?
 - Is the file understandable and editable without a specific editor?
 
-## Version 0.1.0 notes
+## Version 0.1.1 notes
 
-This is intentionally an experimental first version.
+This patch refines visual composition rather than domain semantics.
 
-During trial use, prioritize observing:
+Changes from 0.1.0:
+
+- add an editorial / academic serif typography profile alongside the existing
+  sans-serif documentation profile
+- add explicit guidance for implicit visual axes, centered compositions,
+  symmetry, and balanced asymmetry
+- allow focal components to differ in size from their peers when hierarchy
+  benefits
+- replace color-area percentages with qualitative visual-balance guidance
+- add placement rules for legends and auxiliary panels
+- permit short purposeful diagonal connectors in centered fan-out or fan-in
+  compositions
+- discourage unnecessary nested boxes inside already-clear containers
+
+During trial use, continue observing:
 
 - which constraints are repeatedly violated by generated diagrams
 - whether the palette needs adjustment
