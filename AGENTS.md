@@ -15,7 +15,8 @@ and easy to audit.
 
 - Preserve existing user work. Do not delete, rewrite, or normalize unrelated
   local files unless the user explicitly asks.
-- Keep commits focused on the requested change.
+- Keep commits focused on the requested change. Start features from `dev`,
+  squash feature PRs into `dev`, and promote `dev` linearly to `main`.
 - Use Conventional Commits for commit messages, such as `feat: add shell skill`
   or `docs: clarify skill layout`.
 - Do not commit secrets, tokens, credentials, private machine state, caches,

@@ -69,8 +69,13 @@ messages. Common types for this repository are:
 - `docs`: update documentation only
 - `chore`: repository maintenance with no user-facing content change
 
-Keep `CHANGELOG.md` and `VERSION` aligned when a change is notable enough to be
-released. This repository uses Semantic Versioning for its portable content.
+The scaffold is at `0.0.0` until the first valid release. Keep `CHANGELOG.md`
+and `VERSION` aligned when a change is notable enough to be released. This
+repository uses Semantic Versioning for its portable content.
+
+Develop from `dev` on feature branches, squash each feature into `dev`, then
+promote `dev` to `main` with a linear merge. See [CONTRIBUTING.md](CONTRIBUTING.md)
+for the full branch and merge policy.
 
 ## Agent Development Notes
 
