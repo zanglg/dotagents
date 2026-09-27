@@ -29,9 +29,20 @@ chore: update repository metadata
 
 ## Branch And Merge Policy
 
-Use short-lived branches and open pull requests for changes once the remote is
-configured. The `main` branch is intended to stay linear. Prefer squash or rebase
-merges, and avoid merge commits.
+`main` (not `master`) is the stable branch; `dev` is the primary development
+branch. Create feature branches from the latest `dev` and open pull requests
+against `dev`. Squash each feature branch into a single reviewed commit on
+`dev`; do not merge its intermediate work-in-progress commits. Keep feature
+branches separate until they are ready for review.
+
+Promote tested `dev` changes to `main` through a pull request using a linear
+merge (rebase/fast-forward), preserving the feature commits already squashed
+on `dev`. Do not use merge commits or force-push `main`. GitHub rebase merges
+may assign new commit IDs; after promotion, verify the trees match, safeguard
+any pending work, then realign `dev` to `main` with `--force-with-lease` before
+starting another feature. Never reset `dev` over unpromoted work. The repository
+allows squash and rebase merges, but not merge commits; select the appropriate
+method for each PR target.
 
 ## Release Notes
 
@@ -41,7 +52,11 @@ Use Semantic Versioning for repository content:
 - Increment `MINOR` for new skills, templates, or workflows.
 - Increment `PATCH` for fixes and documentation improvements.
 
-When a change is release-worthy, update both `VERSION` and `CHANGELOG.md`.
+The scaffold is `0.0.0` and is not a release. Record work under
+`[Unreleased]` until portable content is ready for a first release. When a
+change is release-worthy, update both `VERSION` and `CHANGELOG.md` in the
+promotion to `main`; do not assign a release version to unfinished feature
+branches.
 
 ## Validation
 
