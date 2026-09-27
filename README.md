@@ -17,8 +17,6 @@ small, auditable, and safe to copy between machines.
 
 - Secrets, tokens, credentials, or private machine state
 - Caches, generated scratch output, dependency folders, or build artifacts
-- Ad hoc diagrams, previews, and measurements from skill development; keep these
-  outside the repository or in an ignored temporary directory
 - Tool-specific local configuration that cannot be safely shared
 - `.DS_Store` and other operating-system metadata
 

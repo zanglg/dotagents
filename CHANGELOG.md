@@ -13,9 +13,6 @@ The repository scaffold is version `0.0.0`; no release has been made.
 - Diagram typography now uses role-based heading, prose, and code font stacks;
   short concept cards center their text as a block, while member lists and long
   descriptions remain left-aligned.
-- Ad hoc diagrams and their supporting notes are no longer tracked as workspace
-  content; temporary skill-development output is excluded from skill commits
-  without adding artifact-specific ignore rules.
 
 ### Added
 
