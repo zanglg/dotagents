@@ -14,7 +14,8 @@ The repository scaffold is version `0.0.0`; no release has been made.
   short concept cards center their text as a block, while member lists and long
   descriptions remain left-aligned.
 - Ad hoc diagrams and their supporting notes are no longer tracked as workspace
-  content; generated skill-development output stays local and ignored.
+  content; temporary skill-development output is excluded from skill commits
+  without adding artifact-specific ignore rules.
 
 ### Added
 
