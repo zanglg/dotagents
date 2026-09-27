@@ -33,7 +33,10 @@ small, auditable, and safe to copy between machines.
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
 `-- skills/
-    `-- .gitkeep       # Placeholder for reusable skills
+    `-- diagram-color-guidelines/
+        |-- SKILL.md
+        `-- references/
+            `-- palette.md
 ```
 
 Each reusable skill should live in its own directory:
@@ -50,6 +53,13 @@ skills/<skill-name>/
 Only add supporting directories when the skill actually needs them. Keep files
 near the skill that owns them so future agents can audit and update the content
 without searching the whole workspace.
+
+## Available Skills
+
+- [Diagram color guidelines](skills/diagram-color-guidelines/SKILL.md): choose,
+  apply, and review coordinated technical-diagram colors using concrete palettes,
+  component mappings, readable text, and distinguishable states. Skill guidance
+  and the palette reference are written in Chinese.
 
 ## Adding A Skill
 
