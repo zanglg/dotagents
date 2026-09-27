@@ -14,6 +14,9 @@ The repository scaffold is version `0.0.0`; no release has been made.
   concrete neutral and classification palettes, component mappings, coordinated
   color selection, distinct core-card fills, coordinated card typography, nested
   visual hierarchy checks, state composition, and readability checks.
+- Diagram geometry and typography defaults, parallel reciprocal connectors,
+  straight-to-curved routing fallbacks, and explicit line, arrow, and border
+  semantics in `skills/diagram-color-guidelines/references/visual-style.md`.
 - Initial `.agents` workspace repository scaffold.
 - Agent-facing repository instructions in `AGENTS.md`.
 - Reusable skill directory placeholder under `skills/`.

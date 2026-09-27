@@ -36,7 +36,8 @@ small, auditable, and safe to copy between machines.
     `-- diagram-color-guidelines/
         |-- SKILL.md
         `-- references/
-            `-- palette.md
+            |-- palette.md
+            `-- visual-style.md
 ```
 
 Each reusable skill should live in its own directory:
@@ -56,10 +57,11 @@ without searching the whole workspace.
 
 ## Available Skills
 
-- [Diagram color guidelines](skills/diagram-color-guidelines/SKILL.md): choose,
-  apply, and review coordinated technical-diagram colors using concrete palettes,
-  component mappings, readable text, and distinguishable states. Skill guidance
-  and the palette reference are written in Chinese.
+- [Technical diagram visual guidelines](skills/diagram-color-guidelines/SKILL.md):
+  choose, apply, and review concrete palettes, coordinated card typography,
+  consistent geometry, parallel reciprocal connectors, routing fallbacks, and
+  meaningful line and border styles. The existing `diagram-color-guidelines`
+  skill name is retained; skill guidance and references are written in Chinese.
 
 ## Adding A Skill
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="744" viewBox="0 0 1040 744" role="img" aria-labelledby="title desc">
+  <title id="title">02  软件上下文与硬件上下文</title>
+  <desc id="desc">request_queue 为每个 possible CPU 分配一个 blk_mq_ctx，并拥有 nr_hw_queues 个 blk_mq_hw_ctx。固定类型时多个 ctx 映射至一个 hctx；合并多个类型后可呈多对多。</desc>
+  <metadata>Source: /Volumes/workspace/linux; v7.3-rc2-27-g893e11787f78. Initialized blk-mq topology, excluding teardown and reconfiguration transients. Ratios are source:target along each arrow. Arrows denote structural association, not I/O flow. Solid borders denote modeled objects; dashed arrows denote explicitly optional scheduler associations. Blue emphasizes the local subject, not selection.</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 0 L8 4 L0 8 Z" fill="#6D7881"/></marker>
+    <style>
+    text { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif; fill: #3F474E; }
+    .title { font-size: 28px; font-weight: 700; }
+    .subtitle, .note { font-size: 14px; fill: #626D76; }
+    .card rect { fill: #F8FAFB; stroke: #7C8791; stroke-width: 1.5; }
+    .card text { fill: #3F474E; }
+    .core rect { fill: #DFE9F2; stroke: #587795; stroke-width: 2; }
+    .core text { fill: #465E73; }
+    .name { font-family: Menlo, Consolas, monospace; font-size: 18px; font-weight: 600; }
+    .body { font-size: 16px; }
+    .code { font-family: Menlo, Consolas, monospace; font-size: 14px; }
+    .relation { font-family: Menlo, Consolas, monospace; font-size: 18px; font-weight: 600; fill: #3F474E; }
+    .field { font-family: Menlo, Consolas, monospace; font-size: 14px; fill: #626D76; }
+    .line { fill: none; stroke: #6D7881; stroke-width: 2; stroke-linejoin: round; stroke-linecap: butt; }
+    .optional { stroke-dasharray: 6 4; }
+</style>
+  </defs>
+  <rect width="1040" height="744" fill="#FFFFFF"/>
+  <text class="title" x="48" y="52" text-anchor="start">02  软件上下文与硬件上下文</text>
+  <text class="subtitle" x="48" y="84" text-anchor="start">每个 request_queue 独立拥有 ctx / hctx；CPU 到硬件队列的映射按 hctx_type 区分。</text>
+  <path class="line" d="M432 272 L236 440" marker-end="url(#arrow)"/>
+<path class="line" d="M608 272 L804 440" marker-end="url(#arrow)"/>
+<path class="line" d="M408 504 H632" marker-end="url(#arrow)"/>
+<text class="relation" x="304" y="330" text-anchor="end">1:N</text>
+<text class="field" x="304" y="354" text-anchor="end">q.queue_ctx</text>
+<text class="relation" x="736" y="330" text-anchor="start">1:H</text>
+<text class="field" x="736" y="354" text-anchor="start">q.queue_hw_ctx[]</text>
+<text class="relation" x="520" y="486" text-anchor="middle">N:1 / type</text>
+<text class="field" x="520" y="530" text-anchor="middle">ctx.hctxs[type]</text>
+<g class="card core">
+<rect x="348" y="144" width="344" height="128" rx="8"/>
+<text class="name" x="368" y="176" text-anchor="start">request_queue</text>
+<text class="body" x="368" y="206" text-anchor="start">软件/硬件上下文的所属队列</text>
+<text class="code" x="368" y="231" text-anchor="start">queue_ctx / queue_hw_ctx[]</text>
+<text class="body" x="368" y="256" text-anchor="start">H = q-&gt;nr_hw_queues</text>
+</g>
+<g class="card">
+<rect x="64" y="440" width="344" height="128" rx="8"/>
+<text class="name" x="84" y="472" text-anchor="start">blk_mq_ctx</text>
+<text class="body" x="84" y="502" text-anchor="start">每个 possible CPU 一个</text>
+<text class="code" x="84" y="527" text-anchor="start">cpu / queue / hctxs[type]</text>
+<text class="body" x="84" y="552" text-anchor="start">N = num_possible_cpus()</text>
+</g>
+<g class="card">
+<rect x="632" y="440" width="344" height="128" rx="8"/>
+<text class="name" x="652" y="472" text-anchor="start">blk_mq_hw_ctx</text>
+<text class="body" x="652" y="502" text-anchor="start">每个硬件队列索引一个</text>
+<text class="code" x="652" y="527" text-anchor="start">queue / ctxs[] / nr_ctx</text>
+<text class="body" x="652" y="552" text-anchor="start">并非每个 hctx 都有 CPU 映射</text>
+</g>
+  <text class="note" x="64" y="614" text-anchor="start">映射依据：set-&gt;map[type].mq_map[cpu]；type 为 DEFAULT / READ / POLL。</text><text class="note" x="64" y="640" text-anchor="start">固定 type：每个 ctx 指向一个 hctx，多个 ctx 可指向同一个 hctx；反向由 hctx-&gt;ctxs[] 记录。</text><text class="note" x="64" y="666" text-anchor="start">跨 type：一个 ctx 可指向多个不同 hctx，整体可为 M:N；未配置的类型回退到 DEFAULT。</text>
+  <path d="M64 702 H96" class="line" marker-end="url(#arrow)"/>
+  <text class="note" x="108" y="707" text-anchor="start">结构关联（非 I/O 流程）；数量比按箭头起点:终点读取。</text>
+  <text class="note" x="976" y="707" text-anchor="end">Linux 893e11787f78</text>
+</svg>
