@@ -8,6 +8,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 The repository scaffold is version `0.0.0`; no release has been made.
 
+### Changed
+
+- Diagram typography now uses role-based heading, prose, and code font stacks;
+  short concept cards center their text as a block, while member lists and long
+  descriptions remain left-aligned.
+- Ad hoc diagrams and their supporting notes are no longer tracked as workspace
+  content; generated skill-development output stays local and ignored.
+
 ### Added
 
 - Technical diagram color guidance in `skills/diagram-color-guidelines/`, with

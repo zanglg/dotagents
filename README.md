@@ -17,6 +17,8 @@ small, auditable, and safe to copy between machines.
 
 - Secrets, tokens, credentials, or private machine state
 - Caches, generated scratch output, dependency folders, or build artifacts
+- Ad hoc diagrams, previews, and measurements from skill development; keep these
+  outside the repository or in an ignored temporary directory
 - Tool-specific local configuration that cannot be safely shared
 - `.DS_Store` and other operating-system metadata
 
@@ -58,10 +60,11 @@ without searching the whole workspace.
 ## Available Skills
 
 - [Technical diagram visual guidelines](skills/diagram-color-guidelines/SKILL.md):
-  choose, apply, and review concrete palettes, coordinated card typography,
-  consistent geometry, parallel reciprocal connectors, routing fallbacks, and
-  meaningful line and border styles. The existing `diagram-color-guidelines`
-  skill name is retained; skill guidance and references are written in Chinese.
+  choose, apply, and review concrete palettes, role-based font stacks, centered
+  short-card text blocks, consistent geometry, parallel reciprocal connectors,
+  routing fallbacks, and meaningful line and border styles. The existing
+  `diagram-color-guidelines` skill name is retained; skill guidance and references
+  are written in Chinese.
 
 ## Adding A Skill
 

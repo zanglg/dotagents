@@ -16,6 +16,10 @@ logs/
 tmp/
 temp/
 
+# Ad hoc diagram outputs, not reusable skill assets
+/block-entities/
+/scheduler-dispatch.svg
+
 # Dependency and tool caches
 node_modules/
 __pycache__/
