@@ -40,6 +40,9 @@ and easy to audit.
 - Record pending notable changes under `[Unreleased]` in `CHANGELOG.md`.
   Update `VERSION` only when preparing an authorized release, together with
   dated release notes. Never bump versions on unfinished feature branches.
+- Keep repository-wide documentation open to additional skills. Group-specific
+  guides belong under `docs/<group>/`; supporting instructions stay beside
+  the skill that owns them.
 - Document non-obvious behavior in the skill or README instead of relying on
   tribal knowledge in commit messages.
 

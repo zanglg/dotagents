@@ -1,0 +1,86 @@
+# EngFlow
+
+**Six related skills within dotagents for evidence, decisions and implementation.** Long tasks use a dependency graph, one code writer and one progress record in the existing checkout. The package ships no runtime scripts and does not create or manage worktrees.
+
+## Skills
+
+| Skill | Use it for | Typical output |
+| --- | --- | --- |
+| `engflow-workspace` | Optional setup, Feature navigation, read-only status, explicit handoff/resume | Index/Feature README when requested; status or handoff |
+| `engflow-research` | Source investigation, comparison, reproducible PoC/benchmark | Conversational findings, durable RES or scoped experiment when useful |
+| `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
+| `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
+| `engflow-review-design` | Review requirements, technical solutions and architecture | Evidence-backed findings in the conversation; no writes |
+| `engflow-implement` | Implement a request, Spec or tickets through testing and code review | Code/tests; one progress record for long work |
+
+These are independent entry points, not six mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
+
+## Install and upgrade
+
+Copy the six `skills/engflow-*` folders from dotagents into the target repository's `.agents/skills/`. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire merged Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+
+Optional setup:
+
+```text
+$engflow-workspace 初始化 EngFlow，项目名称：插件系统。
+```
+
+This creates a document index and a bounded root AGENTS policy block, preserving existing content. It does not create project metadata, speculative Features or empty artifact trees. [The managed-block template](../../skills/engflow-workspace/assets/agents-managed-block.md) is the single packaged source of router rules.
+
+## Examples
+
+```text
+$engflow-workspace 创建或选择“插件热加载”特性
+$engflow-research 比较两种插件隔离方式，结合源码给出证据
+$engflow-research 运行一个可复现的卸载实验，记录资源释放情况
+$engflow-grill 挑战当前设计的故障恢复假设
+$engflow-review-design 评审这份方案，直接在对话中输出问题
+$engflow-write 将刚才评审的第二项整理成 Proposed ADR，保留未决选项
+$engflow-write 将已确认的需求和必要技术方案整理成一份 spec.md
+$engflow-implement 实现这份规格，按依赖逐项推进，完成测试和代码评审
+$engflow-implement 继续 FEAT-001 的长任务，先核对进度记录与当前代码
+$engflow-workspace 总结当前实现进度
+$engflow-workspace 为下一轮准备交接，重点是尚未解决的资源回收问题
+```
+
+## Long implementation tasks
+
+The implementation Skill decides how much planning is needed from scope; no separate plan/run/resume Skill or mode flag is required.
+
+1. Read the scope and live Git state, preserve existing user changes, and define observable completion criteria.
+2. Build a dependency graph of verifiable tasks plus a final integration gate. Select a ready task; the parent or one fresh-context implementation worker implements it as the exclusive writer.
+3. Validate each slice, save evidence, recompute readiness and continue within the existing authorization. Progress reports do not require the user to say “continue”.
+4. Keep one existing suitable progress record, or use `engflow-doc/<FEAT>/implementation.md`; without a Feature, use `.engflow/tasks/<task-slug>.md`. Respect a no-notes constraint and disclose its recovery limit.
+5. On resume, compare recorded state with actual branch, HEAD, working files and outstanding commands. Recheck stale claims instead of replaying work blindly.
+6. Finish with full-scope validation and code review, or report concrete blocked/partial work. Retry only with a reason or new evidence; do not loop indefinitely.
+
+For context-heavy slices, a fresh-context implementation worker may perform the bounded code/test changes in the same checkout. The parent records its handle before granting write authority and pauses its own writes until the worker and its commands are quiescent. Other helpers are read-only. Workers run serially; there is no merger-worker, branch or worktree orchestration.
+
+Details: [long-task protocol](../../skills/engflow-implement/references/long-tasks.md). The structure draws on Matt Pocock's [implement-spec](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement-spec/SKILL.md), adapted for serial writers, bounded parent context and local recovery evidence.
+
+## Context management and subagents
+
+The six entry points stay the same. [The shared context contract](../../skills/engflow-workspace/references/context-budget.md) keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
+
+- Send a bounded objective, essential user constraints, paths/revision, allowed actions and output contract. Do not inherit the entire transcript by default or read the whole source tree in the parent first.
+- Prefer one coherent worker per deliverable. Return outcomes, changed paths when allowed, actual checks, uncertainty and evidence pointers. Scale detail to the task; there is no fixed token quota, and material findings and failures must not be dropped. With more available context, keep related evidence together when that improves reasoning; do not fragment work merely because it is long.
+- Implementation workers are serial and require an explicit parent write grant after read-only preparation and ownership recording. The parent does not write during an active grant. Each result or pause ends that grant; resumed workers begin read-only and need a fresh grant for more edits. Other workers remain read-only; no recursive delegation or worktrees are added. See [the worker protocol](../../skills/engflow-implement/references/delegation.md).
+- For long implementation, keep a compact coordinator summary and worker/command state in the one authorized progress record at verified milestones. Read-only review, grill, status, previews and no-notes tasks use an inline recap instead. Context size, usable budget and compaction policy come from the current host; the Skills set no model-specific limit or percentage trigger. Preserve state for host-reported transitions and reconcile it on resume.
+- If context metering, independent child contexts, shared files, or safe worker coordination are unavailable, use the documented targeted-read/direct-execution fallback. A file summary does not erase old context tokens, and subagents do not guarantee lower total token cost.
+
+The same Skills apply across smaller and larger context windows without editing the package. Put any personal capacity or threshold preference in session instructions or host configuration, where supported; no EngFlow configuration file is required. The workflow defines what must survive a transition, while the host controls compaction.
+
+## What was simplified
+
+- Experiment is a research method, loaded from a reference only when needed.
+- Spec, Design and ADR synthesis share one writing entry point with target-specific references.
+- Handoff is an explicit workspace operation and references the existing implementation record.
+- Grill has no separate checkpoint format. Design review has no persisted review log.
+- Baseline publication, mandatory project metadata, a Decision Register and duplicate plan/status/debug ledgers are removed from the active workflow. Existing records remain readable history.
+- Accepted ADRs under reevaluation remain effective; an approved Spec/Design is not silently treated as approval of later edits.
+
+## Limits and validation
+
+These are prompt instructions, not a scheduler, lock manager or access-control system. Runtime capability determines execution duration and subagent availability. Recovery requires the actual progress record **and code** to survive; uncommitted changes are not transferred by a handoff. Commit/push and external publication follow existing authorization.
+
+Static checks cover six manifests, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.

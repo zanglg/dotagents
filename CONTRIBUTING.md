@@ -137,6 +137,13 @@ tag creation, and remote operations require explicit approval. A dry run does
 not update files, refs, tags, or the remote. Approval of a version bump alone
 is not approval to publish.
 
+## Skill Organization
+
+Keep the root README as a general catalog. Group-specific guides belong under
+`docs/<group>/`; each skill remains under `skills/<skill-name>/`. Adding a skill
+does not require renumbering a group or assigning per-skill versions; repository
+releases follow the SemVer procedure above.
+
 ## Validation
 
 Before committing:

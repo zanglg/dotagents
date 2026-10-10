@@ -30,7 +30,9 @@ small, auditable, and safe to copy between machines.
 |-- LICENSE            # MIT License
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
+|-- docs/              # Guides for related skill groups
 `-- skills/
+    |-- engflow-*/     # Six related EngFlow skills
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
 
@@ -48,6 +50,34 @@ skills/<skill-name>/
 Only add supporting directories when the skill actually needs them. Keep files
 near the skill that owns them so future agents can audit and update the content
 without searching the whole workspace.
+
+## Available Skills
+
+| Skill | Purpose |
+| --- | --- |
+| [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
+| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
+| [engflow-research](skills/engflow-research/SKILL.md) | Source investigation, comparisons and bounded experiments |
+| [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
+| [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
+| [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
+| [engflow-implement](skills/engflow-implement/SKILL.md) | Implementation, long-task coordination, tests and code review |
+
+EngFlow is one group in this workspace. See the
+[EngFlow guide](docs/engflow/README.md) for examples and
+[validation scenarios](docs/engflow/VALIDATION.md) for host checks. Other skills
+can live alongside this group and should be added to this catalog when useful.
+
+## Installation
+
+For a repository-local installation, copy the desired skill folders from
+`skills/` into the target repository's `.agents/skills/`. Keep their supporting
+files together. EngFlow uses cross-skill references, so install its six folders
+together. Other independently scoped skills can be selected separately.
+
+For a personal workspace, use these folders in the skill-discovery location
+supported by your host. This repository's `AGENTS.md` governs development of
+dotagents; it is not a global policy to inject into every project.
 
 ## Adding A Skill
 
