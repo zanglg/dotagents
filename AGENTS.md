@@ -26,8 +26,8 @@ and easy to audit.
   Follow `CONTRIBUTING.md` for this repository's release workflow; feature
   integration, release commits, branch promotion, tags, and remote writes
   require explicit authorization for the relevant action.
-- Use Conventional Commits for commit messages, such as `feat: add shell skill`
-  or `docs: clarify skill layout`.
+- Before preparing commits, read and follow the commit message and commit
+  boundary rules in `CONTRIBUTING.md`.
 - Do not commit secrets, tokens, credentials, private machine state, caches,
   generated scratch output, or `.DS_Store`.
 - Prefer plain text and Markdown for durable documentation.

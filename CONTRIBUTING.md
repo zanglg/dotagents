@@ -8,7 +8,11 @@ be conservative, readable, and easy to audit.
 Use Conventional Commits:
 
 ```text
-<type>[optional scope]: <description>
+<type>[optional scope][!]: <description>
+
+[optional body]
+
+[optional footer]
 ```
 
 Common types:
@@ -26,6 +30,50 @@ feat(skill): add release-note drafting workflow
 docs: clarify skill directory layout
 chore: update repository metadata
 ```
+
+### Message Layout
+
+- Aim for a subject of 50 characters or fewer. Summarize the purpose rather
+  than listing every change; move detail into the body.
+- Separate the subject, body, and footer with blank lines. Wrap body prose at
+  72 characters; keep indivisible URLs, identifiers, and required trailers intact.
+- For substantial changes, use a short overview followed by paragraphs or
+  bullets grouped by purpose. Explain what changed, why, and any compatibility
+  or migration impact. Do not mechanically list every changed file.
+- Mark incompatible changes with `!` or a `BREAKING CHANGE:` footer and explain
+  the affected contract and migration. Include issue references when useful.
+- Review the staged diff and the full message before committing. These line
+  lengths are repository readability conventions, not Conventional Commits
+  requirements. Do not rewrite shared history just to fix message formatting.
+
+Example of a substantial feature commit:
+
+```text
+feat(skills): add EngFlow workflows
+
+Provide six focused entry points for engineering work.
+
+- Add workspace navigation and research workflows.
+- Add clarification, document synthesis, and design review.
+- Add implementation coordination and context management.
+
+Preserve repository SemVer and linear development policies.
+```
+
+### Commit Boundaries
+
+Split development commits by independent purpose, not by file count or diff
+size. Each commit should be understandable, verifiable, and independently
+revertible where practical. Keep a behavior change and the tests or documentation
+needed to explain it together. Use `git add -p` when one file contains changes
+for different purposes; review each staged subset and validate it separately.
+
+Feature branches may contain several coherent development commits. Before an
+approved integration into `dev`, rebase and squash the feature into one complete
+commit with a structured message summarizing the final result. Put unrelated
+features on separate branches rather than combining them in one integration
+commit. A large but cohesive feature needs a well-organized body, not arbitrary
+splitting solely to shorten its commit message.
 
 ## Branch And Merge Policy
 

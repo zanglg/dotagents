@@ -97,9 +97,8 @@ messages. Common types for this repository are:
 - `docs`: update documentation only
 - `chore`: repository maintenance with no user-facing content change
 
-The scaffold is at `0.0.0` until the first valid release. Keep `CHANGELOG.md`
-and `VERSION` aligned when a change is notable enough to be released. This
-repository uses Semantic Versioning for its portable content.
+See [CHANGELOG.md](CHANGELOG.md) for release history and
+[CONTRIBUTING.md](CONTRIBUTING.md) for development and release conventions.
 
 Develop on `feature/<name>` branches from `dev`. Only after user approval,
 rebase and squash a feature to one commit, then fast-forward it into `dev`.
