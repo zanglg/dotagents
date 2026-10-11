@@ -6,13 +6,13 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
-The repository scaffold is version `0.0.0`; no release has been made.
+## [0.1.0] - 2026-10-11
 
 ### Added
 
 - Initial `.agents` workspace repository scaffold.
 - Agent-facing repository instructions in `AGENTS.md`.
-- Reusable skill directory placeholder under `skills/`.
+- Reusable skill directory structure under `skills/`.
 - Contribution, versioning, and changelog conventions.
 - MIT License.
 - General-purpose, prompt-only `semver-bump` skill for version recommendations
