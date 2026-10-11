@@ -15,8 +15,17 @@ and easy to audit.
 
 - Preserve existing user work. Do not delete, rewrite, or normalize unrelated
   local files unless the user explicitly asks.
-- Keep commits focused on the requested change. Start features from `dev`,
-  squash feature PRs into `dev`, and promote `dev` linearly to `main`.
+- Keep commits focused on the requested change. Start features from `dev`.
+  Only integrate a feature after explicit user approval: rebase onto current
+  `dev`, squash it to one Conventional Commit, then fast-forward `dev`.
+- Promote releases from `dev` to `main` with fast-forward only, preserving
+  feature commits. Do not use merge commits, rebase merges, or force-push either
+  shared branch. See `CONTRIBUTING.md` for the complete workflow.
+- Use `skills/semver-bump/SKILL.md` to recommend and update SemVer versions.
+  Its scope is version metadata, not branch integration or publication.
+  Follow `CONTRIBUTING.md` for this repository's release workflow; feature
+  integration, release commits, branch promotion, tags, and remote writes
+  require explicit authorization for the relevant action.
 - Use Conventional Commits for commit messages, such as `feat: add shell skill`
   or `docs: clarify skill layout`.
 - Do not commit secrets, tokens, credentials, private machine state, caches,
@@ -28,8 +37,9 @@ and easy to audit.
   `SKILL.md` entrypoint.
 - Keep supporting files near the skill that owns them, such as `scripts/`,
   `references/`, `assets/`, or templates.
-- Update `CHANGELOG.md` and `VERSION` when a change is intended as a notable
-  release of the portable workspace content.
+- Record pending notable changes under `[Unreleased]` in `CHANGELOG.md`.
+  Update `VERSION` only when preparing an authorized release, together with
+  dated release notes. Never bump versions on unfinished feature branches.
 - Document non-obvious behavior in the skill or README instead of relying on
   tribal knowledge in commit messages.
 

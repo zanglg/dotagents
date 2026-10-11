@@ -24,8 +24,6 @@ small, auditable, and safe to copy between machines.
 
 ```text
 .
-|-- .github/
-|   `-- pull_request_template.md
 |-- AGENTS.md          # Instructions for agents working in this repository
 |-- CHANGELOG.md       # Human-readable release history
 |-- CONTRIBUTING.md    # Contribution and commit conventions
@@ -33,7 +31,7 @@ small, auditable, and safe to copy between machines.
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
 `-- skills/
-    `-- .gitkeep       # Placeholder for reusable skills
+    `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
 
 Each reusable skill should live in its own directory:
@@ -73,9 +71,30 @@ The scaffold is at `0.0.0` until the first valid release. Keep `CHANGELOG.md`
 and `VERSION` aligned when a change is notable enough to be released. This
 repository uses Semantic Versioning for its portable content.
 
-Develop from `dev` on feature branches, squash each feature into `dev`, then
-promote `dev` to `main` with a linear merge. See [CONTRIBUTING.md](CONTRIBUTING.md)
-for the full branch and merge policy.
+Develop on `feature/<name>` branches from `dev`. Only after user approval,
+rebase and squash a feature to one commit, then fast-forward it into `dev`.
+Prepare releases on `dev` and fast-forward `main`, preserving all feature
+commits. Never force-push shared branches or use merge/rebase-merge commits.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full policy.
+
+## Version Skill
+
+[semver-bump](skills/semver-bump/SKILL.md) is a general-purpose, prompt-only skill
+for recommending SemVer upgrades and updating existing version metadata and
+release notes. It discovers each project's conventions rather than assuming
+branch names, file paths, tag formats, or pre-1.0 rules. No helper scripts or
+runtime dependencies are required.
+
+Example requests:
+
+- "Use semver-bump to recommend the next version without editing anything."
+- "Use semver-bump to apply the confirmed version and update the changelog;
+  do not commit."
+
+Analysis is read-only by default, and edits require confirmation. The skill does
+not integrate branches or publish releases. This repository's release baseline
+is `main..dev`, its version source is `VERSION`, and its release process is
+specified separately in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Agent Development Notes
 
