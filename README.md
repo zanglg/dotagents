@@ -32,6 +32,7 @@ small, auditable, and safe to copy between machines.
 |-- VERSION            # Current repository content version
 |-- docs/              # Guides for related skill groups
 `-- skills/
+    |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
     |-- engflow-*/     # Six related EngFlow skills
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
@@ -55,6 +56,7 @@ without searching the whole workspace.
 
 | Skill | Purpose |
 | --- | --- |
+| [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
 | [engflow-research](skills/engflow-research/SKILL.md) | Source investigation, comparisons and bounded experiments |

@@ -13,6 +13,17 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Behavioral scenarios and a pinned three-configuration evaluation protocol
   for implementation quality, recovery and total execution cost; measured
   behavioral results remain pending.
+- English technical diagram aesthetic guidance in
+  `skills/diagram-color-guidelines/`, retaining the existing skill name and
+  concrete palettes while defining stable typography, color, line, arrow, and
+  geometry anchors across independently produced figures. Layout, alignment,
+  routing, and dimensions adapt to content rather than requiring identical
+  results; readability, accurate semantics, tool limitations, and honest
+  validation remain explicit requirements.
+- Diagram typography guidance distinguishing navigational group titles from
+  supplementary labels, with Chinese and mixed-language font fallbacks and
+  layout checks, plus content-adaptive guidance for reading order, grouping,
+  white space, visual weight, and density.
 
 ### Changed
 
