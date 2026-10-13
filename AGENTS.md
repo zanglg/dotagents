@@ -21,6 +21,9 @@ and easy to audit.
 - Promote releases from `dev` to `main` with fast-forward only, preserving
   feature commits. Do not use merge commits, rebase merges, or force-push either
   shared branch. See `CONTRIBUTING.md` for the complete workflow.
+- For this personal skills repository, publishing means promoting an approved
+  versioned snapshot to `main`. Tags, GitHub Releases, and downloadable bundles
+  are optional; create them only when requested. A missing tag is not a blocker.
 - Use `skills/semver-bump/SKILL.md` to recommend and update SemVer versions.
   Its scope is version metadata, not branch integration or publication.
   Follow `CONTRIBUTING.md` for this repository's release workflow; feature

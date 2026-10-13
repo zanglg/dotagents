@@ -104,17 +104,28 @@ Rewriting a published feature branch requires separate explicit approval and
 `--force-with-lease`; it must not overwrite another contributor's work.
 Do not rewrite already integrated feature commits.
 
-Prepare a release on `dev`, then fast-forward `main` to `dev` with
-`git merge --ff-only dev`. Preserve each feature commit and the separate release
-commit. Do not squash the whole release or use GitHub rebase merge, which can
-change commit IDs and break the shared ancestry. Do not create merge commits
-or force-push `dev` or `main`. If branch protection prevents a fast-forward
-push, stop and request a compatible promotion mechanism; do not bypass it.
+Prepare a release on `dev`, then fast-forward `main` to the approved release
+commit with `git merge --ff-only <release-sha>`. Normally this is the current
+`dev` tip. When resuming a prepared release, the user may select an earlier
+release commit already in `dev`; leave later development on `dev` for the next
+version. Preserve each feature commit and the separate release commit. Do not
+squash the whole release or use GitHub rebase merge, which can change commit IDs
+and break the shared ancestry. Do not create merge commits or force-push either
+shared branch.
 
-After promotion both branches point to the same release commit. No reset or
-force-push realignment is necessary. Direct development on `dev` is allowed
-only when the user explicitly grants an exception (as for the initial release
-skill setup).
+After promotion, `main` points to the released snapshot and `dev` contains it.
+The branches have the same tip unless later development remains on `dev`.
+No reset or force-push realignment is necessary. Direct development on `dev`
+is allowed only when the user explicitly grants an exception.
+
+For this personal repository, branch protection should allow authorized direct
+fast-forward pushes while retaining linear history and preventing force-pushes
+and branch deletion. Pull requests remain optional; a mandatory PR rule is
+incompatible with this promotion workflow when GitHub offers only squash or
+rebase merging. With the owner's authorization and sufficient administrative
+access, adjust the conflicting requirement while preserving other protections.
+If access is unavailable, report the specific blocked setting and permission;
+do not silently change the merge method or claim the setting was updated.
 
 ## Release Notes
 
@@ -133,13 +144,17 @@ is not intended, stop and agree on a documented policy before releasing.
 `0.0.0` is a bootstrap sentinel, not a published version; a first compatible
 feature release is `0.1.0`, and a first patch-only release is `0.0.1`.
 
-The scaffold is `0.0.0` and is not a release. Record work under
-`[Unreleased]` until portable content is ready for a first release. When a
-change is release-worthy, prepare both `VERSION` and dated `CHANGELOG.md`
-notes in a separate `chore(release): vX.Y.Z` commit on `dev`, then promote it
-to `main` and create the annotated tag `vX.Y.Z`. `VERSION` is the single source
-of truth; the baseline tag must match the version and the tip of `main`.
-Do not assign a release version to unfinished feature branches.
+Record pending work under `[Unreleased]`. When preparing an authorized stable
+snapshot, update `VERSION` and dated `CHANGELOG.md` notes in a separate
+`chore(release): vX.Y.Z` commit on `dev`, then promote that commit to `main`.
+`VERSION` is the version source of truth; the published `main` commit and its
+version define the release baseline. Do not bump after every feature merge or
+assign a release version to unfinished feature branches.
+
+Tags, GitHub Releases, and downloadable bundles are optional conveniences,
+not release requirements. These plain-text skills can be used directly from
+the repository; a commit SHA is enough to pin a revision. A missing tag does
+not invalidate a published version or block the next version analysis.
 
 Use [semver-bump](skills/semver-bump/SKILL.md) for version analysis and metadata
 updates. Supply `main` as the baseline and `main..dev` as the intended change
@@ -149,36 +164,43 @@ the following process belongs to this repository, not to the skill.
 ### Release Procedure
 
 1. Require a clean checkout of `dev`. Preserve local work; do not automatically
-   stash, reset, or clean it. With permission, fetch branches and tags, and
-   verify local `dev` and `main` match their origin counterparts. Cached refs
-   alone cannot establish publication readiness.
-2. Verify `main` is an ancestor of `dev` and `main..dev` contains no merge
-   commits. Before preparation, require `dev` and `main` to have the same
-   `VERSION`. Require the baseline tag `v<VERSION>` to point to `main`;
-   only the bootstrap version `0.0.0` may lack a tag. Stop on inconsistencies
-   or a partially prepared release; do not silently repair refs or bump twice.
-3. Analyze actual diffs and commit bodies with `semver-bump`. Report the
-   recommended version and rationale. No release-worthy change means no bump.
-4. With approval to edit, update `VERSION` and move applicable `[Unreleased]`
-   notes into a dated `## [X.Y.Z] - YYYY-MM-DD` section. Retain an empty
-   `[Unreleased]` section and remove obsolete bootstrap wording on the first
-   release. Include only integrated changes. Validate content and version
-   consistency, then create the release commit only when authorized.
-5. Before promotion, verify the release commit contains only intended metadata,
-   the target tag does not exist, and local branch tips have not changed.
-   With permission, refresh the remote: `origin/main` must still be the baseline
-   and `origin/dev` the previously verified tip or the approved release tip.
-   Stop and reassess if either advanced unexpectedly.
-6. With explicit authorization for the relevant operations, push `dev` normally,
-   switch to `main`, run `git merge --ff-only dev`, and create an annotated
-   `vX.Y.Z` tag at the release commit. Publish `main` and the tag together with
-   `git push --atomic origin main refs/tags/vX.Y.Z` when supported and authorized.
-   If protection or atomic push fails, stop and request a compatible strategy;
-   do not bypass protections or replace existing tags.
-7. Verify remote `dev`, `main`, and the peeled tag point to the release commit.
-   Report validations and local/remote state, then return to `dev` when safe.
-   On partial failure, report what succeeded and agree on a resume plan;
-   do not undo shared history or increment the version again.
+   stash, reset, or clean it. Under the user's authorization, fetch `main` and
+   `dev`, verify local/remote state, and record the published `main` SHA and
+   `VERSION`. Cached refs alone cannot establish publication readiness.
+2. Verify that published `main` is an ancestor of `dev` and the release range
+   has no merge commits. For a new version, `dev` and published `main` should
+   start with the same `VERSION`. If a release is already prepared, identify
+   and validate its existing commit and intended scope; resume that release
+   rather than bumping twice. Do not silently repair unexplained differences.
+3. For a new release, analyze actual diffs and commit bodies with `semver-bump`.
+   Report the recommended version and rationale. No release-worthy change means
+   no bump. For a resumed release, confirm the selected commit and version.
+4. When preparing new metadata is authorized, update `VERSION` and move the
+   applicable `[Unreleased]` notes into a dated `## [X.Y.Z] - YYYY-MM-DD` section.
+   Retain an empty `[Unreleased]` section and remove obsolete bootstrap wording
+   on the first release. Include only integrated changes. Validate content and
+   version consistency, then create the release commit when authorized.
+5. Before promotion, verify that the release commit contains only intended
+   metadata and lies on `dev`'s history. Refresh the remote: `origin/main` must
+   still be the recorded baseline and `origin/dev` the verified development or
+   approved release tip. Reassess unexpected changes instead of overwriting them.
+6. With authorization to publish, push any intended `dev` commits normally,
+   switch to `main`, and run `git merge --ff-only <release-sha>` followed by
+   `git push origin main`. Do not include later `dev` changes when the user
+   selected an earlier prepared release. Resolve protection conflicts using
+   the branch policy above; a permission failure is not a completed release.
+7. Verify that remote `main` points to the chosen release commit and its
+   `VERSION` and dated notes agree. Verify that remote `dev` still contains that
+   commit and preserves any later work. Report the published SHA and return to
+   `dev` when safe. On partial failure, report what succeeded and resume from
+   the observed state without rewriting shared history or incrementing again.
+
+When a tag is explicitly requested, use an annotated `vX.Y.Z` at the verified
+release commit. Check remote tags first; never replace an existing tag. If
+publishing a new `main` tip and tag together, use an atomic push where supported.
+GitHub Release entries and downloadable bundles are created only when requested
+and must refer to the same verified snapshot. Their absence does not make the
+branch publication incomplete.
 
 Read-only analysis is automatic; metadata edits, release commits, promotion,
 tag creation, and remote operations require explicit approval. A dry run does

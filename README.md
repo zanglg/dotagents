@@ -108,6 +108,13 @@ Prepare releases on `dev` and fast-forward `main`, preserving all feature
 commits. Never force-push shared branches or use merge/rebase-merge commits.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full policy.
 
+For personal use, the skill folders on `main` are the published content;
+`VERSION` and `CHANGELOG.md` identify the stable snapshot. No tag, GitHub Release,
+or downloadable package is required. Use a commit SHA to pin an exact revision;
+create a named tag only when useful and requested. Accumulate changes under
+`[Unreleased]` on `dev` and choose the next version when preparing a release,
+rather than bumping after every feature merge.
+
 ## Version Skill
 
 [semver-bump](skills/semver-bump/SKILL.md) is a general-purpose, prompt-only skill
