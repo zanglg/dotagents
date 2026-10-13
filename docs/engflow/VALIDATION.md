@@ -26,8 +26,18 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | --- | --- | --- |
 | Initialization | Existing unrelated AGENTS rules; run setup twice | Preserve unrelated bytes, one managed block, second run idempotent; no metadata or speculative Feature |
 | Feature navigation | Root README has no Features section; create two goals and repeat one | Add real links without duplicates, distinct IDs for distinct goals, reuse the matching goal |
-| Small implementation | Bounded bug fix with no Feature | Implement, test and code-review without a progress file or bootstrap |
+| Small implementation | Bounded bug fix with no Feature and no consequential unknown | Implement, test and code-review without a progress file, full brief template, mandatory Research/Grill/Design or unnecessary spike |
 | Long dependency graph | T2 depends on T1; T3 is independent; final verification depends on all | One code writer, valid dependency ordering, one progress record, final integration check, no per-slice confirmation |
+| Just-in-time contract | T1 produces an API consumed by T2; chat requires a specific return shape; later tasks need no detail yet | Current brief carries the required interface, invariants, source pointers, acceptance and local freedom; future tasks stay coarse; no duplicate Brief document or speculative function bodies |
+| Direct implementation | Run the same multi-task contract case without fresh-context workers | Parent applies necessary refinement and validation itself; no forced delegation or document prerequisite |
+| Risk-first validation | Several tasks rely on an unsupported dependency API discoverable in pinned source; an independent task is safe | Investigate before dependent implementation, record a validation prerequisite and consumers, revise the disproven approach from evidence, preserve negative findings without leaving obsolete prerequisites in the revised graph, and allow independent progress |
+| Inconclusive spike | Required experiment exceeds its resource bound or produces inadequate evidence | Mark the result inconclusive, preserve uncertainty, keep consumers blocked or replan with supported evidence; no assumed pass or unbounded retry |
+| Experiment ownership | A read-only research helper identifies a PoC requiring temporary files while an implementation worker owns writes | Helper reports findings; only the current exclusive writer performs authorized experiment writes/runs; parent record updates wait for quiescence |
+| Discovery during implementation | T1 has passing local evidence; while implementing T2, discover a shared assumption invalidating T1 and future T3; T4 is unaffected | Pause affected writes, identify direct/transitive contract impact, mark old completion evidence stale with reasons, reopen affected tasks, retain T4, refresh the current brief and verify the revised graph before continuing |
+| Replanning with a live command | A changed contract reaches a worker whose test process may still write | Confirm worker/process quiescence before parent updates, expire the old grant, and require a new grant for revised work; no second writer or stale-brief continuation |
+| Constraint dimensions | User requires an interface, prefers an algorithm, and mentions a proposed library; an accepted choice has unverified feasibility | Preserve the requirement, keep preference/proposal distinct, validate consequential unknowns, and choose local details autonomously without treating approval as proof |
+| Decision and document scope | Implementation evidence conflicts with an effective ADR; an unrelated task can proceed; no document edits were requested | Block affected work, preserve the effective decision and acceptance, ask only for the missing material decision, continue safe work, and create no automatic Design/ADR/AGENTS changes |
+| Recovery after replanning | Pause after a shared assumption is disproven and the record is updated; resume with the same code and record | Reload the revised brief and dependencies, preserve stale-evidence reasons, reconcile actual files/processes, and continue valid work without restoring the old assumption or repeating unaffected work |
 | Partial blockage | T1 needs missing external input; T2 depends on it; T3 is independent | T1/T2 do not proceed, T3 completes, then a specific blocker is reported without claiming overall completion |
 | Blocker resolved | Supply the missing input for a previously blocked task | Recheck the cause, return unfinished affected tasks to pending, recompute readiness and continue |
 | Integration regression | Slice checks passed but final integration fails | Reopen causal tasks or add bounded repairs, keep final gate incomplete, rerun affected verification |
@@ -61,4 +71,42 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 
 ## Evaluation measures
 
-Compare a representative small task and a multi-slice task against a chosen prior Git revision: artifacts created, unnecessary confirmation turns, repeated work after interruption, correctness of completion claims, and actual required checks. Where the host exposes reliable metrics, also measure parent context growth, peak usage, brief/return size and total parent-plus-worker cost. Time/token savings are hypotheses until measured in the target host; lower parent context use does not imply lower total cost.
+Freeze the cases, acceptance oracle and comparison revisions before modifying
+instructions or inspecting scored outcomes. The pre-change EngFlow baseline for
+the adaptive-implementation work is
+[`09ae8a142b15a331c53adf073c54d3b500dfe79a`](https://github.com/zanglg/dotagents/commit/09ae8a142b15a331c53adf073c54d3b500dfe79a).
+This records an instruction baseline, not an executed behavioral result.
+
+| Configuration | Purpose |
+| --- | --- |
+| Native coding agent | Same host, model, tools, project rules and task; no EngFlow skills or EngFlow managed block |
+| Baseline EngFlow | Native setup plus the six skills and any router rules from the pinned pre-change revision |
+| Candidate EngFlow | Same setup as baseline, with the exact candidate instruction revision recorded |
+
+### Reproducible run protocol
+
+1. Prepare disposable fixture snapshots for a small fix, a cross-task interface, a high-impact false assumption, and evidence-driven replanning with an interruption/resume variant. Pin the task repository revision, dependency versions, initial dirty/untracked files and expected acceptance tests. Keep fixture definitions and the acceptance oracle outside the agent's editable scope. Do not score a generic scenario description as a replayable fixture.
+2. Save each exact user prompt, provided tickets/constraints and any scripted replies. Define the false assumption and the same tool-visible evidence for each configuration. For mid-task discovery and recovery, specify an observable injection/stop point and resume prompt before running; if the point is never reached, record that fact instead of inventing a recovery result.
+3. Fix host/model version, tool permissions, available worker/context capabilities, execution settings, timeout and total resource budget. Use fresh isolated sessions and identical initial files for each run; do not carry prior transcripts, work products or learned task notes across configurations. Allow the same tools and delegation capabilities in the native baseline.
+4. Run paired cases in varied configuration order with at least three repetitions per configuration for an initial pilot. Record supported sampling settings/seeds, execution failures and all attempts. Three repetitions are a smoke pilot, not proof of a general advantage; increase coverage/repetitions before strong claims.
+5. Collect observable file changes, tool outcomes, constraint transmission, experiment ordering, graph/brief updates, evidence invalidation and worker ownership events. Apply the same fixed acceptance tests and scoring rubric to final code, independently of the agent's completion claim. Agent-edited tests cannot replace the oracle. Distinguish an unavailable measurement from zero or success.
+6. Preserve run metadata and evidence pointers outside the portable skill package in an explicitly selected evaluation location. Report per-case outcomes, pass counts/attempt counts, cost and duration distributions, excluded runs with reasons, and all unresolved failures. Record any human judgment used to score the trace.
+7. Compare candidate with baseline for the change's effect, and each with native for overall workflow value. If attributing value to an individual rule, add a pinned incremental/ablation configuration; three bundled configurations alone do not identify which rule helped. Retain simple-task controls to detect overhead and avoid selecting only cases that favor the new rules.
+
+### Metrics and interpretation
+
+| Measure | Operational definition |
+| --- | --- |
+| Final acceptance | Runs satisfying the fixed full-scope oracle within budget / all attempts; separately flag unsupported completion claims |
+| Rework | Trace-backed episodes that revise completed or substantially implemented work because an earlier assumption/contract was invalid; distinguish ordinary local test iteration |
+| Human intervention | Record necessary requirement/authority decisions separately from avoidable clarification, correction and rescue turns |
+| Total cost | Aggregate actual usage once across all agent calls, including parent, workers, research and retries; report token usage and monetary cost where exposed, cache accounting and missing metrics |
+| Duration | End-to-end wall time, with human/tool waiting identified; lower token count alone does not establish faster completion |
+| Recovery | Correct resumptions / runs reaching the predefined interruption point, including preservation of useful work, current constraints and write ownership; report runs not reaching that point separately |
+| Process overhead | Extra artifacts, unnecessary confirmations, duplicate source reads and repeated unaffected work; parent context growth, peak usage and brief/return size when reliable host metrics exist |
+
+The protocol and cases above are defined; fixture snapshots and scored runs have
+not been supplied by this documentation change. Host behavior, recovery gains
+and time/token savings remain unmeasured until those runs are executed. Structural
+checks establish packaging and instruction consistency, not agent compliance;
+lower parent context use does not imply lower total cost.

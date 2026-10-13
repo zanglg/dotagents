@@ -6,6 +6,21 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Added
+
+- Adaptive EngFlow implementation with current-task technical briefs,
+  risk-first validation prerequisites, and evidence-driven local replanning.
+- Behavioral scenarios and a pinned three-configuration evaluation protocol
+  for implementation quality, recovery and total execution cost; measured
+  behavioral results remain pending.
+
+### Changed
+
+- Clarify coordinator and implementer decision boundaries, constraint strength,
+  decision status and technical evidence without adding mandatory workflow stages.
+- Extend the existing progress outline with the current brief and affected
+  evidence, preserving serial write ownership and one authoritative task record.
+
 ## [0.1.0] - 2026-10-11
 
 ### Added
