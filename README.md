@@ -32,6 +32,7 @@ small, auditable, and safe to copy between machines.
 |-- VERSION            # Current repository content version
 |-- docs/              # Guides for related skill groups
 `-- skills/
+    |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
     |-- engflow-*/     # Six related EngFlow skills
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
@@ -55,6 +56,7 @@ without searching the whole workspace.
 
 | Skill | Purpose |
 | --- | --- |
+| [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
 | [engflow-research](skills/engflow-research/SKILL.md) | Source investigation, comparisons and bounded experiments |
@@ -97,15 +99,22 @@ messages. Common types for this repository are:
 - `docs`: update documentation only
 - `chore`: repository maintenance with no user-facing content change
 
-The scaffold is at `0.0.0` until the first valid release. Keep `CHANGELOG.md`
-and `VERSION` aligned when a change is notable enough to be released. This
-repository uses Semantic Versioning for its portable content.
+See [CHANGELOG.md](CHANGELOG.md) for release history and
+[CONTRIBUTING.md](CONTRIBUTING.md) for development and release conventions.
 
-Develop on `feature/<name>` branches from `dev`. Only after user approval,
-rebase and squash a feature to one commit, then fast-forward it into `dev`.
-Prepare releases on `dev` and fast-forward `main`, preserving all feature
-commits. Never force-push shared branches or use merge/rebase-merge commits.
+Create a short-lived `feature/<name>` branch from current `main`. After
+validation and user approval, open a PR to `main` and use Squash and merge.
+Verify the result, then delete the completed feature branch and start the next
+one from updated `main`. There is no long-lived `dev` or release back-merge.
+Keep `main` linear and protected by PRs; never push to it directly or force-push.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full policy.
+
+For personal use, the skill folders on `main` provide the latest reviewed
+content. New changes accumulate under `[Unreleased]`; `VERSION` records the
+latest declared release, so later `main` commits may contain additional work.
+Prepare a separate release PR when a new version is wanted. No tag, GitHub
+Release, or downloadable package is required. Pin a commit SHA for an exact
+revision, including the commit that introduced a declared version.
 
 ## Version Skill
 
@@ -122,9 +131,10 @@ Example requests:
   do not commit."
 
 Analysis is read-only by default, and edits require confirmation. The skill does
-not integrate branches or publish releases. This repository's release baseline
-is `main..dev`, its version source is `VERSION`, and its release process is
-specified separately in [CONTRIBUTING.md](CONTRIBUTING.md).
+not integrate branches or publish releases. This repository compares the last
+verified version-release commit on `main` with current `main`; using the current
+tip as both baseline and target would miss unreleased changes. The version
+source is `VERSION`; [CONTRIBUTING.md](CONTRIBUTING.md) defines the process.
 
 ## Agent Development Notes
 

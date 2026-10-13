@@ -6,6 +6,38 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Added
+
+- Adaptive EngFlow implementation with current-task technical briefs,
+  risk-first validation prerequisites, and evidence-driven local replanning.
+- Behavioral scenarios and a pinned three-configuration evaluation protocol
+  for implementation quality, recovery and total execution cost; measured
+  behavioral results remain pending.
+- English technical diagram aesthetic guidance in
+  `skills/diagram-color-guidelines/`, retaining the existing skill name and
+  concrete palettes while defining stable typography, color, line, arrow, and
+  geometry anchors across independently produced figures. Layout, alignment,
+  routing, and dimensions adapt to content rather than requiring identical
+  results; readability, accurate semantics, tool limitations, and honest
+  validation remain explicit requirements.
+- Diagram typography guidance distinguishing navigational group titles from
+  supplementary labels, with Chinese and mixed-language font fallbacks and
+  layout checks, plus content-adaptive guidance for reading order, grouping,
+  white space, visual weight, and density.
+
+### Changed
+
+- Replace the long-lived `dev` workflow with short-lived feature branches from
+  `main`, PR review, Squash and merge, and verified branch cleanup. Keep `main`
+  linear and preserve existing pending work during migration.
+- Keep version preparation in a separate release PR, using the last verified
+  version-release commit as the baseline for `[Unreleased]` changes on `main`.
+  Tags, GitHub Releases, and downloadable bundles remain optional.
+- Clarify coordinator and implementer decision boundaries, constraint strength,
+  decision status and technical evidence without adding mandatory workflow stages.
+- Extend the existing progress outline with the current brief and affected
+  evidence, preserving serial write ownership and one authoritative task record.
+
 ## [0.1.0] - 2026-10-11
 
 ### Added
