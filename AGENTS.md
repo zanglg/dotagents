@@ -15,19 +15,21 @@ and easy to audit.
 
 - Preserve existing user work. Do not delete, rewrite, or normalize unrelated
   local files unless the user explicitly asks.
-- Keep commits focused on the requested change. Start features from `dev`.
-  Only integrate a feature after explicit user approval: rebase onto current
-  `dev`, squash it to one Conventional Commit, then fast-forward `dev`.
-- Promote releases from `dev` to `main` with fast-forward only, preserving
-  feature commits. Do not use merge commits, rebase merges, or force-push either
-  shared branch. See `CONTRIBUTING.md` for the complete workflow.
-- For this personal skills repository, publishing means promoting an approved
-  versioned snapshot to `main`. Tags, GitHub Releases, and downloadable bundles
-  are optional; create them only when requested. A missing tag is not a blocker.
+- Keep commits focused on the requested change. Start short-lived feature
+  branches from current `main`; do not maintain a long-lived `dev` branch.
+- After user approval and validation, integrate each feature through a PR to
+  `main` using Squash and merge, producing one Conventional Commit. Never push
+  directly to `main`, force-push it, or use merge/rebase merging. Verify the
+  result before deleting the completed feature branch. See `CONTRIBUTING.md`
+  for the complete workflow and preservation of existing branches.
+- `main` contains reviewed, usable skills, including changes not yet assigned
+  a version. Keep these under `[Unreleased]`; prepare version metadata in a
+  separate release PR when requested. Tags, GitHub Releases, and downloadable
+  bundles are optional; create them only when requested.
 - Use `skills/semver-bump/SKILL.md` to recommend and update SemVer versions.
   Its scope is version metadata, not branch integration or publication.
   Follow `CONTRIBUTING.md` for this repository's release workflow; feature
-  integration, release commits, branch promotion, tags, and remote writes
+  integration, release commits, PR merges, tags, and remote writes
   require explicit authorization for the relevant action.
 - Before preparing commits, read and follow the commit message and commit
   boundary rules in `CONTRIBUTING.md`.

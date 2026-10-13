@@ -27,10 +27,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
-- Simplify personal-repository publication: promote versioned snapshots to
-  `main` with optional tags, GitHub Releases, and bundles. Use the published
-  commit as the baseline, support resuming an earlier prepared release, and
-  document protection settings compatible with direct fast-forward pushes.
+- Replace the long-lived `dev` workflow with short-lived feature branches from
+  `main`, PR review, Squash and merge, and verified branch cleanup. Keep `main`
+  linear and preserve existing pending work during migration.
+- Keep version preparation in a separate release PR, using the last verified
+  version-release commit as the baseline for `[Unreleased]` changes on `main`.
+  Tags, GitHub Releases, and downloadable bundles remain optional.
 - Clarify coordinator and implementer decision boundaries, constraint strength,
   decision status and technical evidence without adding mandatory workflow stages.
 - Extend the existing progress outline with the current brief and affected

@@ -68,64 +68,77 @@ revertible where practical. Keep a behavior change and the tests or documentatio
 needed to explain it together. Use `git add -p` when one file contains changes
 for different purposes; review each staged subset and validate it separately.
 
-Feature branches may contain several coherent development commits. Before an
-approved integration into `dev`, rebase and squash the feature into one complete
-commit with a structured message summarizing the final result. Put unrelated
-features on separate branches rather than combining them in one integration
-commit. A large but cohesive feature needs a well-organized body, not arbitrary
-splitting solely to shorten its commit message.
+Feature branches may contain several coherent development commits. Put each
+independent feature in its own PR. On approved integration, GitHub Squash and
+merge produces one Conventional Commit on `main`; use the PR title and squash
+commit body to summarize the complete change. There is no need to squash the
+branch locally first. Do not rewrite completed `main` commits.
 
 ## Branch And Merge Policy
 
 ```text
-feature/<name> -> dev -> main
+main -> feature/<name> -> PR (Squash and merge) -> main
 ```
 
-`main` (not `master`) is stable; `dev` holds approved, unreleased features.
-Start each feature from the latest `dev`. A feature remains separate until the
-user explicitly confirms it is ready and authorizes integration.
+`main` is the only long-lived integration branch. It contains reviewed, usable
+content; feature PRs may add `[Unreleased]` changes without incrementing the
+version. Do not maintain `dev` or synchronize a development branch after each
+merge. The repository's existing branch name remains `main`, not `master`.
 
-This is a personal repository. Pull requests are optional for diff review or
-discussion, not a required integration step. `AGENTS.md` and this document
-define the workflow; before integration, report the checks and validation
-results directly to the user.
+For a feature:
 
-For an approved feature:
+1. Preserve local work, fetch the remote, and update a clean local `main` with
+   `git merge --ff-only origin/main`. Create `feature/<name>` from this tip.
+2. Implement and validate the change, update its documentation, and record
+   notable pending changes under `[Unreleased]`. Keep `VERSION` unchanged.
+3. When authorized, commit and push the feature branch and open a PR with base
+   `main`. Review the full file diff, run relevant checks, and report results
+   to the user before the approved merge.
+4. If `main` advances, refresh the branch and review the resulting diff again.
+   Rebase an unpublished branch when useful. Rewriting a published branch
+   requires separate approval and `--force-with-lease`; otherwise merge current
+   `main` into that feature branch or prepare a new branch without overwriting
+   another contributor's work. Linear history is required on `main`, not on
+   temporary feature branches.
+5. With integration approval, use Squash and merge. Keep a Conventional Commit
+   title and a body describing the final change and validation. Record the
+   reviewed head SHA and check the current base; when using `gh`, pass
+   `--match-head-commit <sha>` to guard the reviewed head. Do not bypass required
+   checks, use Rebase and merge or Create a merge commit, or push directly to
+   `main`.
+6. Fetch and verify the resulting commit and intended content. The squash
+   commit has a new ID; when the reviewed head includes the recorded current
+   base, its file tree must match the merged result. Update local `main` by
+   fast-forward, then delete only the completed feature branch after confirming
+   that it has no unmerged work. Start the next feature from updated `main`,
+   not from the old branch. Never force-push `main`.
 
-1. Fetch and verify the current `dev` tip; preserve any local work.
-2. On the feature branch, rebase onto `dev` and squash the feature's commits
-   into one complete Conventional Commit. Resolve conflicts and validate.
-3. Review the resulting diff and commit. Fast-forward `dev` to that commit
-   using `git merge --ff-only feature/<name>` from `dev`.
-4. Push only when authorized. If remote `dev` advanced, stop and repeat the
-   preparation against the new tip; never force-push `dev`.
+Keep unrelated active feature branches intact. If they originated on an older
+base, reconcile their actual pending diff against current `main` before merging;
+do not assume commit IDs alone establish whether their content was integrated.
 
-Rewriting a published feature branch requires separate explicit approval and
-`--force-with-lease`; it must not overwrite another contributor's work.
-Do not rewrite already integrated feature commits.
+When migrating away from `dev`, preserve all pending changes in a migration PR
+and verify the merged content before retiring that branch. This one-time PR may
+start at the existing `dev` tip; new feature branches start from `main`. Do not
+delete `dev` while it still contains unpreserved work. Existing releases and
+historical changelog entries remain unchanged.
 
-Prepare a release on `dev`, then fast-forward `main` to the approved release
-commit with `git merge --ff-only <release-sha>`. Normally this is the current
-`dev` tip. When resuming a prepared release, the user may select an earlier
-release commit already in `dev`; leave later development on `dev` for the next
-version. Preserve each feature commit and the separate release commit. Do not
-squash the whole release or use GitHub rebase merge, which can change commit IDs
-and break the shared ancestry. Do not create merge commits or force-push either
-shared branch.
+For GitHub configuration:
 
-After promotion, `main` points to the released snapshot and `dev` contains it.
-The branches have the same tip unless later development remains on `dev`.
-No reset or force-push realignment is necessary. Direct development on `dev`
-is allowed only when the user explicitly grants an exception.
+- On `main`, enable Require a pull request before merging and Require linear
+  history. Keep force pushes and branch deletion disabled.
+- Enable Allow squash merging. PRs in this repository use that method; other
+  merge buttons need not be enabled.
+- In this solo repository, a PR requirement does not require another person's
+  approval. Avoid a required review that the sole maintainer cannot provide;
+  keep applicable checks and unrelated protections.
+- Temporary feature branches may be deleted after verified integration. Remove
+  obsolete `dev`-specific protection only as needed for its authorized retirement;
+  do not weaken protections for `main` or unrelated branches.
 
-For this personal repository, branch protection should allow authorized direct
-fast-forward pushes while retaining linear history and preventing force-pushes
-and branch deletion. Pull requests remain optional; a mandatory PR rule is
-incompatible with this promotion workflow when GitHub offers only squash or
-rebase merging. With the owner's authorization and sufficient administrative
-access, adjust the conflicting requirement while preserving other protections.
-If access is unavailable, report the specific blocked setting and permission;
-do not silently change the merge method or claim the setting was updated.
+If administrative access is unavailable, report the specific setting and
+permission, and provide the owner with the required GitHub steps. Do not claim
+that documentation changes also changed GitHub configuration.
 
 ## Release Notes
 
@@ -140,72 +153,67 @@ Use Semantic Versioning for repository content:
 Use the highest required level across unreleased changes. For this repository,
 apply the same rule during `0.x`: breaking changes recommend `1.0.0`, not a
 silent minor bump. Confirm the first stable release with the user; if stability
-is not intended, stop and agree on a documented policy before releasing.
-`0.0.0` is a bootstrap sentinel, not a published version; a first compatible
-feature release is `0.1.0`, and a first patch-only release is `0.0.1`.
+is not intended, agree on a documented policy before releasing. `0.0.0` is a
+bootstrap sentinel, not a published version; a first compatible feature release
+is `0.1.0`, and a first patch-only release is `0.0.1`.
 
-Record pending work under `[Unreleased]`. When preparing an authorized stable
-snapshot, update `VERSION` and dated `CHANGELOG.md` notes in a separate
-`chore(release): vX.Y.Z` commit on `dev`, then promote that commit to `main`.
-`VERSION` is the version source of truth; the published `main` commit and its
-version define the release baseline. Do not bump after every feature merge or
-assign a release version to unfinished feature branches.
-
-Tags, GitHub Releases, and downloadable bundles are optional conveniences,
-not release requirements. These plain-text skills can be used directly from
-the repository; a commit SHA is enough to pin a revision. A missing tag does
-not invalidate a published version or block the next version analysis.
+Feature integration and version publication are separate steps. Keep notable
+changes under `[Unreleased]` on `main` until a release is requested. `VERSION`
+records the latest declared release; it does not imply that every later `main`
+commit belongs to that version. The verified commit on `main` that introduced
+that version and its dated changelog notes defines the release snapshot.
 
 Use [semver-bump](skills/semver-bump/SKILL.md) for version analysis and metadata
-updates. Supply `main` as the baseline and `main..dev` as the intended change
-range. The skill is reusable and does not manage branches or publish releases;
-the following process belongs to this repository, not to the skill.
+updates. Find the current version's introduction on `main` using its history
+(for example, `git log --first-parent main -- VERSION`), then verify the version,
+its change from the parent, and matching dated notes. Do not infer a release
+solely from a commit title, a missing tag, or current `main`'s tip. If version
+history is ambiguous, resolve the baseline before recommending a bump.
+
+Compare that verified release commit with current `main` for the next version,
+using both the actual diff and intervening commits. Do not use `main..dev` or
+compare current `main` with itself. The reusable skill does not manage branches
+or publish releases; the following process belongs to this repository.
 
 ### Release Procedure
 
-1. Require a clean checkout of `dev`. Preserve local work; do not automatically
-   stash, reset, or clean it. Under the user's authorization, fetch `main` and
-   `dev`, verify local/remote state, and record the published `main` SHA and
-   `VERSION`. Cached refs alone cannot establish publication readiness.
-2. Verify that published `main` is an ancestor of `dev` and the release range
-   has no merge commits. For a new version, `dev` and published `main` should
-   start with the same `VERSION`. If a release is already prepared, identify
-   and validate its existing commit and intended scope; resume that release
-   rather than bumping twice. Do not silently repair unexplained differences.
-3. For a new release, analyze actual diffs and commit bodies with `semver-bump`.
-   Report the recommended version and rationale. No release-worthy change means
-   no bump. For a resumed release, confirm the selected commit and version.
-4. When preparing new metadata is authorized, update `VERSION` and move the
-   applicable `[Unreleased]` notes into a dated `## [X.Y.Z] - YYYY-MM-DD` section.
-   Retain an empty `[Unreleased]` section and remove obsolete bootstrap wording
-   on the first release. Include only integrated changes. Validate content and
-   version consistency, then create the release commit when authorized.
-5. Before promotion, verify that the release commit contains only intended
-   metadata and lies on `dev`'s history. Refresh the remote: `origin/main` must
-   still be the recorded baseline and `origin/dev` the verified development or
-   approved release tip. Reassess unexpected changes instead of overwriting them.
-6. With authorization to publish, push any intended `dev` commits normally,
-   switch to `main`, and run `git merge --ff-only <release-sha>` followed by
-   `git push origin main`. Do not include later `dev` changes when the user
-   selected an earlier prepared release. Resolve protection conflicts using
-   the branch policy above; a permission failure is not a completed release.
-7. Verify that remote `main` points to the chosen release commit and its
-   `VERSION` and dated notes agree. Verify that remote `dev` still contains that
-   commit and preserves any later work. Report the published SHA and return to
-   `dev` when safe. On partial failure, report what succeeded and resume from
-   the observed state without rewriting shared history or incrementing again.
+1. From a clean checkout, fetch and verify current `main`. Preserve local work;
+   do not automatically stash, reset, or clean it. Identify and record the last
+   verified release SHA, current `VERSION`, and proposed release scope.
+2. Analyze integrated changes from that baseline with `semver-bump`. Recommend
+   the next version and rationale; no release-worthy change means no bump.
+   If a release PR is already prepared, inspect and resume it instead of
+   incrementing twice.
+3. Once the target version and metadata edits are authorized, create a short-
+   lived `release/vX.Y.Z` branch from current `main`. Update `VERSION`, move the
+   applicable `[Unreleased]` notes into `## [X.Y.Z] - YYYY-MM-DD`, retain an empty
+   `[Unreleased]` section, and update any synchronized version fields. Include
+   only integrated changes; keep feature implementation out of the release PR.
+4. Validate version and note consistency, relevant links, and the diff. When
+   authorized, commit with `chore(release): vX.Y.Z`, push the branch, and open a
+   release PR to `main`. Publication requires separate authorization from a
+   metadata-only bump.
+5. Keep the reviewed base and head fixed for the approved merge. If new feature
+   changes land on `main`, reassess the release scope and notes before merging;
+   do not silently include them. Use Squash and merge under the same PR checks
+   as feature integration. An open or blocked PR is not a published version.
+6. Fetch and verify that the published squash commit has the expected parent,
+   file tree, `VERSION`, and dated notes. Record its SHA in the PR description
+   as the release snapshot. Later features may advance `main` without changing
+   that snapshot. Return to updated `main` and remove the completed release
+   branch after checking for unmerged work. No development-branch back-merge
+   is needed.
 
-When a tag is explicitly requested, use an annotated `vX.Y.Z` at the verified
-release commit. Check remote tags first; never replace an existing tag. If
-publishing a new `main` tip and tag together, use an atomic push where supported.
-GitHub Release entries and downloadable bundles are created only when requested
-and must refer to the same verified snapshot. Their absence does not make the
-branch publication incomplete.
+Tags, GitHub Releases, and downloadable bundles are optional; create them only
+when requested. The plain-text skill folders can be used directly, and a commit
+SHA is enough to pin a version. If a tag is requested, create an annotated
+`vX.Y.Z` at the verified published release commit on `main`, not merely at the
+release branch head. Check remote tags first and never replace an existing tag.
+Release entries and bundles must refer to that same verified snapshot.
 
-Read-only analysis is automatic; metadata edits, release commits, promotion,
-tag creation, and remote operations require explicit approval. A dry run does
-not update files, refs, tags, or the remote. Approval of a version bump alone
-is not approval to publish.
+Read-only analysis is automatic. Metadata edits, commits, PR integration, tags,
+and remote writes require authorization for the relevant action; retain valid
+authorization already given in the session. A dry run changes no files or refs.
 
 ## Skill Organization
 
