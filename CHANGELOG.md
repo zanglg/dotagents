@@ -8,6 +8,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- `engflow-refactor-review` as a seventh independent entry point for read-only
+  assessment of existing code and evidence-backed refactoring recommendations.
+  Findings are advisory input to implementation, not a prerequisite or an
+  automatic handoff; catalogs, routing and validation scenarios include the new
+  entry point.
 - Adaptive EngFlow implementation with current-task technical briefs,
   risk-first validation prerequisites, and evidence-driven local replanning.
 - Behavioral scenarios and a pinned three-configuration evaluation protocol

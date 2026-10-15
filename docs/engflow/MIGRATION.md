@@ -1,6 +1,6 @@
 # EngFlow compatibility notes
 
-Use these notes when replacing an older EngFlow installation. Install the six
+Use these notes when replacing an older EngFlow installation. Install the seven
 `skills/engflow-*` folders together from the selected dotagents release or commit.
 Repository releases use Semantic Versioning; EngFlow has no separate version
 number. No progress-record conversion is required.
@@ -18,9 +18,12 @@ number. No progress-record conversion is required.
 | `engflow-review` | `engflow-review-design` | Conversational design findings |
 | `engflow-execute` | `engflow-implement` | Implementation and recovery |
 
+`engflow-refactor-review` is an additional, optional entry point. It replaces no
+existing Skill and is not a prerequisite for implementation.
+
 ## Installation
 
-1. Inspect local Skill customizations and preserve the relevant changes. Install the six new folders. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
+1. Inspect local Skill customizations and preserve the relevant changes. Install the seven current folders. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
 2. Retired folders include `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
 3. Refresh the existing managed block with `$engflow-workspace 更新 EngFlow 托管规则，保留其他 AGENTS 内容。` Follow [the marker rules](../../skills/engflow-workspace/references/initialize.md); update any project-specific shortcuts to the table above.
 

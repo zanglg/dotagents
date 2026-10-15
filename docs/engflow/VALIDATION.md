@@ -4,15 +4,15 @@ This file separates structural checks from host behavior. Passing a text/link ch
 
 ## Structural checks
 
-- [x] Six EngFlow Skill folders; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
+- [x] Seven EngFlow Skill folders; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
 - [x] All local assets, references and Markdown links resolve; retired entry points appear only in migration/history explanations.
 - [x] Only one packaged AGENTS managed-block template exists, with one ordered BEGIN/END pair.
 - [x] No runtime scripts, archived workspaces, symlinks or unsafe ZIP paths are shipped.
 - [x] No baseline publisher, project-metadata generator, CHL template, mandatory Decision Register or review-log writer remains.
 - [x] The implementation manifest loads long-task rules only for large/resumed work and declares one code writer, without worktree/branch orchestration.
-- [x] All six entry points link or inherit the shared context contract; the long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
+- [x] All seven entry points link or inherit the shared context contract; the long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
 
-Static integration checks cover the six EngFlow manifests, local references and
+Static integration checks cover the seven EngFlow manifests, local references and
 managed-block source. These counts apply to EngFlow only; dotagents can contain
 other skills. The write-grant lifecycle previously received an independent
 read-only review; the model-independent context changes and repository integration
@@ -50,6 +50,8 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | No persistent notes | Explicitly forbid progress files on a long task | Keep graph in conversation, disclose recovery limit, continue authorized implementation without writing notes |
 | Missing cross-task files | New environment has note but not uncommitted source | State missing code and request/access the real state; do not pretend note restores the implementation |
 | Review | Review a file or conversation-only design | No filesystem/external writes; return evidence, impact, recommendations and uncertainty directly in conversation |
+| Refactoring review | Request an assessment of existing code without implementation | Return evidence-backed recommendations, risks and verification needs; no edits, handoff documents, task records or automatic implementation |
+| Independent refactoring entry | Request straightforward implementation directly; later reuse review findings that conflict with new evidence | No mandatory refactoring review; implementation reconciles advisory recommendations with current evidence and constraints |
 | Review to ADR | Ask write to synthesize the second finding | Only requested ADR, real evidence, unresolved choices preserved; no assumed approval or fabricated review-log link |
 | Combined Spec | Ordinary Feature synthesis | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
 | Experiment | Request a plan only, then authorize a run | First remains planned; authorized run records actual measurements and failures in one PoC record, no worktree |

@@ -9,6 +9,7 @@ Use existing project conventions and relevant evidence. EngFlow documents defaul
 - Deliberately clarify choices and challenge assumptions -> `engflow-grill`.
 - Turn existing discussion/evidence into a requested Spec, Design or proposed ADR -> `engflow-write`.
 - Review requirements/design/architecture -> `engflow-review-design`; return findings in the conversation without file or external writes.
+- Assess existing code for refactoring opportunities -> `engflow-refactor-review`; return advisory recommendations without starting implementation. This is an optional entry point, not an implementation prerequisite.
 - Implement a request, Spec or tickets through tests and code review -> `engflow-implement`; use its task graph and single progress record for long work.
 
 ### Execution and evidence
