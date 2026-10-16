@@ -8,7 +8,7 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
-- `engflow-refactor-review` as a seventh independent entry point for read-only
+- `engflow-refactor-assess` as a seventh independent entry point for read-only
   assessment of existing code and evidence-backed refactoring recommendations.
   Findings are advisory input to implementation, not a prerequisite or an
   automatic handoff; catalogs, routing and validation scenarios include the new
@@ -32,7 +32,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
-- Strengthen `engflow-refactor-review` diagnostic guidance across all nine
+- Rename `engflow-refactor-review` to `engflow-refactor-assess` to distinguish
+  assessment of existing code from review of a proposed or completed refactoring.
+  Update the skill folder, catalogs, routing, examples and migration guidance;
+  assessment behavior and trigger boundaries are unchanged.
+- Strengthen `engflow-refactor-assess` diagnostic guidance across all nine
   evaluation dimensions, including module boundaries, interface quality,
   change propagation, abstraction costs, readability, decision logic, function
   boundaries, reuse, and documentation context. Add concrete checks for naming,

@@ -50,8 +50,8 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | No persistent notes | Explicitly forbid progress files on a long task | Keep graph in conversation, disclose recovery limit, continue authorized implementation without writing notes |
 | Missing cross-task files | New environment has note but not uncommitted source | State missing code and request/access the real state; do not pretend note restores the implementation |
 | Review | Review a file or conversation-only design | No filesystem/external writes; return evidence, impact, recommendations and uncertainty directly in conversation |
-| Refactoring review | Request an assessment of existing code without implementation | Return evidence-backed recommendations, risks and verification needs; no edits, handoff documents, task records or automatic implementation |
-| Independent refactoring entry | Request straightforward implementation directly; later reuse review findings that conflict with new evidence | No mandatory refactoring review; implementation reconciles advisory recommendations with current evidence and constraints |
+| Refactoring assessment | Request an assessment of existing code without implementation | Return evidence-backed recommendations, risks and verification needs; no edits, handoff documents, task records or automatic implementation |
+| Independent refactoring entry | Request straightforward implementation directly; later reuse assessment findings that conflict with new evidence | No mandatory refactoring assessment; implementation reconciles advisory recommendations with current evidence and constraints |
 | Review to ADR | Ask write to synthesize the second finding | Only requested ADR, real evidence, unresolved choices preserved; no assumed approval or fabricated review-log link |
 | Combined Spec | Ordinary Feature synthesis | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
 | Experiment | Request a plan only, then authorize a run | First remains planned; authorized run records actual measurements and failures in one PoC record, no worktree |

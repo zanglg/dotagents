@@ -11,12 +11,12 @@
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
 | `engflow-review-design` | Review requirements, technical solutions and architecture | Evidence-backed findings in the conversation; no writes |
-| `engflow-refactor-review` | Assess existing code for worthwhile refactoring opportunities | Evidence-backed recommendations, risks and verification needs; no implementation |
+| `engflow-refactor-assess` | Assess existing code for worthwhile refactoring opportunities | Evidence-backed recommendations, risks and verification needs; no implementation |
 | `engflow-implement` | Implement a request, Spec or tickets through testing and code review | Code/tests; one progress record for long work |
 
 These are independent entry points, not seven mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
 
-Refactoring review is an optional assessment of existing code, distinct from design review and the final code/diff review used during implementation. Its recommendations may inform `engflow-implement`, which reconciles them with current evidence and constraints. The review does not initiate implementation or create handoff documents or task records.
+Refactoring assessment is an optional assessment of existing code, distinct from design review and the final code/diff review used during implementation. Its recommendations may inform `engflow-implement`, which reconciles them with current evidence and constraints. The assessment does not initiate implementation or create handoff documents or task records.
 
 ## Install and upgrade
 
@@ -38,7 +38,7 @@ $engflow-research 比较两种插件隔离方式，结合源码给出证据
 $engflow-research 运行一个可复现的卸载实验，记录资源释放情况
 $engflow-grill 挑战当前设计的故障恢复假设
 $engflow-review-design 评审这份方案，直接在对话中输出问题
-$engflow-refactor-review 检视当前模块的重构机会，给出有依据的建议，不修改代码
+$engflow-refactor-assess 检视当前模块的重构机会，给出有依据的建议，不修改代码
 $engflow-write 将刚才评审的第二项整理成 Proposed ADR，保留未决选项
 $engflow-write 将已确认的需求和必要技术方案整理成一份 spec.md
 $engflow-implement 实现这份规格，按依赖逐项推进，完成测试和代码评审

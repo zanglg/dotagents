@@ -63,7 +63,7 @@ without searching the whole workspace.
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
 | [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
-| [engflow-refactor-review](skills/engflow-refactor-review/SKILL.md) | Read-only assessment of existing code and actionable refactoring recommendations |
+| [engflow-refactor-assess](skills/engflow-refactor-assess/SKILL.md) | Read-only assessment of existing code and actionable refactoring recommendations |
 | [engflow-implement](skills/engflow-implement/SKILL.md) | Implementation, long-task coordination, tests and code review |
 
 EngFlow is one group in this workspace. See the

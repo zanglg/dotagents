@@ -1,5 +1,5 @@
 ---
-name: engflow-refactor-review
+name: engflow-refactor-assess
 description: >
   Assess existing code for meaningful refactoring opportunities
   across architecture and implementation. Provide evidence-based
@@ -8,7 +8,7 @@ description: >
   maintainability reviews. Implementation belongs to engflow-implement.
 ---
 
-# Refactoring Review
+# Refactoring Assessment
 
 Identify refactoring opportunities that reduce the complexity of
 understanding, changing, and testing existing code.
@@ -160,11 +160,11 @@ Its findings may inform `engflow-implement`, which owns implementation
 planning, changes, execution, verification, coordination, and progress
 tracking.
 
-Refactoring review is optional, not a prerequisite for implementation.
+Refactoring assessment is optional, not a prerequisite for implementation.
 Recommendations are advisory and must be reconciled with new evidence
 and constraints.
 
-This review does not itself create handoff documents or task records,
+This assessment does not itself create handoff documents or task records,
 or initiate implementation.
 
 For substantial review, follow [the shared context contract](../engflow-workspace/references/context-budget.md).
