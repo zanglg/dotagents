@@ -32,6 +32,15 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Strengthen `engflow-refactor-review` diagnostic guidance across all nine
+  evaluation dimensions, including module boundaries, interface quality,
+  change propagation, abstraction costs, readability, decision logic, function
+  boundaries, reuse, and documentation context. Add concrete checks for naming,
+  testability, call-order requirements, invalid state combinations, and mutable
+  state ownership; consolidate overlapping rules and weigh function extraction
+  and merging by net benefit. Focus state-validity checks on caller burden and
+  apply external-consumer and dynamic-use safeguards beyond forwarding methods,
+  without changing the skill's read-only scope.
 - Replace the long-lived `dev` workflow with short-lived feature branches from
   `main`, PR review, Squash and merge, and verified branch cleanup. Keep `main`
   linear and preserve existing pending work during migration.

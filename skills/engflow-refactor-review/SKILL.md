@@ -30,15 +30,58 @@ to the scope and risk; do not default to an exhaustive repository audit.
 Use these dimensions as diagnostic lenses. Investigate those relevant
 to the affected code and observed problems:
 
-1. Modules — cohesion, coupling, responsibility ownership
-2. Interfaces — clarity, contracts, encapsulation, caller knowledge
-3. Abstractions — value, depth, indirection
-4. Readability — naming, intent, control flow
-5. Maintainability — change locality, dependencies, testability
-6. Cyclomatic complexity — branching, decision paths
-7. Function cohesion and organization — responsibilities, comprehension
-8. Reusability — duplication, shared semantics, ownership
-9. Comments and documentation — necessary context, accuracy, clarity
+1. Modules — cohesion, coupling, responsibility ownership. Consider splitting
+   when independent responsibilities benefit from separate ownership or
+   encapsulation, and merging when a boundary adds navigation and coordination
+   without meaningful isolation. Do not split or merge solely for module size
+   or file count.
+2. Interfaces — clarity, contracts, encapsulation, caller knowledge. Assess
+   whether callers must understand internal workflows and whether valid use
+   is straightforward. Look for hidden call-order requirements or representable
+   invalid states that impose avoidable reasoning or validation burdens on
+   callers. Recommend changes that reduce caller knowledge or misuse risk;
+   group parameters only when they represent a meaningful concept.
+3. Abstractions — value, depth, indirection. Assess the complexity hidden and
+   contracts preserved against the costs of indirection, configuration, and
+   navigation. Recommend removing a layer only when its responsibilities would
+   remain covered after the proposed change and no meaningful contract or
+   boundary would be lost.
+4. Readability — naming, intent, control flow. Assess whether names accurately
+   express responsibilities and domain meaning, particularly whether function
+   names mislead callers about behavior, results, or important side effects.
+   Do not recommend renaming solely for stylistic preference. Examine expression
+   complexity, local state, and navigation cost. Favor changes that make intent
+   and control flow easier to follow; do not assume shorter code is easier to
+   understand.
+5. Maintainability — change locality, dependencies, testability. Trace how
+   changes propagate and examine ownership of business rules and mutable state.
+   Look for related rules that must change together across locations, and assess
+   whether clearer ownership or explicit dependencies would reduce that
+   coordination burden. Examine whether hidden dependencies make tests hard to
+   isolate or reproduce, or require unrelated environment setup. Consider
+   separating business rules from side effects where it improves testability;
+   weigh added interfaces or abstractions against their cost rather than
+   introducing them mechanically for mocking.
+6. Cyclomatic complexity — branching, decision paths. Examine repeated
+   decisions and interactions between conditions across the relevant call
+   path, not just individual functions. Look for unnecessary decisions or
+   genuinely shared decision logic that can be simplified or consolidated.
+7. Function cohesion and organization — responsibilities, comprehension.
+   Consider extraction when it names a meaningful operation or encapsulates
+   a cohesive responsibility. Consider merging helpers when doing so restores
+   useful locality. Recommend either change only when its benefits outweigh
+   added navigation, parameter passing, and shared-state coordination costs.
+8. Reusability — duplication, shared semantics, ownership. Assess whether code
+   shares knowledge and whether ownership and expected evolution support a
+   common contract; similarity alone is insufficient. Preserve duplication
+   when sharing would require excessive configuration, distort semantics, or
+   make independent evolution harder.
+9. Comments and documentation — necessary context, accuracy, clarity. Identify
+   knowledge that code alone cannot communicate well: business constraints,
+   non-obvious rationale, critical invariants, and compatibility context.
+   Assess what context must be preserved or added and which explanations
+   would become inaccurate after a proposed refactoring. Do not invent a
+   rationale; investigate material uncertainty or disclose it.
 
 Consider these dimensions together. Do not optimize one metric or
 produce a finding for every dimension merely to complete a checklist.
@@ -50,7 +93,6 @@ produce a finding for every dimension merely to complete a checklist.
 - Prefer overall simplicity, useful locality, and meaningful
   encapsulation over isolated improvements.
 - Respect project conventions and intentional architectural decisions.
-- Recommend abstractions only when their benefits justify their costs.
 - Avoid premature generalization, forced reuse, and speculative needs.
 - Prefer clear code and concise documentation of important constraints.
 - Recognize when leaving the code unchanged is the better choice.
@@ -59,14 +101,12 @@ produce a finding for every dimension merely to complete a checklist.
 
 - Length, duplication, branch count, or a small implementation alone
   does not establish a problem. Identify the actual maintenance cost.
-- Do not recommend splitting a cohesive function when doing so would
-  increase navigation, parameter passing, or shared-state coordination.
 - A forwarding method may preserve a contract, isolate a dependency,
   or provide domain meaning. Establish its role before recommending
-  removal. Account for external consumers and dynamic use where relevant;
-  absence of repository references does not prove an interface is unused.
-- Similar-looking code may have different semantics or evolve
-  independently. Recommend sharing only when the knowledge is shared.
+  removal.
+- Account for external consumers and dynamic use where relevant to a proposed
+  change; absence of repository references does not prove a symbol or interface
+  is unused.
 - Moving complexity can improve encapsulation and ownership. Evaluate
   the reasoning burden across callers and implementation, not just
   individual function metrics. Early returns do not necessarily reduce
