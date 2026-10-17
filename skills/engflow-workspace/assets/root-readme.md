@@ -9,7 +9,8 @@ Goal: {{PROJECT_DESCRIPTION}}
 
 ## Working with this repository
 
-- `engflow-workspace`: Feature navigation, status and explicit session handoff.
+- `engflow-workspace`: Feature navigation and read-only status.
+- `handoff` (standalone): explicit session transfer and evidence-aware resumption.
 - `engflow-research`: source research, comparisons and measured experiments.
 - `engflow-grill`: conversational clarification and assumption testing.
 - `engflow-write`: requested Spec, Design or proposed ADR.

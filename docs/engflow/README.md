@@ -6,7 +6,8 @@
 
 | Skill | Use it for | Typical output |
 | --- | --- | --- |
-| `engflow-workspace` | Optional setup, Feature navigation, read-only status, explicit handoff/resume | Index/Feature README when requested; status or handoff |
+| `engflow-workspace` | Optional setup, Feature navigation, read-only status | Index/Feature README when requested; conversational status |
+| `handoff` (standalone integration) | Explicit session transfer and safe resumption | Conversational handoff, requested file, or reconciled resume state |
 | `engflow-research` | Source investigation, comparison, reproducible PoC/benchmark | Conversational findings, durable RES or scoped experiment when useful |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
@@ -14,13 +15,15 @@
 | `engflow-refactor-assess` | Assess existing code for worthwhile refactoring opportunities | Evidence-backed recommendations, risks and verification needs; no implementation |
 | `engflow-implement` | Implement a request, Spec or tickets through testing and code review | Code/tests; one progress record for long work |
 
-These are independent entry points, not seven mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
+These are independent entry points, not mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
 
 Refactoring assessment is an optional assessment of existing code, distinct from design review and the final code/diff review used during implementation. Its recommendations may inform `engflow-implement`, which reconciles them with current evidence and constraints. The assessment does not initiate implementation or create handoff documents or task records.
 
 ## Install and upgrade
 
-Copy the seven `skills/engflow-*` folders from dotagents into the target repository's `.agents/skills/`. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire merged Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+Copy the seven `skills/engflow-*` folders and `skills/handoff/` from dotagents into the target repository's `.agents/skills/` for the integrated workflow. [Handoff](../../skills/handoff/SKILL.md) can also be installed alone for any kind of work, without EngFlow or a repository. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire merged Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+
+Handoff returns context in the conversation by default; a file request without a destination uses OS temporary storage. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
 
 Optional setup:
 
@@ -44,7 +47,7 @@ $engflow-write 将已确认的需求和必要技术方案整理成一份 spec.md
 $engflow-implement 实现这份规格，按依赖逐项推进，完成测试和代码评审
 $engflow-implement 继续 FEAT-001 的长任务，先核对进度记录与当前代码
 $engflow-workspace 总结当前实现进度
-$engflow-workspace 为下一轮准备交接，重点是尚未解决的资源回收问题
+$handoff 为下一轮准备交接，重点是尚未解决的资源回收问题
 ```
 
 ## Long implementation tasks
@@ -64,7 +67,7 @@ Details: [long-task protocol](../../skills/engflow-implement/references/long-tas
 
 ## Context management and subagents
 
-All seven entry points share [the context contract](../../skills/engflow-workspace/references/context-budget.md), which keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
+The seven EngFlow entry points share [the context contract](../../skills/engflow-workspace/references/context-budget.md), which keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
 
 - Send a bounded objective, essential user constraints, paths/revision, allowed actions and output contract. Do not inherit the entire transcript by default or read the whole source tree in the parent first.
 - Prefer one coherent worker per deliverable. Return outcomes, changed paths when allowed, actual checks, uncertainty and evidence pointers. Scale detail to the task; there is no fixed token quota, and material findings and failures must not be dropped. With more available context, keep related evidence together when that improves reasoning; do not fragment work merely because it is long.
@@ -78,7 +81,7 @@ The same Skills apply across smaller and larger context windows without editing 
 
 - Experiment is a research method, loaded from a reference only when needed.
 - Spec, Design and ADR synthesis share one writing entry point with target-specific references.
-- Handoff is an explicit workspace operation and references the existing implementation record.
+- Handoff is a standalone, explicit session-transfer skill; it references an existing implementation record without creating a second ledger.
 - Grill has no separate checkpoint format. Design review has no persisted review log.
 - Baseline publication, mandatory project metadata, a Decision Register and duplicate plan/status/debug ledgers are removed from the active workflow. Existing records remain readable history.
 - Accepted ADRs under reevaluation remain effective; an approved Spec/Design is not silently treated as approval of later edits.
@@ -87,4 +90,4 @@ The same Skills apply across smaller and larger context windows without editing 
 
 These are prompt instructions, not a scheduler, lock manager or access-control system. Runtime capability determines execution duration and subagent availability. Recovery requires the actual progress record **and code** to survive; uncommitted changes are not transferred by a handoff. Commit/push and external publication follow existing authorization.
 
-Static checks cover seven manifests, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.
+Static checks cover seven EngFlow manifests, standalone handoff integration, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.
