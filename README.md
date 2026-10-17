@@ -33,7 +33,8 @@ small, auditable, and safe to copy between machines.
 |-- docs/              # Guides for related skill groups
 `-- skills/
     |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
-    |-- engflow-*/     # Seven related EngFlow skills
+    |-- engflow-*/     # Six related EngFlow skills
+    |-- technical-research/ # Standalone evidence-driven investigation
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
 
@@ -59,7 +60,7 @@ without searching the whole workspace.
 | [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
-| [engflow-research](skills/engflow-research/SKILL.md) | Source investigation, comparisons and bounded experiments |
+| [technical-research](skills/technical-research/SKILL.md) | Standalone implementation analysis, problem/solution investigation and feasibility assessment, with optional bounded experiments |
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
 | [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
@@ -75,8 +76,11 @@ can live alongside this group and should be added to this catalog when useful.
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. EngFlow uses cross-skill references, so install its seven folders
-together. Other independently scoped skills can be selected separately.
+files together. `technical-research` can be installed on its own; it requires no
+EngFlow skills, Feature setup or prescribed document directory. EngFlow uses
+cross-skill references, so install its six `engflow-*` folders together and add
+`technical-research` for its research integration. Other independently scoped
+skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of
