@@ -6,6 +6,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-17
+
 ### Added
 
 - `engflow-refactor-assess` as a seventh independent entry point for read-only
@@ -32,6 +34,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Adopt an explicit pre-stable version policy: `0.x` minor releases may include
+  incompatible changes, with compatibility impacts and migration guidance
+  documented. The first stable `1.0.0` release requires explicit confirmation.
 - Rename `engflow-refactor-review` to `engflow-refactor-assess` to distinguish
   assessment of existing code from review of a proposed or completed refactoring.
   Update the skill folder, catalogs, routing, examples and migration guidance;
@@ -55,6 +60,17 @@ This project follows Semantic Versioning and uses Conventional Commits.
   decision status and technical evidence without adding mandatory workflow stages.
 - Extend the existing progress outline with the current brief and affected
   evidence, preserving serial write ownership and one authoritative task record.
+
+### Compatibility and migration
+
+- Repository development no longer uses `dev` and fast-forward release promotion.
+  Start new feature branches from current `main`, integrate through PRs using
+  Squash and merge, and prepare versions in separate release PRs. Preserve any
+  pending work on older branches before retiring them; see `CONTRIBUTING.md`.
+- The optional seventh EngFlow entry point is `engflow-refactor-assess`. If an
+  unreleased installation used `engflow-refactor-review`, preserve customizations
+  and replace that installed folder; see `docs/engflow/MIGRATION.md`. This rename
+  does not remove an entry point from the `0.1.0` release.
 
 ## [0.1.0] - 2026-10-11
 

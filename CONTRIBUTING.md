@@ -150,12 +150,16 @@ Use Semantic Versioning for repository content:
 - Increment `PATCH` for backward-compatible fixes and user-facing documentation
   corrections. Maintenance-only changes need not trigger a release.
 
-Use the highest required level across unreleased changes. For this repository,
-apply the same rule during `0.x`: breaking changes recommend `1.0.0`, not a
-silent minor bump. Confirm the first stable release with the user; if stability
-is not intended, agree on a documented policy before releasing. `0.0.0` is a
-bootstrap sentinel, not a published version; a first compatible feature release
-is `0.1.0`, and a first patch-only release is `0.0.1`.
+Use the highest required level across unreleased changes. During `0.x`, the
+public contracts are still evolving: increment `MINOR` for incompatible changes
+as well as backward-compatible new capabilities, and `PATCH` for compatible
+fixes. Document incompatibilities and migration steps in the release notes;
+compatibility is not guaranteed across `0.x` minor releases. A breaking change
+does not automatically declare stability. Prepare `1.0.0` only when the user
+explicitly confirms the first stable release; from then on, apply the MAJOR,
+MINOR and PATCH rules above. `0.0.0` is a bootstrap sentinel, not a published
+version; a first compatible feature release is `0.1.0`, and a first patch-only
+release is `0.0.1`.
 
 Feature integration and version publication are separate steps. Keep notable
 changes under `[Unreleased]` on `main` until a release is requested. `VERSION`
