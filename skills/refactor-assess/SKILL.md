@@ -1,11 +1,12 @@
 ---
-name: engflow-refactor-assess
+name: refactor-assess
 description: >
   Assess existing code for meaningful refactoring opportunities
   across architecture and implementation. Provide evidence-based
   recommendations without modifying project files. Use for
   refactoring assessments, code simplification reviews, and
-  maintainability reviews. Implementation belongs to engflow-implement.
+  maintainability reviews. Works independently of any engineering workflow;
+  implementation is out of scope.
 ---
 
 # Refactoring Assessment
@@ -13,8 +14,9 @@ description: >
 Identify refactoring opportunities that reduce the complexity of
 understanding, changing, and testing existing code.
 
-This skill is read-only. Produce an assessment and recommendations;
-do not modify project files or perform implementation.
+This skill is read-only. Return an assessment and recommendations in the
+conversation; do not create reports, modify files or perform implementation.
+No Feature, Spec, workspace setup or other Skill is required.
 
 ## Scope
 
@@ -152,19 +154,18 @@ and unsupported recommendations.
 
 If no meaningful improvement is justified, say so explicitly.
 
-## EngFlow
+## Workflow boundaries
 
-This skill provides read-only refactoring assessments.
-
-Its findings may inform `engflow-implement`, which owns implementation
-planning, changes, execution, verification, coordination, and progress
-tracking.
-
-Refactoring assessment is optional, not a prerequisite for implementation.
-Recommendations are advisory and must be reconciled with new evidence
+Findings may inform the user's implementation workflow, which owns planning,
+changes, execution and verification. No particular implementation Skill is
+required. Assessment is optional, not a prerequisite for implementation;
+recommendations are advisory and must be reconciled with current evidence
 and constraints.
 
-This assessment does not itself create handoff documents or task records,
-or initiate implementation.
+This assessment does not create reports, handoff documents or task records,
+nor initiate implementation. A later request to persist findings or implement
+a recommendation is a separate operation under its applicable authorization.
+Read-only evidence checks are allowed; builds, tests or experiments that mutate
+files, environments or external state require a separately authorized workflow.
 
-For substantial review, follow [the shared context contract](../engflow-workspace/references/context-budget.md).
+For substantial review, follow [the local context and review guidance](references/context.md).

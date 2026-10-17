@@ -1,7 +1,8 @@
 # EngFlow compatibility notes
 
-Use these notes when replacing an older EngFlow installation. Install the seven
-`skills/engflow-*` folders together from the selected dotagents release or commit.
+Use these notes when replacing an older EngFlow installation. Install the six
+`skills/engflow-*` folders together, plus standalone `skills/refactor-assess/`
+for refactoring assessments, from the selected dotagents release or commit.
 Repository releases use Semantic Versioning; EngFlow has no separate version
 number. No progress-record conversion is required.
 
@@ -17,17 +18,20 @@ number. No progress-record conversion is required.
 | `engflow-decision` / `engflow-to-adr` | `engflow-write` | Proposed ADR synthesis |
 | `engflow-review` | `engflow-review-design` | Conversational design findings |
 | `engflow-execute` | `engflow-implement` | Implementation and recovery |
-| `engflow-refactor-review` | `engflow-refactor-assess` | Read-only refactoring assessment |
+| `engflow-refactor-review` / `engflow-refactor-assess` | `refactor-assess` | Standalone read-only refactoring assessment |
 
-`engflow-refactor-assess` is an optional entry point, renamed from
-`engflow-refactor-review` to distinguish assessment of existing code from review
-of a proposed or completed refactoring. Its scope is unchanged, and it is not a
-prerequisite for implementation.
+`refactor-assess` is now a standalone skill, extracted from
+`engflow-refactor-assess` (previously `engflow-refactor-review`). It assesses
+existing code rather than reviewing a proposed or completed refactoring. Its
+read-only scope is unchanged and it is not a prerequisite for implementation.
+Preserve installed customizations before replacing the old skill folder, update
+saved commands/router rules, and keep existing assessment artifacts. No document
+migration or compatibility wrapper is required.
 
 ## Installation
 
-1. Inspect local Skill customizations and preserve the relevant changes. Install the seven current folders. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
-2. Retired folders include `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
+1. Inspect local Skill customizations and preserve the relevant changes. Install the six current EngFlow folders plus standalone `refactor-assess` for assessments. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
+2. Retired folders include `engflow-refactor-assess`, `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
 3. Refresh the existing managed block with `$engflow-workspace 更新 EngFlow 托管规则，保留其他 AGENTS 内容。` Follow [the marker rules](../../skills/engflow-workspace/references/initialize.md); update any project-specific shortcuts to the table above.
 
 ## Existing artifacts

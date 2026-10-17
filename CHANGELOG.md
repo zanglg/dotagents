@@ -6,6 +6,15 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Changed
+
+- Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining
+  its nine diagnostic dimensions, evidence-based recommendations and read-only
+  conversational output. Replace the EngFlow context dependency with local
+  review guidance, remove implementation-skill prerequisites, and update routing,
+  installation, migration and validation scenarios. Preserve existing artifacts;
+  no compatibility wrapper is provided.
+
 ## [0.2.0] - 2026-10-17
 
 ### Added
