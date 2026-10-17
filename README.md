@@ -33,7 +33,7 @@ small, auditable, and safe to copy between machines.
 |-- docs/              # Guides for related skill groups
 `-- skills/
     |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
-    |-- engflow-*/     # Six related EngFlow skills
+    |-- engflow-*/     # Seven related EngFlow skills
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
 
@@ -63,6 +63,7 @@ without searching the whole workspace.
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
 | [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
+| [engflow-refactor-assess](skills/engflow-refactor-assess/SKILL.md) | Read-only assessment of existing code and actionable refactoring recommendations |
 | [engflow-implement](skills/engflow-implement/SKILL.md) | Implementation, long-task coordination, tests and code review |
 
 EngFlow is one group in this workspace. See the
@@ -74,7 +75,7 @@ can live alongside this group and should be added to this catalog when useful.
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. EngFlow uses cross-skill references, so install its six folders
+files together. EngFlow uses cross-skill references, so install its seven folders
 together. Other independently scoped skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location

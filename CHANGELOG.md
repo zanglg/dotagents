@@ -8,6 +8,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- `engflow-refactor-assess` as a seventh independent entry point for read-only
+  assessment of existing code and evidence-backed refactoring recommendations.
+  Findings are advisory input to implementation, not a prerequisite or an
+  automatic handoff; catalogs, routing and validation scenarios include the new
+  entry point.
 - Adaptive EngFlow implementation with current-task technical briefs,
   risk-first validation prerequisites, and evidence-driven local replanning.
 - Behavioral scenarios and a pinned three-configuration evaluation protocol
@@ -27,6 +32,19 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Rename `engflow-refactor-review` to `engflow-refactor-assess` to distinguish
+  assessment of existing code from review of a proposed or completed refactoring.
+  Update the skill folder, catalogs, routing, examples and migration guidance;
+  assessment behavior and trigger boundaries are unchanged.
+- Strengthen `engflow-refactor-assess` diagnostic guidance across all nine
+  evaluation dimensions, including module boundaries, interface quality,
+  change propagation, abstraction costs, readability, decision logic, function
+  boundaries, reuse, and documentation context. Add concrete checks for naming,
+  testability, call-order requirements, invalid state combinations, and mutable
+  state ownership; consolidate overlapping rules and weigh function extraction
+  and merging by net benefit. Focus state-validity checks on caller burden and
+  apply external-consumer and dynamic-use safeguards beyond forwarding methods,
+  without changing the skill's read-only scope.
 - Replace the long-lived `dev` workflow with short-lived feature branches from
   `main`, PR review, Squash and merge, and verified branch cleanup. Keep `main`
   linear and preserve existing pending work during migration.
