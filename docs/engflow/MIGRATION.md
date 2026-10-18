@@ -1,8 +1,9 @@
 # EngFlow compatibility notes
 
-Use these notes when replacing an older EngFlow installation. Install the six
-`skills/engflow-*` folders together, plus standalone `skills/refactor-assess/`
-for refactoring assessments, from the selected dotagents release or commit.
+Use these notes when replacing an older EngFlow installation. For the complete
+integrated workflow, install the five `skills/engflow-*` folders together with
+`skills/technical-research/`, `skills/handoff/` and `skills/refactor-assess/`
+from the selected dotagents release or commit.
 Repository releases use Semantic Versioning; EngFlow has no separate version
 number. No progress-record conversion is required.
 
@@ -10,8 +11,8 @@ number. No progress-record conversion is required.
 
 | Older entry point | Current entry point | Operation |
 | --- | --- | --- |
-| `engflow-handoff` | `engflow-workspace` | Explicit handoff/resume |
-| `engflow-experiment` | `engflow-research` | Bounded experiment |
+| `engflow-handoff` / workspace handoff operation | `handoff` | Standalone explicit session transfer/resume |
+| `engflow-research` / `engflow-experiment` | `technical-research` | Standalone investigation and optional bounded experiment |
 | `engflow-challenge` | `engflow-grill` | Clarify or test assumptions |
 | `engflow-spec` / `engflow-to-spec` | `engflow-write` | Spec synthesis |
 | `engflow-design` / `engflow-to-design` | `engflow-write` | Design synthesis |
@@ -28,10 +29,21 @@ Preserve installed customizations before replacing the old skill folder, update
 saved commands/router rules, and keep existing assessment artifacts. No document
 migration or compatibility wrapper is required.
 
+Session handoff/resume is now owned by the standalone `handoff` skill, not
+`engflow-workspace`. Update saved commands and managed routing rules. Preserve
+existing handoff documents and local customizations; no document migration or
+compatibility wrapper is required. The standalone skill has no EngFlow dependency.
+
+Research is now the standalone `technical-research` skill, not an EngFlow-owned
+entry point. Install it independently or alongside EngFlow. Preserve local
+customizations before replacing an installed `engflow-research` folder and update
+saved commands/router rules. Existing RES and PoC paths and IDs remain valid;
+there is no mandatory document migration or compatibility wrapper.
+
 ## Installation
 
-1. Inspect local Skill customizations and preserve the relevant changes. Install the six current EngFlow folders plus standalone `refactor-assess` for assessments. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
-2. Retired folders include `engflow-refactor-assess`, `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
+1. Inspect local Skill customizations and preserve the relevant changes. Install the five current EngFlow folders plus `technical-research`, `handoff` and `refactor-assess` for integrated research, session transfer and assessment. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
+2. Retired folders include `engflow-refactor-assess`, `engflow-research`, `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
 3. Refresh the existing managed block with `$engflow-workspace 更新 EngFlow 托管规则，保留其他 AGENTS 内容。` Follow [the marker rules](../../skills/engflow-workspace/references/initialize.md); update any project-specific shortcuts to the table above.
 
 ## Existing artifacts

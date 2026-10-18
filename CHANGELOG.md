@@ -8,6 +8,26 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Extract `engflow-research` as the standalone `technical-research` skill, with
+  self-contained context/delegation guidance, optional project-specific paths
+  and IDs, and no EngFlow installation dependency. Update EngFlow routing,
+  catalogs, installation and migration guidance; preserve existing RES/PoC
+  records and provide no compatibility wrapper.
+- Strengthen `technical-research` with three composable investigation purposes:
+  existing implementation explanation, problem and solution investigation, and
+  feasibility assessment. Add source-backed flow and contract analysis, causal
+  hypothesis checks, solution comparisons, cross-layer evidence tracing,
+  configuration/runtime gates and explicit support/extension/unknown conclusions.
+  Add discriminating minimal experiment guidance, reproducibility details and
+  validation scenarios without requiring all three purposes, experiments,
+  production changes or new document workflows.
+- Extract session handoff/resume from `engflow-workspace` into the standalone
+  `handoff` skill for coding, research, design, writing and other work, without
+  an EngFlow, repository or Feature dependency. Preserve evidence, authority
+  limits and live-state reconciliation; use conversation by default and unique
+  OS temporary files for file requests without a destination. Update routing,
+  catalogs, migration guidance and validation scenarios while retaining existing
+  handoff records and optional EngFlow persistence conventions.
 - Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining
   its nine diagnostic dimensions, evidence-based recommendations and read-only
   conversational output. Replace the EngFlow context dependency with local

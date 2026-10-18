@@ -33,7 +33,9 @@ small, auditable, and safe to copy between machines.
 |-- docs/              # Guides for related skill groups
 `-- skills/
     |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
-    |-- engflow-*/     # Six related EngFlow skills
+    |-- engflow-*/     # Five related EngFlow skills
+    |-- handoff/      # Standalone session transfer and resumption
+    |-- technical-research/ # Standalone evidence-driven investigation
     |-- refactor-assess/ # Standalone read-only refactoring assessment
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
@@ -59,8 +61,9 @@ without searching the whole workspace.
 | --- | --- |
 | [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
-| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
-| [engflow-research](skills/engflow-research/SKILL.md) | Source investigation, comparisons and bounded experiments |
+| [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
+| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
+| [technical-research](skills/technical-research/SKILL.md) | Standalone implementation analysis, problem/solution investigation and feasibility assessment, with optional bounded experiments |
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
 | [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
@@ -76,10 +79,10 @@ can live alongside this group and should be added to this catalog when useful.
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. EngFlow uses cross-skill references, so install its six folders
-together and add `refactor-assess` for refactoring-assessment integration.
-`refactor-assess` also installs alone, without EngFlow or Feature setup.
-Other independently scoped skills can be selected separately.
+files together. `technical-research`, `handoff` and `refactor-assess` each install
+independently, without EngFlow or Feature setup. For the integrated workflow,
+install the five `engflow-*` folders together and add these three standalone
+skills. Other independently scoped skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of

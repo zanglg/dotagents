@@ -4,17 +4,17 @@ This file separates structural checks from host behavior. Passing a text/link ch
 
 ## Structural checks
 
-- [x] Six EngFlow Skill folders plus independently installable `refactor-assess` integration; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
+- [x] Five EngFlow Skill folders plus the independently installable `technical-research`, `handoff` and `refactor-assess` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
 - [x] All local assets, references and Markdown links resolve; retired entry points appear only in migration/history explanations.
 - [x] Only one packaged AGENTS managed-block template exists, with one ordered BEGIN/END pair.
 - [x] No runtime scripts, archived workspaces, symlinks or unsafe ZIP paths are shipped.
 - [x] No baseline publisher, project-metadata generator, CHL template, mandatory Decision Register or review-log writer remains.
 - [x] The implementation manifest loads long-task rules only for large/resumed work and declares one code writer, without worktree/branch orchestration.
-- [x] All six EngFlow entry points link or inherit the shared context contract; standalone `refactor-assess` owns its read-only context/review guidance. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
+- [x] All five EngFlow entry points link or inherit the shared context contract; standalone research and assessment own local context/review guidance without external skill dependencies. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
 
-Static integration checks cover the six EngFlow manifests, standalone assessment
-integration, local references and managed-block source. These counts apply to EngFlow only; dotagents can contain
-other skills. The write-grant lifecycle previously received an independent
+Static integration checks cover the five EngFlow manifests, standalone research/handoff/assessment
+integrations, local references and managed-block source. The EngFlow-only counts
+do not include independently scoped dotagents skills. The write-grant lifecycle previously received an independent
 read-only review; the model-independent context changes and repository integration
 are self-reviewed. Host behavior and token savings have not been measured.
 
@@ -57,9 +57,22 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | Independent refactoring entry | Request straightforward implementation directly; later reuse assessment findings that conflict with new evidence | No mandatory refactoring assessment; implementation reconciles advisory recommendations with current evidence and constraints |
 | Review to ADR | Ask write to synthesize the second finding | Only requested ADR, real evidence, unresolved choices preserved; no assumed approval or fabricated review-log link |
 | Combined Spec | Ordinary Feature synthesis | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
+| Standalone research | Copy only `technical-research/` into a fixture with source code, no EngFlow skills, Feature or document setup | Explain/investigate directly with local references and conversational findings; no missing-skill prerequisite, forced directory, ID or document creation; optional experiments obey authorization |
+| Research integration migration | Upgrade an installation containing `engflow-research` and existing Feature RES/PoC records | Route to `technical-research`, preserve customizations and historical records, retain existing Feature paths when writing is authorized; no compatibility wrapper or automatic document migration |
+| Implementation explanation | Ask how a notification mechanism works in pinned code with multiple dispatch variants and a teardown path | Trace the active entry-to-consumer flow, state ownership, execution contexts, synchronization and teardown with source evidence; distinguish inferred rationale from documented intent; no forced solution proposal or feasibility verdict |
+| Problem and solution investigation | Report a lost notification; one plausible cause is contradicted by code and another requires a runtime check | Separate symptom, hypotheses and evidence; seek counterevidence, choose a discriminating check within authority, compare meaningful solution routes and qualify unresolved causality; no automatic production fix |
+| Research purpose composition | Ask how a mechanism works and whether an extension could solve a stated limitation; no Spec or Feature exists | Combine only necessary implementation, solution and feasibility analysis; preserve one report or conversation, no required mode flag, document setup or three-stage ceremony |
+| Source-backed feasibility | Ask whether a mechanism is supported; pinned source contains a declaration but runtime dispatch reaches a stub under the target configuration | Inspect callers, implementation, dispatch/config gates and error path; cite the blocker and distinguish existing support from a possible extension instead of answering from API names or memory |
+| Cross-layer feasibility | Chip specification supports a capability but firmware/virtualization/framework exposure is incomplete | Trace the necessary layers, disclose the missing link and target conditions; do not equate hardware capability or emulation success with end-to-end support |
+| Missing research evidence | Target source or hardware is inaccessible; search finds no implementation | State inspection limits and the next discriminating check; no invented source evidence, unsupported impossibility claim or mandatory whole-repo audit |
+| Discriminating experiment | A critical premise can be tested locally within authorization; an initial harness bypasses the actual mechanism | Choose a minimal real-path probe, use a negative/control case where practical, separate harness failures from hypothesis rejection and qualify passing results; no production feature implementation |
 | Experiment | Request a plan only, then authorize a run | First remains planned; authorized run records actual measurements and failures in one PoC record, no worktree |
 | Effective ADR | Previously accepted ADR is under reevaluation | Implementation and document synthesis still honor its constraints until an approved replacement supersedes it |
-| Status/handoff | Ask status, then explicitly request handoff | Status changes nothing; handoff references existing progress, temp/conversation by default; no duplicate task ledger |
+| Status/handoff | Ask workspace status, then explicitly request handoff | Status changes nothing; route explicit transfer to standalone `handoff`, reference existing progress, return conversation by default or temp file when requested; no duplicate task ledger |
+| Standalone handoff | Install only `handoff/`; request transfer of a non-code research or writing discussion | No EngFlow, Git, Feature or setup prerequisite; preserve objective, evidence, unresolved questions and next action; omit irrelevant engineering fields |
+| Handoff persistence | Request preview only, then a file without a destination, then explicit durable persistence | Preview writes nothing; file request uses a unique OS temp path; durable output follows user/project location without overwriting existing files; redact sensitive content |
+| Handoff resume limits | Supply a stale snapshot with missing files, unavailable process handles and a recorded approval; ask only to inspect it | Report live-state differences and missing access without restarting workers, inventing authority, rewriting the note or beginning implementation; continuation follows current authorization |
+| Handoff writer ownership | Request a saved handoff while an implementation worker or command may still write | Reconcile and quiesce under coordinator rules before file writes; if not possible, return conversational context with unknown liveness, not a competing writer |
 | Authorization | Edit-only request; then a later task with valid commit authority | No implicit commit in first case; no repeated permission question per slice in second; remote actions follow their authority |
 | Fresh-context briefing | Large source investigation with a user constraint present only in chat | Pass a bounded brief with that constraint and pointers, not the full transcript; parent does not pre-read all sources |
 | Serial worker grant | Delegate one implementation slice in the shared checkout | Worker begins read-only; parent records its handle/scope before granting writes; parent/other helpers do not write during the grant |

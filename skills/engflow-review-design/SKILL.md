@@ -22,4 +22,4 @@ The review is reusable input, not a decision or publication. Keep findings, poss
 
 When the user subsequently requests synthesis, use `engflow-write` and name the intended output: Spec, Design or proposed ADR. A request to create an issue or another artifact follows that target's existing workflow. Carry forward the evidence and uncertainty; the user need not repeat facts already available in this session.
 
-Existing historical review logs may be read as evidence. This Skill does not maintain them or require a `REV-*` numbering scheme. For a new session, `engflow-workspace` can carry the review through an explicit handoff request.
+Existing historical review logs may be read as evidence. This Skill does not maintain them or require a `REV-*` numbering scheme. For a new session, the standalone `handoff` skill can carry the review through an explicit transfer request.
