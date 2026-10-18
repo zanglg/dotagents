@@ -73,7 +73,7 @@ The five EngFlow entry points share [the context contract](../../skills/engflow-
 
 The standalone research skill uses one source-investigation protocol and optional [read-only delegation guidance](../../skills/technical-research/references/delegation.md), without EngFlow context or writer-grant machinery. Research helpers return evidence directly; only the parent saves an authorized report. Under implementation they respect the coordinator's restrictions.
 
-Standalone `refactor-assess` carries its own [read-only context and review guidance](../../skills/refactor-assess/references/context.md); it does not require the EngFlow context contract. Findings stay conversational and advisory, with no automatic report or task creation.
+Standalone `refactor-assess` carries its own [read-only collaboration guidance](../../skills/refactor-assess/references/context.md); it does not require the EngFlow context contract. Findings stay conversational and advisory, with no automatic report or task creation.
 
 - Send a bounded objective, essential user constraints, paths/revision, allowed actions and output contract. Do not inherit the entire transcript by default or read the whole source tree in the parent first.
 - Prefer one coherent worker per deliverable. Return outcomes, changed paths when allowed, actual checks, uncertainty and evidence pointers. Scale detail to the task; there is no fixed token quota, and material findings and failures must not be dropped. With more available context, keep related evidence together when that improves reasoning; do not fragment work merely because it is long.
