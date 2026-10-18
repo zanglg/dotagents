@@ -1,26 +1,28 @@
 # EngFlow
 
-**Seven related skills within dotagents for evidence, decisions and implementation.** Long tasks use a dependency graph, one code writer and one progress record in the existing checkout. The package ships no runtime scripts and does not create or manage worktrees.
+**Six related EngFlow skills within dotagents for decisions and implementation, integrated with the standalone `technical-research` skill for evidence.** Long tasks use a dependency graph, one code writer and one progress record in the existing checkout. The package ships no runtime scripts and does not create or manage worktrees.
 
 ## Skills
 
 | Skill | Use it for | Typical output |
 | --- | --- | --- |
 | `engflow-workspace` | Optional setup, Feature navigation, read-only status, explicit handoff/resume | Index/Feature README when requested; status or handoff |
-| `engflow-research` | Source investigation, comparison, reproducible PoC/benchmark | Conversational findings, durable RES or scoped experiment when useful |
+| `technical-research` (standalone integration) | Implementation analysis, problem/solution investigation, feasibility and optional experiments | Conversational findings or authorized durable research/experiment evidence |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
 | `engflow-review-design` | Review requirements, technical solutions and architecture | Evidence-backed findings in the conversation; no writes |
 | `engflow-refactor-assess` | Assess existing code for worthwhile refactoring opportunities | Evidence-backed recommendations, risks and verification needs; no implementation |
 | `engflow-implement` | Implement a request, Spec or tickets through testing and code review | Code/tests; one progress record for long work |
 
-These are independent entry points, not seven mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
+These are independent entry points, not mandatory stages. A small fix can go straight to implementation. An ordinary Feature can use a single Spec containing acceptance criteria and a technical approach. Separate Design, ADR, research and experiment records are created only when useful or requested.
 
 Refactoring assessment is an optional assessment of existing code, distinct from design review and the final code/diff review used during implementation. Its recommendations may inform `engflow-implement`, which reconciles them with current evidence and constraints. The assessment does not initiate implementation or create handoff documents or task records.
 
 ## Install and upgrade
 
-Copy the seven `skills/engflow-*` folders from dotagents into the target repository's `.agents/skills/`. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire merged Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+Copy the six `skills/engflow-*` folders and `skills/technical-research/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+
+Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md` and, when useful, `experiments/POC-###-slug/experiment.md` under that Feature. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
 
 Optional setup:
 
@@ -34,8 +36,8 @@ This creates a document index and a bounded root AGENTS policy block, preserving
 
 ```text
 $engflow-workspace 创建或选择“插件热加载”特性
-$engflow-research 比较两种插件隔离方式，结合源码给出证据
-$engflow-research 运行一个可复现的卸载实验，记录资源释放情况
+$technical-research 比较两种插件隔离方式，结合源码给出证据
+$technical-research 运行一个可复现的卸载实验，记录资源释放情况
 $engflow-grill 挑战当前设计的故障恢复假设
 $engflow-review-design 评审这份方案，直接在对话中输出问题
 $engflow-refactor-assess 检视当前模块的重构机会，给出有依据的建议，不修改代码
@@ -64,7 +66,9 @@ Details: [long-task protocol](../../skills/engflow-implement/references/long-tas
 
 ## Context management and subagents
 
-All seven entry points share [the context contract](../../skills/engflow-workspace/references/context-budget.md), which keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
+The six EngFlow entry points share [the context contract](../../skills/engflow-workspace/references/context-budget.md), which keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
+
+The standalone research skill carries its own [context and delegation rules](../../skills/technical-research/references/context.md); it does not require the EngFlow contract to be installed. When delegated by implementation, it follows that coordinator's exclusive-writer protocol.
 
 - Send a bounded objective, essential user constraints, paths/revision, allowed actions and output contract. Do not inherit the entire transcript by default or read the whole source tree in the parent first.
 - Prefer one coherent worker per deliverable. Return outcomes, changed paths when allowed, actual checks, uncertainty and evidence pointers. Scale detail to the task; there is no fixed token quota, and material findings and failures must not be dropped. With more available context, keep related evidence together when that improves reasoning; do not fragment work merely because it is long.
@@ -87,4 +91,4 @@ The same Skills apply across smaller and larger context windows without editing 
 
 These are prompt instructions, not a scheduler, lock manager or access-control system. Runtime capability determines execution duration and subagent availability. Recovery requires the actual progress record **and code** to survive; uncommitted changes are not transferred by a handoff. Commit/push and external publication follow existing authorization.
 
-Static checks cover seven manifests, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.
+Static checks cover six EngFlow manifests and the standalone research integration, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.

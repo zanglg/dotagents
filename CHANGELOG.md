@@ -6,6 +6,22 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Changed
+
+- Extract `engflow-research` as the standalone `technical-research` skill, with
+  self-contained context/delegation guidance, optional project-specific paths
+  and IDs, and no EngFlow installation dependency. Update EngFlow routing,
+  catalogs, installation and migration guidance; preserve existing RES/PoC
+  records and provide no compatibility wrapper.
+- Strengthen `technical-research` with three composable investigation purposes:
+  existing implementation explanation, problem and solution investigation, and
+  feasibility assessment. Add source-backed flow and contract analysis, causal
+  hypothesis checks, solution comparisons, cross-layer evidence tracing,
+  configuration/runtime gates and explicit support/extension/unknown conclusions.
+  Add discriminating minimal experiment guidance, reproducibility details and
+  validation scenarios without requiring all three purposes, experiments,
+  production changes or new document workflows.
+
 ## [0.2.0] - 2026-10-17
 
 ### Added

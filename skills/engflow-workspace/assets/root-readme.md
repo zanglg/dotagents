@@ -10,7 +10,7 @@ Goal: {{PROJECT_DESCRIPTION}}
 ## Working with this repository
 
 - `engflow-workspace`: Feature navigation, status and explicit session handoff.
-- `engflow-research`: source research, comparisons and measured experiments.
+- `technical-research` (standalone): implementation analysis, problem/solution investigation, feasibility and optional bounded experiments.
 - `engflow-grill`: conversational clarification and assumption testing.
 - `engflow-write`: requested Spec, Design or proposed ADR.
 - `engflow-review-design`: evidence-backed design findings in the conversation.
