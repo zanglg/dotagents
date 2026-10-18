@@ -6,7 +6,8 @@ description: >
   recommendations without modifying project files. Use for
   refactoring assessments, code simplification reviews, and
   maintainability reviews. Works independently of any engineering workflow;
-  implementation is out of scope.
+  implementation is out of scope. Use on explicit user request.
+disable-model-invocation: true
 ---
 
 # Refactoring Assessment
@@ -17,6 +18,10 @@ understanding, changing, and testing existing code.
 This skill is read-only. Return an assessment and recommendations in the
 conversation; do not create reports, modify files or perform implementation.
 No Feature, Spec, workspace setup or other Skill is required.
+
+Use only when the user explicitly requests a refactoring assessment,
+code simplification review, or maintainability review. An implementation
+request or observed code complexity alone does not trigger this skill.
 
 ## Scope
 

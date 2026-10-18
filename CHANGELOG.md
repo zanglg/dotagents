@@ -8,6 +8,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Require explicit user invocation for `refactor-assess`, with Claude Code
+  frontmatter and Codex invocation policy matching `handoff`; implementation
+  requests or observed code complexity alone do not trigger assessment.
 - Simplify `handoff` around artifact references and unpersisted context, with
   explicit-only invocation metadata in Claude Code frontmatter and Codex
   `agents/openai.yaml` policy. Save handoffs to OS temporary storage by
