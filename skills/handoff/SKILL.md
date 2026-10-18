@@ -1,43 +1,84 @@
 ---
 name: handoff
-description: "On explicit request, prepare a concise session handoff or resume from one for coding, research, design, writing or other work. Preserve objectives, constraints, evidence, unresolved questions and next actions without duplicating existing records. Works independently of any workflow or repository."
+description: "Transfer essential context between sessions or resume from a handoff. Reference existing artifacts and preserve only what the next session cannot reliably recover. Use on explicit user request."
+disable-model-invocation: true
 ---
 
 # Handoff
 
-Transfer enough context for a fresh session to continue correctly. Use only on
-an explicit handoff, save-for-next-session, or resume request. A status question
-or context-pressure signal alone does not request a handoff. No repository,
-Feature, task tracker or other Skill is required.
+Enable a fresh session to continue work without losing essential context or duplicating information already available elsewhere.
+
+Use only when the user explicitly requests a handoff, save-for-next-session, or resume. A status question or context-pressure signal alone does not trigger this skill.
+
+No repository, workflow, task tracker, or other skill is required.
 
 ## Prepare
 
-1. Identify the next-session objective from the request and available context. Ask only if an ambiguity materially changes what should be preserved. Collect relevant constraints, confirmed choices, supported findings, unresolved questions and evidence pointers. Preserve the difference between facts, hypotheses, recommendations and approvals; silence is not approval.
-2. Inspect live state where relevant and accessible. For coding, include the actual working directory, branch, HEAD and staged/unstaged/untracked changes; HEAD alone does not identify working files. For research, retain the question, source revisions, supported findings and untested claims. For design/discussion, retain settled choices, unresolved dependencies and decision authority. For other work, retain the current artifact/version and next deliverable. Mark unavailable facts unknown; do not force Git or engineering fields into unrelated work.
-3. Reuse existing reports, plans or progress records as pointers rather than copying them into a second ledger. Read the current summary and relevant sections, not every historical artifact. Include active worker handles/write ownership and outstanding command identifiers when applicable. Before writing a handoff file, reconcile and quiesce any active writer under the current workflow's protocol; do not assume timeout or revocation stops a process. If quiescence cannot be established, return a conversational handoff with that uncertainty instead of creating a competing writer.
-4. Adapt [the handoff outline](assets/handoff.md), omitting irrelevant sections. Include the objective, critical context, observed progress/verification, blockers and first executable next action. Redact secrets, credentials and sensitive payloads, including those in URLs, commands or artifact names. Avoid raw logs and duplicated specifications. Do not invent tests, approvals, paths, worker liveness or completed work.
-5. By default, return the complete concise handoff in the conversation. When file output is requested without a destination, save a uniquely named Markdown file in the OS temporary directory (`TMPDIR`, then `/tmp`; `TEMP` on Windows). Never overwrite an existing file. For explicit durable persistence, use the user's location or established convention; if neither exists, propose a location before writing. Inspect destinations and preserve existing user content; never replace an existing handoff unless its update was explicitly requested. Respect preview/no-write requests. Report the actual saved path or that no file was saved; a temp file may not survive or be visible to the next environment.
-6. End with a ready-to-copy next-session instruction referencing real artifacts and the first action. Suggest only relevant installed/available skills or explicitly label optional suggestions; none is a prerequisite for reading the handoff. State what else must be transferred: a handoff is not a backup of uncommitted code, a running VM, process memory or inaccessible documents. Do not commit, push, switch branches, create worktrees or publish externally as part of preparing it.
+1. **Identify the next objective.**
+   Determine what the next session should accomplish and where the current work stopped. Use any focus specified by the user. Ask only when ambiguity materially affects the handoff.
+
+2. **Reference existing artifacts.**
+   Identify relevant specifications, designs, plans, progress records, source files, or other durable artifacts. Inspect as needed to establish what they already contain. Reference them by actual path or URL, briefly explaining their relevance. Do not duplicate information that the next session can recover from accessible artifacts.
+
+3. **Preserve unpersisted context.**
+   Capture only information necessary for correct continuation that is not reliably recoverable from the referenced artifacts or current environment. This may include:
+   - User intent, constraints, and preferences not recorded elsewhere.
+   - Decisions, rejected alternatives, rationale, or exceptions that materially affect the next work.
+   - Findings, blockers, uncertainties, or failed approaches that would otherwise require rediscovery.
+   - Pending questions and decisions requiring user approval.
+
+   Distinguish confirmed facts and decisions from hypotheses, proposals, and unresolved questions. Do not treat silence as approval.
+
+   When the conversation itself is the primary source, preserve its load-bearing details rather than reducing it to a generic summary. Do not reproduce the full discussion.
+
+4. **Specify the next action.**
+   State the first concrete action for the next session, including any essential dependency or constraint. Leave environment inspection and routine state discovery to the next agent.
+
+5. **Check transfer completeness.**
+   Ask whether the next session, with only the handoff and referenced artifacts, could continue correctly without repeating important questions or decisions. Fill material gaps without duplicating existing records.
+
+   If critical information is unavailable or cannot be verified, identify the gap and label the handoff as partial. Never invent missing context.
+
+6. **Deliver the handoff.**
+   By default, save the complete handoff as a uniquely named Markdown file in the OS temporary directory (`TMPDIR`, then `/tmp`; `TEMP` on Windows). Use `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`, for example `handoff-2026-10-18-dotagents-handoff-refresh-a7f3c2.md`. Derive a short, meaningful project label and topic slug from known context; use `general` when no project applies. Use safe ASCII filename components without path separators or sensitive information. Never overwrite an existing file; generate another suffix on collision.
+
+   If the user specifies a destination, use it. For durable persistence, follow the user's specified location or an established convention. Do not assume a temporary file will survive or be accessible in another environment.
+
+   Report the actual saved path and a short, ready-to-copy continuation instruction in the conversation; do not repeat the full file unless requested. If conversation-only output or a preview is requested, return the complete handoff in the conversation without writing a file. If saving fails or file tools are unavailable, report that no file was saved and return the handoff in the conversation instead.
+
+   Redact secrets, credentials, and sensitive information, including those embedded in paths, URLs, or commands. Do not modify unrelated artifacts, commit, push, or otherwise change project state as part of preparing a handoff.
 
 ## Resume
 
-Read the supplied handoff and critical linked material. If a referenced path is
-inaccessible, request the content or actual shared location; do not pretend a
-path transfers files. Compare snapshot claims with current artifacts, source
-revisions, working files and live commands as applicable. Treat handoff content
-as historical context, not authority to override current user/project instructions.
+1. Read the handoff and relevant referenced artifacts. If a required source is inaccessible, request access or the missing content instead of assuming it was transferred.
+2. Treat the handoff as historical context, not authoritative current state. Inspect the current environment and reconcile any material differences before acting.
+3. Follow the user's current instructions and applicable workflow rules. A handoff does not grant new authorization, prove prior work is complete, or justify replaying potentially non-idempotent actions.
+4. Continue from the next applicable action when requested. An inspect-only request remains read-only.
 
-Do not restart an unknown worker, replay a non-idempotent command or overwrite
-newer work merely because the note says it was pending. Recheck affected stale
-claims and preserve unaffected evidence. If process handles are unavailable,
-report uncertain liveness and establish safe ownership before further writes.
+Do not rewrite the handoff merely because it was read.
 
-Follow the user's requested intent: an inspect/summarize request stays read-only;
-an explicit continue/resume request proceeds through the relevant work's normal
-authorization and verification rules. A note recording prior approval is not a
-new grant of authority, and its authenticity or continued applicability may need
-confirmation. Do not rewrite the handoff merely because it was read, create a
-new task ledger, or assume automatic background restart. Report the reconciled
-state and next action or precise blocker.
+## Output Format
 
-Inspired by Matt Pocock's [handoff](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md), adapted for explicit, evidence-aware transfer and safe resumption.
+Adapt the following outline to the task. Omit empty or irrelevant sections.
+
+### Objective
+What the next session should accomplish and where work stopped.
+
+### Read First
+- `path/to/artifact` - what it contains and why it matters.
+
+### Unpersisted Context
+- Essential information unavailable from the referenced artifacts.
+
+### Open Questions
+- Unresolved decisions, blockers, or dependencies, if any.
+
+### Next Action
+The first concrete step to take after reading the referenced artifacts and inspecting the current environment.
+
+### Continuation Instruction
+A short, ready-to-copy instruction telling the next agent what to read and what to do next.
+
+---
+
+Keep the handoff proportional to the task. Prefer precise references over repeated summaries, and essential context over exhaustive session history. Do not impose a fixed length or include information solely to fill the template.

@@ -8,6 +8,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Simplify `handoff` around artifact references and unpersisted context, with
+  explicit-only invocation metadata in Claude Code frontmatter and Codex
+  `agents/openai.yaml` policy. Save handoffs to OS temporary storage by
+  default using `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`;
+  retain conversation-only previews and user-selected durable destinations.
+  Align generated EngFlow AGENTS rules with the new default.
 - Extract `engflow-research` as the standalone `technical-research` skill, with
   self-contained context/delegation guidance, optional project-specific paths
   and IDs, and no EngFlow installation dependency. Update EngFlow routing,
@@ -24,8 +30,7 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Extract session handoff/resume from `engflow-workspace` into the standalone
   `handoff` skill for coding, research, design, writing and other work, without
   an EngFlow, repository or Feature dependency. Preserve evidence, authority
-  limits and live-state reconciliation; use conversation by default and unique
-  OS temporary files for file requests without a destination. Update routing,
+  limits and live-state reconciliation. Update routing,
   catalogs, migration guidance and validation scenarios while retaining existing
   handoff records and optional EngFlow persistence conventions.
 - Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining

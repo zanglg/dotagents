@@ -7,7 +7,7 @@
 | Skill | Use it for | Typical output |
 | --- | --- | --- |
 | `engflow-workspace` | Optional setup, Feature navigation, read-only status | Index/Feature README when requested; conversational status |
-| `handoff` (standalone integration) | Explicit session transfer and safe resumption | Conversational handoff, requested file, or reconciled resume state |
+| `handoff` (standalone integration) | Explicit session transfer and safe resumption | Named temporary handoff file by default, requested preview, or reconciled resume state |
 | `technical-research` (standalone integration) | Implementation analysis, problem/solution investigation, feasibility and optional experiments | Conversational findings or authorized durable research/experiment evidence |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
@@ -25,7 +25,7 @@ Copy the five `skills/engflow-*` folders plus `skills/technical-research/`, `ski
 
 Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md` and, when useful, `experiments/POC-###-slug/experiment.md` under that Feature. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
 
-[Handoff](../../skills/handoff/SKILL.md) also installs independently and returns context in the conversation by default; a file request without a destination uses OS temporary storage. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
+[Handoff](../../skills/handoff/SKILL.md) also installs independently and saves a Markdown file in OS temporary storage by default, named `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`. It reports the actual path and a copyable continuation instruction; conversation-only or preview requests do not write files. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
 
 Optional setup:
 
