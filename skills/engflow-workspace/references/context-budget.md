@@ -45,7 +45,7 @@ Next action / unresolved work:
 Grant released / outstanding processes and whether they can still write:
 ```
 
-Size briefs and returns to the task: include everything needed to act or verify, and expand for material complexity. This Skill prescribes no token quota. Return concise evidence rather than full source files, patches, transcripts or logs; the parent can request the particular details it needs. Never silently omit a material finding, failure, constraint or changed path to meet an output limit; disclose incomplete coverage and retrieve the remaining evidence before dependent decisions. Design review stays conversational and creates no evidence files. Authorized research/experiment records may hold detail where the workflow already permits it.
+Size briefs and returns to the task: include everything needed to act or verify, and expand for material complexity. This Skill prescribes no token quota. Return concise evidence rather than full source files, patches, transcripts or logs; the parent can request the particular details it needs. Never silently omit a material finding, failure, constraint or changed path to meet an output limit; disclose incomplete coverage and retrieve the remaining evidence before dependent decisions. Design review stays conversational and creates no evidence files. Authorized research reports or existing experiment records may hold supporting detail; technical research does not execute experiments.
 
 The parent inspects consequential claims, ownership boundaries and relevant diff/evidence excerpts. It need not replay every source read or rerun an unchanged successful check, but must resolve missing evidence and use final integration validation where required. A short report alone is not proof of completion.
 

@@ -11,7 +11,7 @@ Goal: {{PROJECT_DESCRIPTION}}
 
 - `engflow-workspace`: Feature navigation and read-only status.
 - `handoff` (standalone): explicit session transfer and evidence-aware resumption.
-- `technical-research` (standalone): implementation analysis, problem/solution investigation, feasibility and optional bounded experiments.
+- `technical-research` (standalone): source-driven investigation of technical questions with evidence-backed explanations; no experiment execution.
 - `engflow-grill`: conversational clarification and assumption testing.
 - `engflow-write`: requested Spec, Design or proposed ADR.
 - `engflow-review-design`: evidence-backed design findings in the conversation.

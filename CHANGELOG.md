@@ -15,18 +15,20 @@ This project follows Semantic Versioning and uses Conventional Commits.
   retain conversation-only previews and user-selected durable destinations.
   Align generated EngFlow AGENTS rules with the new default.
 - Extract `engflow-research` as the standalone `technical-research` skill, with
-  self-contained context/delegation guidance, optional project-specific paths
+  self-contained read-only delegation guidance, optional project-specific paths
   and IDs, and no EngFlow installation dependency. Update EngFlow routing,
   catalogs, installation and migration guidance; preserve existing RES/PoC
   records and provide no compatibility wrapper.
-- Strengthen `technical-research` with three composable investigation purposes:
-  existing implementation explanation, problem and solution investigation, and
-  feasibility assessment. Add source-backed flow and contract analysis, causal
-  hypothesis checks, solution comparisons, cross-layer evidence tracing,
-  configuration/runtime gates and explicit support/extension/unknown conclusions.
-  Add discriminating minimal experiment guidance, reproducibility details and
-  validation scenarios without requiring all three purposes, experiments,
-  production changes or new document workflows.
+- Unify `technical-research` around concrete technical questions and source-based
+  evidence, retaining actual-path/contract tracing, configuration and cross-layer
+  checks, counterevidence and qualified conclusions without predefined research
+  categories. Remove experiment execution, its template, and research writer
+  orchestration; existing logs and PoC results remain usable evidence. Replace
+  category/context guides with brief optional read-only delegation guidance and
+  simplify the report outline. Require explicit user invocation, with Claude Code
+  frontmatter and Codex invocation policy matching `handoff`. Update routing and
+  migration guidance; implementation retains separately scoped runtime validation,
+  and historical artifacts remain unchanged.
 - Extract session handoff/resume from `engflow-workspace` into the standalone
   `handoff` skill for coding, research, design, writing and other work, without
   an EngFlow, repository or Feature dependency. Preserve evidence, authority

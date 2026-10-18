@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | `engflow-workspace` | Optional setup, Feature navigation, read-only status | Index/Feature README when requested; conversational status |
 | `handoff` (standalone integration) | Explicit session transfer and safe resumption | Named temporary handoff file by default, requested preview, or reconciled resume state |
-| `technical-research` (standalone integration) | Implementation analysis, problem/solution investigation, feasibility and optional experiments | Conversational findings or authorized durable research/experiment evidence |
+| `technical-research` (standalone integration) | Investigate concrete technical questions through source and first-party evidence | Conversational explanations/judgments or an authorized research report; no experiment execution |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
 | `engflow-review-design` | Review requirements, technical solutions and architecture | Evidence-backed findings in the conversation; no writes |
@@ -23,7 +23,7 @@ Refactoring assessment is an optional assessment of existing code, distinct from
 
 Copy the five `skills/engflow-*` folders plus `skills/technical-research/`, `skills/handoff/` and `skills/refactor-assess/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. [Refactor Assess](../../skills/refactor-assess/SKILL.md) also installs independently and returns advisory findings without modifying files. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
 
-Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md` and, when useful, `experiments/POC-###-slug/experiment.md` under that Feature. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
+`technical-research` is explicit-user-request only; integration references do not automatically invoke it for ordinary implementation uncertainty. It uses `disable-model-invocation: true` in frontmatter and `policy.allow_implicit_invocation: false` in `agents/openai.yaml` for their respective hosts. Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md`. Existing PoC records may be consulted, but new runtime checks require a separately scoped execution workflow. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
 
 [Handoff](../../skills/handoff/SKILL.md) also installs independently and saves a Markdown file in OS temporary storage by default, named `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`. It reports the actual path and a copyable continuation instruction; conversation-only or preview requests do not write files. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
 
@@ -40,7 +40,7 @@ This creates a document index and a bounded root AGENTS policy block, preserving
 ```text
 $engflow-workspace 创建或选择“插件热加载”特性
 $technical-research 比较两种插件隔离方式，结合源码给出证据
-$technical-research 运行一个可复现的卸载实验，记录资源释放情况
+$technical-research 追踪卸载路径与资源生命周期，查明通信链路中断的源码依据
 $engflow-grill 挑战当前设计的故障恢复假设
 $engflow-review-design 评审这份方案，直接在对话中输出问题
 $refactor-assess 检视当前模块的重构机会，给出有依据的建议，不修改代码
@@ -71,7 +71,7 @@ Details: [long-task protocol](../../skills/engflow-implement/references/long-tas
 
 The five EngFlow entry points share [the context contract](../../skills/engflow-workspace/references/context-budget.md), which keeps the parent focused on constraints, the task graph, verified outcomes and the next action. Source-heavy investigation, large-log analysis, independent review and bounded implementation slices use fresh/minimal-context workers when the host supports them and the avoided reads justify delegation.
 
-The standalone research skill carries its own [context and delegation rules](../../skills/technical-research/references/context.md); it does not require the EngFlow contract to be installed. When delegated by implementation, it follows that coordinator's exclusive-writer protocol.
+The standalone research skill uses one source-investigation protocol and optional [read-only delegation guidance](../../skills/technical-research/references/delegation.md), without EngFlow context or writer-grant machinery. Research helpers return evidence directly; only the parent saves an authorized report. Under implementation they respect the coordinator's restrictions.
 
 Standalone `refactor-assess` carries its own [read-only context and review guidance](../../skills/refactor-assess/references/context.md); it does not require the EngFlow context contract. Findings stay conversational and advisory, with no automatic report or task creation.
 
@@ -85,7 +85,7 @@ The same Skills apply across smaller and larger context windows without editing 
 
 ## What was simplified
 
-- Experiment is a research method, loaded from a reference only when needed.
+- Research follows the technical question without predefined categories. Experiment execution is outside its scope; implementation retains its separately authorized validation responsibilities.
 - Spec, Design and ADR synthesis share one writing entry point with target-specific references.
 - Handoff is a standalone, explicit session-transfer skill; it references an existing implementation record without creating a second ledger.
 - Grill has no separate checkpoint format. Design review has no persisted review log.
