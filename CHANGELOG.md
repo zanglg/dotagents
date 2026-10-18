@@ -6,8 +6,28 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Added
+
+- Add standalone `design` for evidence-backed feature design, autonomous routine
+  choices, consequential user decisions and continuous dependency-driven work.
+  Define design quality and decision authority rather than a fixed process;
+  maintain one authorized proposal with readiness limits, not a mandatory
+  Spec/ADR suite or separate progress ledger.
+- Add standalone `poc` for bounded execution-based validation through an experiment
+  quality contract, explicit authority and reproducible, qualified evidence.
+  Design includes on-demand read-only Research; PoC still needs separately bounded
+  execution authority. Default to the current agent; worker ownership rules apply
+  only when delegated. Host invocation guards and non-recursive coordination remain.
+
 ### Changed
 
+- Let explicitly requested Design tasks use read-only Research without per-call
+  approval, unless restricted by the user; no expanded access, disclosure or extra
+  research reports. Keep global invocation guards and return evidence to Design.
+  Retain explicit task-level Research permission elsewhere and keep Research
+  non-executing. Retain `engflow-write`
+  for synthesis of existing conclusions, not as a required Design output step.
+  Update installation, routing, migration and behavioral validation guidance.
 - Refocus `refactor-assess` on evidence-backed maintenance benefits, net cost and
   compatibility rather than nine diagnostic dimensions and a fixed process.
   Simplify read-only collaboration guidance and add behavioral validation
@@ -36,8 +56,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
   categories. Remove experiment execution, its template, and research writer
   orchestration; existing logs and PoC results remain usable evidence. Replace
   category/context guides with brief optional read-only delegation guidance and
-  simplify the report outline. Require explicit user invocation, with Claude Code
-  frontmatter and Codex invocation policy matching `handoff`. Update routing and
+  simplify the report outline. Retain explicit-only host metadata matching
+  `handoff`, with read-only Research composition allowed within an explicitly
+  requested Design task where supported by the host. Update routing and
   migration guidance; implementation retains separately scoped runtime validation,
   and historical artifacts remain unchanged.
 - Extract session handoff/resume from `engflow-workspace` into the standalone

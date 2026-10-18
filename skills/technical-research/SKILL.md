@@ -1,6 +1,6 @@
 ---
 name: technical-research
-description: "Investigate technical questions through source code, first-party specifications and existing evidence. Explain mechanisms and assess possible paths with evidence-backed conclusions, counterevidence and explicit uncertainty. No experiment execution or production implementation. Use only on explicit user request."
+description: "Investigate technical questions through source code, first-party specifications and existing evidence. Explain mechanisms and assess possible paths with evidence-backed conclusions, counterevidence and explicit uncertainty. No experiment execution or production implementation. Use on explicit research request or as read-only support for an explicitly requested Design task."
 disable-model-invocation: true
 ---
 
@@ -10,10 +10,18 @@ Answer the user's technical question with a defensible explanation.
 Choose the investigation strategy and answer structure to fit the question;
 no predefined research category, workflow or document setup is required.
 
-Use only when the user explicitly requests this Skill or a source-based technical
-investigation. Routine coding questions, implementation uncertainty, and mentions
-in another workflow do not automatically invoke it. Ordinary source inspection
-can continue in that workflow without starting this Skill.
+Use on an explicit research request, explicit task-scoped Research permission,
+or as read-only support within an explicitly requested Design task. Design may
+use Research as needed without per-call confirmation unless the user restricts it.
+Routine coding questions, implementation uncertainty and other workflow references
+alone do not invoke this Skill. Honor host invocation restrictions.
+
+Within Design, investigate only consequential evidence gaps in the active task;
+do not expand access or disclosure permissions, execute experiments or write a
+separate research report. Return evidence to Design for integration into its
+proposal. This authority ends with that task, not a grant for unrelated work.
+When assigned as a helper, do not delegate further or take design decisions;
+suggest runtime checks to the coordinator rather than invoking PoC.
 
 ## Evidence standard
 
@@ -42,10 +50,10 @@ the question. Provide traceable source references and qualify changing or unknow
 source state. When evidence is insufficient, narrow the conclusion and identify
 the next discriminating check. Static analysis is not runtime verification.
 
-Return findings in the conversation by default. Save a report only within write
-authorization, reusing an appropriate existing report and the user's or project's
-location; otherwise propose a location first. Preserve historical artifacts.
-The [report outline](assets/research.md) is optional.
+Return findings in the conversation by default. Outside Design, save a report only
+within write authorization, reusing an appropriate existing report and the user's
+or project's location; otherwise propose a location first. Preserve historical
+artifacts. The [report outline](assets/research.md) is optional.
 
 Use bounded read-only helpers when they materially improve the investigation,
 following [delegation guidance](references/delegation.md). Otherwise work directly.

@@ -32,6 +32,8 @@ small, auditable, and safe to copy between machines.
 |-- VERSION            # Current repository content version
 |-- docs/              # Guides for related skill groups
 `-- skills/
+    |-- design/       # Feature design and sustained technical decisions
+    |-- poc/          # Bounded execution-based verification
     |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
     |-- engflow-*/     # Five related EngFlow skills
     |-- handoff/      # Standalone session transfer and resumption
@@ -63,6 +65,8 @@ without searching the whole workspace.
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
+| [design](skills/design/SKILL.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
+| [poc](skills/poc/SKILL.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [technical-research](skills/technical-research/SKILL.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
@@ -79,10 +83,12 @@ can live alongside this group and should be added to this catalog when useful.
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. `technical-research`, `handoff` and `refactor-assess` each install
-independently, without EngFlow or Feature setup. For the integrated workflow,
-install the five `engflow-*` folders together and add these three standalone
-skills. Other independently scoped skills can be selected separately.
+files together. `design`, `poc`, `technical-research`, `handoff` and
+`refactor-assess` each install independently, without EngFlow or Feature setup.
+For the complete integrated workflow, install the five `engflow-*` folders
+and these five standalone skills. Design can work alone; install Research and
+PoC alongside it to use those optional collaborators. Other independently scoped
+skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of
