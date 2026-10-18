@@ -12,7 +12,8 @@ number. No progress-record conversion is required.
 | Older entry point | Current entry point | Operation |
 | --- | --- | --- |
 | `engflow-handoff` / workspace handoff operation | `handoff` | Standalone explicit session transfer/resume |
-| `engflow-research` / `engflow-experiment` | `technical-research` | Standalone investigation and optional bounded experiment |
+| `engflow-research` | `technical-research` | Standalone source-driven investigation |
+| `engflow-experiment` | No research replacement | Execution-based verification requires a separately scoped workflow |
 | `engflow-challenge` | `engflow-grill` | Clarify or test assumptions |
 | `engflow-spec` / `engflow-to-spec` | `engflow-write` | Spec synthesis |
 | `engflow-design` / `engflow-to-design` | `engflow-write` | Design synthesis |
@@ -38,7 +39,11 @@ Research is now the standalone `technical-research` skill, not an EngFlow-owned
 entry point. Install it independently or alongside EngFlow. Preserve local
 customizations before replacing an installed `engflow-research` folder and update
 saved commands/router rules. Existing RES and PoC paths and IDs remain valid;
-there is no mandatory document migration or compatibility wrapper.
+there is no mandatory document migration or compatibility wrapper. Research now
+uses a unified source-investigation protocol, not three research categories.
+Experiment execution and report-writing workers are removed. Replace the old
+supporting files when upgrading the installed skill; keep historical project
+reports and PoCs. Existing logs/results can still be analyzed with their limits.
 
 ## Installation
 
@@ -52,7 +57,7 @@ there is no mandatory document migration or compatibility wrapper.
 - Preserve historical baseline manifests, `.engflow/project.yaml`, `decisions.md`, `review-log.md` and `CHL-*` records. They are not recreated or maintained as new default workflow state.
 - Accepted ADRs under reevaluation remain effective. Prefer keeping `status: accepted` with an explicit reevaluation note/field for new work. A historical `under-review` ADR is not silently ignored; establish its prior acceptance and replacement status from available evidence.
 - Research and Feature templates no longer create an unused `review_status: pending` queue. Existing review/approval information stays intact. Substantively revised Spec/Design content must not inherit stale approval.
-- New durable experiments normally use one `experiment.md` plus necessary reproducibility artifacts. Existing separate `results.md` remains valid evidence.
+- Existing experiment records, scripts and `results.md` remain valid historical evidence and are not deleted. `technical-research` no longer creates or executes experiments; future runtime verification follows a separately scoped workflow.
 
 ## Long-task adoption
 

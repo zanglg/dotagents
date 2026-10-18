@@ -63,7 +63,7 @@ without searching the whole workspace.
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
-| [technical-research](skills/technical-research/SKILL.md) | Standalone implementation analysis, problem/solution investigation and feasibility assessment, with optional bounded experiments |
+| [technical-research](skills/technical-research/SKILL.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
 | [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |

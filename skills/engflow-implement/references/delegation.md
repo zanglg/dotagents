@@ -31,8 +31,9 @@ not require approval for every local choice or prescribe speculative function
 bodies. During read-only preparation, the worker may inspect sources and flag
 missing contracts or assumptions; the parent resolves essential gaps and updates
 the brief before granting affected writes. If an assumption requires an experiment
-with writes/runs, the current exclusive writer performs it under the research
-experiment rules; a read-only helper has no such grant.
+with writes/runs, the current exclusive writer performs the separately scoped
+check under [the implementation validation rules](long-tasks.md#risk-first-selection);
+`technical-research` and other read-only helpers do not execute it.
 
 On return, identify material discoveries, changed assumptions and possible
 effects on other tasks or interfaces, even if local checks pass. Give supporting
