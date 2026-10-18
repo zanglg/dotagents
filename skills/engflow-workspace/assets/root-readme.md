@@ -11,9 +11,11 @@ Goal: {{PROJECT_DESCRIPTION}}
 
 - `engflow-workspace`: Feature navigation and read-only status.
 - `handoff` (standalone): explicit session transfer and evidence-aware resumption.
+- `design` (standalone): feature design and one evolving proposal; on-demand read-only Research, with separate authority for PoC.
+- `poc` (standalone): bounded, authorized experiments and qualified evidence, not production implementation.
 - `technical-research` (standalone): source-driven investigation of technical questions with evidence-backed explanations; no experiment execution.
 - `engflow-grill`: conversational clarification and assumption testing.
-- `engflow-write`: requested Spec, Design or proposed ADR.
+- `engflow-write`: synthesize existing conclusions into a requested Spec, Design or proposed ADR; not a required step after Design.
 - `engflow-review-design`: evidence-backed design findings in the conversation.
 - `refactor-assess`: optional, read-only assessment of existing code with advisory refactoring recommendations.
 - `engflow-implement`: code, tests and code review; a single progress record for long tasks.

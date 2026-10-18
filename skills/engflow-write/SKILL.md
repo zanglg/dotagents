@@ -7,6 +7,11 @@ description: "On request, turn existing conversation, research or review finding
 
 Synthesize engineering documents from what is already known. Accept a conversation, review findings, source documents or a combination; do not require a saved review log or repeat questions already answered. Use the user's requested target and location. Ask only when the target or an essential decision cannot be inferred.
 
+Forming a new technical route through investigation and decisions belongs to the
+standalone `design` Skill when requested. Design writes its own proposal and does
+not require this Skill as a final step. Use Write to synthesize existing conclusions
+into the requested artifact, not to silently reopen design or launch experiments.
+
 Use the relevant conversational findings and targeted artifact sections; do not reload all historical research or worker transcripts. For context-heavy source gathering, apply [the shared context contract](../engflow-workspace/references/context-budget.md) and use bounded read-only investigation. The document's author remains responsible for synthesis and evidence; no new delegation layer or extra document is required.
 
 ## Read the reference for the requested output
