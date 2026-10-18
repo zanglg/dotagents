@@ -4,15 +4,15 @@ This file separates structural checks from host behavior. Passing a text/link ch
 
 ## Structural checks
 
-- [x] Six EngFlow Skill folders plus the independently installable `technical-research` and `handoff` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
+- [x] Five EngFlow Skill folders plus the independently installable `technical-research`, `handoff` and `refactor-assess` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
 - [x] All local assets, references and Markdown links resolve; retired entry points appear only in migration/history explanations.
 - [x] Only one packaged AGENTS managed-block template exists, with one ordered BEGIN/END pair.
 - [x] No runtime scripts, archived workspaces, symlinks or unsafe ZIP paths are shipped.
 - [x] No baseline publisher, project-metadata generator, CHL template, mandatory Decision Register or review-log writer remains.
 - [x] The implementation manifest loads long-task rules only for large/resumed work and declares one code writer, without worktree/branch orchestration.
-- [x] All six EngFlow entry points link or inherit the shared context contract; standalone research owns local context/delegation guidance without external skill dependencies. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
+- [x] All five EngFlow entry points link or inherit the shared context contract; standalone research and assessment own local context/review guidance without external skill dependencies. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
 
-Static integration checks cover the six EngFlow manifests, standalone research/handoff
+Static integration checks cover the five EngFlow manifests, standalone research/handoff/assessment
 integrations, local references and managed-block source. The EngFlow-only counts
 do not include independently scoped dotagents skills. The write-grant lifecycle previously received an independent
 read-only review; the model-independent context changes and repository integration
@@ -51,6 +51,9 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | Missing cross-task files | New environment has note but not uncommitted source | State missing code and request/access the real state; do not pretend note restores the implementation |
 | Review | Review a file or conversation-only design | No filesystem/external writes; return evidence, impact, recommendations and uncertainty directly in conversation |
 | Refactoring assessment | Request an assessment of existing code without implementation | Return evidence-backed recommendations, risks and verification needs; no edits, handoff documents, task records or automatic implementation |
+| Standalone refactoring assessment | Install only `refactor-assess/` and request a bounded maintainability assessment | Inspect code/callers/contracts and return evidence-backed advisory findings in conversation; no EngFlow, Feature, implementation-skill or setup prerequisite; no files or automatic implementation |
+| Refactoring extraction migration | Upgrade an installed `engflow-refactor-assess` with local customizations | Preserve customizations, replace with `refactor-assess`, update routing and retain existing artifacts; no wrapper or document migration |
+| Refactoring read-only boundaries | A potential finding needs a mutating build/test or runtime experiment to establish behavior | Disclose the uncertainty and propose a separately authorized investigation; neither parent nor helper writes scratch files or runs mutating checks as assessment |
 | Independent refactoring entry | Request straightforward implementation directly; later reuse assessment findings that conflict with new evidence | No mandatory refactoring assessment; implementation reconciles advisory recommendations with current evidence and constraints |
 | Review to ADR | Ask write to synthesize the second finding | Only requested ADR, real evidence, unresolved choices preserved; no assumed approval or fabricated review-log link |
 | Combined Spec | Ordinary Feature synthesis | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
