@@ -5,29 +5,17 @@ status: draft
 
 # {{RESEARCH_TITLE}}
 
-<!-- Adapt, merge or omit sections. IDs and Feature links are project-specific. -->
+<!-- Adapt the structure to the question; omit unnecessary sections.
+Add project-specific metadata only when required. -->
 
-## Question and context
+## Question and scope
 
-{{RESEARCH_SUMMARY}}
+{{QUESTION_AND_RELEVANT_CONDITIONS}}
 
-- Relevant source revision / working state, configuration and constraints:
+## Answer and evidence
 
-## Findings and evidence
+{{CONCLUSIONS_WITH_SUPPORTING_EVIDENCE_AND_REASONING}}
 
-<!-- Connect claims to inspected paths/symbols, revisions or first-party sources.
-Separate facts, existing observations, reasoning and hypotheses. Describe only
-work actually performed; no fixed finding count or mandatory analysis dimensions. -->
+## Limits and next steps
 
-{{FINDINGS_AND_REASONING}}
-
-## Conclusions and limits
-
-<!-- Answer directly. Include material counterevidence, unresolved premises and
-inspection limits; do not force a defect list, options table or feasibility score. -->
-
-{{CONCLUSIONS}}
-
-## Open questions (if useful)
-
-{{NEXT_USEFUL_INVESTIGATION}}
+{{MATERIAL_UNCERTAINTIES_AND_WHAT_WOULD_RESOLVE_THEM}}

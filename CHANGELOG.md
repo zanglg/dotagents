@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Refocus `technical-research` on evidence quality, judgment and authority rather
+  than detailed investigation checklists. Simplify its report outline and
+  read-only delegation contract while retaining explicit invocation, mechanism
+  tracing, question-driven output and execution boundaries.
 - Require explicit user invocation for `refactor-assess`, with Claude Code
   frontmatter and Codex invocation policy matching `handoff`; implementation
   requests or observed code complexity alone do not trigger assessment.
