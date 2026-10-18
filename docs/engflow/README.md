@@ -6,7 +6,8 @@
 
 | Skill | Use it for | Typical output |
 | --- | --- | --- |
-| `engflow-workspace` | Optional setup, Feature navigation, read-only status, explicit handoff/resume | Index/Feature README when requested; status or handoff |
+| `engflow-workspace` | Optional setup, Feature navigation, read-only status | Index/Feature README when requested; conversational status |
+| `handoff` (standalone integration) | Explicit session transfer and safe resumption | Conversational handoff, requested file, or reconciled resume state |
 | `technical-research` (standalone integration) | Implementation analysis, problem/solution investigation, feasibility and optional experiments | Conversational findings or authorized durable research/experiment evidence |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
 | `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
@@ -20,9 +21,11 @@ Refactoring assessment is an optional assessment of existing code, distinct from
 
 ## Install and upgrade
 
-Copy the six `skills/engflow-*` folders and `skills/technical-research/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+Copy the six `skills/engflow-*` folders plus `skills/technical-research/` and `skills/handoff/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
 
 Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md` and, when useful, `experiments/POC-###-slug/experiment.md` under that Feature. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
+
+[Handoff](../../skills/handoff/SKILL.md) also installs independently and returns context in the conversation by default; a file request without a destination uses OS temporary storage. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
 
 Optional setup:
 
@@ -46,7 +49,7 @@ $engflow-write 将已确认的需求和必要技术方案整理成一份 spec.md
 $engflow-implement 实现这份规格，按依赖逐项推进，完成测试和代码评审
 $engflow-implement 继续 FEAT-001 的长任务，先核对进度记录与当前代码
 $engflow-workspace 总结当前实现进度
-$engflow-workspace 为下一轮准备交接，重点是尚未解决的资源回收问题
+$handoff 为下一轮准备交接，重点是尚未解决的资源回收问题
 ```
 
 ## Long implementation tasks
@@ -82,7 +85,7 @@ The same Skills apply across smaller and larger context windows without editing 
 
 - Experiment is a research method, loaded from a reference only when needed.
 - Spec, Design and ADR synthesis share one writing entry point with target-specific references.
-- Handoff is an explicit workspace operation and references the existing implementation record.
+- Handoff is a standalone, explicit session-transfer skill; it references an existing implementation record without creating a second ledger.
 - Grill has no separate checkpoint format. Design review has no persisted review log.
 - Baseline publication, mandatory project metadata, a Decision Register and duplicate plan/status/debug ledgers are removed from the active workflow. Existing records remain readable history.
 - Accepted ADRs under reevaluation remain effective; an approved Spec/Design is not silently treated as approval of later edits.
@@ -91,4 +94,4 @@ The same Skills apply across smaller and larger context windows without editing 
 
 These are prompt instructions, not a scheduler, lock manager or access-control system. Runtime capability determines execution duration and subagent availability. Recovery requires the actual progress record **and code** to survive; uncommitted changes are not transferred by a handoff. Commit/push and external publication follow existing authorization.
 
-Static checks cover six EngFlow manifests and the standalone research integration, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.
+Static checks cover six EngFlow manifests and the standalone research and handoff integrations, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.

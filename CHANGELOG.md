@@ -21,6 +21,13 @@ This project follows Semantic Versioning and uses Conventional Commits.
   Add discriminating minimal experiment guidance, reproducibility details and
   validation scenarios without requiring all three purposes, experiments,
   production changes or new document workflows.
+- Extract session handoff/resume from `engflow-workspace` into the standalone
+  `handoff` skill for coding, research, design, writing and other work, without
+  an EngFlow, repository or Feature dependency. Preserve evidence, authority
+  limits and live-state reconciliation; use conversation by default and unique
+  OS temporary files for file requests without a destination. Update routing,
+  catalogs, migration guidance and validation scenarios while retaining existing
+  handoff records and optional EngFlow persistence conventions.
 
 ## [0.2.0] - 2026-10-17
 

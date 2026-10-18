@@ -4,7 +4,7 @@ This file separates structural checks from host behavior. Passing a text/link ch
 
 ## Structural checks
 
-- [x] Six EngFlow Skill folders plus the independently installable `technical-research` integration; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
+- [x] Six EngFlow Skill folders plus the independently installable `technical-research` and `handoff` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
 - [x] All local assets, references and Markdown links resolve; retired entry points appear only in migration/history explanations.
 - [x] Only one packaged AGENTS managed-block template exists, with one ordered BEGIN/END pair.
 - [x] No runtime scripts, archived workspaces, symlinks or unsafe ZIP paths are shipped.
@@ -12,8 +12,8 @@ This file separates structural checks from host behavior. Passing a text/link ch
 - [x] The implementation manifest loads long-task rules only for large/resumed work and declares one code writer, without worktree/branch orchestration.
 - [x] All six EngFlow entry points link or inherit the shared context contract; standalone research owns local context/delegation guidance without external skill dependencies. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
 
-Static integration checks cover the six EngFlow manifests, standalone research
-integration, local references and managed-block source. The EngFlow-only counts
+Static integration checks cover the six EngFlow manifests, standalone research/handoff
+integrations, local references and managed-block source. The EngFlow-only counts
 do not include independently scoped dotagents skills. The write-grant lifecycle previously received an independent
 read-only review; the model-independent context changes and repository integration
 are self-reviewed. Host behavior and token savings have not been measured.
@@ -65,7 +65,11 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | Discriminating experiment | A critical premise can be tested locally within authorization; an initial harness bypasses the actual mechanism | Choose a minimal real-path probe, use a negative/control case where practical, separate harness failures from hypothesis rejection and qualify passing results; no production feature implementation |
 | Experiment | Request a plan only, then authorize a run | First remains planned; authorized run records actual measurements and failures in one PoC record, no worktree |
 | Effective ADR | Previously accepted ADR is under reevaluation | Implementation and document synthesis still honor its constraints until an approved replacement supersedes it |
-| Status/handoff | Ask status, then explicitly request handoff | Status changes nothing; handoff references existing progress, temp/conversation by default; no duplicate task ledger |
+| Status/handoff | Ask workspace status, then explicitly request handoff | Status changes nothing; route explicit transfer to standalone `handoff`, reference existing progress, return conversation by default or temp file when requested; no duplicate task ledger |
+| Standalone handoff | Install only `handoff/`; request transfer of a non-code research or writing discussion | No EngFlow, Git, Feature or setup prerequisite; preserve objective, evidence, unresolved questions and next action; omit irrelevant engineering fields |
+| Handoff persistence | Request preview only, then a file without a destination, then explicit durable persistence | Preview writes nothing; file request uses a unique OS temp path; durable output follows user/project location without overwriting existing files; redact sensitive content |
+| Handoff resume limits | Supply a stale snapshot with missing files, unavailable process handles and a recorded approval; ask only to inspect it | Report live-state differences and missing access without restarting workers, inventing authority, rewriting the note or beginning implementation; continuation follows current authorization |
+| Handoff writer ownership | Request a saved handoff while an implementation worker or command may still write | Reconcile and quiesce under coordinator rules before file writes; if not possible, return conversational context with unknown liveness, not a competing writer |
 | Authorization | Edit-only request; then a later task with valid commit authority | No implicit commit in first case; no repeated permission question per slice in second; remote actions follow their authority |
 | Fresh-context briefing | Large source investigation with a user constraint present only in chat | Pass a bounded brief with that constraint and pointers, not the full transcript; parent does not pre-read all sources |
 | Serial worker grant | Delegate one implementation slice in the shared checkout | Worker begins read-only; parent records its handle/scope before granting writes; parent/other helpers do not write during the grant |

@@ -4,7 +4,8 @@
 Use existing project conventions and relevant evidence. EngFlow documents default to `engflow-doc/FEAT-###-slug/`; a bounded task does not require a Feature or bootstrap. Infer requested operations from natural language.
 
 ### Routing
-- Initialize rules, create/select a Feature, inspect status, or explicitly hand off/resume a session -> `engflow-workspace`.
+- Initialize rules, create/select a Feature or inspect status -> `engflow-workspace`.
+- Explicitly prepare/save a session handoff or resume from one -> standalone `handoff`.
 - Investigate sources, compare approaches, reproduce behavior or run a bounded experiment -> `technical-research`.
 - Deliberately clarify choices and challenge assumptions -> `engflow-grill`.
 - Turn existing discussion/evidence into a requested Spec, Design or proposed ADR -> `engflow-write`.
@@ -25,7 +26,7 @@ Use existing project conventions and relevant evidence. EngFlow documents defaul
 - Initialization creates a root index and this bounded AGENTS block; Feature creation adds only a Feature README and index link. Preserve unrelated content and history. No new project metadata, baseline publication, Decision Register, Review Log or CHL state is required.
 - Standalone `technical-research` stores durable evidence only where useful/requested and authorized. Within an existing Feature, retain the `research/RES-###-slug.md` and `experiments/POC-###-slug/experiment.md` conventions, allocating IDs above the Feature-local maximum; no Feature is required for research. Ordinary Features may use one Spec with a technical section; separate Design and ADRs are created when needed/requested. Review and Grill are conversational; later document synthesis is a separate requested operation.
 - Small implementation tasks need no ledger. Long tasks maintain one authorized existing record or `engflow-doc/<FEAT>/implementation.md`; without a Feature, use `.engflow/tasks/<task-slug>.md`. Update it at verified milestones and controlled pauses. Do not create parallel plan/status/debug/checkpoint records. A no-notes constraint is honored with reduced recovery guarantees disclosed.
-- Status is read-only. Handoff is explicit, conversational/temp by default; repository handoff requires explicit persistence intent. Reference existing task/document state and redact sensitive content.
+- Status is read-only. Standalone `handoff` handles explicit session transfer: conversation by default, OS temp storage for a file request without a destination. Repository handoff requires explicit persistence intent; retain existing Feature `handoffs/HANDOFF-###-slug.md` or `engflow-doc/handoffs/` conventions and allocate IDs above the applicable maximum. Reference existing task/document state and redact sensitive content.
 - Inspect IDs and paths before writing; do not overwrite other tasks or reuse known IDs. Preserve user edits and historical artifacts. Numbering is not concurrency-safe.
 - Commits require existing user authorization or an applicable policy explicitly authorizing them. Edit authorization alone is insufficient; reuse valid authorization without asking repeatedly. Push, publication and remote issue changes need their applicable authorization.
 <!-- ENGFLOW:END -->

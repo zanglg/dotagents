@@ -34,6 +34,7 @@ small, auditable, and safe to copy between machines.
 `-- skills/
     |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
     |-- engflow-*/     # Six related EngFlow skills
+    |-- handoff/      # Standalone session transfer and resumption
     |-- technical-research/ # Standalone evidence-driven investigation
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
@@ -59,7 +60,8 @@ without searching the whole workspace.
 | --- | --- |
 | [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
-| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation, status and explicit handoff |
+| [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
+| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
 | [technical-research](skills/technical-research/SKILL.md) | Standalone implementation analysis, problem/solution investigation and feasibility assessment, with optional bounded experiments |
 | [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
 | [engflow-write](skills/engflow-write/SKILL.md) | Requested Spec, Design or proposed ADR synthesis |
@@ -79,8 +81,9 @@ For a repository-local installation, copy the desired skill folders from
 files together. `technical-research` can be installed on its own; it requires no
 EngFlow skills, Feature setup or prescribed document directory. EngFlow uses
 cross-skill references, so install its six `engflow-*` folders together and add
-`technical-research` for its research integration. Other independently scoped
-skills can be selected separately.
+`technical-research` and `handoff` for research and session-transfer integration.
+`handoff` also installs alone, without EngFlow or a repository. Other independently
+scoped skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of

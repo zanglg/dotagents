@@ -16,6 +16,6 @@ Keep the current frontier, settled choices and critical constraints concise. Del
 5. When no material ready questions remain, summarize the agreed choices, verified facts, unproven assumptions and deferred risks, and confirm shared understanding. Honor early stop/pause immediately with unresolved items made explicit. Silence is not approval.
 6. Return a concise summary and suggested next action. Clarification does not automatically write documents, approve an ADR or start implementation. A subsequent synthesis request goes to `engflow-write`; investigation goes to `technical-research`.
 
-For explicit save/handoff/resume requests, use `engflow-workspace` to export or read a short handoff containing the unresolved questions and their dependencies. There is no separate CHL file, checkpoint numbering or Challenge state machine to maintain. Existing historical CHL records may be read without rewriting them.
+For explicit save/handoff/resume requests, use the standalone `handoff` skill to export or read a short handoff containing the unresolved questions and their dependencies. There is no separate CHL file, checkpoint numbering or Challenge state machine to maintain. Existing historical CHL records may be read without rewriting them.
 
 Inspired by Matt Pocock's [grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md); this is an EngFlow adaptation, not an official or verbatim copy.

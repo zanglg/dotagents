@@ -2,7 +2,8 @@
 
 Use these notes when replacing an older EngFlow installation. For the complete
 integrated workflow, install the six `skills/engflow-*` folders together with
-`skills/technical-research/` from the selected dotagents release or commit.
+`skills/technical-research/` and `skills/handoff/` from the selected dotagents
+release or commit.
 Repository releases use Semantic Versioning; EngFlow has no separate version
 number. No progress-record conversion is required.
 
@@ -10,7 +11,7 @@ number. No progress-record conversion is required.
 
 | Older entry point | Current entry point | Operation |
 | --- | --- | --- |
-| `engflow-handoff` | `engflow-workspace` | Explicit handoff/resume |
+| `engflow-handoff` / workspace handoff operation | `handoff` | Standalone explicit session transfer/resume |
 | `engflow-research` / `engflow-experiment` | `technical-research` | Standalone investigation and optional bounded experiment |
 | `engflow-challenge` | `engflow-grill` | Clarify or test assumptions |
 | `engflow-spec` / `engflow-to-spec` | `engflow-write` | Spec synthesis |
@@ -25,6 +26,11 @@ number. No progress-record conversion is required.
 of a proposed or completed refactoring. Its scope is unchanged, and it is not a
 prerequisite for implementation.
 
+Session handoff/resume is now owned by the standalone `handoff` skill, not
+`engflow-workspace`. Update saved commands and managed routing rules. Preserve
+existing handoff documents and local customizations; no document migration or
+compatibility wrapper is required. The standalone skill has no EngFlow dependency.
+
 Research is now the standalone `technical-research` skill, not an EngFlow-owned
 entry point. Install it independently or alongside EngFlow. Preserve local
 customizations before replacing an installed `engflow-research` folder and update
@@ -33,7 +39,7 @@ there is no mandatory document migration or compatibility wrapper.
 
 ## Installation
 
-1. Inspect local Skill customizations and preserve the relevant changes. Install the six current EngFlow folders plus `technical-research` for research integration. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
+1. Inspect local Skill customizations and preserve the relevant changes. Install the six current EngFlow folders plus `technical-research` and `handoff` for research and session-transfer integration. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
 2. Retired folders include `engflow-research`, `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
 3. Refresh the existing managed block with `$engflow-workspace 更新 EngFlow 托管规则，保留其他 AGENTS 内容。` Follow [the marker rules](../../skills/engflow-workspace/references/initialize.md); update any project-specific shortcuts to the table above.
 
