@@ -14,7 +14,7 @@ Keep the current frontier, settled choices and critical constraints concise. Del
 3. Ask the **ready frontier**: independent questions whose prerequisites are settled. Number the questions, give a recommended answer and short reason, then wait for responses. Keep a round readable; do not ask a dependent question before its prerequisite has been answered. Offer investigate/defer when evidence is insufficient.
 4. Recompute dependencies after each round. Test high-impact assumptions with counterexamples and failure scenarios. If an answer changes a prior choice, reopen affected branches. Respect the requested depth; avoid endless low-value objections.
 5. When no material ready questions remain, summarize the agreed choices, verified facts, unproven assumptions and deferred risks, and confirm shared understanding. Honor early stop/pause immediately with unresolved items made explicit. Silence is not approval.
-6. Return a concise summary and suggested next action. Clarification does not automatically write documents, approve an ADR or start implementation. A subsequent synthesis request goes to `engflow-write`; investigation goes to `engflow-research`.
+6. Return a concise summary and suggested next action. Clarification does not automatically write documents, approve an ADR or start implementation. A subsequent synthesis request goes to `engflow-write`; investigation goes to `technical-research`.
 
 For explicit save/handoff/resume requests, use the standalone `handoff` skill to export or read a short handoff containing the unresolved questions and their dependencies. There is no separate CHL file, checkpoint numbering or Challenge state machine to maintain. Existing historical CHL records may be read without rewriting them.
 
