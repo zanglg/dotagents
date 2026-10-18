@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Refocus `refactor-assess` on evidence-backed maintenance benefits, net cost and
+  compatibility rather than nine diagnostic dimensions and a fixed process.
+  Simplify read-only collaboration guidance and add behavioral validation
+  scenarios; preserve explicit invocation and advisory, conversation-only output.
 - Refocus `technical-research` on evidence quality, judgment and authority rather
   than detailed investigation checklists. Simplify its report outline and
   read-only delegation contract while retaining explicit invocation, mechanism
@@ -43,9 +47,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
   catalogs, migration guidance and validation scenarios while retaining existing
   handoff records and optional EngFlow persistence conventions.
 - Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining
-  its nine diagnostic dimensions, evidence-based recommendations and read-only
-  conversational output. Replace the EngFlow context dependency with local
-  review guidance, remove implementation-skill prerequisites, and update routing,
+  evidence-based recommendations and read-only conversational output. Replace
+  the EngFlow context dependency with local review guidance, remove
+  implementation-skill prerequisites, and update routing,
   installation, migration and validation scenarios. Preserve existing artifacts;
   no compatibility wrapper is provided.
 
