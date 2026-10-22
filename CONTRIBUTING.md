@@ -49,7 +49,7 @@ chore: update repository metadata
 Example of a substantial feature commit:
 
 ```text
-feat(skills): add EngFlow workflows
+feat(skills): add engineering workflows
 
 Provide six focused entry points for engineering work.
 

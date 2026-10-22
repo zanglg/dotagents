@@ -12,8 +12,6 @@ This project follows Semantic Versioning and uses Conventional Commits.
   a compact outline and no EngFlow dependency. Organize Specs by independent
   objective, with explicit non-goals, observable acceptance and test boundaries.
   Preserve evidence, open questions and approval history; previews write nothing.
-  Keep Design/ADR synthesis in `engflow-write` and update routing, migration and
-  validation guidance.
 - Add standalone `design` for evidence-backed feature design, autonomous routine
   choices, consequential user decisions and continuous dependency-driven work.
   Define design quality and decision authority rather than a fixed process;
@@ -39,13 +37,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
   approval, unless restricted by the user; no expanded access, disclosure or extra
   research reports. Keep global invocation guards and return evidence to Design.
   Retain explicit task-level Research permission elsewhere and keep Research
-  non-executing. Retain `engflow-write`
-  for synthesis of existing conclusions, not as a required Design output step.
-  Update installation, routing, migration and behavioral validation guidance.
+  non-executing. Design writes its own proposal without a separate output step.
 - Refocus `refactor-assess` on evidence-backed maintenance benefits, net cost and
   compatibility rather than nine diagnostic dimensions and a fixed process.
-  Simplify read-only collaboration guidance and add behavioral validation
-  scenarios; preserve explicit invocation and advisory, conversation-only output.
+  Simplify read-only collaboration guidance; preserve explicit invocation and
+  advisory, conversation-only output.
 - Refocus `technical-research` on evidence quality, judgment and authority rather
   than detailed investigation checklists. Simplify its report outline and
   read-only delegation contract while retaining explicit invocation, mechanism
@@ -58,11 +54,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
   `agents/openai.yaml` policy. Save handoffs to OS temporary storage by
   default using `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`;
   retain conversation-only previews and user-selected durable destinations.
-  Align generated EngFlow AGENTS rules with the new default.
 - Extract `engflow-research` as the standalone `technical-research` skill, with
   self-contained read-only delegation guidance, optional project-specific paths
-  and IDs, and no EngFlow installation dependency. Update EngFlow routing,
-  catalogs, installation and migration guidance; preserve existing RES/PoC
+  and IDs, and no EngFlow installation dependency. Preserve existing RES/PoC
   records and provide no compatibility wrapper.
 - Unify `technical-research` around concrete technical questions and source-based
   evidence, retaining actual-path/contract tracing, configuration and cross-layer
@@ -72,24 +66,33 @@ This project follows Semantic Versioning and uses Conventional Commits.
   category/context guides with brief optional read-only delegation guidance and
   simplify the report outline. Retain explicit-only host metadata matching
   `handoff`, with read-only Research composition allowed within an explicitly
-  requested Design task where supported by the host. Update routing and
-  migration guidance; implementation retains separately scoped runtime validation,
-  and historical artifacts remain unchanged.
+  requested Design task where supported by the host. Historical artifacts remain
+  unchanged.
 - Extract session handoff/resume from `engflow-workspace` into the standalone
   `handoff` skill for coding, research, design, writing and other work, without
   an EngFlow, repository or Feature dependency. Preserve evidence, authority
-  limits and live-state reconciliation. Update routing,
-  catalogs, migration guidance and validation scenarios while retaining existing
-  handoff records and optional EngFlow persistence conventions.
+  limits and live-state reconciliation while retaining existing handoff records.
 - Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining
   evidence-based recommendations and read-only conversational output. Replace
   the EngFlow context dependency with local review guidance, remove
-  implementation-skill prerequisites, and update routing,
-  installation, migration and validation scenarios. Preserve existing artifacts;
-  no compatibility wrapper is provided.
+  implementation-skill prerequisites and preserve existing artifacts. No
+  compatibility wrapper is provided.
+
+### Removed
+
+- Remove the entire EngFlow workflow group to make room for a future redesign:
+  all `skills/engflow-*/` entry points and supporting references/templates,
+  including ADR support, plus `docs/engflow/` and active catalog/installation
+  references. Retain the independent skills unchanged; no replacement workflow
+  or compatibility wrapper is introduced.
 
 ### Compatibility and migration
 
+- EngFlow entry points are no longer shipped. Preserve local customizations
+  before retiring installed `engflow-*` folders and removing their commands,
+  shortcuts and managed AGENTS rules; keep unrelated rules and project artifacts.
+  Repository edits do not update installed copies automatically. Independent
+  skills remain available, without requiring the retired workflow.
 - `diagram-aesthetics` replaces `diagram-color-guidelines`; the old entrypoint is
   not retained. For existing installations, preserve customizations, install the
   new folder with its references, update invocations and links, and retire the old
