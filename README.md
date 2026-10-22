@@ -35,6 +35,9 @@ small, auditable, and safe to copy between machines.
     |-- poc/          # Bounded execution-based verification
     |-- diagram-aesthetics/ # Shared technical diagram aesthetics
     |-- handoff/      # Standalone session transfer and resumption
+    |-- plan-implementation/ # Milestone planning and revision
+    |-- implement/    # Linear implementation and cross-session recovery
+    |-- code-review/  # Read-only review of code changes
     |-- technical-research/ # Standalone evidence-driven investigation
     |-- specify/      # Standalone specification synthesis
     |-- refactor-assess/ # Standalone read-only refactoring assessment
@@ -63,6 +66,9 @@ without searching the whole workspace.
 | [diagram-aesthetics](skills/diagram-aesthetics/SKILL.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
+| [plan-implementation](skills/plan-implementation/SKILL.md) | Create and revise verifiable milestone plans without implementing or publishing tickets |
+| [implement](skills/implement/SKILL.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
+| [code-review](skills/code-review/SKILL.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
 | [design](skills/design/SKILL.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
 | [poc](skills/poc/SKILL.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [technical-research](skills/technical-research/SKILL.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
@@ -70,7 +76,11 @@ without searching the whole workspace.
 | [refactor-assess](skills/refactor-assess/SKILL.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 These skills are independent entry points, not a required workflow. Add other
-reusable skills to this catalog when useful.
+reusable skills to this catalog when useful. Planning owns milestone structure;
+implementation owns observed progress in the same plan; code review returns findings
+without edits. Small work can go straight to implementation. See the usage and
+validation scenarios for [planning](skills/plan-implementation/README.md),
+[implementation](skills/implement/README.md) and [review](skills/code-review/README.md).
 
 ## Installation
 
