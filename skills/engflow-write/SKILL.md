@@ -1,11 +1,11 @@
 ---
 name: engflow-write
-description: "On request, turn existing conversation, research or review findings into an engineering spec, technical design or proposed ADR. Infer the requested document from natural language, preserve evidence and uncertainty, and generate only the requested artifact."
+description: "On request, turn existing conversation, research or review findings into a technical design or proposed ADR. Infer the requested document from natural language, preserve evidence and uncertainty, and generate only the requested artifact."
 ---
 
 # EngFlow Write
 
-Synthesize engineering documents from what is already known. Accept a conversation, review findings, source documents or a combination; do not require a saved review log or repeat questions already answered. Use the user's requested target and location. Ask only when the target or an essential decision cannot be inferred.
+Synthesize technical designs and proposed ADRs from what is already known. Accept a conversation, review findings, source documents or a combination; do not require a saved review log or repeat questions already answered. Use the user's requested target and location. Ask only when the target or an essential decision cannot be inferred.
 
 Forming a new technical route through investigation and decisions belongs to the
 standalone `design` Skill when requested. Design writes its own proposal and does
@@ -16,11 +16,10 @@ Use the relevant conversational findings and targeted artifact sections; do not 
 
 ## Read the reference for the requested output
 
-- Requirements, acceptance criteria, or a complete specification for an ordinary Feature -> `references/spec.md`.
 - A separate technical solution or architecture document -> `references/design.md`.
 - A consequential choice, alternatives and WHY -> `references/adr.md`.
 
-For an ordinary Feature, one `spec.md` can contain requirements, the necessary technical approach and validation. Split out `design.md` when requested or when architecture complexity warrants a separate treatment; preserve an existing project's split. Reading a reference does not authorize creating every document type.
+Specification synthesis belongs to standalone `specify`. Write may revise the technical-design section of an existing combined Spec when requested; it does not require splitting the document.
 
 ## Shared contract
 

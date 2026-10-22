@@ -4,7 +4,7 @@ This file separates structural checks from host behavior. Passing a text/link ch
 
 ## Structural checks
 
-- [x] Five EngFlow Skill folders plus the independently installable `design`, `poc`, `technical-research`, `handoff` and `refactor-assess` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
+- [x] Five EngFlow Skill folders plus the independently installable `design`, `poc`, `technical-research`, `handoff`, `refactor-assess` and `specify` integrations; other repository skills are allowed; frontmatter names match the folders and descriptions are present.
 - [x] All local assets, references and Markdown links resolve; retired entry points appear only in migration/history explanations.
 - [x] Only one packaged AGENTS managed-block template exists, with one ordered BEGIN/END pair.
 - [x] No runtime scripts, archived workspaces, symlinks or unsafe ZIP paths are shipped.
@@ -12,7 +12,7 @@ This file separates structural checks from host behavior. Passing a text/link ch
 - [x] The implementation manifest loads long-task rules only for large/resumed work and declares one code writer, without worktree/branch orchestration.
 - [x] All five EngFlow entry points link or inherit the shared context contract; standalone research and assessment own local read-only delegation/review guidance without external skill dependencies. The long-task protocol links the serial-worker write-grant contract. No stale parent-only writer rule remains.
 
-Static integration checks cover the five EngFlow manifests, standalone design/PoC/research/handoff/assessment
+Static integration checks cover the five EngFlow manifests, standalone design/PoC/research/handoff/assessment/specification
 integrations, local references and managed-block source. The EngFlow-only counts
 do not include independently scoped dotagents skills. The write-grant lifecycle previously received an independent
 read-only review; the model-independent context changes and repository integration
@@ -79,7 +79,13 @@ Use a disposable repository, record actual file/Git changes and command outcomes
 | Refactoring rationale and changing inputs | Code omits a consequential compatibility rationale, and a helper's recommendation targets a file changed during review | Preserve evidenced context without inventing intent; parent rechecks affected findings and discloses remaining uncertainty, with no report or scratch writes |
 | Independent refactoring entry | Request straightforward implementation directly; later reuse assessment findings that conflict with new evidence | No mandatory refactoring assessment; implementation reconciles advisory recommendations with current evidence and constraints |
 | Review to ADR | Ask write to synthesize the second finding | Only requested ADR, real evidence, unresolved choices preserved; no assumed approval or fabricated review-log link |
-| Combined Spec | Ordinary Feature synthesis | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
+| Combined Spec | Ask `specify` to synthesize an ordinary Feature | One Spec with necessary approach/validation; no automatic separate Design/ADR/plan |
+| Standalone specification | Install only `specify/`; provide a settled conversation and requested output path | Produce a Draft specification with observable acceptance and necessary known contracts; no EngFlow, Feature, other skill or setup dependency |
+| Spec preview and destination | Request a preview, then request a saved Spec without an established destination | Preview creates no files; propose a destination before writing when user/project context supplies none |
+| Spec unresolved choices | Review findings offer competing fixes and an unsupported critical premise | Preserve alternatives and evidence limits; identify blocked scope without selecting a solution, starting design/experiments or claiming readiness |
+| Spec update and approval | Revise an approved combined Spec with stable REQ/AC IDs, Feature metadata and an existing Design link | Preserve IDs, metadata, unrelated content and approval provenance; changed content does not inherit approval; link rather than duplicate Design |
+| Spec invocation and boundaries | Ask for implementation, then explicitly request a Spec from known conclusions | No mandatory Spec conversion during implementation; explicit synthesis creates only the requested artifact, with no tickets, commits or publication. Verify explicit-only host metadata in the respective hosts |
+| Spec extraction migration | Upgrade an installation with local Spec templates in `engflow-write` | Preserve customizations, install `specify`, update routing, retire only replaced Spec support files and keep Write's Design/ADR functions and historical project documents |
 | Standalone research | Copy only `technical-research/` into a fixture with source code, no EngFlow skills, Feature or document setup | Investigate directly with one protocol and conversational findings; no missing-skill prerequisite, forced category, directory, ID or report creation; no experiment execution |
 | Research explicit invocation | Outside an active Design task, ask a routine coding question or encounter implementation uncertainty, then explicitly request research | No automatic invocation from ordinary workflow references; explicit research uses the Skill. Verify unchanged `disable-model-invocation` and `policy.allow_implicit_invocation` in their respective hosts, including whether Design composition is supported; do not assume cross-host enforcement |
 | Research integration migration | Upgrade an installation containing `engflow-research` and existing Feature RES/PoC records | Route to `technical-research`, preserve customizations and historical records, retain existing Feature paths when writing is authorized; no compatibility wrapper or automatic document migration |

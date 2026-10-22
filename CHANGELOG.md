@@ -8,6 +8,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Extract specification synthesis into standalone, explicit-only `specify`, with
+  a compact outline and no EngFlow dependency. Organize Specs by independent
+  objective, with explicit non-goals, observable acceptance and test boundaries.
+  Preserve evidence, open questions and approval history; previews write nothing.
+  Keep Design/ADR synthesis in `engflow-write` and update routing, migration and
+  validation guidance.
 - Add standalone `design` for evidence-backed feature design, autonomous routine
   choices, consequential user decisions and continuous dependency-driven work.
   Define design quality and decision authority rather than a fixed process;
