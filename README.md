@@ -30,12 +30,10 @@ small, auditable, and safe to copy between machines.
 |-- LICENSE            # MIT License
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
-|-- docs/              # Guides for related skill groups
 `-- skills/
     |-- design/       # Feature design and sustained technical decisions
     |-- poc/          # Bounded execution-based verification
     |-- diagram-aesthetics/ # Shared technical diagram aesthetics
-    |-- engflow-*/     # Five related EngFlow skills
     |-- handoff/      # Standalone session transfer and resumption
     |-- technical-research/ # Standalone evidence-driven investigation
     |-- specify/      # Standalone specification synthesis
@@ -65,32 +63,22 @@ without searching the whole workspace.
 | [diagram-aesthetics](skills/diagram-aesthetics/SKILL.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
 | [design](skills/design/SKILL.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
 | [poc](skills/poc/SKILL.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [technical-research](skills/technical-research/SKILL.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
-| [engflow-grill](skills/engflow-grill/SKILL.md) | Conversational clarification and assumption testing |
-| [specify](skills/specify/SKILL.md) | Synthesize existing discussion and evidence into a specification or preview; no EngFlow dependency |
-| [engflow-write](skills/engflow-write/SKILL.md) | Requested Design or proposed ADR synthesis |
-| [engflow-review-design](skills/engflow-review-design/SKILL.md) | Read-only design findings in the conversation |
+| [specify](skills/specify/SKILL.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
 | [refactor-assess](skills/refactor-assess/SKILL.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
-| [engflow-implement](skills/engflow-implement/SKILL.md) | Implementation, long-task coordination, tests and code review |
 
-EngFlow is one group in this workspace. See the
-[EngFlow guide](docs/engflow/README.md) for examples and
-[validation scenarios](docs/engflow/VALIDATION.md) for host checks. Other skills
-can live alongside this group and should be added to this catalog when useful.
+These skills are independent entry points, not a required workflow. Add other
+reusable skills to this catalog when useful.
 
 ## Installation
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. `design`, `poc`, `technical-research`, `handoff`, `refactor-assess`
-and `specify` each install independently, without EngFlow or Feature setup.
-For the complete integrated workflow, install the five `engflow-*` folders
-and these six standalone skills. Design can work alone; install Research and
-PoC alongside it to use those optional collaborators. Other independently scoped
-skills can be selected separately.
+files together. Each skill installs independently, without workspace setup.
+Design can work alone; install `technical-research` and `poc` alongside it to
+use those optional collaborators. Other skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of
