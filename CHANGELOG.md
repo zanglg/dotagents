@@ -21,6 +21,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Rename `diagram-color-guidelines` to `diagram-aesthetics` and focus it on visual
+  outcomes and cross-figure identity, not drawing techniques or notation teaching.
+  Replace detailed recipes and fixed typography/stroke sizes with relative
+  principles, a compact cool-dominant theme, and semantic color extension rules.
+  Consolidate defaults in `references/default-theme.md`; retain readability,
+  multilingual support, domain-notation priority, and add visual integrity checks.
+  Refine the starting theme with a more distinct blue accent, generic color roles,
+  and explicit category-palette extension rather than fixed component skins.
 - Let explicitly requested Design tasks use read-only Research without per-call
   approval, unless restricted by the user; no expanded access, disclosure or extra
   research reports. Keep global invocation guards and return evidence to Design.
@@ -73,6 +81,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
   implementation-skill prerequisites, and update routing,
   installation, migration and validation scenarios. Preserve existing artifacts;
   no compatibility wrapper is provided.
+
+### Compatibility and migration
+
+- `diagram-aesthetics` replaces `diagram-color-guidelines`; the old entrypoint is
+  not retained. For existing installations, preserve customizations, install the
+  new folder with its references, update invocations and links, and retire the old
+  installed copy to avoid duplicate discovery. Repository edits do not update
+  installed copies automatically.
 
 ## [0.2.0] - 2026-10-17
 

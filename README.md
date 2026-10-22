@@ -34,7 +34,7 @@ small, auditable, and safe to copy between machines.
 `-- skills/
     |-- design/       # Feature design and sustained technical decisions
     |-- poc/          # Bounded execution-based verification
-    |-- diagram-color-guidelines/ # Shared technical diagram aesthetics
+    |-- diagram-aesthetics/ # Shared technical diagram aesthetics
     |-- engflow-*/     # Five related EngFlow skills
     |-- handoff/      # Standalone session transfer and resumption
     |-- technical-research/ # Standalone evidence-driven investigation
@@ -61,7 +61,7 @@ without searching the whole workspace.
 
 | Skill | Purpose |
 | --- | --- |
-| [diagram-color-guidelines](skills/diagram-color-guidelines/SKILL.md) | Tool-independent diagram aesthetics with multilingual typography, semantic colors, and content-adaptive layout |
+| [diagram-aesthetics](skills/diagram-aesthetics/SKILL.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
 | [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
 | [engflow-workspace](skills/engflow-workspace/SKILL.md) | Optional setup, Feature navigation and read-only status |
