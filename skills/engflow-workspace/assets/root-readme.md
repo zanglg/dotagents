@@ -15,7 +15,8 @@ Goal: {{PROJECT_DESCRIPTION}}
 - `poc` (standalone): bounded, authorized experiments and qualified evidence, not production implementation.
 - `technical-research` (standalone): source-driven investigation of technical questions with evidence-backed explanations; no experiment execution.
 - `engflow-grill`: conversational clarification and assumption testing.
-- `engflow-write`: synthesize existing conclusions into a requested Spec, Design or proposed ADR; not a required step after Design.
+- `specify` (standalone): synthesize existing discussion and evidence into a requested specification; no setup required.
+- `engflow-write`: synthesize existing conclusions into a requested Design or proposed ADR; not a required step after Design.
 - `engflow-review-design`: evidence-backed design findings in the conversation.
 - `refactor-assess`: optional, read-only assessment of existing code with advisory refactoring recommendations.
 - `engflow-implement`: code, tests and code review; a single progress record for long tasks.

@@ -10,7 +10,8 @@ Use existing project conventions and relevant evidence. EngFlow documents defaul
 - Explicit experiment request or user-authorized bounded experiment within a task -> standalone `poc`; invocation alone does not grant unrestricted execution.
 - Explicit research request, task-scoped Research permission, or on-demand support within an explicitly requested Design task -> `technical-research`; no experiment execution. Other routine source inspection stays in the active workflow.
 - Deliberately clarify choices and challenge assumptions -> `engflow-grill`.
-- Turn existing discussion/evidence into a requested Spec, Design or proposed ADR -> `engflow-write`.
+- Turn existing discussion/evidence into a requested specification -> standalone `specify`; no new design phase or automatic implementation.
+- Synthesize existing conclusions into a requested Design or proposed ADR -> `engflow-write`.
 - Review requirements/design/architecture -> `engflow-review-design`; return findings in the conversation without file or external writes.
 - Assess existing code for refactoring opportunities -> `refactor-assess`; return advisory recommendations without starting implementation. This is an optional entry point, not an implementation prerequisite.
 - Implement a request, Spec or tickets through tests and code review -> `engflow-implement`; use its task graph and single progress record for long work.

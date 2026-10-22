@@ -1,6 +1,6 @@
 # EngFlow
 
-**Five related EngFlow skills within dotagents for decisions and implementation, integrated with standalone `design`, `poc`, `technical-research`, `handoff` and `refactor-assess` skills.** Long implementation tasks use a dependency graph, one code writer and one progress record in the existing checkout. The package ships no runtime scripts and does not create or manage worktrees.
+**Five related EngFlow skills within dotagents for decisions and implementation, integrated with standalone `design`, `poc`, `technical-research`, `handoff`, `refactor-assess` and `specify` skills.** Long implementation tasks use a dependency graph, one code writer and one progress record in the existing checkout. The package ships no runtime scripts and does not create or manage worktrees.
 
 ## Skills
 
@@ -12,7 +12,8 @@
 | `poc` (standalone integration) | Test a bounded technical premise within execution authority | Qualified results and necessary reproducibility artifacts |
 | `technical-research` (standalone integration) | Investigate concrete technical questions through source and first-party evidence | Conversational explanations/judgments or an authorized research report; no experiment execution |
 | `engflow-grill` | Deliberate clarification and assumption testing | Conversation only |
-| `engflow-write` | Synthesize existing discussion/evidence into the requested Spec, Design or proposed ADR | Only the requested document or preview |
+| `specify` (standalone integration) | Synthesize existing discussion/evidence into a specification | Only the requested Spec or preview |
+| `engflow-write` | Synthesize existing conclusions into the requested Design or proposed ADR | Only the requested document or preview |
 | `engflow-review-design` | Review requirements, technical solutions and architecture | Evidence-backed findings in the conversation; no writes |
 | `refactor-assess` (standalone integration) | Assess existing code for worthwhile refactoring opportunities | Evidence-backed recommendations, risks and verification needs; no implementation |
 | `engflow-implement` | Implement a request, Spec or tickets through testing and code review | Code/tests; one progress record for long work |
@@ -23,11 +24,18 @@ Refactoring assessment is an optional assessment of existing code, distinct from
 
 ## Install and upgrade
 
-Copy the five `skills/engflow-*` folders plus `skills/design/`, `skills/poc/`, `skills/technical-research/`, `skills/handoff/` and `skills/refactor-assess/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. [Refactor Assess](../../skills/refactor-assess/SKILL.md) also installs independently and returns advisory findings without modifying files. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
+Copy the five `skills/engflow-*` folders plus `skills/design/`, `skills/poc/`, `skills/technical-research/`, `skills/handoff/`, `skills/refactor-assess/` and `skills/specify/` from dotagents into the target repository's `.agents/skills/` for the complete integrated workflow. [Technical Research](../../skills/technical-research/SKILL.md) also works on its own, without EngFlow setup or other skills. [Refactor Assess](../../skills/refactor-assess/SKILL.md) also installs independently and returns advisory findings without modifying files. For upgrades, follow [MIGRATION.md](MIGRATION.md) to retire replaced Skill folders after preserving local customizations. Historical project artifacts are not deleted or renamed.
 
 `technical-research` accepts explicit research requests, task-scoped Research permission, and on-demand read-only use within an explicitly requested Design task. The Design request supplies task-level permission unless the user restricts it; other workflow references alone do not invoke Research. Design's Research returns evidence without extra report writes or expanded access/disclosure permissions. It uses `disable-model-invocation: true` in frontmatter and `policy.allow_implicit_invocation: false` in `agents/openai.yaml` for their respective hosts. Research returns conversational findings by default and follows user-selected or established project locations for durable evidence. Within an existing EngFlow Feature, use `research/RES-###-slug.md`. Existing PoC records may be consulted; new runtime checks require bounded execution authority, for example through standalone `poc`. Allocate IDs above the existing Feature-local maximum and preserve existing reports. These are integration conventions, not requirements of standalone research; do not create a Feature merely to investigate.
 
 [Handoff](../../skills/handoff/SKILL.md) also installs independently and saves a Markdown file in OS temporary storage by default, named `handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`. It reports the actual path and a copyable continuation instruction; conversation-only or preview requests do not write files. For explicitly requested durable EngFlow handoffs, preserve the existing Feature's `handoffs/HANDOFF-###-slug.md` convention, or `engflow-doc/handoffs/` without a Feature, allocating IDs above the applicable maximum. These are optional integration conventions, not standalone requirements.
+
+[Specify](../../skills/specify/SKILL.md) installs independently and synthesizes existing
+conversation and evidence into an implementable, testable specification. It does not
+restart design or initiate implementation. Use user/project paths and existing
+formats; within an existing EngFlow Feature, retain its `spec.md`, IDs and metadata.
+No Feature is created just to write a specification. Preview requests write nothing;
+new content is Draft unless explicitly approved for that content.
 
 Optional setup:
 
@@ -50,7 +58,7 @@ $engflow-grill 挑战当前设计的故障恢复假设
 $engflow-review-design 评审这份方案，直接在对话中输出问题
 $refactor-assess 检视当前模块的重构机会，给出有依据的建议，不修改代码
 $engflow-write 将刚才评审的第二项整理成 Proposed ADR，保留未决选项
-$engflow-write 将已确认的需求和必要技术方案整理成一份 spec.md
+$specify 将已确认的需求和必要技术方案整理成一份 spec.md
 $engflow-implement 实现这份规格，按依赖逐项推进，完成测试和代码评审
 $engflow-implement 继续 FEAT-001 的长任务，先核对进度记录与当前代码
 $engflow-workspace 总结当前实现进度
@@ -60,9 +68,10 @@ $handoff 为下一轮准备交接，重点是尚未解决的资源回收问题
 ## Sustained design and experiments
 
 [Design](../../skills/design/SKILL.md) forms a solution rather than merely formatting
-known conclusions. It works independently and writes its own proposal; Write
-remains available for requested synthesis of existing material into a Spec, Design
-or proposed ADR. No mandatory chain of Skills or document suite is introduced.
+known conclusions. It works independently and writes its own proposal. Specify
+synthesizes existing material into a specification; Write remains available for
+requested Design or proposed ADR synthesis. No mandatory chain of Skills or
+document suite is introduced.
 
 Design resolves ready questions along their dependencies, makes supported routine
 choices and asks for consequential user tradeoffs. Follow-up answers continue the
@@ -128,7 +137,7 @@ The same Skills apply across smaller and larger context windows without editing 
 ## What was simplified
 
 - Research follows the technical question without predefined categories. Experiment execution is outside its scope; implementation retains its separately authorized validation responsibilities.
-- Spec, Design and ADR synthesis share one writing entry point; forming a new solution belongs to Design, which writes its own proposal. PoC supplies separately authorized execution evidence.
+- Spec synthesis belongs to standalone Specify; Design and ADR synthesis remain in Write. Forming a new solution belongs to Design, which writes its own proposal. None is a mandatory follow-up stage. PoC supplies separately authorized execution evidence.
 - Handoff is a standalone, explicit session-transfer skill; it references an existing implementation record without creating a second ledger.
 - Grill has no separate checkpoint format. Design review has no persisted review log.
 - Baseline publication, mandatory project metadata, a Decision Register and duplicate plan/status/debug ledgers are removed from the active workflow. Existing records remain readable history.
@@ -138,4 +147,4 @@ The same Skills apply across smaller and larger context windows without editing 
 
 These are prompt instructions, not a scheduler, lock manager or access-control system. Runtime capability determines execution duration and subagent availability. Recovery requires the actual progress record **and code** to survive; uncommitted changes are not transferred by a handoff. Commit/push and external publication follow existing authorization.
 
-Static checks cover five EngFlow manifests and the standalone design, PoC, research, handoff and assessment integrations, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.
+Static checks cover five EngFlow manifests and the standalone design, PoC, research, handoff, assessment and specification integrations, internal links, retired active names, templates, packaging and the single managed-block source. Host behavioral scenarios are listed in [VALIDATION.md](VALIDATION.md); they must be exercised in the target agent environment before claiming end-to-end reliability.

@@ -20,6 +20,6 @@ Use for **requirements / technical design / architecture review**, including des
 
 The review is reusable input, not a decision or publication. Keep findings, possible solutions and any user-confirmed choices distinct. Recommendations do not become Accepted ADRs or design approvals.
 
-When the user subsequently requests synthesis, use `engflow-write` and name the intended output: Spec, Design or proposed ADR. A request to create an issue or another artifact follows that target's existing workflow. Carry forward the evidence and uncertainty; the user need not repeat facts already available in this session.
+When the user subsequently requests synthesis, use standalone `specify` for a specification or `engflow-write` for a Design or proposed ADR. A request to create an issue or another artifact follows that target's existing workflow. Carry forward the evidence and uncertainty; the user need not repeat facts already available in this session.
 
 Existing historical review logs may be read as evidence. This Skill does not maintain them or require a `REV-*` numbering scheme. For a new session, the standalone `handoff` skill can carry the review through an explicit transfer request.

@@ -2,9 +2,9 @@
 
 Use these notes when replacing an older EngFlow installation. For the complete
 integrated workflow, install the five `skills/engflow-*` folders together with
-`skills/design/`, `skills/poc/`, `skills/technical-research/`, `skills/handoff/`
-and `skills/refactor-assess/`
-from the selected dotagents release or commit.
+`skills/design/`, `skills/poc/`, `skills/technical-research/`, `skills/handoff/`,
+`skills/refactor-assess/` and `skills/specify/` from the selected dotagents release
+or commit.
 Repository releases use Semantic Versioning; EngFlow has no separate version
 number. No progress-record conversion is required.
 
@@ -16,12 +16,22 @@ number. No progress-record conversion is required.
 | `engflow-research` | `technical-research` | Standalone source-driven investigation |
 | `engflow-experiment` | `poc` | Bounded execution-based verification; establish current execution authority |
 | `engflow-challenge` | `engflow-grill` | Clarify or test assumptions |
-| `engflow-spec` / `engflow-to-spec` | `engflow-write` | Spec synthesis |
+| `engflow-spec` / `engflow-to-spec` / Spec operation in `engflow-write` | `specify` | Standalone Spec synthesis |
+| `to-spec` (unreleased name) | `specify` | Rename the installed folder and saved commands; behavior is unchanged |
 | `engflow-design` / `engflow-to-design` | `design` or `engflow-write` | Form a new solution with Design; synthesize existing conclusions with Write |
 | `engflow-decision` / `engflow-to-adr` | `engflow-write` | Proposed ADR synthesis |
 | `engflow-review` | `engflow-review-design` | Conversational design findings |
 | `engflow-execute` | `engflow-implement` | Implementation and recovery |
 | `engflow-refactor-review` / `engflow-refactor-assess` | `refactor-assess` | Standalone read-only refactoring assessment |
+
+Specification synthesis is now owned by standalone `specify`, not `engflow-write`.
+Install `skills/specify/` with its outline and host metadata; it needs no EngFlow
+setup or other skill. Update saved Spec commands and managed routing rules.
+Preserve local customizations before retiring the installed
+`engflow-write/references/spec.md` and `engflow-write/assets/spec.md`; the outline
+now lives in `specify/assets/spec.md`. Keep `engflow-write` for Design/ADR synthesis.
+Existing specifications, paths, Feature metadata, IDs and approval history remain
+valid; no project-document migration or compatibility wrapper is required.
 
 `refactor-assess` is now a standalone skill, extracted from
 `engflow-refactor-assess` (previously `engflow-refactor-review`). It assesses
@@ -50,8 +60,9 @@ reports and PoCs. Existing logs/results can still be analyzed with their limits.
 
 Install `design` and `poc` independently or alongside Research. Design owns
 investigation and decisions and maintains its own proposal; `engflow-write`
-remains for synthesis of existing conclusions. No entry point is renamed or
-removed by this addition, and existing Spec/Design/ADR files remain valid.
+remains for Design/ADR synthesis of existing conclusions; `specify` handles
+specifications. Design and PoC adoption itself renames or removes no entry point,
+and existing Spec/Design/ADR files remain valid.
 
 An explicitly requested Design task now includes on-demand read-only Research
 unless the user restricts it; no separate Research permission is needed. Explicit
@@ -65,7 +76,7 @@ Verify actual host behavior rather than assuming conditional invocation support.
 
 ## Installation
 
-1. Inspect local Skill customizations and preserve the relevant changes. Install the five current EngFlow folders plus `design`, `poc`, `technical-research`, `handoff` and `refactor-assess` for the complete integrated workflow. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
+1. Inspect local Skill customizations and preserve the relevant changes. Install the five current EngFlow folders plus `design`, `poc`, `technical-research`, `handoff`, `refactor-assess` and `specify` for the complete integrated workflow. Retire only obsolete **installed Skill folders** after that review; never delete project documents. No compatibility wrapper Skills are shipped because they would keep the entry-point count and ambiguity high.
 2. Retired folders include `engflow-refactor-assess`, `engflow-research`, `engflow-refactor-review`, `engflow-handoff`, `engflow-experiment`, `engflow-to-spec`, `engflow-to-design`, `engflow-to-adr`, and the older `engflow-challenge`, `engflow-spec`, `engflow-design`, `engflow-decision`, `engflow-review`, `engflow-execute`. If upgrading from older releases, also retire the replaced `engflow-bootstrap`, `engflow-feature`, `engflow-status`, `engflow-baseline` folders after preserving customizations.
 3. Refresh the existing managed block with `$engflow-workspace 更新 EngFlow 托管规则，保留其他 AGENTS 内容。` Follow [the marker rules](../../skills/engflow-workspace/references/initialize.md); update any project-specific shortcuts to the table above.
 
