@@ -8,6 +8,18 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Add standalone `plan-implementation` for creating and revising verifiable
+  milestone plans, with dependency-aware reordering, progressive detail and
+  explicit approval boundaries. No implementation or ticket publishing.
+- Add standalone `implement` for linear delivery through code, tests and review.
+  Large or cross-session work maintains one execution record with actual evidence,
+  pending approval and recovery context; small changes need no saved plan. Reconcile
+  source and outstanding commands on resume and verify the integrated result.
+- Add standalone `code-review` for read-only review of working changes, commits,
+  branches and PRs without requiring a Spec or tracker. Distinguish indexed,
+  working and committed snapshots; report actionable findings with evidence and
+  scope limits. All three skills retain explicit-only host metadata, work
+  independently and introduce no workspace framework or automatic commits.
 - Extract specification synthesis into standalone, explicit-only `specify`, with
   a compact outline and no EngFlow dependency. Organize Specs by independent
   objective, with explicit non-goals, observable acceptance and test boundaries.
@@ -83,8 +95,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Remove the entire EngFlow workflow group to make room for a future redesign:
   all `skills/engflow-*/` entry points and supporting references/templates,
   including ADR support, plus `docs/engflow/` and active catalog/installation
-  references. Retain the independent skills unchanged; no replacement workflow
-  or compatibility wrapper is introduced.
+  references. Retain the existing independent skills unchanged; no replacement
+  workspace or compatibility wrapper is introduced.
 
 ### Compatibility and migration
 
