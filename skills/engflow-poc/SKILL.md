@@ -1,5 +1,5 @@
 ---
-name: poc
+name: engflow-poc
 description: >
   Test a technical premise through a minimal, bounded experiment. Exercise the
   real mechanism and return reproducible evidence with explicit limits. Use on
@@ -7,7 +7,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Proof of Concept
+# Engflow PoC
 
 Resolve a consequential uncertainty with the smallest adequate experiment, not
 a partial implementation of the whole feature. No other Skill or document is required.

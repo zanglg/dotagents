@@ -5,9 +5,9 @@ task state, not a runtime checkpoint engine or ticket system.
 
 ## The record
 
-Reuse a suitable existing plan, including one produced by `plan-implementation`.
+Reuse a suitable existing plan, including one produced by `engflow-plan`.
 Follow the user's path or project convention; otherwise propose one file location
-and obtain write authority. Preserve existing formats, stable milestone IDs, user
+and obtain write authority. Preserve existing formats, stable milestone/task IDs, user
 content and history. No planner or template is required.
 
 Keep enough information for a fresh session:
@@ -19,10 +19,20 @@ Keep enough information for a fresh session:
 - Observed completion, partial work, actual checks, consequential discoveries,
   blockers, outstanding commands/side effects and the next concrete action.
 
-Planning owns milestone structure; implementation owns observed progress. Keep
-both in the same record, not parallel ledgers. A milestone may span sessions.
-Routine local refinement needs no planner invocation. Structural changes preserve
-valid work and explain new dependencies or invalidated evidence.
+Dedicated planning owns overall milestone/task decomposition; implementation owns
+observed progress and may maintain necessary local detail within agreed scope.
+Keep both in the same record, not parallel ledgers. Milestones and tasks may span
+sessions. Near-term tasks carry deliverables, dependencies and observable completion
+conditions; optional steps are local lists. Existing milestone-only plans remain
+valid. Routine refinement needs no planner invocation. Structural changes preserve
+valid work and explain new dependencies or invalidated evidence. Retired IDs are
+not reused; replaced tasks retain successor references. Past evidence does not
+automatically prove new completion conditions.
+
+Use the plan as the authoritative execution record, referencing effective
+requirement and design sources rather than overriding them. Keep proposed material changes and
+pending agreement distinguishable from still-effective content. Only affected and
+dependent work is blocked; preserve valid authorization elsewhere.
 
 ## Approval and changes
 
@@ -70,7 +80,8 @@ Honor an immediate stop request; report if saving state is not safely possible.
    other non-idempotent effects. Missing access or unresolved process state blocks
    affected execution, not grounds to invent a successful recovery.
 4. Within current execution and record-write authority, update the same plan and
-   continue the earliest unfinished, unblocked work in the reconciled sequence.
+   continue the earliest unfinished, unblocked task (or milestone without tasks)
+   in the reconciled sequence.
    Do not repeat still-valid completed work or skip final integrated acceptance.
 
 A handoff can supplement the record when requested, but is not required to resume.

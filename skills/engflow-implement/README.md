@@ -1,4 +1,4 @@
-# Implement
+# Engflow Implement
 
 Install independently for linear delivery and cross-session recovery. Small tasks
 need no plan; large tasks use one living record. No ticket system or runtime
@@ -11,9 +11,9 @@ Example requests:
 - "Resume from this plan after reconciling code and validation evidence."
 - "Show current progress without changing anything."
 
-Use `plan-implementation` for dedicated milestone planning when useful.
+Use `engflow-plan` for dedicated milestone planning when useful.
 Implementation owns execution facts and local steps, not a second ledger.
-Use `code-review` through permitted host composition or self-review with that
+Use `engflow-code-review` through permitted host composition or self-review with that
 limitation disclosed. Neither Skill is a required installation dependency.
 
 ## Validation
@@ -22,7 +22,10 @@ These are host scenarios to exercise, not claimed behavioral results.
 | Scenario | Expected boundary |
 | --- | --- |
 | Standalone small task | Implement, test, review; no setup or saved plan |
-| Large task or supplied plan | One record, progressive detail and final integrated acceptance |
+| Large task or supplied plan | One record, ready tasks, progressive detail and final integrated acceptance |
+| Planner unavailable at the next milestone | Maintain supported local detail; report genuine decision/replanning blockers |
+| Task structure changes after partial delivery | Preserve IDs, successor references, valid results and evidence |
+| Read-only review unavailable | Self-review and disclose limits; do not claim the review Skill ran |
 | No approved record destination or notes forbidden | Respect write authority and disclose recovery limits |
 | Pending approval, status-only or plan-only request | No unauthorized implementation or record writes |
 | Reorder or stop during partial work | Preserve work, check dependencies/commands and record the next action |

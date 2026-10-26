@@ -7,6 +7,24 @@ This project follows Semantic Versioning and uses Conventional Commits.
 ## [Unreleased]
 
 ### Added
+- Add `engflow-clarify` for deep discovery and targeted clarification, including
+  authorized updates to an existing specification.
+- Document independent Engflow composition, document scope, review responsibilities
+  and host validation scenarios under `docs/engflow/`.
+
+### Changed
+- Rename engineering entrypoints to `engflow-*`: specify, design, implement,
+  code-review, technical-research and poc; rename plan-implementation to
+  `engflow-plan`. Old invocation names and installed folder paths require migration;
+  no duplicate legacy aliases are provided. Existing task documents remain valid.
+- Extend progressive planning with optional near-term tasks, local steps, stable
+  replacement references and evidence-preserving revision; retain old plan formats.
+- Make specification, design and planning self-checks explicit, preserve deferred
+  requirements separately from current acceptance, and keep generic code review
+  usable independently. Implementation retains its review/fix/validation loop.
+
+
+### Added
 
 - Add standalone `plan-implementation` for creating and revising verifiable
   milestone plans, with dependency-aware reordering, progressive detail and

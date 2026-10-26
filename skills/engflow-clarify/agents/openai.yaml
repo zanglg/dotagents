@@ -1,0 +1,6 @@
+interface:
+  display_name: "Engflow Clarify"
+  short_description: "Explore goals and clarify consequential requirements"
+  default_prompt: "Use $engflow-clarify to explore this goal or clarify the existing specification."
+policy:
+  allow_implicit_invocation: false

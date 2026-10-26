@@ -1,7 +1,7 @@
 # Research and PoC collaboration
 
-Design owns the solution and user decisions. Use `technical-research` for substantial
-source investigation and `poc` for execution-based evidence, loading their instructions
+Design owns the solution and user decisions. Use `engflow-research` for substantial
+source investigation and `engflow-poc` for execution-based evidence, loading their instructions
 when selected. Default to the current agent; using a Skill does not require a worker.
 
 ## Authority and evidence

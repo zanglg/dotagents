@@ -1,5 +1,5 @@
 ---
-name: specify
+name: engflow-specify
 description: >
   Synthesize existing discussion and evidence into a specification.
   Use on explicit request to create, update or preview a spec, not to
@@ -7,7 +7,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Specify
+# Engflow Specify
 
 Define intended behavior, scope and observable acceptance from existing material.
 No workspace setup or other Skill is required.
@@ -44,6 +44,24 @@ Adapt [the outline](assets/spec.md), omitting unneeded sections and stating non-
   snippets only when they express a contract more precisely than prose.
 - Link existing Design material rather than duplicating it. A combined Spec may
   include the necessary approach without requiring separate documents.
+
+## Self-check and revision
+
+Before delivery, check completeness within the stated scope, consistency, material
+edge cases, measurable acceptance and traceability to decisions or evidence. Resolve
+supported issues and report important unknowns. This is author self-check, not an
+independent review or approval.
+
+Keep requirement certainty separate from delivery scope. Confirmed deferred work
+may remain in the Spec with its reason or supplied revisit condition, but is not
+current acceptance. A requested priority or deadline does not authorize execution.
+Accept later clarification into the same suitable Spec, preserving IDs and decision
+history; identify Design or Plan assumptions affected by material changes.
+
+Choose document scope by independently evolving objectives. Reuse suitable feature
+or project documents; do not create a new Spec per session. Reference shared product
+contracts rather than duplicating them. Update their authority source when a change
+affects a shared contract; do not require global and feature document layers.
 
 ## Output
 

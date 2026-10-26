@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: engflow-code-review
 description: >
   Review code changes for correctness, requirement coverage, regressions and
   validation gaps. Use on explicit review request or as read-only support within
@@ -7,7 +7,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Code Review
+# Engflow Code Review
 
 Find actionable problems in the requested change. Return evidence-backed findings
 in conversation, not a patch, broad refactoring agenda or approval to merge.
@@ -34,6 +34,16 @@ meaningful impact. Seek counterevidence. Distinguish introduced/exposed defects
 from relevant pre-existing issues, labeling provenance. Code smells are cues, not
 automatic bugs; omit cosmetic preferences, speculative abstractions and redundant
 lint output without material consequence. Honor a requested narrow focus.
+
+## Workflow independence
+
+Review suitable changes regardless of which tools or Skills produced them. When
+available, use effective Spec, Design and Plan material to check implementation
+coverage and justified deviations. Missing artifacts are a coverage limit, not a
+reason to demand the whole Engflow workflow. An ambiguous requirement is an open
+question, not permission to invent the intended behavior. This Skill assesses code
+and its compliance; it does not replace review of whether the requirements or
+technical proposal themselves are sound.
 
 ## Findings
 

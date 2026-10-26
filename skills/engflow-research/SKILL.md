@@ -1,10 +1,10 @@
 ---
-name: technical-research
+name: engflow-research
 description: "Investigate technical questions through source code, first-party specifications and existing evidence. Explain mechanisms and assess possible paths with evidence-backed conclusions, counterevidence and explicit uncertainty. No experiment execution or production implementation. Use on explicit research request or as read-only support for an explicitly requested Design task."
 disable-model-invocation: true
 ---
 
-# Technical Research
+# Engflow Research
 
 Answer the user's technical question with a defensible explanation.
 Choose the investigation strategy and answer structure to fit the question;

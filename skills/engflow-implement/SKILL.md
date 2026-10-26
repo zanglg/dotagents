@@ -1,5 +1,5 @@
 ---
-name: implement
+name: engflow-implement
 description: >
   Implement a request or plan through code, tests and review. Use on explicit
   request to start or resume implementation. For large or cross-session work,
@@ -7,7 +7,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Implement
+# Engflow Implement
 
 Deliver the requested behavior, not just a patch. Work linearly in the existing
 checkout and branch, preserving user-owned changes. No Spec, tracker or other
@@ -26,20 +26,27 @@ bring a recommendation. Do not change requirements or acceptance to make work pa
 
 Small changes need no saved plan. For large or cross-session work, read
 [the continuity contract](references/continuity.md) and reuse one execution plan.
-Dedicated milestone planning or structural revision can use `plan-implementation`
-when requested and available; it is not a prerequisite. Without it, maintain enough
-structure to execute safely, not a second planning framework.
+Dedicated planning, cross-milestone restructuring or extensive task decomposition
+can use `engflow-plan` when requested and available; it is not a prerequisite.
+Consume suitable plans regardless of their producer. Within agreed scope, maintain
+necessary structure and refine current tasks in the same record. If reliable work
+requires unresolved decisions or dedicated replanning, record the evidence, affected
+work and next planning need; continue unrelated ready work within authority. Do not
+automatically invoke another planning stage or bypass explicit-only host settings.
 
 ## Delivery standard
 
-Advance the next ready milestone in the agreed linear sequence. Refine its local
-steps against actual code and resolve consequential prerequisites before dependent
-work. Use test-first development when useful; verify behavior and contracts rather
-than incidental internals. Run focused checks as changes accumulate.
+Advance the next ready task, or milestone when no tasks are defined, in the agreed
+linear sequence. Refine local steps against actual code and resolve consequential
+prerequisites before dependent work. Preserve task deliverables and binding
+interfaces; significant decomposition changes need dedicated planning judgment,
+and material changes beyond authority need agreement. Use test-first development
+when useful; verify behavior and contracts rather than incidental internals. Run
+focused checks as changes accumulate.
 
 Review meaningful increments and the combined result for correctness, scope,
 regressions and validation coverage. An explicitly requested implementation task
-includes read-only code review within its scope unless restricted. Use `code-review`
+includes read-only code review within its scope unless restricted. Use `engflow-code-review`
 or fresh-context reviewers through supported host composition when available;
 otherwise self-review and disclose it. Do not bypass invocation restrictions or
 claim independent review. Fix substantiated findings and rerun affected checks.

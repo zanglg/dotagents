@@ -1,5 +1,5 @@
 ---
-name: design
+name: engflow-design
 description: >
   Design a feature from goals and actual constraints. Choose technical approaches,
   involve the user in consequential tradeoffs, and deliver a grounded proposal
@@ -7,7 +7,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Design
+# Engflow Design
 
 Develop a coherent proposal that solves the user's problem and gives implementation
 a reliable direction. Choose the strategy and document structure to fit the task;
@@ -66,6 +66,21 @@ action sufficient for continuation, not a discussion transcript or second progre
 ledger. Split documents only when independently maintaining them materially helps,
 within write authority. On resume, reconcile the draft with current source,
 instructions and outstanding experiment state; missing context remains a limitation.
+
+## Self-check and document scope
+
+Before delivery, check that the approach satisfies effective requirements, explains
+consequential tradeoffs, defines necessary interfaces and invariants, and has an
+adequate basis for verification. Seek counterevidence for critical assumptions;
+keep unsupported premises conditional. This is author self-check, not independent
+review or approval. Research supplies evidence; it does not approve the design.
+
+Reuse a suitable design for the current independently evolving objective. Use
+feature detail for this delivery and reference shared architecture and constraints.
+Cross-module work does not automatically require a global document. When changing
+a shared mechanism or contract, update its authorized source and link affected
+features; do not maintain competing copies or require fixed document layers.
+Preserve confirmed deferred scope without designing it prematurely.
 
 ## Boundaries
 
