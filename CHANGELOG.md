@@ -8,6 +8,25 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Add read-only `engflow-clarify` for deep discovery and targeted clarification.
+  Return conversational decisions, current/deferred scope and affected-source
+  summaries; do not create or update Specs or interview records. `engflow-specify`
+  owns synthesis, consistency checks, previews and authorized specification writes,
+  reusing settled decisions without requiring a separate clarification stage.
+  Validate the boundary with explicit summary transfer, save requests that remain
+  read-only, and standalone Specify previews; preserve the older writable-Clarify
+  evaluation as historical rather than claiming it validates the new contract.
+- Document independent Engflow composition, document scope, review responsibilities
+  and host validation scenarios under `docs/engflow/`.
+- Give all skills a user-facing README with consistent purpose, examples, inputs
+  and outputs, installation/collaboration and validation sections. Keep SKILL.md
+  authoritative, route the catalog to usage guides, and check README presence and
+  its entrypoint link without changing skill invocation or execution contracts.
+- Add dependency-free static skill/link checks with unit tests, plus an opt-in
+  real-host regression suite using synthetic fixtures and fresh Pi sessions.
+  Record reviewed smoke outcomes, including a timeout and bounded rerun; keep raw
+  evidence outside the repository and distinguish static/mechanical checks from
+  behavioral verdicts.
 - Add standalone `plan-implementation` for creating and revising verifiable
   milestone plans, with dependency-aware reordering, progressive detail and
   explicit approval boundaries. No implementation or ticket publishing.
@@ -37,6 +56,31 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Rename engineering entrypoints to `engflow-*`: specify, design, implement,
+  code-review, technical-research, poc, refactor-assess and handoff; rename
+  plan-implementation to `engflow-plan`. Old invocation names and installed folder
+  paths require migration; no duplicate legacy aliases are provided. Existing task
+  and handoff documents remain valid, including the `handoff-...md` filename format.
+  Refactor Assess and Handoff remain independent, explicit-only capabilities, not
+  automatic implementation stages or dependencies.
+- Extend progressive planning with optional near-term tasks, local steps, stable
+  replacement references and evidence-preserving revision; retain old plan formats.
+  Implement expands the next coarse milestone within existing authority without
+  requiring a planner call; consequential contract, acceptance or dependency
+  changes remain planning/design decisions, not routine refinement.
+- Make specification, design and planning self-checks explicit, preserve deferred
+  requirements separately from current acceptance, and keep generic code review
+  usable independently. Implementation retains its review/fix/validation loop.
+- Close material-change source synchronization explicitly: retain approval evidence,
+  affected authority-source paths, pending updates and next actions in existing
+  records. Update only within each skill's write scope; reconcile stale sources on
+  resume and report documentation lag separately from code and validation status.
+  Handoff references pending synchronization rather than creating another ledger.
+- Strengthen Handoff's transfer of outstanding operation handles, scope, observed
+  liveness and uncertain effects; reconcile identity before conflicting work or
+  retries. Add skill-local judgment examples for refinement, decision authority,
+  source conflicts and worthwhile refactoring. Consolidate repeated entrypoint
+  rules without removing independent-use or authorization boundaries.
 - Rename `diagram-color-guidelines` to `diagram-aesthetics` and focus it on visual
   outcomes and cross-figure identity, not drawing techniques or notation teaching.
   Replace detailed recipes and fixed typography/stroke sizes with relative
@@ -80,31 +124,38 @@ This project follows Semantic Versioning and uses Conventional Commits.
   `handoff`, with read-only Research composition allowed within an explicitly
   requested Design task where supported by the host. Historical artifacts remain
   unchanged.
-- Extract session handoff/resume from `engflow-workspace` into the standalone
-  `handoff` skill for coding, research, design, writing and other work, without
+- Extract session handoff/resume from `engflow-workspace` into an independent
+  skill, initially `handoff` and now `engflow-handoff`, for coding, research,
+  design, writing and other work, without
   an EngFlow, repository or Feature dependency. Preserve evidence, authority
   limits and live-state reconciliation while retaining existing handoff records.
-- Extract `engflow-refactor-assess` as standalone `refactor-assess`, retaining
-  evidence-based recommendations and read-only conversational output. Replace
+- Decouple refactoring assessment from the old workflow, initially as
+  `refactor-assess` and now regrouped as independent `engflow-refactor-assess`.
+  Retain evidence-based recommendations and read-only conversational output. Replace
   the EngFlow context dependency with local review guidance, remove
   implementation-skill prerequisites and preserve existing artifacts. No
   compatibility wrapper is provided.
 
 ### Removed
 
-- Remove the entire EngFlow workflow group to make room for a future redesign:
-  all `skills/engflow-*/` entry points and supporting references/templates,
-  including ADR support, plus `docs/engflow/` and active catalog/installation
-  references. Retain the existing independent skills unchanged; no replacement
-  workspace or compatibility wrapper is introduced.
+- Retire the old EngFlow workspace-oriented workflow and its ADR orchestration,
+  supporting templates and guides. The independent `engflow-*` skills and new
+  guide reuse the namespace, not the old workflow contracts; no compatibility
+  workspace or legacy wrappers are introduced.
 
 ### Compatibility and migration
 
-- EngFlow entry points are no longer shipped. Preserve local customizations
-  before retiring installed `engflow-*` folders and removing their commands,
-  shortcuts and managed AGENTS rules; keep unrelated rules and project artifacts.
-  Repository edits do not update installed copies automatically. Independent
-  skills remain available, without requiring the retired workflow.
+- Clarify is now conversation-only, including requests to save or revise a Spec.
+  Use Specify for the authorized document update, carrying decisions and approval
+  evidence without restarting clarification. Combined requests still respect host
+  invocation restrictions; existing documents need no migration.
+- Migrate standalone engineering skill names using the mapping in the
+  [Engflow guide](docs/engflow/README.md#migration). For older EngFlow workflow
+  installations, compare against the current catalog: preserve customizations,
+  replace reused names deliberately and retire only obsolete entry points and
+  old workflow-specific rules. Do not remove all `engflow-*` folders; these names
+  now contain independent skills, not the retired workspace workflow. Keep project
+  artifacts and unrelated rules. Repository edits do not update installed copies.
 - `diagram-aesthetics` replaces `diagram-color-guidelines`; the old entrypoint is
   not retained. For existing installations, preserve customizations, install the
   new folder with its references, update invocations and links, and retire the old

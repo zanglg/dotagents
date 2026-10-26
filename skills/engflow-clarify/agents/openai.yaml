@@ -1,0 +1,6 @@
+interface:
+  display_name: "Engflow Clarify"
+  short_description: "Clarify requirements and return read-only decision summaries"
+  default_prompt: "Use $engflow-clarify to explore this goal or clarify the existing specification, returning decisions in conversation without writing files."
+policy:
+  allow_implicit_invocation: false

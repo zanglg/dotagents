@@ -30,17 +30,21 @@ small, auditable, and safe to copy between machines.
 |-- LICENSE            # MIT License
 |-- README.md          # Repository overview
 |-- VERSION            # Current repository content version
+|-- docs/              # Guides and sanitized evaluation results
+|-- scripts/           # Static checks and opt-in behavior evaluation
+|-- tests/             # Deterministic validation-tool tests
 `-- skills/
-    |-- design/       # Feature design and sustained technical decisions
-    |-- poc/          # Bounded execution-based verification
+    |-- engflow-clarify/ # Deep discovery and requirement clarification
+    |-- engflow-design/       # Feature design and sustained technical decisions
+    |-- engflow-poc/          # Bounded execution-based verification
     |-- diagram-aesthetics/ # Shared technical diagram aesthetics
-    |-- handoff/      # Standalone session transfer and resumption
-    |-- plan-implementation/ # Milestone planning and revision
-    |-- implement/    # Linear implementation and cross-session recovery
-    |-- code-review/  # Read-only review of code changes
-    |-- technical-research/ # Standalone evidence-driven investigation
-    |-- specify/      # Standalone specification synthesis
-    |-- refactor-assess/ # Standalone read-only refactoring assessment
+    |-- engflow-handoff/      # Standalone session transfer and resumption
+    |-- engflow-plan/ # Milestone planning and revision
+    |-- engflow-implement/    # Linear implementation and cross-session recovery
+    |-- engflow-code-review/  # Read-only review of code changes
+    |-- engflow-research/ # Standalone evidence-driven investigation
+    |-- engflow-specify/      # Standalone specification synthesis
+    |-- engflow-refactor-assess/ # Standalone read-only refactoring assessment
     `-- semver-bump/   # General-purpose SemVer recommendation and updates
 ```
 
@@ -48,12 +52,18 @@ Each reusable skill should live in its own directory:
 
 ```text
 skills/<skill-name>/
-|-- SKILL.md
+|-- README.md          # User-facing usage guide
+|-- SKILL.md           # Authoritative agent instructions
 |-- references/
 |-- scripts/
 |-- assets/
 `-- templates/
 ```
+
+Every skill has a short README with Purpose, Examples, Inputs and outputs,
+Installation and collaboration, and Validation and references. Link to SKILL.md
+for authoritative behavior rather than maintaining a second instruction set.
+Repository-only validation links are documentation, not installation dependencies.
 
 Only add supporting directories when the skill actually needs them. Keep files
 near the skill that owns them so future agents can audit and update the content
@@ -63,31 +73,37 @@ without searching the whole workspace.
 
 | Skill | Purpose |
 | --- | --- |
-| [diagram-aesthetics](skills/diagram-aesthetics/SKILL.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
-| [semver-bump](skills/semver-bump/SKILL.md) | SemVer recommendations and confirmed version updates |
-| [handoff](skills/handoff/SKILL.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [plan-implementation](skills/plan-implementation/SKILL.md) | Create and revise verifiable milestone plans without implementing or publishing tickets |
-| [implement](skills/implement/SKILL.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
-| [code-review](skills/code-review/SKILL.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
-| [design](skills/design/SKILL.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
-| [poc](skills/poc/SKILL.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
-| [technical-research](skills/technical-research/SKILL.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
-| [specify](skills/specify/SKILL.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
-| [refactor-assess](skills/refactor-assess/SKILL.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
+| [diagram-aesthetics](skills/diagram-aesthetics/README.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
+| [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
+| [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
+| [engflow-plan](skills/engflow-plan/README.md) | Create and revise progressive milestone/task plans without implementing or publishing tickets |
+| [engflow-implement](skills/engflow-implement/README.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
+| [engflow-code-review](skills/engflow-code-review/README.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
+| [engflow-design](skills/engflow-design/README.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
+| [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
+| [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
+| [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
+| [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
+| [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
+
+See the [Engflow guide](docs/engflow/README.md) for responsibilities, composition,
+document scope and migration from the previous names.
 
 These skills are independent entry points, not a required workflow. Add other
-reusable skills to this catalog when useful. Planning owns milestone structure;
-implementation owns observed progress in the same plan; code review returns findings
-without edits. Small work can go straight to implementation. See the usage and
-validation scenarios for [planning](skills/plan-implementation/README.md),
-[implementation](skills/implement/README.md) and [review](skills/code-review/README.md).
+reusable skills to this catalog when useful. Dedicated planning owns the delivery
+structure; implementation owns observed progress and just-in-time refinement in
+the same plan. Code review checks changes; refactoring assessment evaluates existing
+maintenance burdens. Both return findings without edits. Handoff transfers essential
+context without becoming a second execution record. Small work can go straight to
+implementation. See the usage and validation scenarios for [planning](skills/engflow-plan/README.md),
+[implementation](skills/engflow-implement/README.md) and [review](skills/engflow-code-review/README.md).
 
 ## Installation
 
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
 files together. Each skill installs independently, without workspace setup.
-Design can work alone; install `technical-research` and `poc` alongside it to
+Design can work alone; install `engflow-research` and `engflow-poc` alongside it to
 use those optional collaborators. Other skills can be selected separately.
 
 For a personal workspace, use these folders in the skill-discovery location
@@ -97,7 +113,8 @@ dotagents; it is not a global policy to inject into every project.
 ## Adding A Skill
 
 1. Create `skills/<skill-name>/SKILL.md`.
-2. Describe when the skill should be used and how to use it.
+2. Describe invocation and behavior in SKILL.md; add README.md using the five
+   user-guide sections above and link it to SKILL.md.
 3. Put supporting scripts, references, templates, or assets beside that skill.
 4. Run the smallest relevant validation for any executable content.
 5. Review `git status --short` before committing.
@@ -156,9 +173,11 @@ plain-text where practical, and easy for a human to review. Prefer documenting
 non-obvious behavior in the relevant skill or README instead of relying on
 commit messages.
 
-Before committing documentation-only changes, manually review Markdown for
-clarity and broken relative links. For scripts or generated assets, run a local
-check that covers the changed behavior and record it in the final response.
+Run `python3 scripts/validate_skills.py` and manually review Markdown for clarity.
+Run `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v` when changing
+validation tools. See [validation guidance](docs/validation.md) for checker limits
+and opt-in real-host behavior evaluation; static checks do not prove skill behavior.
+Record actual checks and remaining coverage limits in the final response.
 
 ## License
 

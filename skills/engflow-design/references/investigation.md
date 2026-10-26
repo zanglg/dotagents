@@ -1,0 +1,42 @@
+# Research and PoC collaboration
+
+Design owns the solution and user decisions. Use `engflow-research` for substantial
+source investigation and `engflow-poc` for execution-based evidence, loading their instructions
+when selected. Default to the current agent; using a Skill does not require a worker.
+
+## Authority and evidence
+
+An explicit Design request includes on-demand read-only Research for consequential
+evidence gaps in that active task, unless the user restricts it. No per-call approval
+is needed. This does not expand access or disclosure permissions, authorize separate
+research reports, or carry over to unrelated work. Research returns evidence; Design
+maintains its authorized proposal. PoC still requires bounded execution authority.
+
+Use the host-supported invocation or composition mechanism; do not relax global
+Research invocation settings or bypass host restrictions. If the host requires a
+separate explicit invocation, request it or continue direct read-only investigation.
+
+Supply the question, relevant target state, essential constraints and authority
+limits. Research returns evidence and proposed checks to Design rather than starting
+PoC. Helpers do not take over design decisions or recursively delegate.
+
+Verify consequential results and reconcile affected choices. Reference necessary
+artifacts rather than copying logs or creating another report. If a collaborator
+is unavailable, continue direct read-only investigation or disclose the verification
+gap; do not invent execution or permission.
+
+## Optional workers
+
+Delegate only when the host provides meaningful benefit, required evidence access
+and safe coordination. Research workers remain read-only.
+
+Before a PoC worker mutates, record its handle, scope and unique write grant in the
+existing draft or conversation, then grant exclusive ownership. The parent pauses
+all writes during the grant. If preparation-before-grant is unsupported, execute
+in the parent.
+
+Return or pause expires the grant; a resumed worker needs a fresh one. Confirm
+worker and command quiescence before reclaiming writes or retrying; a timeout or
+result message is not proof. Check changed paths and consequential evidence against
+the initial state and scope. Preserve outstanding process/ownership facts in the
+existing draft or conversation; unknown liveness blocks new execution.
