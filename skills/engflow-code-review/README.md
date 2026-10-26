@@ -1,21 +1,40 @@
 # Engflow Code Review
 
-Install independently for read-only review of code changes. No Spec, tracker,
-implementation Skill or report artifact is required.
+User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
-Example requests:
+## Purpose
+
+Review code changes read-only for concrete defects and validation gaps. This is
+not design review, whole-repository refactoring assessment or automatic repair.
+
+## Examples
 - "Review current changes, including relevant untracked files. Do not modify anything."
 - "Review only staged content, not my remaining working edits."
 - "Review this branch against main for correctness and requirement coverage."
 - "Review this PR's concurrency risks without posting comments."
 
-This is not design review, whole-repository refactoring assessment or automatic
-repair. Findings do not authorize fixes or merge. Explicit implementation tasks
-can use scoped read-only review through supported host composition; hosts may
-require separate invocation. The manifest and host metadata remain explicit-only.
+## Inputs and outputs
 
-## Validation
-These are host scenarios to exercise, not claimed behavioral results.
+Specify the target and baseline: working changes, index, commit, branch or PR.
+Provide relevant requirements and existing test evidence when available. Output
+is conversational findings with severity, location, impact and correction or
+verification direction, plus coverage limits. No report artifact is required;
+findings do not authorize fixes, publication or merge.
+
+## Installation and collaboration
+
+Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
+including supporting files. No Spec, tracker or other Skill is required. Invoke
+explicitly through the host's supported mechanism. Explicit implementation tasks
+can use scoped read-only review through supported composition; hosts may require
+separate invocation. `engflow-refactor-assess` serves a different question: whether
+existing code warrants structural improvement.
+
+## Validation and references
+
+These are expectations, not claimed behavioral results. The repository's
+[recorded evaluations](../../docs/engflow/evaluation/results.md) do not directly
+evaluate this Skill; use the scenarios below to check your host.
 
 | Scenario | Expected boundary |
 | --- | --- |
