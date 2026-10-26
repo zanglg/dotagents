@@ -80,6 +80,11 @@ feature detail for this delivery and reference shared architecture and constrain
 Cross-module work does not automatically require a global document. When changing
 a shared mechanism or contract, update its authorized source and link affected
 features; do not maintain competing copies or require fixed document layers.
+For accepted material changes, track affected requirement, shared-contract and
+Plan paths, supplied approval evidence and pending sync actions in the existing
+draft. Update only authorized design sources; report other needed revisions without
+silently rewriting them or invoking another stage. Recheck source consistency before
+closing pending updates; a revised proposal alone does not synchronize its consumers.
 Preserve confirmed deferred scope without designing it prematurely.
 
 ## Boundaries

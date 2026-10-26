@@ -3,8 +3,9 @@ name: engflow-clarify
 description: >
   Explore goals, challenge assumptions and resolve consequential requirement
   ambiguity through focused discussion. Use on explicit clarification or deep
-  interview request, from an early idea or an existing specification. Preserve
-  settled decisions; update an existing specification only within write authority.
+  interview request, from an early idea or an existing specification. Return
+  decisions and proposed changes in conversation only; read existing sources but
+  do not create or update files.
 disable-model-invocation: true
 ---
 
@@ -36,8 +37,9 @@ Keep decision certainty separate from delivery scope: a confirmed requirement ma
 be deferred and excluded from current acceptance. Preserve why it was deferred
 and any supplied revisit condition; do not silently turn it into current work.
 Separate a requested deadline from feature semantics and execution permission.
-Resolve relative dates to calendar dates when persisting them; do not schedule
-or promise future execution from a planning statement.
+Resolve relevant relative dates to calendar dates in the summary; do not schedule
+or promise future execution from a planning statement. See [judgment examples](references/judgment.md)
+when requirement certainty, delivery scope and execution authority diverge.
 
 Technical feasibility needs source evidence or separately authorized experiments,
 not user agreement. Investigate relevant facts read-only when accessible; otherwise
@@ -46,19 +48,32 @@ technical design unless the user has already fixed a technical constraint.
 
 ## Outcome and continuity
 
-Finish when the important intent is clear enough for the next useful activity,
-not when every possible detail has been discussed. Summarize confirmed decisions,
-current and deferred scope, unresolved questions and affected downstream material.
-Do not automatically invoke another Skill or start implementation.
+Finish when important intent is clear enough for the next useful activity, not
+when every possible detail has been discussed. At meaningful discussion boundaries,
+return a proportional decision/change summary in conversation: confirmed decisions,
+current/deferred scope, unresolved questions and proposed changes. Reference existing
+requirement IDs and affected acceptance, constraints and downstream paths where known;
+do not invent IDs or force the discussion into a complete Spec template.
 
-When asked to save or revise requirements, update the suitable existing Spec
-within write authority, preserving its IDs, effective decisions and user content.
-Otherwise keep the discussion conversational. Do not create a parallel interview
-ledger. Follow the user's path or project convention; if neither exists, propose
-a destination before creating a file. Missing access remains a recovery limit.
+Preserve supplied approval evidence and pending gates in the summary. Distinguish
+agreed changes from proposals and identify sources still awaiting synchronization;
+user agreement does not mean those files were updated. Do not restart settled
+questions or hand off after every answer merely to follow a stage sequence.
 
-Substantive changes do not inherit approval of the prior content. Preserve pending
-review gates and supplied approval evidence; report affected Design or Plan
-assumptions without silently rewriting those artifacts. Viewing or previewing is
-read-only. Do not run experiments, modify production code, manage branches,
-commit, publish or claim the discussion proves technical feasibility.
+## Specification handoff and boundaries
+
+`engflow-specify` owns specification synthesis, consistency checks, previews and
+authorized writes. Supply the discussion or decision summary as input, not a second
+interview ledger. It can resolve ordinary missing details without requiring Clarify.
+
+This Skill is read-only even when asked to save its output or edit a Spec. Return
+the content and identify Specify as the next capability; do not write files or
+silently invoke it. If the user explicitly requests clarification followed by Spec
+creation/update, finish the clarification summary first. The current agent may then
+perform the separately scoped Specify work through permitted host invocation or
+composition, retaining valid write authority. If the host needs a separate explicit
+invocation, explain that next step rather than bypassing it or claiming a save.
+
+No other Skill is required for discussion. Do not create reports or scratch files,
+run experiments, modify code or documents, manage branches, commit or publish.
+Any helpers remain read-only and return findings to the conversation.

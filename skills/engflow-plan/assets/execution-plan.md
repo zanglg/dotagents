@@ -62,6 +62,11 @@ reference task evidence instead of keeping duplicate status ledgers.
 Keep consequential findings and changes with reasons. Preserve successor references
 for retired tasks, valid historical evidence and reasons evidence became stale.
 Link durable detail rather than copying logs. Do not reuse IDs.
+For accepted material changes, identify affected authority-source paths/sections,
+approval evidence, sync status and next update action or missing write authority.
+Close pending sync work only after checking that sources reflect the accepted
+change and the plan distinguishes intended, implemented and verified behavior.
+Report documentation lag separately from code completion.
 
 ## Final outcome
 

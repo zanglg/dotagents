@@ -19,8 +19,11 @@ Keep enough information for a fresh session:
 - Observed completion, partial work, actual checks, consequential discoveries,
   blockers, outstanding commands/side effects and the next concrete action.
 
-Dedicated planning owns overall milestone/task decomposition; implementation owns
-observed progress and may maintain necessary local detail within agreed scope.
+Dedicated planning owns the overall delivery structure and consequential revisions;
+implementation owns observed progress and just-in-time refinement within that structure.
+Before starting a coarse milestone, add only the tasks or local steps needed for
+safe execution, preserving agreed scope, contracts, acceptance and cross-milestone
+dependencies. Routine expansion in the same record needs no planner invocation.
 Keep both in the same record, not parallel ledgers. Milestones and tasks may span
 sessions. Near-term tasks carry deliverables, dependencies and observable completion
 conditions; optional steps are local lists. Existing milestone-only plans remain
@@ -50,6 +53,29 @@ do not bypass prerequisites or discard changes to make the new order fit.
 If notes are forbidden or unavailable, honor that limit and disclose the recovery
 gap. Conversational context must then be retained and supplied by the user.
 Do not claim an unsaved checkpoint is durable.
+
+## Source synchronization
+
+When a material change is accepted, identify affected authoritative requirements,
+designs or shared contracts by path/section. In the existing decision record, keep
+its approval evidence, affected work and whether each source is synchronized or
+pending, with the next update action and any missing authority/access. No separate
+sync ledger or mandatory status schema is needed. If record writes are unavailable,
+report these facts conversationally and disclose the recovery limit.
+
+Update sources only within current write authority, preserving decision history.
+Do not rewrite an old decision as if it had always been the new one. Before closing
+a sync item, verify that its source reflects the accepted change and the plan still
+distinguishes intended, implemented and verified behavior. Source synchronization
+can finish before implementation; it does not prove delivery. Code/tests passing
+or a plan update alone does not prove sources are current.
+Report remaining sync work separately from implementation and validation status.
+
+On resume, reconcile pending source updates with supplied approval evidence. A
+stale document does not silently revoke a verified accepted change, and a plan
+note alone does not override an effective requirement. Resolve uncertain authority
+or conflicting intent before affected execution; a known documentation lag alone
+need not block otherwise authorized work. Preserve independent ready work.
 
 ## Checkpoints
 
@@ -84,7 +110,8 @@ Honor an immediate stop request; report if saving state is not safely possible.
    in the reconciled sequence.
    Do not repeat still-valid completed work or skip final integrated acceptance.
 
-A handoff can supplement the record when requested, but is not required to resume.
+`engflow-handoff` can supplement the record when requested, but is not required to
+resume. It references pending source updates and decisions, not a second sync ledger.
 Local plans, temporary handoffs and uncommitted files do not automatically transfer
 to another environment. Verify access to code and artifacts; do not commit or
 publish merely to transfer them without authorization.

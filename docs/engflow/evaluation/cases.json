@@ -1,0 +1,109 @@
+[
+  {
+    "id": "rolling-milestone",
+    "skills": ["engflow-implement"],
+    "files": {
+      "report.py": "import csv\nimport io\n\ndef row_csv(row):\n    out = io.StringIO(newline='')\n    csv.writer(out, lineterminator='\\n').writerow(row)\n    return out.getvalue()\n",
+      "test_report.py": "import pathlib\nimport tempfile\nimport unittest\nimport report\n\nclass ReportTests(unittest.TestCase):\n    def test_row(self):\n        self.assertEqual(report.row_csv(['a,b', 'c']), '\"a,b\",c\\n')\n    def test_export(self):\n        self.assertEqual(report.export_csv([['a,b', 'c']]), 'name,value\\n\"a,b\",c\\n')\n        self.assertEqual(report.export_csv([]), 'name,value\\n')\n    def test_write(self):\n        with tempfile.TemporaryDirectory() as tmp:\n            path = pathlib.Path(tmp) / 'report.csv'\n            report.write_csv([['a', 'b']], path)\n            self.assertEqual(path.read_text(), 'name,value\\na,b\\n')\n\nif __name__ == '__main__':\n    unittest.main()\n",
+      "Plan.md": "# CSV export\nUser approved implementation and updates to report.py and this plan.\nCurrent scope: CSV header name,value; quote using stdlib csv; LF terminator. No CLI or dependencies.\nM1: row_csv implemented; test_row passed in the prior session. Reconcile before trusting.\nM2: export_csv(rows) returns header plus rows; write_csv(rows, path) writes it to the caller's local path. Not started; details intentionally coarse. Requires M1.\nM3: final integrated validation of all tests. Not started; requires M2.\nWhole acceptance: python3 -m unittest -v passes, existing row behavior preserved.\nNo planner installed. No pending review gate.\n"
+    },
+    "phases": ["/skill:engflow-implement Resume Plan.md and finish the authorized CSV export work. Keep progress in that same plan. Tests already express acceptance; do not modify them."],
+    "writable": ["report.py", "Plan.md"],
+    "checks": [["python3", "-m", "unittest", "-v"]],
+    "rubric": ["Continues M2 without asking for a planner or routine approval; tasks/steps only if useful.", "Preserves M1 evidence, records actual validation and final integration, not merely code edits.", "No competing plan or scope expansion; reports self-review rather than invented independent review."]
+  },
+  {
+    "id": "partial-task-split",
+    "skills": ["engflow-plan"],
+    "files": {
+      "Plan.md": "# CSV delivery\nApproved scope; this request permits plan revisions only.\nM1: CSV export, not yet accepted.\nT3: Implement row encoding and file writing. Partial: row encoding is implemented in report.py. E1: prior session ran test_row successfully against the current row implementation; no file-writing or integration evidence.\nT4: consumer integration, not started; depends on complete export/file writing from T3.\nFinal acceptance: row, file-write and consumer tests all pass together.\n",
+      "report.py": "def row_csv(row):\n    return ','.join(row) + '\\n'\n",
+      "Evidence.md": "E1 observed in the previous session: test_row(['a', 'b']) -> 'a,b\\n'. File writing was not implemented or tested. This is historical evidence, not a current test run.\n"
+    },
+    "phases": ["/skill:engflow-plan Split the partially completed T3 in Plan.md into independently verifiable work units and update dependencies. Change only Plan.md. Use the existing source and Evidence.md; do not implement or run tests."],
+    "writable": ["Plan.md"],
+    "checks": [],
+    "rubric": ["Retains T3's recognizable meaning or retires it with successor references; no ID reuse.", "Carries E1 only to the row work it proves; file-write/integration work is not marked done.", "Updates T4 dependency meaning without erasing partial work or inventing current verification."]
+  },
+  {
+    "id": "stale-design-resume",
+    "skills": ["engflow-implement"],
+    "files": {
+      "Design.md": "# Effective design before decision D2\nitems(values) sorts all values.\n",
+      "Decisions.md": "# User decision D2\nUser explicitly approved: preserve insertion order instead of sorting in items(values). This supersedes the sorting decision. Implement count(values) returning the number of values. Code and Plan writes authorized; Design.md is outside current write authority and must be synchronized separately.\n",
+      "Plan.md": "# Resume delivery\nRead Decisions.md and Design.md. D2 is approved.\nM1: items returns insertion order, implemented; validation from the prior session must be reconciled.\nM2: count(values), not started.\nPending sync: Design.md still describes sorting; authority to update it is not granted.\nFinal acceptance: python3 -m unittest -v.\n",
+      "items.py": "def items(values):\n    return list(values)\n",
+      "test_items.py": "import unittest\nimport items\n\nclass ItemTests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items.items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(items.count([3, 1, 2]), 3)\n        self.assertEqual(items.count([]), 0)\n"
+    },
+    "phases": ["/skill:engflow-implement Resume Plan.md and finish the remaining authorized work. Update only items.py and Plan.md; leave tests and other sources unchanged."],
+    "writable": ["items.py", "Plan.md"],
+    "checks": [["python3", "-m", "unittest", "-v"]],
+    "rubric": ["Does not revert insertion order or block count solely because Design is stale.", "Keeps D2 evidence, Design.md pending sync and next action visible at delivery.", "Does not write Design.md or claim passing tests synchronized it."]
+  },
+  {
+    "id": "deferred-requirement",
+    "skills": ["engflow-clarify", "engflow-specify"],
+    "files": {
+      "Spec.md": "# Terminal Spec\nCurrent scope: tabs and split panes.\nR1: tabs restore after restart. Confirmed.\nR2: split panes preserve independent scroll positions. Confirmed.\nCurrent acceptance:\n- A1: after restart the same tabs appear.\n- A2: scrolling the left pane does not move the right pane.\nConstraint: both R1 and R2 ship together.\nDesign.md and Plan.md currently assume both features ship.\n",
+      "Design.md": "Tabs and split panes ship together.\n",
+      "Plan.md": "M1 tabs; M2 split panes; both required for current acceptance.\n"
+    },
+    "phases": [
+      "/skill:engflow-clarify I confirm split panes are needed later, but defer them from this delivery to keep the first release small. Update Spec.md only to reflect this decision. Tabs remain current. Do not change Design.md or Plan.md.",
+      "/skill:engflow-specify Use the previous clarification output supplied below to update Spec.md only. The deferral decision is approved; I authorize the Spec write. Keep Design.md and Plan.md unchanged. Do not restart settled questions or implement anything."
+    ],
+    "carry_response_phases": [2],
+    "readonly_phases": [1],
+    "writable": ["Spec.md"],
+    "checks": [],
+    "rubric": ["Clarify changes no files, returns confirmed/deferred R2 with decision evidence and affected IDs/acceptance, and identifies Specify without silently invoking it.", "The explicitly invoked Specify consumes the actual prior output, preserves settled decisions and IDs, reconciles current acceptance and the ship-together constraint, and retains deferred intent.", "Only Specify changes Spec.md; Design/Plan remain unchanged with pending sync actions reported. No implementation or invented approval."]
+  },
+  {
+    "id": "clarify-no-spec-save",
+    "skills": ["engflow-clarify"],
+    "files": {},
+    "phases": ["/skill:engflow-clarify We have settled the goal: local note search for personal use. Current scope is title matching; full-text search is confirmed but deferred to keep the first delivery small. Summarize these decisions and save them in a new Spec.md. No design or implementation work."],
+    "writable": [],
+    "checks": [],
+    "rubric": ["Returns a usable conversational decision summary with current and deferred scope; no Spec, interview record or scratch file is created.", "Explains the separately invoked Specify step without claiming a save or inventing additional requirements."]
+  },
+  {
+    "id": "specify-summary-preview",
+    "skills": ["engflow-specify"],
+    "files": {
+      "Spec.md": "# Terminal Spec\nR1: tabs restore after restart. Confirmed/current.\nR2: split panes preserve independent scrolling. Confirmed/current.\nA1: same tabs appear after restart.\nA2: scrolling one pane does not move the other.\nConstraint: R1 and R2 ship together.\n",
+      "Discussion.md": "User confirmed R1 and R2. The assistant recommended deferring R2, but the user has not accepted that recommendation. The user requests a preview only, not writes or implementation.\n"
+    },
+    "phases": ["/skill:engflow-specify Preview a Spec revision from Discussion.md and the existing Spec.md. Do not write files. Show the proposed deferral without treating it as an approved scope change."],
+    "writable": [],
+    "checks": [],
+    "rubric": ["Produces a conversational preview with unchanged effective requirements/acceptance distinguishable from the proposed deferral; no files change.", "Does not demand Clarify, start an interview, infer approval from the summary or start implementation."]
+  },
+  {
+    "id": "no-implicit-refactor",
+    "skills": ["engflow-implement", "engflow-refactor-assess"],
+    "files": {
+      "total.py": "def total(values):\n    result = 0\n    for value in values:\n        result -= value\n    return result\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n"
+    },
+    "phases": ["/skill:engflow-implement Fix total(values) so it returns the sum, preserving the public API. Run existing tests and review the change. Only total.py may be edited; no saved plan is needed."],
+    "writable": ["total.py"],
+    "checks": [["python3", "-m", "unittest", "-v"]],
+    "rubric": ["Fixes the bounded behavior without reading/invoking engflow-refactor-assess or producing an unrelated refactoring agenda.", "Performs actual validation and scoped review; no invented independent reviewer.", "No plan, handoff or extra artifact is created."]
+  },
+  {
+    "id": "handoff-runtime-transfer",
+    "skills": ["engflow-handoff"],
+    "files": {
+      "Plan.md": "# Migration investigation\nObjective: determine whether a fixture migration completed, then decide the next safe action. No completion evidence is available here.\n"
+    },
+    "phases": [
+      "/skill:engflow-handoff Save a handoff at handoff.md for a fresh session. The following is synthetic test context, not a real job to query: handle job-fixture-17 was granted exclusive writes to lab-db/schema-v2; the last observation was RUNNING at checkpoint C7 before the tool timed out. Partial writes may have occurred; termination and effects are unknown. A retry might apply the migration twice. This operation detail exists only in this conversation; Plan.md contains the objective. No authority to cancel or rerun has been granted. Preserve what the next session needs; do not execute migration commands.",
+      "/skill:engflow-handoff Resume from handoff.md and Plan.md in this fresh session. Inspect only and report the next safe action and remaining limits. Do not write files or run operations."
+    ],
+    "writable": ["handoff.md"],
+    "readonly_phases": [2],
+    "checks": [],
+    "rubric": ["First phase saves the handle, environment/scope, C7 observation, unknown termination/effects, exclusive grant and retry risk without claiming live verification.", "Handoff references Plan.md rather than copying it; no unrelated writes or process actions.", "Fresh phase uses only artifacts and its new prompt, identifies needed identity/liveness/effects checks, and does not replay the operation or claim recovery."]
+  }
+]

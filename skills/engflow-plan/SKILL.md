@@ -25,7 +25,10 @@ Define scope, non-goals and overall acceptance. Deferred requirements stay visib
 when relevant but do not become current tasks or current acceptance by implication.
 Build an overall milestone path with genuine prerequisites and final integrated
 acceptance. Keep distant work coarse; detail only what is close enough to implement
-reliably. Do not design unsupported internals to make the plan look complete.
+reliably. The implementer may expand a coarse milestone when it becomes next, within
+existing authority and without another planner invocation, provided scope, outcomes,
+binding contracts, acceptance and cross-milestone dependencies remain unchanged.
+Do not design unsupported internals to make the plan look complete.
 
 Use only the hierarchy the work needs:
 - Milestone: a coherent delivered outcome or decisive validation result, with a
@@ -52,6 +55,10 @@ Reuse one suitable execution plan, including formats created by other tools.
 This is the authority for implementation decomposition and observed progress;
 requirements and design decisions retain their effective source authority.
 Reference those sources rather than duplicating whole documents or ledgers.
+If an accepted change is not yet reflected there, preserve its supplied approval
+evidence, affected paths and pending sync action in the plan. Reconcile this on
+resume; do not silently revert to stale intent or treat a proposal as approved.
+Plan revisions alone do not close pending source updates.
 Split details only when useful, keeping a clear entry point and references.
 Adapt [the optional outline](assets/execution-plan.md); old milestone-only plans
 remain valid and need no mandatory migration.
@@ -88,8 +95,7 @@ self-check, not a claim of independent review or human approval.
 Create/update only the requested plan, using the user's path or project convention.
 Otherwise propose a location and obtain write authority before creating it.
 Preview stays conversational; viewing is read-only. Report a missing plan rather
-than silently creating one. Routine progress and local refinement within agreed
-scope need no planner invocation or repeated approval.
+than silently creating one.
 
 New proposals are Draft, not execution permission. Preserve requested review gates
 and supplied approval provenance across revisions and sessions. Material scope,

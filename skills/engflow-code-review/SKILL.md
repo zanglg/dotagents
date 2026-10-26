@@ -64,10 +64,9 @@ conclusion. Helpers do not write, run mutating checks or delegate further. Verif
 consequential returns. Otherwise review directly and disclose self-review when
 assessing work authored in the same context.
 
-Explicit implementation tasks may use this read-only capability within scope
-unless restricted. Honor host invocation settings; request separate invocation
-when required or let the implementer self-review without claiming this Skill ran.
-Other workflow references alone do not invoke review.
+Within explicit implementation tasks, honor host invocation settings; request
+separate invocation when required or let the implementer self-review without
+claiming this Skill ran. Other workflow references alone do not invoke review.
 
 All reviewers remain read-only. Inspect files and existing results; do not run
 mutating builds/tests/experiments, install dependencies, write reports or source,

@@ -15,8 +15,15 @@ No workspace setup or other Skill is required.
 ## Synthesis
 
 Reuse settled answers and inspect only relevant documents and source. Do not
-restart an interview or invent requirements to fill a template. Ask only when
-an essential ambiguity prevents a useful draft.
+restart an interview or invent requirements to fill a template. Resolve ordinary
+missing details from evidence; ask only when an essential ambiguity prevents a
+useful draft. Deep clarification is optional, not a prerequisite.
+
+Accept discussion or an `engflow-clarify` summary as input. Synthesize it against
+the effective Spec and sources rather than copying a transcript or blindly applying
+suggested edits. Preserve accepted decisions and supplied approval evidence; a
+summary's recommendations are not approval, write authority or proof of feasibility.
+Do not reopen settled questions merely because another Skill gathered the answers.
 
 Distinguish requirements, preferences, technical choices and assumptions.
 Review recommendations are not decisions; approval is not proof of feasibility.
@@ -54,9 +61,15 @@ independent review or approval.
 
 Keep requirement certainty separate from delivery scope. Confirmed deferred work
 may remain in the Spec with its reason or supplied revisit condition, but is not
-current acceptance. A requested priority or deadline does not authorize execution.
+current acceptance. For an agreed deferral, reconcile affected requirements,
+acceptance, constraints and cross-references, preserving deferred intent and stable
+IDs. For a proposed deferral, keep still-effective scope distinguishable until
+agreement. A requested priority or deadline does not authorize execution.
 Accept later clarification into the same suitable Spec, preserving IDs and decision
-history; identify Design or Plan assumptions affected by material changes.
+history. For material changes, identify affected Design/Plan paths and assumptions,
+with pending updates and next sync actions in the Spec or output. Preserve decision
+evidence and distinguish accepted changes from proposals; changing the Spec does
+not synchronize downstream artifacts or authorize their revision.
 
 Choose document scope by independently evolving objectives. Reuse suitable feature
 or project documents; do not create a new Spec per session. Reference shared product

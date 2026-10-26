@@ -26,23 +26,29 @@ bring a recommendation. Do not change requirements or acceptance to make work pa
 
 Small changes need no saved plan. For large or cross-session work, read
 [the continuity contract](references/continuity.md) and reuse one execution plan.
-Dedicated planning, cross-milestone restructuring or extensive task decomposition
-can use `engflow-plan` when requested and available; it is not a prerequisite.
-Consume suitable plans regardless of their producer. Within agreed scope, maintain
-necessary structure and refine current tasks in the same record. If reliable work
-requires unresolved decisions or dedicated replanning, record the evidence, affected
-work and next planning need; continue unrelated ready work within authority. Do not
-automatically invoke another planning stage or bypass explicit-only host settings.
+Consume suitable plans regardless of their producer. Maintain current detail in
+the same record; `engflow-plan` is optional, not a prerequisite for refinement.
+Cross-milestone restructuring, changes to binding contracts or acceptance, and
+unresolved major technical choices need dedicated planning or design judgment.
+Record the evidence, affected work and next decision needed; obtain agreement for
+material changes before affected execution. Use `engflow-plan` when requested and
+available, or surface the planning need without blocking unrelated authorized work.
+Do not automatically invoke another stage or bypass explicit-only host settings.
 
 ## Delivery standard
 
-Advance the next ready task, or milestone when no tasks are defined, in the agreed
-linear sequence. Refine local steps against actual code and resolve consequential
-prerequisites before dependent work. Preserve task deliverables and binding
-interfaces; significant decomposition changes need dedicated planning judgment,
-and material changes beyond authority need agreement. Use test-first development
-when useful; verify behavior and contracts rather than incidental internals. Run
-focused checks as changes accumulate.
+Before starting the next milestone, check its prerequisites and whether its current
+detail supports safe execution. If it is still coarse, expand it in place into
+verifiable tasks or local steps as needed, within execution and record-write
+authority. This is routine refinement when agreed scope, outcomes, binding contracts,
+acceptance and cross-milestone dependencies remain unchanged; no planner invocation
+or new approval is needed. Keep later work coarse; an executable milestone needs
+no task layer. For ambiguous boundaries, consult [judgment examples](references/judgment.md).
+
+Advance the next ready task, or the milestone when it has no tasks, in the agreed
+linear sequence. Refine local steps against actual code and preserve task deliverables
+and binding interfaces. Use test-first development when useful; verify behavior and
+contracts rather than incidental internals. Run focused checks as changes accumulate.
 
 Review meaningful increments and the combined result for correctness, scope,
 regressions and validation coverage. An explicitly requested implementation task
@@ -61,21 +67,27 @@ revise the remaining sequence with reasons. Preserve valid results. Retry only
 with a changed hypothesis or new information; stop at a concrete blocker rather
 than inventing progress.
 
+After an accepted material change, identify affected requirement/design sources
+and their sync status in the existing record, or conversation when no record is
+writable. Update them only within write authority; otherwise keep the decision
+evidence, stale paths and next sync action explicit. Code and Plan updates alone
+do not close source synchronization. Report outstanding sync work at delivery;
+block execution only where unresolved authority or conflicting intent affects it.
+
 ## Continuation and steering
 
 Update the same record at meaningful checkpoints and continue ready work without
 routine "continue" gates. Milestones and sessions need not align. On resume,
 reconcile actual code, evidence and outstanding commands before executing.
 
-Viewing status or a plan is read-only. Plan-only requests authorize no implementation.
-Honor any requested approval gate across sessions; revising or reordering does not
-open it. Material changes beyond agreed scope need agreement before affected work;
-routine local choices and progress updates do not.
+Status/view requests are read-only; plan-only requests do not authorize execution.
+Preserve pending approval gates across sessions and revisions. Routine refinement
+does not reopen approval, and a reorder does not grant execution permission.
 
 For a requested reorder, verify prerequisites and capture partial work first.
 Update the same plan within authority, preserving stable IDs and valid evidence.
 If dependencies prevent the order, explain the conflict and propose a safe
-alternative. An order-only request changes the plan, not execution permission.
+alternative.
 
 ## Authority and output
 
@@ -89,8 +101,10 @@ invocation rules; implementation alone does not invoke Research or arbitrary PoC
 Do not orchestrate branches/worktrees or introduce a workspace framework.
 
 Commits, pushes and publication require authority for this work; reuse valid
-authorization but do not infer it from edit permission. A separately requested
-handoff references the record, not a duplicate ledger.
+authorization but do not infer it from edit permission. Separately requested
+`engflow-handoff` references the record, not a duplicate ledger; it is not required
+for resumption. Refactoring assessment is also explicit-only, not an automatic
+stage of implementation.
 
 Report delivered behavior, actual validation, review limits and unfinished work.
 Include the record path and next action when relevant. Do not promise background

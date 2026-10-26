@@ -1,5 +1,5 @@
 ---
-name: refactor-assess
+name: engflow-refactor-assess
 description: >
   Assess existing code for refactoring opportunities with worthwhile maintenance
   benefits. Ground recommendations in evidence, weigh costs and compatibility
@@ -9,7 +9,7 @@ description: >
 disable-model-invocation: true
 ---
 
-# Refactoring Assessment
+# Engflow Refactor Assess
 
 Identify changes that make existing code easier to understand, change or test.
 Choose the investigation strategy to fit the question, not a fixed set of
@@ -18,6 +18,11 @@ diagnostic dimensions. No Feature, Spec, setup or other Skill is required.
 Use only when the user explicitly requests a refactoring assessment,
 code simplification review, or maintainability review. An implementation
 request or observed code complexity alone does not trigger this Skill.
+
+Unlike `engflow-code-review`, assess whether existing code merits a behavior-preserving
+structural change, not whether a particular patch is correct. Findings may inform
+Design or Plan when explicitly adopted; they do not become requirements or tasks
+merely by being reported. No other Engflow Skill needs to be installed.
 
 ## Judgment standard
 
@@ -32,7 +37,8 @@ from refactoring. Respect project conventions and effective architectural decisi
 
 Treat code smells and metrics as investigation cues, not findings. Prefer the
 smallest coherent change that addresses the demonstrated burden, not speculative
-needs. Leaving the code unchanged is a valid conclusion.
+needs. Leaving the code unchanged is a valid conclusion. Use [judgment examples](references/judgment.md)
+to distinguish demonstrated maintenance benefit from stylistic preference.
 
 ## Investigation and evidence
 
