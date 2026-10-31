@@ -34,6 +34,12 @@ or restart execution. Existing paths and small tasks without saved plans remain 
 
 ## Installation and collaboration
 
+Use Research for consequential source questions and PoC for bounded experiments
+when useful and permitted by the active task. Neither is a prerequisite. Integrate
+their evidence and limitations into the existing record, without automatic reports.
+Reuse granted execution scope; a pending gate or missing authority still applies.
+Mutating probes run in the current agent; optional helpers remain read-only.
+
 Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
 including supporting files. Invoke explicitly through the host's supported mechanism.
 No other Skill is required. `engflow-plan` can help with dedicated planning;

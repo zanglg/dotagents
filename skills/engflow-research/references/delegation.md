@@ -14,7 +14,10 @@ the governing coordinator's restrictions.
 A useful return connects conclusions to traceable evidence and preserves material
 counterevidence and uncertainty. Let the question determine its structure and depth.
 
-The parent remains responsible for the answer: verify consequential claims,
+The Research task owner remains responsible for the answer: verify consequential claims,
 reconcile conflicting or changing evidence, and disclose unresolved limits.
-Only the parent may save an authorized report. Delegation does not require
-additional reports, progress records or handoff files.
+That task owner handles explicitly requested report writes within its assigned
+authority; helpers recruited only to investigate return evidence without saving.
+A host-level subagent can own an explicitly assigned research-and-save task; its
+transport alone does not make it an investigation-only helper. Delegation does not
+require additional reports, progress records or handoff files.

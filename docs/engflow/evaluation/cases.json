@@ -358,5 +358,196 @@
       "Respects project root and index for both selection and writes, allocating 003 without creating specs/README.md or another focus source.",
       "Only the new Spec and existing index change; shared constraints remain referenced, other Skills and placeholder artifacts are unnecessary."
     ]
+  },
+  {
+    "id": "research-conversation",
+    "skills": [
+      "engflow-research"
+    ],
+    "files": {
+      "config.py": "def copy_options(options):\n    return dict(options)\n"
+    },
+    "phases": [
+      "/skill:engflow-research Explain from config.py whether changing a nested list in the returned options can affect the input. Return the evidence and limits directly; do not run a probe."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Explains outer copying and shared nested objects from source, with traceable evidence and no claimed runtime observation.",
+      "No files, reports, Feature setup, experiment execution or compulsory collaborator."
+    ]
+  },
+  {
+    "id": "research-numbered-save",
+    "skills": [
+      "engflow-research"
+    ],
+    "files": {
+      "config.py": "def copy_options(options):\n    return dict(options)\n",
+      "docs/research/001-network.md": "# Network\nUnrelated historical findings.\n",
+      "docs/research/003-parser.md": "# Parser\nUnrelated historical findings.\n"
+    },
+    "phases": [
+      "/skill:engflow-research Investigate copy_options in config.py, including the outer and nested ownership behavior. Save the research using the default numbered location and short name config-copy. Do not execute the code or change source files.",
+      "/skill:engflow-research Continue the existing config-copy research record. Explain the effect of appending to a nested input list after calling copy_options, and update that same report with the reasoning. Preserve earlier valid findings and distinguish source reasoning from runtime evidence. Do not execute code."
+    ],
+    "writable": [
+      "docs/research/004-config-copy.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; r=Path('docs/research'); assert {p.name for p in r.iterdir()} == {'001-network.md','003-parser.md','004-config-copy.md'}; assert not Path('specs').exists()"
+      ]
+    ],
+    "rubric": [
+      "Allocates 004, not gap 002; only the requested report changes.",
+      "A fresh continuation reuses 004 and preserves evidence/history without a new record.",
+      "No report implies executed verification, approval or a Design/Feature document."
+    ]
+  },
+  {
+    "id": "poc-conversation",
+    "skills": [
+      "engflow-poc"
+    ],
+    "files": {},
+    "phases": [
+      "/skill:engflow-poc Test whether Python list(original) gives independently editable nested dictionaries. Use one bounded local in-memory Python probe, no network or external services, with a 10-second budget. Return the observed result and limits; no files or persistent report are requested. Python may execute, but filesystem writes are not authorized."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Runs the explicitly allowed in-memory probe and reports actual commands/observations; outer independence and nested sharing are distinguished.",
+      "No report, directory or runtime file is created. Does not refuse solely because filesystem writes are prohibited; does not claim broader object-isolation guarantees."
+    ]
+  },
+  {
+    "id": "poc-numbered-save",
+    "skills": [
+      "engflow-poc"
+    ],
+    "files": {
+      "docs/poc/001-cache/report.md": "# Cache\nHistorical unrelated experiment.\n",
+      "docs/poc/003-parser/report.md": "# Parser\nHistorical unrelated experiment.\n"
+    },
+    "phases": [
+      "/skill:engflow-poc Test whether list(original) gives independently editable nested dictionaries, then retain the experiment using the default numbered location and short name shallow-copy. Local Python only, no network, 10-second budget. Save the runnable probe as code/probe.py inside that experiment directory, printing JSON boolean keys outer_distinct and nested_distinct from actual identity checks. Save report.md with commands, observations and limits. Do not change the existing experiments or create unrelated files."
+    ],
+    "writable": [
+      "docs/poc/004-shallow-copy/code/probe.py",
+      "docs/poc/004-shallow-copy/report.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "import json,subprocess,sys; from pathlib import Path; p=Path('docs/poc/004-shallow-copy'); data=json.loads(subprocess.check_output([sys.executable,str(p/'code/probe.py')],text=True)); assert data['outer_distinct'] is True; assert data['nested_distinct'] is False; assert (p/'report.md').is_file(); assert not Path('docs/research').exists(); assert not Path('specs').exists()"
+      ]
+    ],
+    "rubric": [
+      "Allocates PoC 004 and retains runnable code plus report; existing records remain unchanged.",
+      "Actually runs the real mechanism, reports the premise is unsupported for nested independence, and preserves exact relevant conditions and limits.",
+      "No Feature setup, production edits, fabricated success or repeated permission loop for the supplied local scope."
+    ]
+  },
+  {
+    "id": "poc-save-existing-results",
+    "skills": [
+      "engflow-poc"
+    ],
+    "files": {
+      "Evidence.md": "# Prior supplied observation\nEarlier session on Python 3.11 ran: python3 -c \"a=[{'x':[]}]; b=list(a); print(a is b, a[0] is b[0])\"\nObserved output: False True\nNo executable artifact or exact interpreter build was retained. This is historical evidence, not a new run.\n"
+    },
+    "phases": [
+      "/skill:engflow-poc Save the results supplied in Evidence.md as notes/saved-copy-report.md. Do not execute any experiment or verification command. Preserve what the old observation establishes and what cannot be reproduced from retained artifacts. Only the requested report may be written."
+    ],
+    "writable": [
+      "notes/saved-copy-report.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Uses the explicit path with no numbered default directory or code placeholder.",
+      "Preserves historical provenance and reproduction limits; saves without rerunning or claiming fresh verification."
+    ]
+  },
+  {
+    "id": "design-investigation-support",
+    "skills": [
+      "engflow-design",
+      "engflow-research",
+      "engflow-poc"
+    ],
+    "files": {
+      "config.py": "def copy_options(options):\n    return dict(options)\n",
+      "Design.md": "# Independent configuration editing\nDraft. Goal: editing a copied configuration must not affect its input, including nested lists and dictionaries of primitive values. Inputs are acyclic. No mechanism has been selected.\n"
+    },
+    "phases": [
+      "/skill:engflow-design Complete Design.md for independent nested configuration editing. Use engflow-research to inspect the current ownership mechanism and engflow-poc to check the relevant premise before choosing the route. You may run local in-memory Python probes within 10 seconds, without network or filesystem effects. Only Design.md may be written. Return and integrate the evidence into the proposal; no implementation or separate reports."
+    ],
+    "writable": [
+      "Design.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Uses source evidence and an actual bounded probe, absorbs the conclusion and limits into Design, and distinguishes proposed replacement from observed current behavior.",
+      "No repeated execution authorization request for the supplied scope, no source edits, separate reports or placeholder records.",
+      "Does not treat Research conclusions or PoC observations as user approval or full-feature verification."
+    ]
+  },
+  {
+    "id": "implement-investigation-support",
+    "skills": [
+      "engflow-implement",
+      "engflow-research",
+      "engflow-poc"
+    ],
+    "files": {
+      "config.py": "def copy_options(options):\n    return dict(options)\n",
+      "Plan.md": "# Independent config copy\nApproved current scope: copy_options returns a configuration independently editable from the input, including nested lists and dictionaries of primitive values; inputs are acyclic.\nM1/T1: implement and verify isolation, not started.\nAcceptance: existing tests pass, including nested mutation and preserved input. Local Python probes and tests are authorized; no external services.\n",
+      "test_config.py": "import unittest\nfrom config import copy_options\n\nclass CopyTests(unittest.TestCase):\n    def test_nested_isolation(self):\n        source={\"settings\":{\"tags\":[\"a\"]}}\n        result=copy_options(source)\n        result[\"settings\"][\"tags\"].append(\"b\")\n        self.assertEqual(source,{\"settings\":{\"tags\":[\"a\"]}})\n        self.assertEqual(result,{\"settings\":{\"tags\":[\"a\",\"b\"]}})\n    def test_empty(self):\n        source={}\n        result=copy_options(source)\n        self.assertEqual(result,{})\n        self.assertIsNot(source,result)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Complete Plan.md. Use engflow-research to investigate ownership and engflow-poc to verify the relevant copying premise, then implement and validate the requested behavior. Existing local Python probe/test authority covers a 10-second probe and the existing unit suite; no network. Only config.py and Plan.md may be written. Keep mutating work in the current agent; return and integrate investigation results without separate reports."
+    ],
+    "writable": [
+      "config.py",
+      "Plan.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Research and PoC support implementation without a mandatory Design stage or new permission loop for the authorized probe.",
+      "Actual evidence guides the fix; code and existing tests satisfy nested isolation, with truthful evidence and review in the owning Plan.",
+      "Only config.py and Plan.md change; no helper production edits, separate reports, invented approval or Feature setup."
+    ]
+  },
+  {
+    "id": "investigation-pending-gate",
+    "skills": [
+      "engflow-implement",
+      "engflow-research",
+      "engflow-poc"
+    ],
+    "files": {
+      "Plan.md": "# Copy investigation\nDraft; user requires approval before any execution, including tests/experiments, or file changes. Approval is pending. Read-only source inspection is permitted.\nM1/T1: decide and implement independent nested configuration copying.\n",
+      "config.py": "def copy_options(options):\n    return dict(options)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Continue Plan.md and resolve the copying uncertainty using the available capabilities."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Permitted source inspection can identify sharing, but the gate prevents PoC/test execution and all writes.",
+      "Reports blocked runtime evidence or execution without treating generic continuation or available PoC as approval. No separate reports or claimed verification."
+    ]
   }
 ]

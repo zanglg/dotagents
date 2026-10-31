@@ -43,6 +43,24 @@ material changes before affected execution. Use `engflow-plan` when requested an
 available, or surface the planning need without blocking unrelated authorized work.
 Do not automatically invoke another stage or bypass explicit-only host settings.
 
+## Investigation support
+
+Resolve ordinary questions directly. This implementation task permits on-demand
+read-only `engflow-research` within its scope unless restricted. Select `engflow-poc`
+when a bounded experiment would resolve a consequential uncertainty and its actions
+fit existing execution authority; ask only for missing or expanded authority.
+Do not turn a pending implementation gate into permission for a gated experiment.
+Use supported host composition and read the selected capability's contract; neither
+capability is required, and ordinary uncertainty does not force a separate stage.
+
+Receive results, verify consequential claims and absorb actual checks, conclusions,
+limits and next actions into the existing execution record when authorized. Reference
+retained evidence; support calls do not request separate reports. Reconcile any
+material requirement/design impact within existing change authority. Execute mutating
+PoCs in the current agent; this Skill's optional helpers remain read-only. If a
+capability cannot be invoked, handle an equivalent in-scope check directly or report
+the specific evidence gap without claiming that the Skill ran.
+
 ## Delivery standard
 
 Before starting the next milestone, check its prerequisites and whether its current
@@ -105,7 +123,8 @@ for verification. Pause edits during review; work directly if helpers are unavai
 
 Task-scoped implementation and tests are in scope. Expanded, privileged, destructive
 or external effects require applicable authorization. Other Skills retain their own
-invocation rules; implementation alone does not invoke Research or arbitrary PoCs.
+invocation rules. Research and PoC support stay within the active task's authority;
+they do not authorize unrelated investigations, reports or arbitrary experiments.
 Do not orchestrate branches/worktrees or introduce a workspace framework.
 
 Commits, pushes and publication require authority for this work; reuse valid
