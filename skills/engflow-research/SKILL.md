@@ -1,6 +1,11 @@
 ---
 name: engflow-research
-description: "Investigate technical questions through source code, first-party specifications and existing evidence. Explain mechanisms and assess possible paths with evidence-backed conclusions, counterevidence and explicit uncertainty. No experiment execution or production implementation. Use on explicit research request or as read-only support for an explicitly requested Design task."
+description: >
+  Investigate technical questions through source code, first-party specifications
+  and existing evidence. Return grounded conclusions and uncertainty. Use on
+  explicit research request or as authorized read-only support for another task,
+  including Design and Implement. Save a report only when explicitly requested;
+  no experiment execution or production implementation.
 disable-model-invocation: true
 ---
 
@@ -10,18 +15,19 @@ Answer the user's technical question with a defensible explanation.
 Choose the investigation strategy and answer structure to fit the question;
 no predefined research category, workflow or document setup is required.
 
-Use on an explicit research request, explicit task-scoped Research permission,
-or as read-only support within an explicitly requested Design task. Design may
-use Research as needed without per-call confirmation unless the user restricts it.
-Routine coding questions, implementation uncertainty and other workflow references
-alone do not invoke this Skill. Honor host invocation restrictions.
+Use on an explicit research request or within a coordinating task that permits
+read-only investigation. Design and Implement may select Research as needed within
+their active scope, without per-call confirmation unless restricted. Other callers
+can use the same capability with appropriate task authority. Neither a document
+reference nor an unrelated question invokes it automatically. Honor host invocation
+settings; using this Skill does not require a separate worker or other Engflow Skills.
 
-Within Design, investigate only consequential evidence gaps in the active task;
-do not expand access or disclosure permissions, execute experiments or write a
-separate research report. Return evidence to Design for integration into its
-proposal. This authority ends with that task, not a grant for unrelated work.
-When assigned as a helper, do not delegate further or take design decisions;
-suggest runtime checks to the coordinator rather than invoking PoC.
+When supporting another task, return evidence and limitations to its caller. The
+caller owns decisions and integration into its authorized documents or execution
+record; support alone does not request a separate report or permit editing those
+sources. Stay within the question and existing access/disclosure limits. Helpers
+recruited for this investigation remain read-only, do not delegate further and
+suggest runtime checks rather than invoking PoC or starting implementation.
 
 ## Evidence standard
 
@@ -50,14 +56,25 @@ the question. Provide traceable source references and qualify changing or unknow
 source state. When evidence is insufficient, narrow the conclusion and identify
 the next discriminating check. Static analysis is not runtime verification.
 
-Return findings in the conversation by default. Outside Design, save a report only
-within write authorization, reusing an appropriate existing report and the user's
-or project's location; otherwise propose a location first. Preserve historical
-artifacts. The [report outline](assets/research.md) is optional.
+Return findings to the caller or, when independent, directly in conversation.
+Save a report only when explicitly requested and within write authority. Reuse the
+same appropriate record when continuing a question; preserve useful history and
+distinguish prior evidence from new observations. Follow the supplied path or project
+convention; otherwise save to `docs/research/NNN-short-name.md`.
+
+For a new record, use the next number above allocated research records, starting
+at `001` with at least three digits. Do not fill gaps, renumber existing records or
+overwrite a collision; recheck the destination before writing. This numbering is
+independent of features and PoCs. Preview does not create files or reserve numbers.
+Saving existing findings requires no rerun or new investigation. Reference relevant
+feature/design sources without creating them or changing current-feature navigation.
+The [report outline](assets/research.md) is optional; report its saved path and limits.
 
 Use bounded read-only helpers when they materially improve the investigation,
 following [delegation guidance](references/delegation.md). Otherwise work directly.
-Only the parent saves an authorized report.
+The agent responsible for this Research task handles explicitly authorized report
+writes; investigation-only helpers return evidence. Determine that responsibility
+from the assigned task and write scope, not merely from being a host-level subagent.
 
 ## Boundaries
 

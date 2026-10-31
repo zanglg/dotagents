@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Add explicit-save defaults for standalone Research and PoC records:
+  `docs/research/NNN-short-name.md` and `docs/poc/NNN-short-name/report.md`, with
+  necessary experiment code under `code/`. Reuse existing records on continuation;
+  keep conversation/caller returns as the default and preserve supplied paths.
 - Add read-only `engflow-clarify` for deep discovery and targeted clarification.
   Return conversational decisions, current/deferred scope and affected-source
   summaries; do not create or update Specs or interview records. `engflow-specify`
@@ -56,6 +60,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Make Research and PoC reusable by Design, Implement and other authorized callers.
+  Return evidence for caller-owned integration without automatic reports; reuse
+  sufficient execution authority without expanding scope or bypassing gates.
+  Keep Implement's mutating experiments in the current agent and helpers read-only.
 - Rename engineering entrypoints to `engflow-*`: specify, design, implement,
   code-review, technical-research, poc, refactor-assess and handoff; rename
   plan-implementation to `engflow-plan`. Old invocation names and installed folder

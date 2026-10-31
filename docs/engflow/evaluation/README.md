@@ -17,6 +17,14 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | specify-summary-preview | Standalone Specify receives an unapproved deferral suggestion | No writes or required Clarify; effective acceptance remains distinct from proposal |
 | no-implicit-refactor | Bounded fix with Refactor Assess installed | Tool trace must not load assessment; no unrelated work or artifacts |
 | handoff-runtime-transfer | Two fresh sessions, outstanding synthetic operation | Runtime context survives via files only; no replay or invented liveness |
+| research-conversation | Standalone source investigation | Evidence-backed conversation; no probe, report or workflow setup |
+| research-numbered-save | Save after records 001/003, then resume in a fresh session | Allocate 004 once; preserve history and distinguish analysis from execution |
+| poc-conversation | Authorized in-memory experiment without file writes | Actual evidence returned; no persistent report or unnecessary permission loop |
+| poc-numbered-save | Retain a bounded experiment | Next PoC directory, reproducible code and report; existing records preserved |
+| poc-save-existing-results | Save historical evidence to an explicit path | No rerun, fabricated fresh result or placeholder code |
+| design-investigation-support | Design uses Research and PoC | Evidence integrated into Design only, within existing execution scope |
+| implement-investigation-support | Implement uses Research and PoC | Actual probe, fix and validation; one writer and owning execution record |
+| investigation-pending-gate | Available capabilities with execution approval pending | Source inspection only; no experiment, test or file changes |
 
 Each case contains input files, prompts, permitted writes, optional executable
 acceptance checks and a manual rubric. Rubrics are not supplied in the agent prompt.
@@ -94,8 +102,9 @@ Record passed/failed/blocked outcomes with specific evidence and retain failed
 attempts. Do not claim independent review when the author performed the evaluation.
 Keep durable sanitized summaries here; do not commit raw transcripts, private paths,
 credentials, machine state or scratch output. Temporary evidence is not guaranteed
-to survive. See [the original smoke evaluation](results.md) and the
-[Clarify/Specify follow-up](clarify-specify-results.md) for inspected snapshots and limits.
+to survive. See [the original smoke evaluation](results.md), the
+[Clarify/Specify follow-up](clarify-specify-results.md), and the
+[Research/PoC follow-up](investigation-results.md) for inspected snapshots and limits.
 
 For another host, use the same fixture inputs and rubric with its actual invocation
 and policy mechanisms. Do not assume Pi results establish Claude Code or Codex

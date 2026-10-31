@@ -15,8 +15,8 @@ planning or implementation. Suitable external artifacts are valid inputs.
 | [engflow-plan](../../skills/engflow-plan/SKILL.md) | Organize milestones, near-term tasks, dependencies and integrated acceptance |
 | [engflow-implement](../../skills/engflow-implement/SKILL.md) | Implement, validate, review and maintain observed progress |
 | [engflow-code-review](../../skills/engflow-code-review/SKILL.md) | General read-only review of code changes, with or without Engflow artifacts |
-| [engflow-research](../../skills/engflow-research/SKILL.md) | Investigate technical questions from sources and existing evidence |
-| [engflow-poc](../../skills/engflow-poc/SKILL.md) | Run separately authorized bounded experiments |
+| [engflow-research](../../skills/engflow-research/SKILL.md) | Investigate source evidence independently or for an authorized caller; save only on request |
+| [engflow-poc](../../skills/engflow-poc/SKILL.md) | Test premises within bounded execution authority; return evidence and retain records on request |
 | [engflow-refactor-assess](../../skills/engflow-refactor-assess/SKILL.md) | Assess worthwhile behavior-preserving improvements to existing code, without edits |
 | [engflow-handoff](../../skills/engflow-handoff/SKILL.md) | Transfer essential context or resume from a handoff without duplicating existing records |
 
@@ -62,10 +62,42 @@ A missing planner is not an installation failure. Do not create a competing plan
 
 Invocation is not delegation: the current agent can use a Skill without a worker.
 References alone do not invoke another Skill. Respect explicit invocation settings
-and host composition; do not add automatic stage transitions. Existing Design /
-Research and Implement / Review task-scoped permissions remain bounded by their
+and host composition; do not add automatic stage transitions. Research/PoC support
+and Implement/Review task-scoped permissions remain bounded by their
 contracts and host support. Human approval depends on the affected decision and
 existing gate, not on the mere use of another capability.
+
+## Research and PoC
+
+Research and PoC are independent capabilities usable by Design, Implement and other
+authorized callers. Research investigates source evidence without executing probes;
+PoC tests a premise through a bounded experiment. Select them when they materially
+help the current question; ordinary questions can be handled directly. Neither a
+Feature nor another Skill is required, and invocation does not require a worker.
+
+An explicit Design or Implement task permits on-demand read-only Research within
+its scope unless restricted. PoC runs need adequate execution authority: reuse
+existing permission without per-call confirmation, and obtain only missing scope.
+A request to design, inspect or save a report does not authorize arbitrary runs,
+expand access, or remove pending gates. Honor the host's invocation settings.
+
+Both capabilities return evidence and limitations to the caller, which verifies
+consequential claims and integrates them into its authorized Design or execution
+record. Calls do not automatically create separate reports or let a collaborator
+rewrite the caller's sources. Keep decision-relevant conclusions and references in
+the owning document; retain detailed evidence separately only where useful and
+authorized. Implement runs mutating probes in the current agent; its optional
+helpers remain read-only.
+
+Independent use returns results directly in conversation. An explicit save request
+uses the supplied/project path, otherwise Research writes
+`docs/research/NNN-short-name.md`, and PoC uses `docs/poc/NNN-short-name/report.md`
+with necessary runnable material under `code/`. Allocate the next number within
+each record family, preserve identities and recheck collisions. Continue the same
+question/experiment in its existing record; saving old results does not rerun them.
+Temporary experiment files are distinct from durable reports. Preview reserves no
+number, and neither family creates or selects a Feature. No report template,
+parallel task ledger or automatic stage transition is required.
 
 ## Checks and review
 
@@ -184,6 +216,11 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | New session, dirty code or stale checks | Reconcile actual state and outstanding effects before execution |
 | View/preview or pending gate | No writes/implementation or implicit approval |
 | Plain code diff without documents | Review concrete defects and disclose requirements coverage limits |
+| Standalone Research or PoC without a save request | Return results in conversation; no automatic durable report |
+| Explicit save with no path | Allocate the next record in the appropriate default family |
+| Resume a saved investigation or save supplied observations | Reuse the record and preserve provenance; saving alone does not rerun |
+| Design/Implement selects Research or PoC | Return evidence for caller-owned integration; reuse adequate existing authority |
+| Execution gate pending or scope insufficient | Do not run a probe through another capability to bypass the boundary |
 | All tasks marked done | Still check milestone and final integrated acceptance |
 | Approved design change; code/Plan updated; Design stale | Keep approval evidence, stale path and next sync action visible; update only within authority |
 | Resume with a pending source update | Reconcile approval and current sources; do not revert accepted intent or silently approve a proposal |

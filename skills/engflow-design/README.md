@@ -24,9 +24,12 @@ conditional when feasibility is not established.
 
 Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
 including supporting files. Invoke explicitly through the host's supported mechanism.
-Design works alone. Optional `engflow-research` provides read-only evidence within
-permitted host composition; `engflow-poc` needs separately bounded execution authority.
-Design retains solution ownership. See the [collaboration contract](references/investigation.md).
+Design works alone. Optional Research supplies source evidence; PoC supplies runtime
+evidence within adequate existing execution authority. Obtain only missing experiment
+scope, not repeated approval for an already permitted probe. Both return results for
+Design to verify and integrate; calls do not automatically save separate reports.
+See the [collaboration contract](references/investigation.md). Both capabilities
+remain usable independently and by other authorized callers.
 
 ## Validation and references
 

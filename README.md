@@ -79,7 +79,7 @@ without searching the whole workspace.
 | [engflow-plan](skills/engflow-plan/README.md) | Create and revise progressive milestone/task plans without implementing or publishing tickets |
 | [engflow-implement](skills/engflow-implement/README.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
 | [engflow-code-review](skills/engflow-code-review/README.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
-| [engflow-design](skills/engflow-design/README.md) | Continuous feature design and an evolving proposal; on-demand read-only Research and separately authorized PoC |
+| [engflow-design](skills/engflow-design/README.md) | Continuous feature design and an evolving proposal; optional Research and PoC within task authority |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
@@ -103,8 +103,10 @@ implementation. See the usage and validation scenarios for [planning](skills/eng
 For a repository-local installation, copy the desired skill folders from
 `skills/` into the target repository's `.agents/skills/`. Keep their supporting
 files together. Each skill installs independently, without workspace setup.
-Design can work alone; install `engflow-research` and `engflow-poc` alongside it to
-use those optional collaborators. Other skills can be selected separately.
+Design and Implement can work alone; install `engflow-research` and `engflow-poc`
+alongside either to use optional evidence gathering within the task's authority.
+Research and PoC also work independently or for other authorized callers, returning
+results by default and saving numbered records only on request.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of

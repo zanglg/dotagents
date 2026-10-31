@@ -39,11 +39,13 @@ details. Reconcile affected choices when evidence or requirements change, and
 continue useful work within scope without routine permission to proceed. A blocked
 question need not stop independent work.
 
-Investigate ordinary questions directly. Explicitly starting Design also authorizes
-on-demand read-only Research for this task unless the user restricts it. No per-call
-confirmation is needed; access and report-writing authority do not expand. PoC still
-needs bounded execution authority. Follow [the collaboration contract](references/investigation.md);
-Design retains responsibility, and neither collaborator is a mandatory stage.
+Investigate ordinary questions directly. Explicitly starting Design also permits
+on-demand read-only Research for this task unless restricted. Select PoC when runtime
+evidence is needed and existing authority covers the bounded experiment; obtain only
+the missing scope when it does not. No per-call confirmation is needed within granted
+scope. Follow [the collaboration contract](references/investigation.md); Design owns
+the decisions and absorbs consequential evidence into its proposal. Neither capability
+is a mandatory stage or an automatic request for a separate report.
 
 Finish when implementation can proceed without rediscovering feature semantics,
 cross-component contracts or major technical choices. Make necessary invariants
