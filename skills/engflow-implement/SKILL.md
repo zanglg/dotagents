@@ -16,6 +16,14 @@ until the user pauses, ends or redirects it.
 
 ## Judgment and scope
 
+Resolve the explicit feature ID/path or established conversation target before
+working. For an unspecified continuation, verify the current-feature link in
+`specs/README.md` (or the project equivalent), then read that feature's plan and
+needed sources. Highest number, latest edit and a dependency's document do not
+select a feature. A missing, stale or ambiguous link needs resolution, not a guess.
+Keep the session's selected target if another session changes the link. Status or
+inspection requests do not switch stored focus or authorize execution.
+
 Establish observable acceptance, effective requirements and actual source state.
 Distinguish requirements from preferences, decisions from recommendations, and
 evidence from assumptions. Approval does not establish technical feasibility.
@@ -126,5 +134,6 @@ for resumption. Refactoring assessment is also explicit-only, not an automatic
 stage of implementation.
 
 Report delivered behavior, actual validation, review limits and unfinished work.
-Include the record path and next action when relevant. Do not promise background
+Include the selected feature, record path, current milestone/task and next action
+when relevant; qualify task IDs by feature or plan when scopes could be confused. Do not promise background
 progress, automatic session recovery or transfer of unpersisted code.

@@ -11,12 +11,22 @@ disable-model-invocation: true
 
 # Engflow Clarify
 
-Help the user reach decisions that materially change what should be built.
-Start from the available discussion, specification and relevant code. No Spec,
-Design or other Skill is required. Continue follow-up discussion within the
+Help the user form, challenge or revise goals, boundaries and consequential
+choices through focused discussion. This is an optional depth of exploration;
+ordinary clarification also belongs to the capability doing the work. Do not
+turn a request for a usable Spec into a mandatory interview or produce a parallel
+specification. Start from the available discussion, specification and relevant code.
+No Spec, Design or other Skill is required. Continue follow-up discussion within the
 active task until the user pauses, ends or redirects it.
 
 ## Explore or clarify
+
+Respect an explicit feature ID/path or the established conversation target. For an
+unspecified continuation, the project's current-feature link (by default in
+`specs/README.md`) is a navigation hint to verify against the sources. If it is
+missing, stale or ambiguous, explain the candidates rather than choosing by highest
+number or modification time. Reading another feature does not switch the target;
+Clarify never writes directories, documents or the current-feature link.
 
 For an early idea, establish the problem, intended users, useful outcomes,
 first-delivery scope, constraints and consequential tradeoffs. Challenge the

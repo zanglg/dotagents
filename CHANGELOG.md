@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Default new Engflow features to numbered `specs/NNN-short-name/` directories
+  with on-demand Spec, Design and Plan documents. Add a lightweight current-feature
+  link, explicit-target precedence and checkpoint-based continuation without a
+  second task ledger, automatic branch management or forced migration.
 - Add explicit-save defaults for standalone Research and PoC records:
   `docs/research/NNN-short-name.md` and `docs/poc/NNN-short-name/report.md`, with
   necessary experiment code under `code/`. Reuse existing records on continuation;
@@ -60,6 +64,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Keep Specify a complete specification entry point with ordinary clarification;
+  position Clarify as optional deep exploration and reuse its settled conclusions.
+  Describe parent/child feature references and readiness scoped to the current
+  delivery, preserving shared authority and deferred intent.
 - Make Research and PoC reusable by Design, Implement and other authorized callers.
   Return evidence for caller-owned integration without automatic reports; reuse
   sufficient execution authority without expanding scope or bypassing gates.

@@ -83,7 +83,7 @@ without searching the whole workspace.
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
-| [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
+| [engflow-specify](skills/engflow-specify/README.md) | Form and maintain testable specifications, resolving ordinary ambiguity; optional deep exploration through Clarify |
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 See the [Engflow guide](docs/engflow/README.md) for responsibilities, composition,

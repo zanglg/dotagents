@@ -1,7 +1,8 @@
 ---
 name: engflow-specify
 description: >
-  Synthesize existing discussion and evidence into a specification.
+  Form and maintain a coherent, testable specification from goals, discussion
+  and evidence, resolving ordinary requirement ambiguity as needed.
   Use on explicit request to create, update or preview a spec, not to
   develop a new design or start implementation.
 disable-model-invocation: true
@@ -17,7 +18,10 @@ No workspace setup or other Skill is required.
 Reuse settled answers and inspect only relevant documents and source. Do not
 restart an interview or invent requirements to fill a template. Resolve ordinary
 missing details from evidence; ask only when an essential ambiguity prevents a
-useful draft. Deep clarification is optional, not a prerequisite.
+useful draft. Own ordinary clarification without requiring a separate interview.
+Deep exploration with Clarify is optional when goals, assumptions or consequential
+tradeoffs need sustained discussion. Reuse its conclusions without repeating the
+interview; synthesize a Spec rather than reformatting its summary.
 
 Accept discussion or an `engflow-clarify` summary as input. Synthesize it against
 the effective Spec and sources rather than copying a transcript or blindly applying
@@ -34,12 +38,40 @@ Cite actual evidence or conversational premises. Record unresolved choices,
 unsupported claims, affected scope and what would resolve them; do not imply
 blocked work is ready. Any helpers remain read-only; verify their material claims.
 
+## Feature context
+
+Resolve an explicit feature ID/path or the established conversation target first.
+For an unspecified continuation, verify the current-feature link in
+`specs/README.md` (or the project equivalent) against accessible sources. Do not
+select by highest number or modification time; ask when the target remains
+ambiguous. Reading a dependency does not switch the selected feature.
+
+Reuse the selected feature's `spec.md` and existing paths. For an authorized new
+feature without a different project convention, create `specs/NNN-short-name/`
+using the next number above existing directories and retained index identities,
+starting at `001` with at least three digits. Preserve IDs, do not fill gaps, and
+recheck for collisions before writing. Create only the requested document, not
+empty Design/Plan files or a branch. A new session is not a new feature.
+
+An authorized feature creation or selection may maintain its link and the
+`Current feature` link in the same resolved project index (default
+`specs/README.md`) unless writes are restricted. That link
+records focus only; progress and gates remain in the feature's documents. Creating
+future/deferred features alone does not change established focus. Keep
+an established session target if another session changes the link. Preview and
+read-only requests never allocate numbers, create directories or change focus.
+
 ## Content
 
 Default to one Spec per independently implementable, verifiable and evolving
 objective, containing as many requirements as needed. Split by independent scope,
 not by individual requirement or document length; respect existing project structure.
 Adapt [the outline](assets/spec.md), omitting unneeded sections and stating non-goals.
+For a large objective, keep shared intent and constraints concise and link separately
+evolving feature detail. A dependent feature can still have its own acceptance and
+lifetime. Detail the current delivery and its necessary dependencies; distinguish
+confirmed later scope from undecided possibilities without inventing future behavior.
+Unresolved later work blocks only the decisions that actually depend on it.
 
 - Make behavior and quality requirements testable, covering material edge cases
   and failures. Acceptance criteria describe externally observable results;
@@ -78,14 +110,16 @@ affects a shared contract; do not require global and feature document layers.
 
 ## Output
 
-Create or update only the requested specification. Inspect the target first;
-use the user's path or project convention, otherwise propose a location before
-writing. Preview and no-write requests stay in the conversation.
+Create or update the requested specification and, when permitted, its feature
+navigation links. Inspect targets first; honor explicit paths and existing project
+conventions, otherwise use the numbered-feature default for authorized creation.
+State the selected feature and output path. Preview and no-write requests stay
+in the conversation.
 
 Preserve unrelated content, structure, stable IDs and approval history; append
 new IDs rather than renumbering. New content is Draft unless explicitly approved
 for that content. Substantive revisions do not inherit prior approval.
 
-Do not start design, experiments or implementation, create other artifacts,
+Do not start design, experiments or implementation, create unrelated artifacts,
 manage branches, commit or publish. Report the output path or preview and
 material open questions.

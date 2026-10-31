@@ -26,6 +26,16 @@ The [outline](assets/execution-plan.md) is optional, not a required format or an
 instruction to create files during installation. No function-body plan or fixed
 per-step TDD script is required.
 
+## Feature selection
+
+Existing project paths remain valid. New features default to
+`specs/NNN-short-name/plan.md`; create documents only as needed. Feature numbers
+are stable identities, not priority or execution order. Resolve an explicit ID/path
+first; otherwise an unspecified continuation uses the verified `Current feature`
+link in `specs/README.md`. Authorized work may maintain those navigation links;
+preview and read-only requests do not. Progress and approval stay in feature
+documents. Ambiguity is reported rather than choosing the newest feature.
+
 ## Installation and collaboration
 
 Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
@@ -44,7 +54,9 @@ subset and limits.
 | --- | --- |
 | No Spec or tracker | Plan from available goals and code; no setup requirement |
 | Critical route unknown | Expose the question and blocked scope, not invented readiness |
-| Preview, view-only or missing destination | Respect write intent; no silent artifact creation |
+| Preview or view-only | No artifact creation, number allocation or focus changes |
+| Authorized new feature without a path | Use the numbered default and report the selected path |
+| Several features, unspecified continuation | Verify the current link; do not choose by highest ID |
 | Large task | Coarse future milestones, detailed near-term tasks and final acceptance |
 | Split/merge a partially completed task | Preserve valid work, successor references and evidence coverage |
 | External or milestone-only plan | Reuse it without forced migration or producer dependency |

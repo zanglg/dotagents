@@ -22,6 +22,16 @@ limits. Output includes code changes, actual validation, review limits, unfinish
 work and, when relevant, an updated execution record and next action. Commit,
 publication and handoff are separate operations, not implied by edit permission.
 
+## Feature selection and recovery
+
+An explicit feature ID/path or established conversation target selects the work.
+Otherwise verify the `Current feature` link in `specs/README.md`, then recover the
+current milestone/task and next action from its `plan.md` or existing record.
+The index stores navigation only. Highest number and latest edit do not imply
+current work; a stale or ambiguous selection needs resolution. Explicitly scoped
+sessions keep their target during concurrent work. Viewing does not switch focus
+or restart execution. Existing paths and small tasks without saved plans remain valid.
+
 ## Installation and collaboration
 
 Use Research for consequential source questions and PoC for bounded experiments
