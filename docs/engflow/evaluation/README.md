@@ -1,5 +1,8 @@
 # Engflow behavior evaluation
 
+See [numbered feature results](numbered-features-results.md) for the current-feature,
+numbering and backward-compatibility checks and their host/snapshot limits.
+
 Run synthetic tasks with real tools in fresh host/model sessions. This is distinct
 from static validation and from checking whether a prompt contains certain words.
 The small suite in [cases.json](cases.json) is a smoke regression suite, not proof
@@ -17,6 +20,15 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | specify-summary-preview | Standalone Specify receives an unapproved deferral suggestion | No writes or required Clarify; effective acceptance remains distinct from proposal |
 | no-implicit-refactor | Bounded fix with Refactor Assess installed | Tool trace must not load assessment; no unrelated work or artifacts |
 | handoff-runtime-transfer | Two fresh sessions, outstanding synthetic operation | Runtime context survives via files only; no replay or invented liveness |
+| numbered-feature-create | Standalone Specify creates after IDs 001 and 003 | Allocate 004; shared-source references, deferred scope and allowed current link |
+| feature-current-resume | Current 002 while a newer 007 exists | Resume 002/T2, real tests and one owning progress record |
+| feature-explicit-plan | Explicit 007 while saved focus is 002 | Target wins; restricted writes preserve index, siblings and gate |
+| feature-stale-focus | Saved target is missing, multiple candidates exist | Ask which feature; no guessed recovery or writes |
+| feature-current-gate | Generic continuation with approval pending | No coding or inferred approval; truthful existing-plan reconciliation is allowed |
+| numbered-feature-preview | Preview a new numbered feature | No allocation, directories or stored focus changes |
+| feature-design-first | Only Design installed, future scope unresolved | Next feature and Design only; current readiness remains scoped |
+| feature-future-batch | Save two deferred features while current work is partial | Sequential IDs, preserved current focus and checkpoint |
+| feature-custom-location | Project-specific feature root and index | Read and write the same index; no competing default pointer |
 
 Each case contains input files, prompts, permitted writes, optional executable
 acceptance checks and a manual rubric. Rubrics are not supplied in the agent prompt.

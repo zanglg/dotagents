@@ -16,6 +16,26 @@ no Spec, Feature or other Skill is required.
 Explicit invocation starts or resumes the task. Follow-up answers continue it
 without reinvocation until the user pauses, ends or redirects it.
 
+## Feature context
+
+Use the explicit feature ID/path or established conversation target. For an
+unspecified continuation, verify the current-feature link in `specs/README.md`
+(or the project equivalent). Do not infer focus from the largest number or most
+recent file; resolve a missing, stale or conflicting target before affected work.
+Reading another feature as a dependency does not switch the target, and a later
+change to the link does not redirect an already scoped session.
+
+Reuse existing paths. Otherwise, authorized new features default to
+`specs/NNN-short-name/`: use the next number above existing directories and retained
+index identities, starting at `001` with at least three digits; preserve IDs and
+recheck collisions before writing. Create only this capability's requested document
+(`design.md`), without requiring other Skills or creating placeholder artifacts.
+Authorized creation or selection may maintain feature links and `Current feature`
+in the same resolved project index (default `specs/README.md`) unless writes are
+restricted. This is navigation, not progress
+or approval. Creating future/deferred features alone does not change established
+focus; preview/view requests change neither files nor focus.
+
 ## Design judgment
 
 Establish intended behavior, acceptance and constraints from available requirements,
@@ -58,8 +78,9 @@ evidence, authority or decisions rather than inventing readiness or background p
 
 Writing the proposal is part of Design. Maintain one authorized draft at meaningful
 decisions, discoveries and pauses, using an appropriate existing document and
-user/project location; otherwise propose a location before writing. Preserve
-unrelated content. Preview and no-write requests stay conversational.
+user/project location or the numbered-feature default. Authorized feature
+navigation updates are in scope; preserve unrelated content. Preview and no-write
+requests stay conversational. Identify the selected feature and proposal path.
 
 Keep the current route, rationale, evidence, unresolved dependencies and next useful
 action sufficient for continuation, not a discussion transcript or second progress
@@ -85,7 +106,10 @@ Plan paths, supplied approval evidence and pending sync actions in the existing
 draft. Update only authorized design sources; report other needed revisions without
 silently rewriting them or invoking another stage. Recheck source consistency before
 closing pending updates; a revised proposal alone does not synchronize its consumers.
-Preserve confirmed deferred scope without designing it prematurely.
+Preserve confirmed deferred scope without designing it prematurely. For a large
+objective, reference common mechanisms and independently maintained feature detail.
+Judge readiness for the current delivery and its actual dependencies; later unknowns
+do not require a complete design now or silently weaken shared constraints.
 
 ## Boundaries
 

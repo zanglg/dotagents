@@ -30,9 +30,12 @@ boundaries it returns confirmed decisions, current/deferred scope, open question
 impacts on existing requirements, acceptance and downstream sources. No separate
 interview ledger or complete Spec template is required.
 
-Specify owns synthesis, consistency checks and authorized Spec creation/revision;
-it is not a transcript copier. It handles ordinary missing details itself, so deep
-interviewing is optional. It preserves IDs and approval evidence and reconciles the
+Specify is a complete entry point for producing and maintaining a coherent,
+testable Spec. It owns synthesis, consistency checks and authorized writes, and
+handles ordinary missing details itself. Clarify is an optional depth of exploration
+for forming intent, challenging assumptions and discussing consequential choices;
+questioning is not its exclusive capability. Reuse settled conclusions rather than
+repeating an interview or treating Specify as a transcript formatter. It preserves IDs and approval evidence and reconciles the
 scope, constraints and acceptance affected by agreed changes. Confirmed deferred
 requirements remain outside current acceptance; agreement is not feasibility proof.
 
@@ -110,18 +113,32 @@ lag need not stop otherwise authorized work, but remains visible in the final re
 
 ## Document scope and lifetime
 
-Reuse an appropriate document for the independently evolving objective. A new
-session or Skill invocation is not a new feature. Create feature detail for an
-independent delivery; keep shared long-lived constraints and mechanisms in their
-existing authority sources. Cross-module changes are not automatically global.
-Reference shared rules instead of copying them, and update affected shared sources
-when authorized. No global/feature layers or directory structure are mandatory.
+New independently evolving features default to `specs/NNN-short-name/`, with
+`spec.md`, `design.md` and `plan.md` created only when needed. Use the next available
+number above allocated identities; numbers are stable identities, not execution
+order. Explicit paths and established project conventions take precedence, and
+existing documents need no migration. A new session or Skill invocation is not a
+new feature. Small tasks can still use one combined document or no saved plan.
 
-A small feature can use one combined document. When numbered feature directories
-are useful, numbers are stable identities, not execution order. Keep revisions of
-the same objective together; create a new objective when independently deliverable.
-Distinguish historical decisions, proposed changes, current intent and observed
-implementation. Deferred work does not become implemented by moving its label.
+Keep large objectives concise and reference independently maintained child features.
+Shared requirements and mechanisms retain their authority sources; do not copy
+them into every child. Detail the current delivery and its necessary dependencies,
+keeping confirmed deferred work distinct from undecided future options. A dependency
+does not prohibit a feature from having its own acceptance and evolution.
+
+Use `specs/README.md` as a lightweight feature index with a `Current feature` link.
+That link locates work; the selected feature's plan holds current tasks, evidence,
+gates and next actions. An explicit target or established conversation takes priority.
+Verify the link when resuming without a target; never choose by highest number or
+latest edit. Read-only requests do not update focus, and ongoing sessions retain
+their selected target if another session changes the link. See
+[feature organization and continuation](features.md) for examples and boundaries.
+
+These are document and navigation defaults, not a required stage sequence, branch
+manager or second task ledger. Each capability works independently and maintains
+only its own authorized content and permitted navigation links. Distinguish
+historical decisions, proposals, effective intent and observed implementation;
+deferred work does not become implemented by moving its label.
 
 ## Migration
 
@@ -156,6 +173,9 @@ Retire only obsolete entry points and rules tied to the old workflow, not every
 
 ## Validation scenarios
 
+See [numbered feature results](evaluation/numbered-features-results.md) for tested
+feature selection, allocation, continuation and compatibility boundaries.
+
 These are behavioral expectations, not test results by themselves. Use the
 [repeatable evaluation suite](evaluation/README.md) for fixtures and real-host runs;
 [original smoke results](evaluation/results.md) and the
@@ -177,6 +197,14 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | Clarify summary passed to Specify | Reuse settled decisions; no automatic invocation, new approval inference or repeated interview |
 | Spec/Design/Plan creation | Perform proportionate self-check; no invented independent approval |
 | Large implementation | Whole milestone route, detailed current tasks, coarse future work |
+| New feature with no path | Next numbered directory, only the requested document and allowed index links |
+| Existing 001 and 003; new feature | Allocate 004, preserve existing IDs and content |
+| Current link is 002 while 007 is newest | Resume 002; report its plan and current task |
+| Explicit 003 with current link 002 | Select 003; persist navigation only within write authority |
+| Preview another feature or inspect a dependency | No directory, number allocation or stored focus change |
+| Missing/stale current link with several candidates | Report ambiguity; do not guess or start implementation |
+| Parent and child features | Reference shared constraints and child progress; keep one owner per task |
+| Current feature ready, unrelated future semantics unknown | Proceed within current authority; preserve future questions |
 | M1 accepted; M2 coarse but within agreed contracts | Implement expands M2 as needed and continues without a planner call |
 | M2 expansion changes a binding interface or milestone dependency | Surface the planning/design decision; do not silently treat it as local refinement |
 | Refine M2 or split partial T3 | Modify needed scope only; preserve IDs, work and evidence |

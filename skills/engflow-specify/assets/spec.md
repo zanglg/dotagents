@@ -19,6 +19,10 @@ conditions when useful. Deferred requirements are not current acceptance.
 
 ## Constraints and Dependencies
 
+Reference parent/shared requirements and related features when applicable; keep
+their authoritative content in its owning source. Identify dependencies that
+affect the current delivery rather than detailing every future feature.
+
 ## Technical Approach (if needed; link existing Design)
 
 ## Open Questions and Assumptions

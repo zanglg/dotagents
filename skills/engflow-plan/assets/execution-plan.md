@@ -51,6 +51,7 @@ do not transfer approval to changed scope or reopen it for routine progress.
 Implementation maintains observations here. Preserve them during plan revision;
 reference task evidence instead of keeping duplicate status ledgers.
 
+- Current feature (path) and milestone/task, when applicable:
 - Last reconciled source/environment state:
 - Verified completion and commands/results:
 - Partial or implemented-but-unverified work:

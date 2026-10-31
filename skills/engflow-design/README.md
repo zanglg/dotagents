@@ -20,6 +20,16 @@ Spec is optional. Output is an authorized design draft or conversational preview
 with rationale, evidence, unresolved decisions and readiness limits. It can remain
 conditional when feasibility is not established.
 
+## Feature selection
+
+Existing project paths remain valid. New features default to
+`specs/NNN-short-name/design.md`; create documents only as needed. Feature numbers
+are stable identities, not priority or execution order. Resolve an explicit ID/path
+first; otherwise an unspecified continuation uses the verified `Current feature`
+link in `specs/README.md`. Authorized work may maintain those navigation links;
+preview and read-only requests do not. Progress and approval stay in feature
+documents. Ambiguity is reported rather than choosing the newest feature.
+
 ## Installation and collaboration
 
 Copy this whole folder to your host's skill directory, such as `.agents/skills/`,

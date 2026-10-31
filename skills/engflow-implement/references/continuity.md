@@ -6,9 +6,30 @@ task state, not a runtime checkpoint engine or ticket system.
 ## The record
 
 Reuse a suitable existing plan, including one produced by `engflow-plan`.
-Follow the user's path or project convention; otherwise propose one file location
-and obtain write authority. Preserve existing formats, stable milestone/task IDs, user
-content and history. No planner or template is required.
+Follow the user's path or project convention; otherwise use `plan.md` in the
+selected feature. For authorized new feature records, default to
+`specs/NNN-short-name/plan.md`, with the next number above existing directories and
+retained index identities (at least three digits, starting at `001`). Recheck
+collisions and preserve existing identities; do not create placeholder Spec/Design
+files or branches. Record creation still needs write authority. Preserve existing
+formats, stable milestone/task IDs, user content and history. No planner or template
+is required.
+
+When feature creation or selection permits navigation writes, maintain its link
+and `Current feature` in the same resolved project index (default
+`specs/README.md`), unless the user restricts writes. Store
+only navigation there; creating future/deferred features alone does not switch
+established focus. Current milestone/task, evidence, gates and next action stay
+in the owning plan. A focus link is neither execution permission nor a lock. Keep
+an explicit session target during concurrent work; do not follow later pointer
+changes silently. Inspection/preview and restricted-file tasks leave it unchanged.
+If focus cannot be saved, report the selected path for the next session.
+
+For related features, follow parent/shared-source and dependency references as
+needed. Overall plans own cross-feature outcomes and integrated acceptance; child
+plans own their tasks and observations. Do not duplicate their progress. If no plan
+exists, use the selected feature's available sources to identify readiness and the
+next useful action; do not invent a previous task or bypass a pending gate.
 
 Keep enough information for a fresh session:
 - Objective, non-goals, whole-task acceptance and authority limits.
@@ -96,7 +117,10 @@ Honor an immediate stop request; report if saving state is not safely possible.
 
 ## Resume
 
-1. Read current instructions, the record and needed references. Preserve pending
+1. Resolve the requested feature or established conversation target. Otherwise
+   verify the project's current-feature link; never choose by largest number or
+   newest file. Resolve stale or ambiguous selection before affected work. Read
+   current instructions, its record and needed references. Preserve pending
    approval and access limits. Inspect-only requests neither write nor restart work.
 2. Reconcile actual repository/environment state: branch/HEAD where available,
    staged/unstaged/untracked changes, relevant files and outstanding commands.

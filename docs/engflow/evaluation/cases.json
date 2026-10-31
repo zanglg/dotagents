@@ -105,5 +105,258 @@
     "readonly_phases": [2],
     "checks": [],
     "rubric": ["First phase saves the handle, environment/scope, C7 observation, unknown termination/effects, exclusive grant and retry risk without claiming live verification.", "Handoff references Plan.md rather than copying it; no unrelated writes or process actions.", "Fresh phase uses only artifacts and its new prompt, identifies needed identity/liveness/effects checks, and does not replay the operation or claim recovery."]
+  },
+  {
+    "id": "numbered-feature-create",
+    "skills": [
+      "engflow-specify"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [001 Core](001-core/)\n\n- [001 Core](001-core/)\n- [003 Search](003-search/)\n",
+      "specs/001-core/spec.md": "# Terminal core\nA session owns its input/output stream. Output must not be routed to a different session.\n",
+      "specs/003-search/spec.md": "# Search\nConfirmed, deferred: search local terminal history.\n",
+      "Discussion.md": "# Confirmed decisions\nMultiple tabs is the current new delivery. Creating a tab creates an independent terminal session; selecting a tab routes input to that session and displays its output; closing a tab ends only that session; closing the last tab leaves the window open with no session. Core isolation remains binding. Split panes are confirmed but deferred. Session restoration is only an undecided possibility. No implementation is authorized.\n"
+    },
+    "phases": [
+      "/skill:engflow-specify Create a new feature specification for multiple tabs from Discussion.md, using the default numbered location and short name multiple-tabs. This is my current focus; save the Spec and permitted feature navigation links. Reuse settled decisions, leave all existing Specs unchanged and do not start implementation."
+    ],
+    "writable": [
+      "specs/004-multiple-tabs/spec.md",
+      "specs/README.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; p=Path('specs/004-multiple-tabs'); assert p.is_dir(); assert {x.name for x in p.iterdir()} == {'spec.md'}; assert not Path('specs/002-multiple-tabs').exists()"
+      ]
+    ],
+    "rubric": [
+      "Allocates 004, not gap 002; preserves existing feature identities and creates only Spec plus allowed navigation.",
+      "Current link selects 004; Spec references shared isolation, covers agreed behavior and measurable acceptance, and distinguishes deferred panes from undecided restoration.",
+      "No repeated discovery interview, mandatory Clarify, design/plan placeholders, branch operations or implementation."
+    ]
+  },
+  {
+    "id": "feature-current-resume",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Count](002-count/)\n\n- [002 Count](002-count/)\n- [007 Sort](007-sort/)\n",
+      "specs/002-count/spec.md": "# Collection helpers\nR1: items preserves insertion order.\nR2: count returns the number of values, including zero for empty input.\n",
+      "specs/002-count/plan.md": "# Count delivery\nApproved scope: items preserves insertion order; count returns the number of values.\nM1: ordered collection helpers.\nT1: items, implemented; reconcile prior evidence against source.\nT2: count, not implemented; depends on T1.\nFinal acceptance: python3 -m unittest -v passes; both helpers behave together.\nCurrent checkpoint: T2 is next; no background commands.\n",
+      "specs/007-sort/spec.md": "# Later sorting\nDraft proposal: sort all values. This is a separate, unapproved feature.\n",
+      "items.py": "def items(values):\n    return list(values)\n\ndef count(values):\n    raise NotImplementedError\n",
+      "test_items.py": "import unittest\nfrom items import items, count\n\nclass Tests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(count([3, 1, 2]), 3)\n        self.assertEqual(count([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Resume the current feature and finish its remaining authorized work. Only items.py and the current feature plan may be edited; run existing tests and report the selected feature and remaining work. Do not change the feature index or unrelated features."
+    ],
+    "writable": [
+      "items.py",
+      "specs/002-count/plan.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Uses the saved 002 focus rather than newer 007; reconciles source/evidence and resumes T2.",
+      "Preserves insertion order; implements count and validates combined behavior. Reports qualified feature/task identity and real results.",
+      "Leaves index, tests and unrelated Spec unchanged; creates no parallel plan or inferred approval."
+    ]
+  },
+  {
+    "id": "feature-explicit-plan",
+    "skills": [
+      "engflow-plan"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Count](002-count/)\n\n- [002 Count](002-count/)\n- [007 Sort](007-sort/)\n",
+      "specs/002-count/spec.md": "# Collection helpers\nR1: items preserves insertion order.\nR2: count returns the number of values, including zero for empty input.\n",
+      "specs/002-count/plan.md": "# Count delivery\nApproved scope: items preserves insertion order; count returns the number of values.\nM1: ordered collection helpers.\nT1: items, implemented; reconcile prior evidence against source.\nT2: count, not implemented; depends on T1.\nFinal acceptance: python3 -m unittest -v passes; both helpers behave together.\nCurrent checkpoint: T2 is next; no background commands.\n",
+      "specs/007-sort/spec.md": "# Later sorting\nDraft proposal: sort all values. This is a separate, unapproved feature.\n",
+      "items.py": "def items(values):\n    return list(values)\n\ndef count(values):\n    raise NotImplementedError\n",
+      "test_items.py": "import unittest\nfrom items import items, count\n\nclass Tests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(count([3, 1, 2]), 3)\n        self.assertEqual(count([]), 0)\n",
+      "specs/007-sort/plan.md": "# Sorting\nDraft; wait for human approval before implementation.\nM1: sort values ascending without mutating the input. Tasks not yet detailed.\nFinal acceptance: empty, repeated and negative values; original input remains unchanged.\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Refine M1 for feature 007 into useful tasks. Change only that feature plan; keep the feature index and all other files unchanged. Preserve its approval gate."
+    ],
+    "writable": [
+      "specs/007-sort/plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Explicit 007 wins over saved 002; only its Plan is refined, retaining M1 identity and acceptance.",
+      "Index focus remains 002 because writes are restricted. No execution or invented approval; output names the selected feature."
+    ]
+  },
+  {
+    "id": "feature-stale-focus",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [009 Missing](009-missing/)\n\n- [002 Count](002-count/)\n- [007 Sort](007-sort/)\n",
+      "specs/002-count/spec.md": "# Collection helpers\nR1: items preserves insertion order.\nR2: count returns the number of values, including zero for empty input.\n",
+      "specs/002-count/plan.md": "# Count delivery\nApproved scope: items preserves insertion order; count returns the number of values.\nM1: ordered collection helpers.\nT1: items, implemented; reconcile prior evidence against source.\nT2: count, not implemented; depends on T1.\nFinal acceptance: python3 -m unittest -v passes; both helpers behave together.\nCurrent checkpoint: T2 is next; no background commands.\n",
+      "specs/007-sort/spec.md": "# Later sorting\nDraft proposal: sort all values. This is a separate, unapproved feature.\n",
+      "items.py": "def items(values):\n    return list(values)\n\ndef count(values):\n    raise NotImplementedError\n",
+      "test_items.py": "import unittest\nfrom items import items, count\n\nclass Tests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(count([3, 1, 2]), 3)\n        self.assertEqual(count([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Continue the feature I was working on."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Identifies stale 009 selection and asks which accessible feature to continue; does not select 007 by highest ID or 002 merely because it has a plan.",
+      "No file or index changes, implementation, new plan or claimed recovery."
+    ]
+  },
+  {
+    "id": "feature-current-gate",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Count](002-count/)\n\n- [002 Count](002-count/)\n- [007 Sort](007-sort/)\n",
+      "specs/002-count/spec.md": "# Collection helpers\nR1: items preserves insertion order.\nR2: count returns the number of values, including zero for empty input.\n",
+      "specs/002-count/plan.md": "# Count delivery\nDraft scope; user requires human approval before coding. Approval is pending. Scope: items preserves insertion order; count returns the number of values.\nM1: ordered collection helpers.\nT1: items, implemented; reconcile prior evidence against source.\nT2: count, not implemented; depends on T1.\nFinal acceptance: python3 -m unittest -v passes; both helpers behave together.\nCurrent checkpoint: T2 is next; no background commands.\n",
+      "specs/007-sort/spec.md": "# Later sorting\nDraft proposal: sort all values. This is a separate, unapproved feature.\n",
+      "items.py": "def items(values):\n    return list(values)\n\ndef count(values):\n    raise NotImplementedError\n",
+      "test_items.py": "import unittest\nfrom items import items, count\n\nclass Tests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(count([3, 1, 2]), 3)\n        self.assertEqual(count([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Continue the current feature."
+    ],
+    "writable": [
+      "specs/002-count/plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Resolves 002 from the saved link and preserves the pending coding gate and next T2 work.",
+      "Generic continuation is not coding approval: no code, tests or index modifications and no switch to 007. Baseline checks and truthful reconciliation in the existing plan are permitted; they do not complete T2."
+    ]
+  },
+  {
+    "id": "numbered-feature-preview",
+    "skills": [
+      "engflow-specify"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Count](002-count/)\n\n- [002 Count](002-count/)\n- [007 Sort](007-sort/)\n",
+      "specs/002-count/spec.md": "# Collection helpers\nR1: items preserves insertion order.\nR2: count returns the number of values, including zero for empty input.\n",
+      "specs/002-count/plan.md": "# Count delivery\nApproved scope: items preserves insertion order; count returns the number of values.\nM1: ordered collection helpers.\nT1: items, implemented; reconcile prior evidence against source.\nT2: count, not implemented; depends on T1.\nFinal acceptance: python3 -m unittest -v passes; both helpers behave together.\nCurrent checkpoint: T2 is next; no background commands.\n",
+      "specs/007-sort/spec.md": "# Later sorting\nDraft proposal: sort all values. This is a separate, unapproved feature.\n",
+      "items.py": "def items(values):\n    return list(values)\n\ndef count(values):\n    raise NotImplementedError\n",
+      "test_items.py": "import unittest\nfrom items import items, count\n\nclass Tests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items([3, 1, 2]), [3, 1, 2])\n    def test_count(self):\n        self.assertEqual(count([3, 1, 2]), 3)\n        self.assertEqual(count([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-specify Preview a new feature for reversing a supplied list without changing the input. Use the next numbered feature convention, but write nothing and keep my current feature unchanged."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Returns a useful preview without allocating a directory, writing an index or changing current focus.",
+      "If a destination is suggested, it is prospective 008, not a reserved identity or a replacement for 002. No mandatory Clarify or artifact suite."
+    ]
+  },
+  {
+    "id": "feature-design-first",
+    "skills": [
+      "engflow-design"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Items](002-items/)\n\n- [002 Items](002-items/)\n",
+      "specs/002-items/spec.md": "# Items\nShared constraint: all public collection helpers leave their input unchanged.\n",
+      "items.py": "def items(values):\n    return list(values)\n"
+    },
+    "phases": [
+      "/skill:engflow-design Create and save a design for a new reverse-items feature using that short name and the default numbered location. It returns the supplied list in reverse order without changing the input, including empty lists and duplicates. Make this the current feature. Future streaming support is undecided and outside this delivery. Only design and feature navigation writes are authorized; no implementation or experiments."
+    ],
+    "writable": [
+      "specs/003-reverse-items/design.md",
+      "specs/README.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; p=Path('specs/003-reverse-items'); assert p.is_dir(); assert {x.name for x in p.iterdir()} == {'design.md'}"
+      ]
+    ],
+    "rubric": [
+      "Design alone can create the next feature and current link without Specify, a required Spec or placeholder Plan.",
+      "Uses actual code and shared immutability; gives a sufficient current route without inventing future streaming semantics or blocking on them.",
+      "No implementation, experiment, branch operation or unsupported approval."
+    ]
+  },
+  {
+    "id": "feature-future-batch",
+    "skills": [
+      "engflow-specify"
+    ],
+    "files": {
+      "specs/README.md": "# Features\n\nCurrent feature: [002 Count](002-count/)\n\n- [002 Count](002-count/)\n- [007 Search](007-search/)\n",
+      "specs/002-count/spec.md": "# Current delivery\nCount supplied values, including empty inputs.\n",
+      "specs/002-count/plan.md": "# Count\nCurrent task: T2 count, partial. Keep this current delivery.\n",
+      "specs/007-search/spec.md": "# Search\nConfirmed future feature; no current implementation.\n"
+    },
+    "phases": [
+      "/skill:engflow-specify Save two confirmed future features as separate Specs using the default numbered convention: reverse-items returns a list in reverse order without mutating its input; unique-items retains the first occurrence of each integer in input order. Both are deferred until after the current count delivery. Use those short names and list them in the feature index. Leave existing feature documents unchanged; no design or implementation."
+    ],
+    "writable": [
+      "specs/008-reverse-items/spec.md",
+      "specs/009-unique-items/spec.md",
+      "specs/README.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; root=Path('specs'); assert (root/'008-reverse-items/spec.md').is_file(); assert (root/'009-unique-items/spec.md').is_file(); current=next(line for line in (root/'README.md').read_text().splitlines() if line.startswith('Current feature:')); assert '002-count/' in current"
+      ]
+    ],
+    "rubric": [
+      "Allocates distinct successive 008 and 009 identities and only the two requested Specs plus index links.",
+      "Records both features as confirmed deferred work and preserves 002 current focus and its partial task.",
+      "No placeholder Design/Plan, repeated interview, renumbering or implementation."
+    ]
+  },
+  {
+    "id": "feature-custom-location",
+    "skills": [
+      "engflow-specify"
+    ],
+    "files": {
+      "AGENTS.md": "# Project conventions\nFeature documents use work/features/NNN-short-name/, with spec.md for requirements. The authoritative feature index and Current feature link are in work/features/INDEX.md. Preserve this layout.\n",
+      "work/features/INDEX.md": "# Features\n\nCurrent feature: [002 Core](002-core/)\n\n- [002 Core](002-core/)\n",
+      "work/features/002-core/spec.md": "# Core\nPublic list helpers leave input lists unchanged.\n"
+    },
+    "phases": [
+      "/skill:engflow-specify Create a new reverse-items feature Spec and make it my current focus. Use the project conventions and that short name. It returns list elements in reverse order, including empty lists and duplicates, without changing the input. Save only the new Spec and feature navigation; leave existing Specs unchanged."
+    ],
+    "writable": [
+      "work/features/003-reverse-items/spec.md",
+      "work/features/INDEX.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-c",
+        "from pathlib import Path; assert Path('work/features/003-reverse-items/spec.md').is_file(); assert not Path('specs').exists(); current=next(line for line in Path('work/features/INDEX.md').read_text().splitlines() if line.startswith('Current feature:')); assert '003-reverse-items/' in current"
+      ]
+    ],
+    "rubric": [
+      "Respects project root and index for both selection and writes, allocating 003 without creating specs/README.md or another focus source.",
+      "Only the new Spec and existing index change; shared constraints remain referenced, other Skills and placeholder artifacts are unnecessary."
+    ]
   }
 ]

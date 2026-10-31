@@ -14,6 +14,26 @@ Organize an objective into verifiable work for linear execution across sessions.
 Own dedicated planning and structural revision; leave observed execution state
 and local implementation choices to the implementer.
 
+## Feature context
+
+Use the explicit feature ID/path or established conversation target. For an
+unspecified continuation, verify the current-feature link in `specs/README.md`
+(or the project equivalent). Do not infer focus from the largest number or most
+recent file; resolve a missing, stale or conflicting target before affected work.
+Reading another feature as a dependency does not switch the target, and a later
+change to the link does not redirect an already scoped session.
+
+Reuse existing paths. Otherwise, authorized new features default to
+`specs/NNN-short-name/`: use the next number above existing directories and retained
+index identities, starting at `001` with at least three digits; preserve IDs and
+recheck collisions before writing. Create only this capability's requested document
+(`plan.md`), without requiring other Skills or creating placeholder artifacts.
+Authorized creation or selection may maintain feature links and `Current feature`
+in the same resolved project index (default `specs/README.md`) unless writes are
+restricted. This is navigation, not progress
+or approval. Creating future/deferred features alone does not change established
+focus; preview/view requests change neither files nor focus.
+
 ## Planning judgment
 
 Ground the plan in the user's goal, effective requirements and decisions, actual
@@ -60,6 +80,11 @@ evidence, affected paths and pending sync action in the plan. Reconcile this on
 resume; do not silently revert to stale intent or treat a proposal as approved.
 Plan revisions alone do not close pending source updates.
 Split details only when useful, keeping a clear entry point and references.
+A large objective may reference separately numbered features. Keep shared outcomes,
+cross-feature dependencies and integrated acceptance at the overall entry point;
+keep each task and its observed evidence in one owning plan. Reference child progress
+instead of maintaining a second task ledger. Candidate future features are not
+committed milestones; detail only the selected delivery and necessary dependencies.
 Adapt [the optional outline](assets/execution-plan.md); old milestone-only plans
 remain valid and need no mandatory migration.
 
@@ -92,10 +117,11 @@ self-check, not a claim of independent review or human approval.
 
 ## Output and authority
 
-Create/update only the requested plan, using the user's path or project convention.
-Otherwise propose a location and obtain write authority before creating it.
-Preview stays conversational; viewing is read-only. Report a missing plan rather
-than silently creating one.
+Create/update the requested plan and permitted feature navigation links, using
+the user's path, project convention or numbered-feature default. Creation still
+requires a request that authorizes a saved plan. Preview stays conversational;
+viewing is read-only. Report a missing plan rather than silently creating one.
+Identify the selected feature and current milestone/task when applicable.
 
 New proposals are Draft, not execution permission. Preserve requested review gates
 and supplied approval provenance across revisions and sessions. Material scope,
@@ -109,7 +135,7 @@ Report the plan or path, current detail, major revisions, unresolved questions a
 execution limits. Even when execution is also requested, return planning results
 and authority context; this Skill does not start coding or invoke other stages.
 
-Only authorized plan writes and read-only investigation are in scope. No production
-edits, mutating tests/experiments, ticket publishing, commits or branch/worktree
+Only authorized plan/navigation writes and read-only investigation are in scope.
+No production edits, mutating tests/experiments, ticket publishing, commits or branch/worktree
 management. Optional helpers remain read-only, do not delegate further, and return
 evidence for the author to verify.
