@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Added
 
+- Default new Engflow features to numbered `specs/NNN-short-name/` directories
+  with on-demand Spec, Design and Plan documents. Add a lightweight current-feature
+  link, explicit-target precedence and checkpoint-based continuation without a
+  second task ledger, automatic branch management or forced migration.
 - Add read-only `engflow-clarify` for deep discovery and targeted clarification.
   Return conversational decisions, current/deferred scope and affected-source
   summaries; do not create or update Specs or interview records. `engflow-specify`
@@ -56,6 +60,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Keep Specify a complete specification entry point with ordinary clarification;
+  position Clarify as optional deep exploration and reuse its settled conclusions.
+  Describe parent/child feature references and readiness scoped to the current
+  delivery, preserving shared authority and deferred intent.
 - Rename engineering entrypoints to `engflow-*`: specify, design, implement,
   code-review, technical-research, poc, refactor-assess and handoff; rename
   plan-implementation to `engflow-plan`. Old invocation names and installed folder

@@ -5,7 +5,9 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 ## Purpose
 
 Explore an early idea or resolve consequential ambiguity in existing requirements.
-Use when discussion and decisions are needed, rather than document synthesis.
+Use as an optional deep exploration mode when goals, assumptions or consequential
+choices need discussion. Specify remains a complete entry point for ordinary
+specification work, including routine clarification.
 It reads existing material but returns content only in conversation; it never writes files.
 
 ## Examples
@@ -14,6 +16,7 @@ It reads existing material but returns content only in conversation; it never wr
 - "Clarify restart behavior in the existing Spec without reopening settled choices."
 - "Split panes are confirmed but deferred. Summarize the Spec changes needed; keep tabs current."
 - "Summarize our decisions conversationally; do not create a file."
+- "Challenge the assumptions behind feature 003; keep the current focus unchanged."
 
 ## Inputs and outputs
 

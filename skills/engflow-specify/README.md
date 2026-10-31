@@ -4,8 +4,8 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Turn existing discussion and evidence into a specification of behavior, scope and
-observable acceptance. Use for synthesis or revision, not a new design exercise or
+Turn goals, existing discussion and evidence into a specification of behavior,
+scope and observable acceptance, resolving ordinary requirement gaps directly. Use for synthesis or revision, not a new design exercise or
 a mechanical transcript save. Specify owns Spec consistency checks and authorized writes.
 
 ## Examples
@@ -14,6 +14,8 @@ a mechanical transcript save. Specify owns Spec consistency checks and authorize
 - "Save the agreed feature requirements in docs/specs/export.md."
 - "Update the existing Spec for the approved scope change, preserving requirement IDs."
 - "Use this Clarify summary to revise Spec.md, reconciling acceptance and constraints."
+- "Create the next numbered feature for multiple tabs; use the default location."
+- "Continue specifying feature 003; panes remain confirmed but deferred."
 
 ## Inputs and outputs
 
@@ -21,6 +23,16 @@ Provide available decisions, constraints, source references and the requested ta
 or preview intent. Output is a Spec or preview, including unknowns and affected
 source updates. The [Spec outline](assets/spec.md) is optional; existing formats
 remain usable, and deferred requirements need not become current acceptance.
+
+## Feature selection
+
+Existing project paths remain valid. New features default to
+`specs/NNN-short-name/spec.md`; create documents only as needed. Feature numbers
+are stable identities, not priority or execution order. Resolve an explicit ID/path
+first; otherwise an unspecified continuation uses the verified `Current feature`
+link in `specs/README.md`. Authorized work may maintain those navigation links;
+preview and read-only requests do not. Progress and approval stay in feature
+documents. Ambiguity is reported rather than choosing the newest feature.
 
 ## Installation and collaboration
 
