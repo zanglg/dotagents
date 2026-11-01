@@ -70,6 +70,19 @@ class ValidatorTests(unittest.TestCase):
         self.manifest.write_text(self.manifest.read_text().replace(": true", ": false"))
         self.assertTrue(any("disable-model-invocation" in e for e in self.errors()))
 
+    def test_design_remains_explicit_only(self):
+        design = self.root / "skills/engflow-design"
+        design.mkdir()
+        (design / "README.md").write_text("[contract](SKILL.md).\n")
+        manifest = self.manifest.read_text().replace("engflow-example", "engflow-design")
+        (design / "SKILL.md").write_text(manifest)
+        (design / "agents").mkdir()
+        policy = design / "agents/openai.yaml"
+        policy.write_text("policy:\n  allow_implicit_invocation: false\n")
+        self.assertEqual(self.errors(), [])
+        policy.write_text("policy:\n  allow_implicit_invocation: true\n")
+        self.assertTrue(any("allow_implicit_invocation" in e for e in self.errors()))
+
     def test_missing_policy(self):
         self.policy.unlink()
         self.assertTrue(self.errors())
@@ -98,6 +111,17 @@ class ValidatorTests(unittest.TestCase):
         (self.root / "some file.md").write_text("# Heading\n")
         (self.root / "README.md").write_text("[ref]: some%20file.md#heading\n")
         self.assertEqual(self.errors(), [])
+
+    def test_shared_method_link_requires_sibling_reference(self):
+        reference = self.root / "skills/engflow-peer/references/core.md"
+        reference.parent.mkdir(parents=True)
+        reference.write_text("# Shared method\n")
+        self.manifest.write_text(self.manifest.read_text() +
+                                 "\n[Method](../engflow-peer/references/core.md)\n")
+        self.assertEqual(self.errors(), [])
+        reference.unlink()
+        self.assertTrue(any("broken link ../engflow-peer/references/core.md" in e
+                            for e in self.errors()))
 
     def test_duplicate_and_explicit_anchors(self):
         self.assertEqual(anchors('# One\n# One\n<a id="special"></a>\n'),

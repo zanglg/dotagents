@@ -7,8 +7,11 @@ Skill sequence is mandatory. The owning SKILL.md remains the execution contract.
 ## Feature identity and documents
 
 Default new feature documents to `specs/NNN-short-name/`: `spec.md` owns intended
-behavior, scope and acceptance; `design.md` owns consequential technical decisions;
-`plan.md` owns delivery structure, observed progress and evidence. Create only what
+behavior, scope and acceptance; an optional `design.md` owns independently maintained
+technical decisions; `plan.md` is the technical/delivery entry point and owns feature
+continuity. Design support may return a compact approach for Plan-owned integration
+without a separate design file. Keep simple tasks inline; optional `tasks.md` owns
+task decomposition, state and evidence when separate maintenance adds value. Create only what
 the requested work needs. A first Design or Plan can establish a feature without
 Specify installed. Explicit paths and existing project conventions take precedence;
 reuse existing documents rather than moving them to fit the default.
@@ -40,7 +43,8 @@ acceptance remain distinct. An approved requirement cannot be deferred merely to
 make the current work appear complete.
 
 An overall plan can link child plans. It owns cross-feature dependencies and overall
-integration; each task and its evidence have one owning plan. Use references for
+integration; each task and its evidence have one owning task source, inline in
+its plan or in the linked tasks.md. Use references for
 child progress rather than copying task checkboxes into the parent or feature index.
 
 ## Current feature
@@ -61,7 +65,8 @@ Current feature: [003 Multiple tabs](003-multiple-tabs/)
 The index identifies scope; it does not duplicate task status, evidence or approvals.
 Spec/Design carry their unresolved decisions and next useful action while no plan
 exists. Once there is a plan, its checkpoint identifies the current milestone/task
-and next concrete action. Qualify IDs when comparing features, for example
+and next concrete action, referencing rather than copying task evidence when a
+separate tasks.md exists. Qualify IDs when comparing features, for example
 `003-multiple-tabs / M1 / T2` or the plan path plus task ID.
 
 An explicit feature ID/path or established conversation target wins over the link.

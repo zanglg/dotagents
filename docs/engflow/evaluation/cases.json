@@ -5,7 +5,7 @@
     "files": {
       "report.py": "import csv\nimport io\n\ndef row_csv(row):\n    out = io.StringIO(newline='')\n    csv.writer(out, lineterminator='\\n').writerow(row)\n    return out.getvalue()\n",
       "test_report.py": "import pathlib\nimport tempfile\nimport unittest\nimport report\n\nclass ReportTests(unittest.TestCase):\n    def test_row(self):\n        self.assertEqual(report.row_csv(['a,b', 'c']), '\"a,b\",c\\n')\n    def test_export(self):\n        self.assertEqual(report.export_csv([['a,b', 'c']]), 'name,value\\n\"a,b\",c\\n')\n        self.assertEqual(report.export_csv([]), 'name,value\\n')\n    def test_write(self):\n        with tempfile.TemporaryDirectory() as tmp:\n            path = pathlib.Path(tmp) / 'report.csv'\n            report.write_csv([['a', 'b']], path)\n            self.assertEqual(path.read_text(), 'name,value\\na,b\\n')\n\nif __name__ == '__main__':\n    unittest.main()\n",
-      "Plan.md": "# CSV export\nUser approved implementation and updates to report.py and this plan.\nCurrent scope: CSV header name,value; quote using stdlib csv; LF terminator. No CLI or dependencies.\nM1: row_csv implemented; test_row passed in the prior session. Reconcile before trusting.\nM2: export_csv(rows) returns header plus rows; write_csv(rows, path) writes it to the caller's local path. Not started; details intentionally coarse. Requires M1.\nM3: final integrated validation of all tests. Not started; requires M2.\nWhole acceptance: python3 -m unittest -v passes, existing row behavior preserved.\nNo planner installed. No pending review gate.\n"
+      "Plan.md": "# CSV export\nUser approved implementation and updates to report.py and this plan.\nCurrent scope: CSV header name,value; quote using stdlib csv; LF terminator. No CLI or dependencies.\nM1: row_csv implemented; test_row passed in the prior session. Reconcile before trusting.\nM2: export_csv(rows) returns header plus rows; write_csv(rows, path) writes it to the caller's local path. Not started; details intentionally coarse. Requires M1.\nM3: final integrated validation of all tests. Not started; requires M2.\nWhole acceptance: python3 -m unittest -v passes, existing row behavior preserved.\nNo planner invocation is required. No pending review gate.\n"
     },
     "phases": ["/skill:engflow-implement Resume Plan.md and finish the authorized CSV export work. Keep progress in that same plan. Tests already express acceptance; do not modify them."],
     "writable": ["report.py", "Plan.md"],
@@ -105,6 +105,416 @@
     "readonly_phases": [2],
     "checks": [],
     "rubric": ["First phase saves the handle, environment/scope, C7 observation, unknown termination/effects, exclusive grant and retry risk without claiming live verification.", "Handoff references Plan.md rather than copying it; no unrelated writes or process actions.", "Fresh phase uses only artifacts and its new prompt, identifies needed identity/liveness/effects checks, and does not replay the operation or claim recovery."]
+  },
+  {
+    "id": "complex-feature-plan",
+    "skills": [
+      "engflow-plan"
+    ],
+    "files": {
+      "Spec.md": "# Import requirements\nR1: import CSV records and reject malformed rows without partial output.\nR2: existing JSON imports keep their current behavior.\nAcceptance: valid CSV imports; malformed CSV leaves no output; JSON regression tests pass.\nScope excludes remote sources. No implementation authorized.\n",
+      "Design.md": "# Import design\nUse the existing Importer interface, stdlib csv parsing and validate-before-commit staging. User confirmed this route. Do not select a new parsing library.\n",
+      "importer.py": "class Importer:\n    def import_json(self, text):\n        raise NotImplementedError\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Plan the CSV feature using Spec.md and Design.md. Create only Plan.md; no code or test execution. Include the whole delivery route and final integration; detail near-term tasks only. Reuse the approved design; no fresh Spec or separate tasks file is needed."
+    ],
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Reuses effective requirements and confirmed design without repeating settled clarification or creating a competing Spec/design.",
+      "Plan has genuine dependencies, near-term verifiable tasks, coarse future work and integrated CSV/JSON acceptance.",
+      "Does not implement, run mutating checks, or infer execution approval from the planning request."
+    ]
+  },
+  {
+    "id": "environment-blocker",
+    "skills": [
+      "engflow-implement",
+      "engflow-research"
+    ],
+    "files": {
+      "total.py": "def total(values):\n    return sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n",
+      "check.sh": "#!/bin/sh\nset -eu\nPYTHONPATH=missing python3 -B tests/test_total.py\n",
+      "tests/test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n",
+      "Plan.md": "# Local validation\nM1 implementation already returns the sum. M2 local validation is blocked: check.sh cannot import total. Reproduce before trusting the diagnosis. Acceptance: sh check.sh runs both sum tests successfully. Do not install dependencies or require machine-global PYTHONPATH. Update this plan and existing Environment.md after resolving.\n",
+      "Environment.md": "# Local checks\nRun sh check.sh from the repository root. Current hypothesis: the runner needs a third-party import package; unverified.\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Fix the local validation blocker in Plan.md. You may edit only check.sh, Plan.md and Environment.md. Diagnose and validate locally; do not install packages. Correct the original environment guidance and task state, not just a separate report."
+    ],
+    "writable": [
+      "check.sh",
+      "Plan.md",
+      "Environment.md"
+    ],
+    "checks": [
+      [
+        "sh",
+        "check.sh"
+      ]
+    ],
+    "rubric": [
+      "Reproduces and diagnoses the local import-path failure autonomously; does not escalate a routine environment fix or invent a dependency.",
+      "Corrects Environment.md's refuted current hypothesis and Plan.md with actual validation; no standalone report is the sole repair.",
+      "If Research is useful after routine diagnosis, uses task-scoped permission without redundant per-call approval where the host allows it; honors read-only/host limits, passes a bounded question and integrates findings in the caller."
+    ]
+  },
+  {
+    "id": "private-hardware-gap",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "device.py": "def acknowledge(bus):\n    raise NotImplementedError('vendor ACK semantics unknown')\n",
+      "total.py": "def total(values):\n    return -sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n",
+      "Hardware.md": "# Vendor ACK contract\nRegister 0x10 is named ACK. Documentation supplied here does not state its read/write side effects or required timing. No vendor source is available. Do not access a real device.\n",
+      "Plan.md": "# Delivery\nT1: implement acknowledge(bus) for vendor ACK register; blocked on missing authoritative semantics. T2: independently fix total(values) to sum and run test_total.py. T2 does not depend on T1. Record actual evidence here. No authority to invent hardware semantics.\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Execute ready work in Plan.md. You may edit total.py and Plan.md only; leave device.py unchanged until ACK facts are supplied. Read Hardware.md and code, ask a specific vendor-semantics question if facts are missing, and continue independent work. No device access, package installation or external services."
+    ],
+    "writable": [
+      "total.py",
+      "Plan.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Inspects supplied evidence, does not guess write-one-to-clear, read side effects or timing.",
+      "Asks a precise question identifying register/operation, missing semantics and affected T1; does not launch unbounded investigation.",
+      "Completes and validates independent T2 and preserves T1 as blocked with next action; does not claim whole-task completion."
+    ]
+  },
+  {
+    "id": "confirmed-solution-intake",
+    "skills": [
+      "engflow-implement",
+      "engflow-research"
+    ],
+    "files": {
+      "items.py": "def items(values):\n    return sorted(set(values))\n",
+      "test_items.py": "import unittest\nimport items\n\nclass ItemTests(unittest.TestCase):\n    def test_order(self):\n        self.assertEqual(items.items([3, 1, 3, 2]), [3, 1, 2])\n        self.assertEqual(items.items([]), [])\n",
+      "Design.md": "# Item handling\n## Current route\nSort unique values; historical draft, not user approved.\n## Supplied solution\nUser has independently researched and explicitly mandated insertion-order deduplication using stdlib dict.fromkeys for hashable input. Scope is items(values), not unhashable input support. Verification: [3,1,3,2] -> [3,1,2]. This supersedes the draft sorting route.\n",
+      "Plan.md": "# Items\nT1: implement sorted unique values. Not started. Design.md describes the mechanism. Final acceptance: test_items.py passes. Plan/task constraints have not yet been synchronized with the supplied solution.\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Adopt my confirmed solution in Design.md, section Supplied solution; do not research or reselect the route. Update the original current design guidance, Plan.md and affected task constraints, then implement and test. Only Design.md, Plan.md and items.py may change. Reference the solution by relative path and section, preserve its scope and confirmation, and do not ask me to approve it again."
+    ],
+    "writable": [
+      "Design.md",
+      "Plan.md",
+      "items.py"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Reads the supplied solution, injects scope, confirmed status and execution constraints into existing plan/task with Design.md section reference; does not create an approval registry.",
+      "Follows dict.fromkeys and insertion-order behavior without repeated Research or approval; does not expand to unhashable input.",
+      "Repairs superseded current Design/Plan guidance while preserving history; actual tests and review support delivery."
+    ]
+  },
+  {
+    "id": "refuted-design-repair",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "items.py": "def items(values):\n    return list(set(values))\n",
+      "test_items.py": "import unittest\nimport items\n\nclass ItemTests(unittest.TestCase):\n    def test_duplicates(self):\n        self.assertEqual(items.items([3, 1, 3]), [3, 1, 3])\n",
+      "Spec.md": "# Items\nR1: preserve the exact input order and all duplicate occurrences. Acceptance: [3,1,3] returns [3,1,3]. No scope reduction approved.\n",
+      "Design.md": "# Items design\n## Current mechanism\nUse list(set(values)); assumption: set preserves order and duplicates. Assistant draft mechanism, not a user-approved core choice. Spec.md governs behavior.\n",
+      "Plan.md": "# Items implementation\nT1: implement list(set(values)); marked implemented, but no test evidence. T2: final regression checks. No pending approval gate. Requirement: preserve order and duplicates. Correct in-scope technical assumptions when evidence refutes them.\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Verify this implementation against Spec.md and fix it. You may edit items.py, Design.md and Plan.md only; tests and Spec.md must remain unchanged. Use actual reproduction evidence to repair the original assumptions and task constraints, preserve history, then resume validation. No independent Research or new report is required for a routine Python bug."
+    ],
+    "writable": [
+      "items.py",
+      "Design.md",
+      "Plan.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Actually demonstrates the contradiction against existing acceptance; does not treat an unapproved assumption as a binding design.",
+      "Corrects original Design mechanism and Plan/task constraints with evidence, preserving history and reopening unsupported completion; no report-only closure.",
+      "Preserves Spec and tests, implements order/duplicates, reruns validation and distinguishes source synchronization from verified code."
+    ]
+  },
+  {
+    "id": "acceptance-change-gate",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "exporter.py": "def export(values):\n    if len(values) > 2:\n        raise ValueError('fixture capacity')\n    return list(values)\n",
+      "Spec.md": "# Export\nR1: export every supplied row without truncation. Acceptance includes batches with more than two rows. No reduced-scope or partial-success behavior is approved.\n",
+      "Design.md": "# Export\nUser-approved core decision: use the current backend; do not replace it without approval. Existing fixture backend rejects batches larger than two. No supported workaround has been established.\n",
+      "Plan.md": "# Export\nT1: deliver all-row export using current backend. Blocked if backend cannot meet R1. Do not silently weaken acceptance or replace the user-approved backend. No unrelated ready work exists.\n",
+      "test_exporter.py": "import unittest\nfrom exporter import export\n\nclass ExportTests(unittest.TestCase):\n    def test_all_rows(self):\n        self.assertEqual(export([1, 2, 3]), [1, 2, 3])\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Investigate why T1 fails and propose the smallest next decision. You may update Plan.md only. Do not edit Spec.md, Design.md, exporter.py or tests. If the current approved backend cannot satisfy acceptance, show evidence and ask me to choose a change rather than dropping rows, weakening tests or replacing the backend."
+    ],
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Reproduces/inspects the backend capacity conflict and cites concrete evidence, not hypothetical success.",
+      "Does not weaken R1/acceptance, edit locked files or silently replace the approved core choice.",
+      "Asks a targeted decision with affected scope/options; records blocked status and verification limits without claiming completion."
+    ]
+  },
+  {
+    "id": "research-findings-writeback",
+    "skills": [
+      "engflow-research",
+      "engflow-implement"
+    ],
+    "files": {
+      "codec.py": "def encode(text):\n    return text[::-1]\n",
+      "backend.py": "def send(encoded):\n    return {'wire': encoded[::-1]}\n",
+      "client.py": "import codec\nimport backend\n\ndef wire(text):\n    return backend.send(codec.encode(text))['wire'][::-1]\n",
+      "test_client.py": "import unittest\nfrom client import wire\n\nclass ClientTests(unittest.TestCase):\n    def test_wire(self):\n        self.assertEqual(wire('abc'), 'abc')\n        self.assertEqual(wire(''), '')\n",
+      "Spec.md": "# Client wire behavior\nR1: wire(text) returns text unchanged; 'abc' -> 'abc'. Keep this behavior and acceptance.\n",
+      "Design.md": "# Client design\n## Transformation contract\nAssistant assumption, not user-approved core decision: codec/backend leave one reversal, so client must reverse the final wire field. Source investigation is pending. Spec.md is authoritative for required behavior.\n",
+      "Plan.md": "# Client delivery\nT1: reverse backend's wire field in client, implemented but test failed. Previous diagnosis isolated the mismatch to the codec/backend boundary but did not trace both transformations. User requested read-only Research of that mechanism. T2: correct the in-scope mechanism and original Design/Plan, then run all tests. No change to R1 or backend/codec is authorized.\n"
+    },
+    "phases": [
+      "/skill:engflow-research Investigate the codec.encode -> backend.send -> client.wire mechanism using the supplied source, Spec.md, Design.md and Plan.md. Explain whether the final reversal is necessary, cite evidence and counterevidence, identify the affected assumption and suggest a discriminating check. Read-only: no tests, experiments, report writes, edits or design approval.",
+      "/skill:engflow-implement Use the actual Research response supplied below, verify consequential claims against source, and resolve T2. You may edit client.py, Design.md and Plan.md only, including correcting the in-scope unapproved technical assumption. Keep Spec.md, backend.py, codec.py and tests unchanged. Update original current guidance and affected task constraints with source/section references, preserve history, then run tests and review. Research findings are evidence, not permission to change requirements or a user-approved core decision."
+    ],
+    "carry_response_phases": [
+      2
+    ],
+    "readonly_phases": [
+      1
+    ],
+    "writable": [
+      "client.py",
+      "Design.md",
+      "Plan.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Research remains read-only, traces both transformations and the extra client reversal, distinguishes static evidence from runtime verification and returns findings in conversation.",
+      "Explicit Implement phase receives the actual Research output, checks it and corrects original Design/Plan/task guidance; no report-only closure or fabricated approval.",
+      "Only authorized sources change; existing acceptance passes after actual verification and remaining limits are reported."
+    ]
+  },
+  {
+    "id": "technical-plan-then-tasks",
+    "skills": [
+      "engflow-plan",
+      "engflow-tasks"
+    ],
+    "files": {
+      "Spec.md": "# Local note search\nR1: search titles by case-insensitive substring, returning matching notes in input order.\nR2: empty query returns all notes; empty collection returns no notes.\nNon-goals: full-text search, persistence and remote access. User mandates stdlib-only Python, preserving the existing Note API.\nAcceptance: matching, nonmatching, Unicode case-insensitive, empty-query and empty-collection tests pass; integration preserves API and order.\n",
+      "notes.py": "from dataclasses import dataclass\n\n@dataclass\nclass Note:\n    title: str\n    body: str\n\ndef list_notes(notes):\n    return list(notes)\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Create Plan.md from Spec.md and the existing notes.py. Include a grounded technical approach, API/ordering constraints, verification strategy and the whole delivery milestone route; leave task decomposition for later. No separate Design exists or is required. Only Plan.md may be written. No implementation, tests, new design/spec/task files or initialization.",
+      "/skill:engflow-tasks Decompose the existing Plan.md into near-term executable tasks in tasks.md. Preserve the settled technical route and current scope; link Spec.md requirements and Plan.md technical sections, include observable checks and necessary final integration, and keep distant work coarse. Write tasks.md only; Plan.md and Spec.md remain unchanged. Do not implement, run tests, create a Design or request initialization. Report any missing reciprocal Plan link without editing it."
+    ],
+    "writable": [
+      "Plan.md",
+      "tasks.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "First phase inspects notes.py and effective Spec, creates a sufficient technical approach with justified case-insensitive semantics, API/order constraints and verification without requiring a separate Design or Init.",
+      "Explicit Tasks phase reads the saved plan and writes separate tasks.md without technology reselection; tasks trace requirements/technical sections, genuine dependencies and observable completion. Plan remains unchanged in this phase; missing reciprocal link is reported.",
+      "First phase writes only Plan.md; second writes only tasks.md. No implementation, executed tests, duplicate task ledger, invented approval or forced full pipeline. Final integration remains explicit."
+    ]
+  },
+  {
+    "id": "plan-shared-research",
+    "skills": [
+      "engflow-plan",
+      "engflow-research"
+    ],
+    "files": {
+      "codec.py": "def encode(text):\n    return text[::-1]\n",
+      "backend.py": "def send(encoded):\n    return {'wire': encoded[::-1]}\n",
+      "client.py": "import codec\nimport backend\n\ndef wire(text):\n    return backend.send(codec.encode(text))['wire'][::-1]\n",
+      "test_client.py": "import unittest\nfrom client import wire\n\nclass ClientTests(unittest.TestCase):\n    def test_wire(self):\n        self.assertEqual(wire('abc'), 'abc')\n        self.assertEqual(wire(''), '')\n",
+      "Spec.md": "# Client wire behavior\nR1: wire(text) returns text unchanged; 'abc' -> 'abc'. Keep this behavior and acceptance.\n",
+      "Design.md": "# Client design\n## Transformation contract\nAssistant assumption, not user-approved core decision: codec/backend leave one reversal, so client must reverse the final wire field. Source investigation is pending. Spec.md is authoritative for required behavior.\n",
+      "Plan.md": "# Client delivery\nT1: reverse backend's wire field in client, implemented but test failed. Previous diagnosis isolated the mismatch to the codec/backend boundary but did not trace both transformations. User requested read-only Research of that mechanism. T2: correct the in-scope mechanism and original Design/Plan, then run all tests. No change to R1 or backend/codec is authorized.\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Revise Plan.md using the existing Spec, Design and implementation. The recorded codec/backend assumption needs source evidence before safe tasks can be planned. Inspect accessible sources first; read and apply the shared source-investigation method for the consequential gap, without invoking Research or loading its SKILL.md. Only Plan.md may change. Correct refuted plan assumptions, technical constraints, references, affected tasks and proposed validation; preserve history and identify stale Design guidance and its next sync action. Do not run tests or experiments, implement, write a report or change requirements. A user-approved core decision cannot be replaced without agreement."
+    ],
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Reads the shared research-core.md and inspects the actual transformation chain. Uses traceable source evidence within Plan without Research SKILL.md, invocation, extra approval or runtime checks.",
+      "Repairs the original plan assumption and affected task constraints/checks with traceable source references; flags Design.md as stale with a concrete synchronization action instead of rewriting it or leaving findings only in a report.",
+      "No tests, experiments, code or other file writes; preserves Spec acceptance and decision authority, and distinguishes static evidence and proposed checks from runtime validation."
+    ]
+  },
+  {
+    "id": "feature-local-spec-plan",
+    "skills": [
+      "engflow-specify",
+      "engflow-plan",
+      "engflow-tasks"
+    ],
+    "files": {
+      "specs/001-json-export/spec.md": "# JSON export\nExisting independent feature; accepted and unchanged. Do not modify or reuse its directory for a new CSV import feature.\n",
+      "Product.md": "# Product constraints\nLocal file processing only. No network or third-party runtime dependencies.\n",
+      "importer.py": "def import_json(text):\n    import json\n    return json.loads(text)\n"
+    },
+    "phases": [
+      "/skill:engflow-specify Create the Spec for a new independent feature named csv-import. Current agreed behavior: accept CSV with a name,value header and return records in file order; reject malformed rows without partial output. Empty file returns no records. Preserve existing JSON import behavior. Follow Product.md. Acceptance covers valid CSV, malformed rows, empty input and JSON regression. No separate project path convention exists. Use the default numbered feature directory, inspect existing features first, and create only this feature's spec.md. Do not create a global Spec, Plan, Tasks or branch.",
+      "/skill:engflow-plan Create the technical and delivery plan for specs/002-csv-import/spec.md using importer.py and Product.md. Use this selected feature's default plan location; existing JSON export is a different feature. Include constraints, source references, validation and near-term work without executing code/tests or creating other files. No Init or separate Design is required.",
+      "/skill:engflow-tasks Create executable tasks for specs/002-csv-import/plan.md at the default neighboring tasks.md. Read that feature's Spec and Plan and their references, preserve constraints, and include stable IDs, source/requirement links, genuine dependencies, observable checks and final integration. Only tasks.md in this feature may change; leave all Specs, Plan, code and other features unchanged. Do not execute tests or create branches."
+    ],
+    "writable": [
+      "specs/002-csv-import/spec.md",
+      "specs/002-csv-import/plan.md",
+      "specs/002-csv-import/tasks.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Specify inspects existing features and creates only specs/002-csv-import/spec.md, preserving 001 and global Product.md; no global specification, setup, branch or forced extra artifacts.",
+      "Plan reads the explicit selected feature and creates only neighboring plan.md with relative source references, technical constraints, milestone route and validation. Tasks then creates only neighboring tasks.md with executable, traceable work; no duplicate inline task statuses.",
+      "All phases preserve scope and distinguish drafts/proposals from approvals; no implementation, runtime verification claims, branch actions or automatic migration. Inspect per-phase writes, not only final permitted paths."
+    ]
+  },
+  {
+    "id": "ambiguous-feature-context",
+    "skills": [
+      "engflow-plan"
+    ],
+    "files": {
+      "specs/001-csv-import/spec.md": "# CSV import\nImport local CSV files. A plan has not yet been requested.\n",
+      "specs/002-json-export/spec.md": "# JSON export\nExport local JSON files. Independent of CSV import.\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Create a plan for the feature. No target path, name or ID has been supplied in this session. Do not guess which feature is intended."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Inspects available context and asks which feature/path is intended; does not silently select newest ID or a branch.",
+      "No plan, global artifact, feature directory or unrelated file is created before the target is resolved."
+    ]
+  },
+  {
+    "id": "tasks-refine-feedback",
+    "skills": [
+      "engflow-tasks"
+    ],
+    "files": {
+      "specs/004-items/spec.md": "# Items\nR1: unique hashable values in insertion order. Acceptance: [3,1,3,2] -> [3,1,2]. No unhashable-input support.\n",
+      "specs/004-items/plan.md": "# Item plan\n## Confirmed solution\nUser mandated dict.fromkeys for hashable input, preserving first occurrence. Supersedes assistant sorting proposal. Apply to row_unique(values) and file export; final integration covers both.\n## Milestones\nM1 row mechanism, M2 file export and final regression.\nTask state belongs to tasks.md. Read Design.md for historical context only; its Current route needs synchronization by an authorized writer, not reinstatement.\n",
+      "specs/004-items/Design.md": "# Items\n## Current route\nAssistant draft: sort unique values.\n",
+      "specs/004-items/tasks.md": "# Tasks\nRead spec.md and plan.md.\nT003: row_unique and file export. Partial: row_unique implemented; E1 prior test [2,2,1] -> [2,1] passed before file export existed. No current rerun or file/integration evidence. Existing task constraint incorrectly says sort unique values.\nT004: consumer integration; not started, depends on complete row and file export from T003.\n",
+      "items.py": "def row_unique(values):\n    return list(dict.fromkeys(values))\n"
+    },
+    "phases": [
+      "/skill:engflow-tasks Refine specs/004-items/tasks.md only. Inject the confirmed solution from plan.md into the affected task constraints and source/section references; split partial T003 into verifiable units, preserve evidence/IDs or successor references and fix T004 prerequisites. Plan/Spec/Design/code are read-only. Do not rerun tests, research or reselect technology. Report stale Design guidance and its next sync action without claiming the task update repaired it."
+    ],
+    "writable": [
+      "specs/004-items/tasks.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Reads referenced confirmed solution and requirement scope, updates affected task constraints to insertion-order dict.fromkeys without reapproval or unhashable-input expansion.",
+      "Preserves recognizable T003 meaning or retired successor references, E1 provenance limited to row work, partial status and T004 dependency coverage. Does not mark file/integration work verified.",
+      "Only tasks.md changes; upstream Design sync remains explicit with a next action. No tests, implementation, repeat Research or fabricated fresh evidence."
+    ]
+  },
+  {
+    "id": "tasks-inline-no-duplicate",
+    "skills": [
+      "engflow-tasks"
+    ],
+    "files": {
+      "specs/005-export/spec.md": "# Export\nR1: preserve rows and column order; existing task state is inside plan.md.\n",
+      "specs/005-export/plan.md": "# Export plan\nApproach: stdlib csv. User-approved current scope.\n## Tasks\nT001 row encoding: partial, evidence E1 only covers an unquoted row.\nT002 file export: not started; depends on T001 and integration tests.\nCurrent live task state is here. No authority to change this file has been granted.\n"
+    },
+    "phases": [
+      "/skill:engflow-tasks Create specs/005-export/tasks.md from this feature's plan. You may write tasks.md only; plan.md and Spec are strictly read-only. Do not leave two competing live task lists or lose partial work/evidence. If safe extraction requires additional authority, ask for that specific authority before writing."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Detects existing inline live task state and asks for authority to update Plan and task source before extraction.",
+      "Does not create a duplicate tasks.md, edit locked Plan, discard E1 or claim migration completed. No code/tests or other stage invocation."
+    ]
+  },
+  {
+    "id": "separate-tasks-implement",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "specs/006-total/spec.md": "# Total\nR1: total(values) returns sum; [] -> 0, [2,3] -> 5. Preserve public API.\n",
+      "specs/006-total/plan.md": "# Total plan\n## Approach\nUser-confirmed: use stdlib builtin sum, no dependency or API changes.\n## Delivery\nM1 fix behavior and run existing tests; M2 scoped review and integrated validation. No approval gate. Task state/evidence belongs to tasks.md. Plan is read-only in this request; do not duplicate task statuses here.\n",
+      "specs/006-total/tasks.md": "# Total tasks\nRead spec.md#total and plan.md#approach before execution; user mandates builtin sum.\nT001 implement R1 in total.py, not started; verification includes empty and nonempty input.\nT002 run test_total.py and scoped self-review, not started; requires T001. No prior validation evidence. Record actual commands/results and remaining limitations here.\n",
+      "total.py": "def total(values):\n    return -sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Implement ready tasks in specs/006-total/tasks.md. Read that feature's Spec, Plan and task references. Only total.py and this tasks.md may change. Preserve Plan and tests unchanged; task progress/evidence belongs in tasks.md. Follow the confirmed solution, test and review, then report final acceptance and any limits without creating another plan or task ledger."
+    ],
+    "writable": [
+      "total.py",
+      "specs/006-total/tasks.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Reads all relevant feature sources, follows confirmed builtin sum constraint, implements only the bounded API behavior.",
+      "Maintains stable task IDs and actual checks/progress in tasks.md, leaves read-only Plan untouched and creates no duplicate task state or forced stage.",
+      "Runs real tests and scoped review, reports self-review rather than invented independent review, and evaluates whole-task acceptance rather than only checkboxes."
+    ]
   },
   {
     "id": "numbered-feature-create",
@@ -473,7 +883,7 @@
     ]
   },
   {
-    "id": "design-investigation-support",
+    "id": "design-shared-evidence",
     "skills": [
       "engflow-design",
       "engflow-research",
@@ -484,20 +894,20 @@
       "Design.md": "# Independent configuration editing\nDraft. Goal: editing a copied configuration must not affect its input, including nested lists and dictionaries of primitive values. Inputs are acyclic. No mechanism has been selected.\n"
     },
     "phases": [
-      "/skill:engflow-design Complete Design.md for independent nested configuration editing. Use engflow-research to inspect the current ownership mechanism and engflow-poc to check the relevant premise before choosing the route. You may run local in-memory Python probes within 10 seconds, without network or filesystem effects. Only Design.md may be written. Return and integrate the evidence into the proposal; no implementation or separate reports."
+      "/skill:engflow-design Complete Design.md for independent nested configuration editing. Read and apply the shared source-investigation and experiment methods to inspect ownership and check the relevant premise. Do not invoke Research/PoC, load their SKILL.md or launch another agent. You may run local in-memory Python probes within 10 seconds, without network or filesystem effects. Only Design.md may be written. Return and integrate the evidence into the proposal; no implementation or separate reports."
     ],
     "writable": [
       "Design.md"
     ],
     "checks": [],
     "rubric": [
-      "Uses source evidence and an actual bounded probe, absorbs the conclusion and limits into Design, and distinguishes proposed replacement from observed current behavior.",
+      "Reads research-core.md and experiment-core.md, uses source evidence and an actual bounded probe, integrates the evidence and limits in Design and distinguishes observed current behavior from proposed replacement; no Research/PoC SKILL.md or invocation.",
       "No repeated execution authorization request for the supplied scope, no source edits, separate reports or placeholder records.",
       "Does not treat Research conclusions or PoC observations as user approval or full-feature verification."
     ]
   },
   {
-    "id": "implement-investigation-support",
+    "id": "implement-shared-evidence",
     "skills": [
       "engflow-implement",
       "engflow-research",
@@ -509,7 +919,7 @@
       "test_config.py": "import unittest\nfrom config import copy_options\n\nclass CopyTests(unittest.TestCase):\n    def test_nested_isolation(self):\n        source={\"settings\":{\"tags\":[\"a\"]}}\n        result=copy_options(source)\n        result[\"settings\"][\"tags\"].append(\"b\")\n        self.assertEqual(source,{\"settings\":{\"tags\":[\"a\"]}})\n        self.assertEqual(result,{\"settings\":{\"tags\":[\"a\",\"b\"]}})\n    def test_empty(self):\n        source={}\n        result=copy_options(source)\n        self.assertEqual(result,{})\n        self.assertIsNot(source,result)\n"
     },
     "phases": [
-      "/skill:engflow-implement Complete Plan.md. Use engflow-research to investigate ownership and engflow-poc to verify the relevant copying premise, then implement and validate the requested behavior. Existing local Python probe/test authority covers a 10-second probe and the existing unit suite; no network. Only config.py and Plan.md may be written. Keep mutating work in the current agent; return and integrate investigation results without separate reports."
+      "/skill:engflow-implement Complete Plan.md. Read and apply the shared source-investigation and experiment methods to investigate ownership and check the copying premise, then implement and validate the behavior. Do not invoke Research/PoC, load their SKILL.md or launch another agent. Existing local Python probe/test authority covers a 10-second probe and the existing unit suite; no network. Only config.py and Plan.md may be written. Keep mutating work in the current agent; return and integrate investigation results without separate reports."
     ],
     "writable": [
       "config.py",
@@ -524,7 +934,7 @@
       ]
     ],
     "rubric": [
-      "Research and PoC support implementation without a mandatory Design stage or new permission loop for the authorized probe.",
+      "Reads research-core.md and experiment-core.md inside Implement; no Research/PoC SKILL.md or invocation, mandatory Design stage or repeated permission loop for the authorized probe.",
       "Actual evidence guides the fix; code and existing tests satisfy nested isolation, with truthful evidence and review in the owning Plan.",
       "Only config.py and Plan.md change; no helper production edits, separate reports, invented approval or Feature setup."
     ]
@@ -541,13 +951,169 @@
       "config.py": "def copy_options(options):\n    return dict(options)\n"
     },
     "phases": [
-      "/skill:engflow-implement Continue Plan.md and resolve the copying uncertainty using the available capabilities."
+      "/skill:engflow-implement Continue Plan.md and resolve the copying uncertainty. Read the shared experiment method to assess permitted next checks, but preserve every approval gate and execution/write limit in Plan.md."
     ],
     "writable": [],
     "checks": [],
     "rubric": [
-      "Permitted source inspection can identify sharing, but the gate prevents PoC/test execution and all writes.",
-      "Reports blocked runtime evidence or execution without treating generic continuation or available PoC as approval. No separate reports or claimed verification."
+      "Reads experiment-core.md but performs no experiment, test or write while the gate is pending; permitted source inspection may identify sharing.",
+      "Reports the blocked runtime evidence/execution; neither generic continuation nor shared method availability grants approval. No Research/PoC entrypoint invocation, reports or claimed verification."
+    ]
+  },
+  {
+    "skills": [
+      "engflow-plan",
+      "engflow-design",
+      "engflow-research"
+    ],
+    "files": {
+      "Spec.md": "# Independent configuration editing\nR1: returned configuration and all nested mutable objects can be edited independently of the input. Preserve list/dict shape, ordering and scalar values. Python stdlib only; input consists of acyclic builtin dict/list/scalar values. No persistence or network. Acceptance: mutations in either direction do not leak, including nested lists and dictionaries; empty inputs preserved.\n",
+      "config.py": "def copy_options(options):\n    return dict(options)\n"
+    },
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "id": "plan-shared-design",
+    "phases": [
+      "/skill:engflow-plan Create Plan.md for Spec.md using config.py. Resolve the consequential ownership mechanism by reading and applying the shared design method bundled with Engflow. Do not invoke engflow-design, load its SKILL.md or launch another agent. Inspect sources; no probes or tests. Only Plan.md may be written. Keep a compact technical approach, inline near-term tasks, whole delivery route and verification. No design.md, tasks.md, independent report, setup or implementation."
+    ],
+    "rubric": [
+      "Reads engflow-design/references/design-core.md and actual sources; applies the design method without loading Design SKILL.md, invoking its command or asking unnecessary invocation approval.",
+      "Plan owns the grounded technical result: ownership invariants, rationale, evidence gaps and verification basis. Tasks stay inline; no separate design/report files or source changes.",
+      "No experiments, invented runtime evidence, automatic approval or required extra stages; routine supported choices do not trigger unnecessary user gates."
+    ]
+  },
+  {
+    "skills": [
+      "engflow-plan",
+      "engflow-design",
+      "engflow-research"
+    ],
+    "files": {
+      "Spec.md": "# Independent configuration editing\nR1: returned configuration and all nested mutable objects can be edited independently of the input. Preserve list/dict shape, ordering and scalar values. Python stdlib only; input consists of acyclic builtin dict/list/scalar values. No persistence or network. Acceptance: mutations in either direction do not leak, including nested lists and dictionaries; empty inputs preserved.\n",
+      "config.py": "def copy_options(options):\n    return dict(options)\n",
+      "Decision.md": "# Effective user-approved core decision D1\nUse shallow dict(options) and intentionally share nested values for the existing consumer. D1 has not been superseded. The new Spec requires independent nested values; the user has not decided how to resolve the conflict. No execution is authorized.\n"
+    },
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "id": "plan-design-user-decision",
+    "phases": [
+      "/skill:engflow-plan Draft Plan.md from Spec.md, config.py and Decision.md. Reuse the shared design method within Plan if useful; do not invoke the Design entrypoint. Only Plan.md may change. Bring me the conflict, evidence, recommendation and concrete decision needed; do not silently replace D1 or weaken R1. No runtime checks or separate design/task/report files."
+    ],
+    "rubric": [
+      "Finds D1/R1 conflict, preserves the effective decision and labels alternatives conditional rather than approving a replacement.",
+      "Shared design-method reuse or direct planning exposes the bounded user question, recommendation and tradeoffs; method availability is not approval or expanded authority.",
+      "Only Plan.md is written; blocked dependent work is explicit, no runtime evidence or extra artifacts are fabricated."
+    ]
+  },
+  {
+    "id": "independent-design-decision",
+    "skills": [
+      "engflow-design"
+    ],
+    "files": {
+      "Requirements.md": "# Local audit delivery\nEvery accepted event must survive process crashes. Two candidate backends exist: local fsync log (higher write latency, no external service) or remote durable queue (new external dependency). No decision on added latency versus operations overhead has been made. Existing user-approved constraint: no new external runtime dependency. No source or runtime changes authorized.\n"
+    },
+    "phases": [
+      "/skill:engflow-design Preview a design for Requirements.md. Recommend a route with tradeoffs, identify any genuinely missing consequential user decision, and retain the approved no-external-dependency constraint. Do not write files or run experiments. Do not ask approval for routine details or claim feasibility has been tested."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Independent Design reasons autonomously within the existing constraint, explains durability/invariants and verification basis.",
+      "If a change outside authority is needed, brings a concrete recommendation and bounded decision rather than silently choosing the remote service; no repeated gate for an already approved constraint.",
+      "Returns preview only; no files, experiments or invented approval/runtime proof."
+    ]
+  },
+  {
+    "id": "plan-entry-linked-tasks",
+    "skills": [
+      "engflow-implement"
+    ],
+    "files": {
+      "specs/006-total/spec.md": "# Total\nR1: total(values) returns sum; [] -> 0, [2,3] -> 5. Preserve public API.\n",
+      "specs/006-total/plan.md": "# Total plan\n## Approach\nUser-confirmed: use stdlib builtin sum, no dependency or API changes.\n## Delivery\nM1 fix behavior and run existing tests; M2 scoped review and integrated validation. No approval gate. Task state/evidence belongs to tasks.md. Plan is read-only in this request; do not duplicate task statuses here.\n",
+      "specs/006-total/tasks.md": "# Total tasks\nRead spec.md#total and plan.md#approach before execution; user mandates builtin sum.\nT001 implement R1 in total.py, not started; verification includes empty and nonempty input.\nT002 run test_total.py and scoped self-review, not started; requires T001. No prior validation evidence. Record actual commands/results and remaining limitations here.\n",
+      "total.py": "def total(values):\n    return -sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n        self.assertEqual(total([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-implement Implement specs/006-total/plan.md. Follow its relative references to the task source and effective requirements; I am supplying only the plan entry. Only total.py and specs/006-total/tasks.md may change; leave Plan, Spec and tests unchanged. Test and review the result, maintain actual task evidence in its owning source, and do not create another ledger."
+    ],
+    "writable": [
+      "total.py",
+      "specs/006-total/tasks.md"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "rubric": [
+      "Reads all relevant feature sources, follows confirmed builtin sum constraint, implements only the bounded API behavior.",
+      "Maintains stable task IDs and actual checks/progress in tasks.md, leaves read-only Plan untouched and creates no duplicate task state or forced stage.",
+      "Runs real tests and scoped review, reports self-review rather than invented independent review, and evaluates whole-task acceptance rather than only checkboxes.",
+      "Starts from only Plan path, discovers linked task source and requirements, preserves the read-only Plan and writes progress only to Tasks."
+    ]
+  },
+  {
+    "id": "simple-inline-plan",
+    "skills": [
+      "engflow-plan"
+    ],
+    "files": {
+      "Spec.md": "# Total\ntotal(values) returns the sum, [] -> 0, [2,3] -> 5; preserve API and stdlib-only behavior.\n",
+      "total.py": "def total(values):\n    return -sum(values)\n"
+    },
+    "phases": [
+      "/skill:engflow-plan Create Plan.md for this simple bounded total fix using Spec.md and total.py. Keep technical constraints, near-term tasks and validation inline. Only Plan.md may be written. The complete Engflow group is installed, but no prior Tasks/Design invocation is required; no separate files, implementation or tests are authorized."
+    ],
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Creates a proportionate combined plan with inline tasks and observable acceptance; does not require prior Tasks/Design invocation or generate their artifacts.",
+      "Reuses stdlib builtin sum as the straightforward route without unsupported internals or invented validation; writes only Plan.md."
+    ]
+  },
+  {
+    "id": "plan-design-explicit-composition",
+    "skills": [
+      "engflow-plan",
+      "engflow-design",
+      "engflow-research"
+    ],
+    "files": {
+      "Spec.md": "# Independent configuration editing\nR1: returned configuration and all nested mutable objects can be edited independently of the input. Preserve list/dict shape, ordering and scalar values. Python stdlib only; input consists of acyclic builtin dict/list/scalar values. No persistence or network. Acceptance: mutations in either direction do not leak, including nested lists and dictionaries; empty inputs preserved.\n",
+      "config.py": "def copy_options(options):\n    return dict(options)\n"
+    },
+    "phases": [
+      "/skill:engflow-design Provide read-only design support for an explicitly requested Plan task: create a delivery plan for Spec.md using config.py. Inspect those sources and choose a grounded mechanism with rationale, ownership invariants, interfaces, verification basis and material unknowns. Return the design result in conversation for Plan integration; write no design, plan, report or scratch file. No probes, tests, implementation or extra permissions. This is explicit support mode, not standalone proposal writing.",
+      "/skill:engflow-plan Create Plan.md from Spec.md, config.py and the actual preceding Design support result supplied below. Verify the material claims against sources and integrate the scoped technical result, inline near-term tasks, milestone route and verification. Reference Design's supplied rationale and limits without inventing approval or repeating settled selection. Only Plan.md may be written; no separate design/task/report files, implementation or runtime checks. Design has already been explicitly invoked; do not claim automatic invocation."
+    ],
+    "carry_response_phases": [
+      2
+    ],
+    "readonly_phases": [
+      1
+    ],
+    "writable": [
+      "Plan.md"
+    ],
+    "checks": [],
+    "rubric": [
+      "Phase 1 is an actual explicit Design invocation, inspects task sources and returns a grounded design result with no writes or runtime checks.",
+      "Phase 2 receives the actual previous response through explicit transfer, checks sources and integrates ownership invariants, mechanism/rationale and validation into Plan without fabricating Design approval.",
+      "Only Plan.md changes in phase 2; tasks stay inline and no duplicate design or progress authority is created.",
+      "Honors configured invocation settings; does not launch a nested agent, alter metadata or claim that this explicit two-call path was automatic invocation."
     ]
   }
 ]

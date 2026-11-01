@@ -19,17 +19,23 @@ When feature creation or selection permits navigation writes, maintain its link
 and `Current feature` in the same resolved project index (default
 `specs/README.md`), unless the user restricts writes. Store
 only navigation there; creating future/deferred features alone does not switch
-established focus. Current milestone/task, evidence, gates and next action stay
-in the owning plan. A focus link is neither execution permission nor a lock. Keep
+established focus. Feature-level checkpoints and gates stay in the owning plan;
+task state stays in its linked tasks.md when present, otherwise in the plan.
+A focus link is neither execution permission nor a lock. Keep
 an explicit session target during concurrent work; do not follow later pointer
 changes silently. Inspection/preview and restricted-file tasks leave it unchanged.
 If focus cannot be saved, report the selected path for the next session.
 
 For related features, follow parent/shared-source and dependency references as
 needed. Overall plans own cross-feature outcomes and integrated acceptance; child
-plans own their tasks and observations. Do not duplicate their progress. If no plan
-exists, use the selected feature's available sources to identify readiness and the
+execution records own their tasks and observations. Do not duplicate their progress.
+If no plan exists, use the selected feature's available sources to identify readiness and the
 next useful action; do not invent a previous task or bypass a pending gate.
+
+Resolve explicit feature paths/IDs and established conversation before the current
+link; verify that link for an unspecified continuation. Never choose by newest ID
+or branch. Ask if the context remains ambiguous. Follow references from the supplied
+plan, task path or feature directory; the user need not enumerate all inputs.
 
 Keep enough information for a fresh session:
 - Objective, non-goals, whole-task acceptance and authority limits.
@@ -45,7 +51,15 @@ implementation owns observed progress and just-in-time refinement within that st
 Before starting a coarse milestone, add only the tasks or local steps needed for
 safe execution, preserving agreed scope, contracts, acceptance and cross-milestone
 dependencies. Routine expansion in the same record needs no planner invocation.
-Keep both in the same record, not parallel ledgers. Milestones and tasks may span
+Keep one task-state authority, not parallel ledgers. Keep simple tasks inline;
+use separate tasks.md only when task volume or independent maintenance warrants
+it and creation is authorized. When present, tasks.md owns task decomposition,
+status and evidence; plan.md owns the approach, milestone route and feature-level checkpoint and references task evidence.
+Read both and keep affected references/constraints synchronized within write authority.
+Existing combined plans keep inline task state and require no extraction. Do not
+create a duplicate tasks.md over existing inline tasks; migration needs explicit
+authority for both sources and must preserve IDs/evidence and replace the old live
+list with references. Milestones and tasks may span
 sessions. Near-term tasks carry deliverables, dependencies and observable completion
 conditions; optional steps are local lists. Existing milestone-only plans remain
 valid. Routine refinement needs no planner invocation. Structural changes preserve
@@ -53,8 +67,9 @@ valid work and explain new dependencies or invalidated evidence. Retired IDs are
 not reused; replaced tasks retain successor references. Past evidence does not
 automatically prove new completion conditions.
 
-Use the plan as the authoritative execution record, referencing effective
-requirement and design sources rather than overriding them. Keep proposed material changes and
+Use the plan and its task source as the execution record, each authoritative for
+its own scope, referencing effective requirement and design sources rather than
+overriding them. Keep proposed material changes and
 pending agreement distinguishable from still-effective content. Only affected and
 dependent work is blocked; preserve valid authorization elsewhere.
 
@@ -98,6 +113,18 @@ note alone does not override an effective requirement. Resolve uncertain authori
 or conflicting intent before affected execution; a known documentation lag alone
 need not block otherwise authorized work. Preserve independent ready work.
 
+For confirmed solution intake or investigation findings, synchronize the original
+affected assumptions and execution constraints, not only a checkpoint summary.
+Record user-confirmed/mandated scope and supplied evidence; use relative paths
+and section references to longer detail and follow them on resume and before
+dependent tasks. Correct refuted current guidance while preserving its history.
+Revise affected task constraints, dependencies and checks; mark obsolete evidence
+with reasons. Product behavior/acceptance changes require user agreement, while
+in-scope technical corrections do not automatically change the Spec.
+A user-approved core decision is not replaced without a new user decision.
+Closure requires source repair, implementation follow-through and actual checks,
+or explicit remaining limits for each; a research report alone is insufficient.
+
 ## Checkpoints
 
 Save meaningful verified progress, consequential discoveries and plan changes as
@@ -117,10 +144,7 @@ Honor an immediate stop request; report if saving state is not safely possible.
 
 ## Resume
 
-1. Resolve the requested feature or established conversation target. Otherwise
-   verify the project's current-feature link; never choose by largest number or
-   newest file. Resolve stale or ambiguous selection before affected work. Read
-   current instructions, its record and needed references. Preserve pending
+1. Read current instructions, the record and needed references. Preserve pending
    approval and access limits. Inspect-only requests neither write nor restart work.
 2. Reconcile actual repository/environment state: branch/HEAD where available,
    staged/unstaged/untracked changes, relevant files and outstanding commands.
@@ -129,7 +153,8 @@ Honor an immediate stop request; report if saving state is not safely possible.
 3. Recheck material drift and stale evidence. Do not blindly replay migrations or
    other non-idempotent effects. Missing access or unresolved process state blocks
    affected execution, not grounds to invent a successful recovery.
-4. Within current execution and record-write authority, update the same plan and
+4. Within current execution and record-write authority, update the existing plan
+   and task source where applicable, and
    continue the earliest unfinished, unblocked task (or milestone without tasks)
    in the reconciled sequence.
    Do not repeat still-valid completed work or skip final integrated acceptance.

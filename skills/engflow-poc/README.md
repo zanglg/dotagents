@@ -33,14 +33,17 @@ environment context. No empty directories or full Feature document suite is requ
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`.
-Invoke explicitly or with bounded task-scoped authority through a permitted host
-mechanism. No other Skill is required. Design, Implement and other authorized callers
-can select PoC when useful. Reuse adequate existing execution permission; a support
-call does not expand it or approve production changes. Return evidence to the caller;
-an experiment worker does not own its decisions or progress record. Implement keeps
-mutating probes in the current agent and its helpers read-only. A temporary directory
-is not an isolation boundary.
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+PoC applies [the shared experiment method](references/experiment-core.md).
+Design and Implement read that method directly under their own actual execution
+authority; this invokes no PoC entrypoint and creates no independent report.
+Reuse adequate permission and obtain only missing scope. Implement keeps mutating
+probes in the current agent and helpers read-only; temporary storage is not a sandbox.
+Independent PoC retains the numbered-save and in-place continuation contracts.
 
 ## Validation and references
 

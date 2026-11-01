@@ -14,39 +14,44 @@ system or an unattended runtime scheduler.
 - "Implement the approved milestone plan, continuing through ready work."
 - "Resume from this plan after reconciling code and validation evidence."
 - "Show current progress without changing anything."
+- "Adopt my confirmed solution in the existing design, update affected tasks, then implement and test; do not reselect the route."
 
 ## Inputs and outputs
 
-Provide the request or plan, accessible source, acceptance and execution/write
-limits. Output includes code changes, actual validation, review limits, unfinished
+Provide a request, plan path, task path or feature directory, accessible source,
+acceptance and execution/write limits. Implement follows references; you need not
+supply every file. Plan is the technical/delivery entry point, linked Tasks is the
+executable task source; with no separate Tasks, keep task state inline in Plan.
+Small fixes need neither. Output includes code changes, actual validation, review limits, unfinished
 work and, when relevant, an updated execution record and next action. Commit,
 publication and handoff are separate operations, not implied by edit permission.
 
-## Feature selection and recovery
-
-An explicit feature ID/path or established conversation target selects the work.
-Otherwise verify the `Current feature` link in `specs/README.md`, then recover the
-current milestone/task and next action from its `plan.md` or existing record.
-The index stores navigation only. Highest number and latest edit do not imply
-current work; a stale or ambiguous selection needs resolution. Explicitly scoped
-sessions keep their target during concurrent work. Viewing does not switch focus
-or restart execution. Existing paths and small tasks without saved plans remain valid.
-
 ## Installation and collaboration
 
-Use Research for consequential source questions and PoC for bounded experiments
-when useful and permitted by the active task. Neither is a prerequisite. Integrate
-their evidence and limitations into the existing record, without automatic reports.
-Reuse granted execution scope; a pending gate or missing authority still applies.
-Mutating probes run in the current agent; optional helpers remain read-only.
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-No other Skill is required. `engflow-plan` can help with dedicated planning;
-implementation owns progress and just-in-time refinement in the same record.
-Use `engflow-code-review` through permitted host composition or disclose self-review.
-A separately requested `engflow-handoff` can reference the record but is not needed
-to resume it. A coarse next milestone alone is not a reason to stop for a planner.
+Plan supplies the route and acceptance; linked Tasks, when present, owns executable
+task state. Keep simple new or existing tasks inline otherwise. Implement follows
+references from the supplied entry, owns observed progress and local refinement,
+and needs no prior planner/Tasks invocation for routine expansion. Explicit context
+wins over feature navigation; otherwise verify Current feature in specs/README.md.
+
+Diagnose ordinary failures directly. For substantial source-evidence gaps, read
+[the research method](../engflow-research/references/research-core.md); for a useful
+bounded probe read [the experiment method](../engflow-poc/references/experiment-core.md).
+These references are methods, not Research/PoC entrypoints. Keep their results in
+the owning execution record and synchronize original sources within write authority.
+Loading a method grants no report writes, access expansion or experiment permission;
+reuse sufficient execution authority and obtain only missing scope. Private facts
+need precise questions, not guesses.
+
+Keep mutating probes in the current agent, helpers read-only. Use Code Review only
+through permitted host composition, or disclose self-review. Handoff is explicit-only
+and optional for resumption. A report or passing check alone does not close pending
+source synchronization.
 
 ## Validation and references
 
@@ -59,7 +64,7 @@ the tested subset, failures/retries and limits.
 | --- | --- |
 | Standalone small task | Implement, test, review; no setup or saved plan |
 | Large task or supplied plan | One record, ready tasks, progressive detail and final integrated acceptance |
-| M1 accepted; M2 coarse; no planner installed | Expand M2 in place as needed within existing authority; preserve outcomes/contracts/acceptance and continue ready work |
+| M1 accepted; M2 coarse; no planner invocation | Expand M2 in place as needed within existing authority; preserve outcomes/contracts/acceptance and continue ready work |
 | Next milestone already executable without tasks | Execute against its acceptance; do not force a task layer |
 | Expanding M2 requires a changed interface or cross-milestone dependency | Surface the consequential planning/design change; await applicable agreement for affected work, not unrelated ready work |
 | Task structure changes after partial delivery | Preserve IDs, successor references, valid results and evidence |

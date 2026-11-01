@@ -6,6 +6,10 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 Choose a grounded technical route from the goal and actual system constraints.
 Use for interfaces, invariants and consequential tradeoffs, not production coding.
+Design owns reusable technical design judgment, independently or as bounded
+support selected within an explicitly requested Plan task. Plan may hold the returned
+approach directly; separate design.md is optional. Existing authoritative designs
+stay referenced rather than copied or replaced.
 
 ## Examples
 
@@ -18,33 +22,30 @@ Use for interfaces, invariants and consequential tradeoffs, not production codin
 Provide the goal, effective requirements, relevant code and constraints. A formal
 Spec is optional. Output is an authorized design draft or conversational preview
 with rationale, evidence, unresolved decisions and readiness limits. It can remain
-conditional when feasibility is not established.
-
-## Feature selection
-
-Existing project paths remain valid. New features default to
-`specs/NNN-short-name/design.md`; create documents only as needed. Feature numbers
-are stable identities, not priority or execution order. Resolve an explicit ID/path
-first; otherwise an unspecified continuation uses the verified `Current feature`
-link in `specs/README.md`. Authorized work may maintain those navigation links;
-preview and read-only requests do not. Progress and approval stay in feature
-documents. Ambiguity is reported rather than choosing the newest feature.
+conditional when feasibility is not established. Within Plan support, return the
+approach, rationale, interfaces/invariants, verification basis, unknowns and required
+user decisions; Plan owns integration and no separate file is written by default.
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-Design works alone. Optional Research supplies source evidence; PoC supplies runtime
-evidence within adequate existing execution authority. Obtain only missing experiment
-scope, not repeated approval for an already permitted probe. Both return results for
-Design to verify and integrate; calls do not automatically save separate reports.
-See the [collaboration contract](references/investigation.md). Both capabilities
-remain usable independently and by other authorized callers.
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+Read [the shared design method](references/design-core.md) for technical judgment.
+Plan reads that method directly and owns its result; it does not invoke Design.
+Design may likewise reuse the shared research/experiment methods through
+[the evidence contract](references/investigation.md). Method reuse grants no
+new writes, probes, approval or report. User participation follows decision
+significance and existing authority, not invocation mode. Independent Design still
+owns authorized proposal persistence and continuation.
 
 ## Validation and references
 
-Useful host checks include a missing research collaborator, an unsupported premise,
+Useful host checks include an incomplete group/shared reference, an unsupported premise,
 a preview-only request, and an accepted change requiring downstream source updates.
 Neither research conclusions nor author self-check establish approval or runtime
 feasibility. In this repository, see [validation guidance](../../docs/validation.md);
-the current smoke suite does not directly evaluate this Skill.
+the [evaluation suite](../../docs/engflow/evaluation/README.md) includes Plan/Design
+support and independent user-decision fixtures. Prepared cases are not behavioral passes.

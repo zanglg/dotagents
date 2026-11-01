@@ -22,7 +22,8 @@ request or observed code complexity alone does not trigger this Skill.
 Unlike `engflow-code-review`, assess whether existing code merits a behavior-preserving
 structural change, not whether a particular patch is correct. Findings may inform
 Design or Plan when explicitly adopted; they do not become requirements or tasks
-merely by being reported. No other Engflow Skill needs to be installed.
+merely by being reported. Engflow installs as a complete group, but this assessment
+requires no prior invocation of another entrypoint.
 
 ## Judgment standard
 

@@ -65,6 +65,13 @@ def inspect_events(path):
     return complete, tools, response
 
 
+def case_skill_names(case):
+    """Install the full Engflow group; cases select entrypoints, not dependencies."""
+    bundle = {p.name for p in (ROOT / "skills").glob("engflow-*")
+              if (p / "SKILL.md").is_file()}
+    return sorted(bundle | set(case["skills"]))
+
+
 def prepare(case, case_dir):
     work = case_dir / "workspace"
     work.mkdir(parents=True)
@@ -72,7 +79,7 @@ def prepare(case, case_dir):
         path = work / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content)
-    for name in case["skills"]:
+    for name in case_skill_names(case):
         shutil.copytree(ROOT / "skills" / name, work / ".eval-skills" / name)
     return work
 
@@ -115,7 +122,7 @@ def run_case(case, output, args):
                    "--no-context-files", "--no-approve", "--offline",
                    "--tools", "read,bash,edit,write", "--provider", args.provider,
                    "--model", args.model, "--thinking", args.thinking]
-        for name in case["skills"]:
+        for name in case_skill_names(case):
             command += ["--skill", str(work / ".eval-skills" / name)]
         command += ["--append-system-prompt",
                     "This is a synthetic local evaluation. Stay within the current working "

@@ -20,7 +20,8 @@ another checkout. It reports errors and exits nonzero on failure.
 - Skill names, parent-directory agreement and nonempty bounded descriptions.
 - Engflow's explicit-only frontmatter and `agents/openai.yaml` policy fields.
 - Retired skill folder names and stale active `skills/<old-name>/` references.
-- Local inline Markdown link/image destinations, reference definitions and Markdown
+- Local shared-method references as well as inline Markdown link/image destinations,
+  reference definitions and Markdown
   heading/explicit anchors; fenced examples are ignored. External URLs are not fetched.
 
 The metadata reader deliberately supports the repository's small subset: flat
@@ -34,7 +35,8 @@ can retain old names; live Markdown links still need valid destinations.
 Unit tests cover missing README/contract links, malformed metadata, policy booleans,
 name mismatches, stale paths,
 links/anchors, evaluator completion/error/timeout handling and explicit inter-phase
-response transfer. They never call a
+response transfer, complete Engflow-group fixture installation and individually
+requested general tools. They never call a
 model or assert skill quality by searching for magic instruction phrases.
 
 ## Behavior is a separate check

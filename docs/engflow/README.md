@@ -1,9 +1,91 @@
 # Engflow
 
-Independent engineering capabilities, not mandatory stages or an automatic agent
-orchestrator. Choose the entry point from the maturity of the work. An early idea
+A prompt-only, specification-driven engineering path inspired by Spec Kit, with
+Engflow's investigation, debugging and execution continuity. These are independent
+capabilities, not mandatory stages or an automatic agent orchestrator. Choose the
+entry point from the maturity of the work. An early idea
 may need clarification; established requirements can go directly to design,
 planning or implementation. Suitable external artifacts are valid inputs.
+
+## Installation and shared methods
+
+Install all sibling `engflow-*` folders together, preserving their references and
+relative layout. Partial independent installation is no longer supported; independent
+use remains: any entrypoint can be requested directly without earlier stages.
+General-purpose skills outside Engflow remain individually installable.
+Preserve installed customizations when updating; do not copy this repository's
+AGENTS.md into target projects as a global policy.
+
+The Design, Research and PoC folders own reusable method references:
+- [Design judgment](../../skills/engflow-design/references/design-core.md)
+- [Source investigation](../../skills/engflow-research/references/research-core.md)
+- [Bounded experiments](../../skills/engflow-poc/references/experiment-core.md)
+
+The active caller reads a method and applies it in the current task. This is not
+loading another SKILL.md, invoking a Skill, launching a worker or acquiring another
+entrypoint's write/output authority. A method supplies reasoning; the caller owns
+decisions, integration and evidence. All entrypoints retain explicit-only metadata.
+Existing project/user/host restrictions still govern operations; method reuse is
+not a workaround for a restriction on the underlying activity.
+
+A missing shared reference means an incomplete group installation. Identify its
+path and request a complete installation rather than silently skipping rules,
+fabricating a contract or installing resources. Independent authorized work may
+continue when it does not depend on the missing method.
+
+## Minimum sufficient path
+
+Inspect the repository, effective decisions and existing artifacts first. Select
+capabilities by risk, complexity and unknowns, not by a mandatory sequence:
+
+- A bounded low-risk fix goes directly to Implement and Verify, with no new Spec,
+  Design or saved plan.
+- Complex work may use Specify -> targeted Clarify -> Plan -> Tasks
+  -> Implement <-> Verify; Clarify can also precede Specify. Use Design where
+  consequential mechanisms need decisions. Reuse adequate artifacts and skip
+  settled stages; tasks may stay inside the existing execution plan.
+- Implementation problems first receive ordinary diagnosis and bounded checks.
+  Substantial evidence gaps may use the shared source-investigation method; unavailable private facts or changes to binding intent need the user.
+  Only affected and dependent work pauses.
+
+These are prompt-level routing rules, not automatic Skill invocation or a new
+command system. Keep independent, actively invoked entry points for user flexibility;
+do not add a unified `engflow` router or change explicit-only host settings.
+Init is deferred: this version adds no initialization Skill, installer, constitution
+generator or setup gate. Use effective project instructions and existing artifacts.
+
+## Feature workspace by default
+
+Match the Spec Kit-style feature workflow with prompt instructions, not its CLI
+or orchestration scripts. For a new feature, honor an explicit path or existing
+project convention; otherwise use:
+
+```text
+specs/
+  001-csv-import/
+    spec.md
+    plan.md
+    tasks.md
+```
+
+Specify creates only the requested feature Spec; Plan creates/updates that feature's
+technical and delivery plan when requested. Keep simple tasks inline in Plan.
+Explicitly invoked `engflow-tasks` can create neighboring tasks.md when task volume
+or independent maintenance warrants separation. Do not pre-create every artifact;
+new and existing combined plans remain valid without migration.
+
+Inspect existing IDs before allocating a new feature number; never renumber,
+migrate old documents or create/switch branches automatically. Subsequent calls
+use the explicit feature path/ID or established conversation first; otherwise
+verify the `Current feature` link in `specs/README.md` (or the project equivalent).
+Ask when context remains ambiguous; newest number and branch name are not authority.
+Authorized feature creation/selection may maintain navigation links unless restricted;
+preview/inspection never changes focus. Ongoing sessions keep their scoped target.
+
+A project-wide Spec is for explicitly project-wide intent/shared product contracts,
+not the default destination of a feature request. Reference relevant global rules
+from feature documents instead of duplicating them. Existing standalone Specs and
+plans remain valid; no forced migration or Init. Simple fixes need no workspace.
 
 ## Responsibilities
 
@@ -11,12 +93,13 @@ planning or implementation. Suitable external artifacts are valid inputs.
 | --- | --- |
 | [engflow-clarify](../../skills/engflow-clarify/SKILL.md) | Read-only discovery and clarification; return decisions and change summaries in conversation |
 | [engflow-specify](../../skills/engflow-specify/SKILL.md) | Synthesize and maintain behavior, scope, constraints and acceptance |
-| [engflow-design](../../skills/engflow-design/SKILL.md) | Choose mechanisms, interfaces, invariants and consequential technical tradeoffs |
-| [engflow-plan](../../skills/engflow-plan/SKILL.md) | Organize milestones, near-term tasks, dependencies and integrated acceptance |
+| [engflow-design](../../skills/engflow-design/SKILL.md) | Explicit technical design; owns the shared design method reused by Plan |
+| [engflow-plan](../../skills/engflow-plan/SKILL.md) | Ground the technical approach, milestone route and integrated validation; reference the task source |
+| [engflow-tasks](../../skills/engflow-tasks/SKILL.md) | Decompose the effective plan into tasks with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](../../skills/engflow-implement/SKILL.md) | Implement, validate, review and maintain observed progress |
 | [engflow-code-review](../../skills/engflow-code-review/SKILL.md) | General read-only review of code changes, with or without Engflow artifacts |
-| [engflow-research](../../skills/engflow-research/SKILL.md) | Investigate source evidence independently or for an authorized caller; save only on request |
-| [engflow-poc](../../skills/engflow-poc/SKILL.md) | Test premises within bounded execution authority; return evidence and retain records on request |
+| [engflow-research](../../skills/engflow-research/SKILL.md) | Investigate technical questions from sources and existing evidence |
+| [engflow-poc](../../skills/engflow-poc/SKILL.md) | Test premises within bounded execution authority; reuse adequate permission and save only on request |
 | [engflow-refactor-assess](../../skills/engflow-refactor-assess/SKILL.md) | Assess worthwhile behavior-preserving improvements to existing code, without edits |
 | [engflow-handoff](../../skills/engflow-handoff/SKILL.md) | Transfer essential context or resume from a handoff without duplicating existing records |
 
@@ -30,12 +113,9 @@ boundaries it returns confirmed decisions, current/deferred scope, open question
 impacts on existing requirements, acceptance and downstream sources. No separate
 interview ledger or complete Spec template is required.
 
-Specify is a complete entry point for producing and maintaining a coherent,
-testable Spec. It owns synthesis, consistency checks and authorized writes, and
-handles ordinary missing details itself. Clarify is an optional depth of exploration
-for forming intent, challenging assumptions and discussing consequential choices;
-questioning is not its exclusive capability. Reuse settled conclusions rather than
-repeating an interview or treating Specify as a transcript formatter. It preserves IDs and approval evidence and reconciles the
+Specify owns synthesis, consistency checks and authorized Spec creation/revision;
+it is not a transcript copier. It handles ordinary missing details itself, so deep
+interviewing is optional. It preserves IDs and approval evidence and reconciles the
 scope, constraints and acceptance affected by agreed changes. Confirmed deferred
 requirements remain outside current acceptance; agreement is not feasibility proof.
 
@@ -47,50 +127,62 @@ that next step rather than bypassing it. A summary alone supplies no write permi
 
 ## Progressive planning and execution
 
-Design decides technical direction; Plan organizes how to deliver and validate it.
-Shared interfaces and correctness-critical invariants should be explicit before
-dependent work; routine local algorithms and helper functions belong to Implement.
-Plan the whole milestone path, detail near-term tasks and keep distant work coarse.
-Steps are optional local lists, not a third ledger. Tasks need not fit one session.
+Plan is the technical/delivery entry point. For consequential unresolved technical
+choices it reads the shared design method, applies it directly and integrates
+mechanisms, rationale, interfaces/invariants, verification and unknowns into the
+plan. It does not invoke Design's entrypoint or require a separate design file.
+Existing sufficient designs/contracts stay authoritative through references.
+Routine local implementation details remain with Implement.
 
-Use one execution plan as the decomposition and progress entry point, referencing
-requirement/design sources. Implement owns observations and validation evidence;
-Plan revisions preserve those facts. Before entering a coarse milestone, Implement
+Independent Design uses the same method but owns its explicitly authorized proposal
+and continuation. Neither usage mode grants approval or experiment execution:
+supported in-scope choices are autonomous, while consequential commitments beyond
+authority need the user. Confirmed solutions are not reselected for preference.
+
+Keep the whole milestone route and integrated acceptance visible; detail near-term
+work and keep distant work coarse. Simple new or existing plans may keep inline
+tasks. Explicitly use Tasks for a separate tasks.md only when task volume or
+independent maintenance makes it useful. Extraction needs authority for both sources,
+preserves IDs/evidence and leaves one live task list. Local steps are optional,
+not a third ledger. Tasks may span sessions; creating or reordering them does not
+authorize implementation.
+
+Use one plan as the technical/delivery entry point and one task-state authority:
+optional separate tasks.md, otherwise inline tasks. Task status and
+evidence stay in that source; plan.md keeps feature-level continuity and references
+rather than copies task evidence. Implement owns actual observations and checks;
+Plan and Tasks revisions preserve those facts. Before entering a coarse milestone, Implement
 may expand it in place as needed within existing authority, preserving agreed scope,
 outcomes, contracts, acceptance and cross-milestone dependencies. This needs no
 planner invocation or mandatory task layer. Use dedicated planning/design judgment
 for consequential restructuring or unresolved major choices; those decisions block
 affected work, not independent ready work.
-A missing planner is not an installation failure. Do not create a competing plan.
+No planner invocation is required for routine refinement. Do not create a
+competing plan or task ledger.
 
-Invocation is not delegation: the current agent can use a Skill without a worker.
-References alone do not invoke another Skill. Respect explicit invocation settings
-and host composition; do not add automatic stage transitions. Research/PoC support
-and Implement/Review task-scoped permissions remain bounded by their
-contracts and host support. Human approval depends on the affected decision and
-existing gate, not on the mere use of another capability.
+References do not invoke Skill entrypoints. Reading shared methods preserves
+explicit-only metadata and creates no automatic stage transitions. Code Review,
+Clarify/Specify combinations and other entrypoint use still honor host invocation
+rules. Human approval follows the affected decision and existing gates, not which
+method was read.
 
 ## Research and PoC
 
-Research and PoC are independent capabilities usable by Design, Implement and other
-authorized callers. Research investigates source evidence without executing probes;
-PoC tests a premise through a bounded experiment. Select them when they materially
-help the current question; ordinary questions can be handled directly. Neither a
-Feature nor another Skill is required, and invocation does not require a worker.
+Independent Research investigates source evidence; independent PoC tests a premise
+within bounded execution authority. Both remain explicit entrypoints and retain
+their own persistence contracts. No feature or prior stage is required to use them.
 
-An explicit Design or Implement task permits on-demand read-only Research within
-its scope unless restricted. PoC runs need adequate execution authority: reuse
-existing permission without per-call confirmation, and obtain only missing scope.
-A request to design, inspect or save a report does not authorize arbitrary runs,
-expand access, or remove pending gates. Honor the host's invocation settings.
+Within Plan, Design or Implement, reuse the source-investigation method for material
+evidence gaps unless restricted; diagnose routine issues directly first. Within
+Design or Implement, use the experiment method only when adequate execution scope
+actually exists. Reuse sufficient permission and obtain only missing scope.
+Design-only, plan-only, read-only and save-only requests do not authorize probes,
+remove pending gates or expand access/disclosure.
 
-Both capabilities return evidence and limitations to the caller, which verifies
-consequential claims and integrates them into its authorized Design or execution
-record. Calls do not automatically create separate reports or let a collaborator
-rewrite the caller's sources. Keep decision-relevant conclusions and references in
-the owning document; retain detailed evidence separately only where useful and
-authorized. Implement runs mutating probes in the current agent; its optional
-helpers remain read-only.
+The active caller integrates evidence and limitations into its own authorized
+artifact, corrects refuted assumptions and exposes pending synchronization.
+No independent Research/PoC report is created through method reuse. Implement
+runs mutating probes in the current agent; optional helpers remain read-only.
 
 Independent use returns results directly in conversation. An explicit save request
 uses the supplied/project path, otherwise Research writes
@@ -102,9 +194,18 @@ Temporary experiment files are distinct from durable reports. Preview reserves n
 number, and neither family creates or selects a Feature. No report template,
 parallel task ledger or automatic stage transition is required.
 
+## Implementation inputs
+
+Implement accepts a request, plan path, task path or feature directory, then follows
+references; the user need not list every file. Plan supplies the technical route,
+constraints and acceptance; linked Tasks supplies executable work and task evidence.
+With no separate Tasks, keep that state inline in Plan. Read relevant Spec/design
+sources when available. Adequate supplied inputs need no invented artifacts; bounded
+fixes may go directly to implementation without saved documents.
+
 ## Checks and review
 
-Specify, Design and Plan perform author self-checks for their own deliverables.
+Specify, Design, Plan and Tasks perform author self-checks for their own deliverables.
 Implement reviews meaningful increments and the combined result, fixes supported
 findings and reruns affected validation. Code Review is general-purpose: it checks
 correctness, compliance, regressions and evidence gaps without requiring a Spec.
@@ -122,15 +223,16 @@ plan without it. Neither skill adds a mandatory stage or automatic implementatio
 ## Material changes and source synchronization
 
 A material change is not fully synchronized merely because code or the execution
-plan was updated. Identify affected Spec, Design, shared-contract and Plan paths,
+plan was updated. Identify affected Spec, Design, shared-contract, Plan and Tasks paths,
 preserve supplied decision/approval evidence, and track pending updates with a
 next action in the existing authorized artifact or conversation. No new ledger
 or compulsory document layers are required.
 
 Each skill stays within its write scope: Clarify reports impacts conversationally;
 Specify updates the authorized Spec; Design its authorized design sources; Plan
-only the plan. Implement may
-synchronize related sources within task write authority. Otherwise report the
+only the plan; Tasks only the task artifact, except an explicitly authorized
+inline-task migration. Implement may synchronize related sources within task
+write authority. Otherwise report the
 stale source and missing authority/access without silently rewriting it. Research,
 Review and Refactor Assess return evidence or recommendations, not effective
 changes or permission to revise sources. Handoff references pending sync work;
@@ -143,36 +245,71 @@ document nor an unsupported plan note silently changes effective intent. Resolve
 uncertain authority or conflicting intent before affected work. Known documentation
 lag need not stop otherwise authorized work, but remains visible in the final report.
 
+## User decisions and confirmed solutions
+
+For complex technical choices that commit major architecture, interfaces, hardware
+semantics or substantial delivery risk, bring the user a concrete recommendation,
+evidence, alternatives/tradeoffs and the affected feature paths before dependent
+execution. Complexity does not require repeated approval for routine local details.
+A requested plan review gate remains closed until explicitly approved. Resume
+independent ready work while a scoped decision is pending.
+
+Record the user's decision and its scope in the existing authoritative content,
+update the technical approach and affected tasks, then resume authorized work.
+Do not treat a conversation answer as persisted until the actual sources have
+been updated; missing access/write authority remains explicit pending sync.
+
+## Confirmed solutions and investigation closure
+
+A user-confirmed or explicitly specified solution is the implementation basis
+within its stated scope, not an invitation to select a preferred alternative.
+Read its evidence and affected sources; check consistency and feasibility without
+reopening settled choices or requesting the same approval again. If new evidence
+conflicts with a user-approved core decision, explain the evidence, affected work
+and options, and request a change decision before incompatible execution.
+
+Inject short solutions into existing Plan decisions and task constraints. Keep
+longer detail in the existing suitable Design/contract or research source, with
+relative path and section references from the plan and affected tasks. Include
+the confirmed/mandated status, supplied decision evidence, scope, essential
+constraints and observable verification. Consumers must follow these references
+before dependent work. No approved-design registry or mandatory new file is needed.
+
+Research remains advisory and read-only; the authorized caller owns integration.
+A report alone is not closure. Correct the affected original Design/contract and
+Plan assumptions, revise affected tasks/dependencies and invalidate obsolete
+completion evidence. Change Spec behavior or acceptance only when that intent
+changes and the user has agreed; technical corrections do not require a new Spec.
+Preserve decision history without leaving refuted text as current guidance.
+Then resume implementation and relevant verification. Missing write authority
+leaves an explicit pending update, not a claim of full synchronization.
+
 ## Document scope and lifetime
 
-New independently evolving features default to `specs/NNN-short-name/`, with
-`spec.md`, `design.md` and `plan.md` created only when needed. Use the next available
-number above allocated identities; numbers are stable identities, not execution
-order. Explicit paths and established project conventions take precedence, and
-existing documents need no migration. A new session or Skill invocation is not a
-new feature. Small tasks can still use one combined document or no saved plan.
+Reuse an appropriate document for the independently evolving objective. A new
+session or Skill invocation is not a new feature. Create feature detail for an
+independent delivery; keep shared long-lived constraints and mechanisms in their
+existing authority sources. Cross-module changes are not automatically global.
+Reference shared rules instead of copying them, and update affected shared sources
+when authorized. No global/feature layers or directory structure are mandatory.
 
-Keep large objectives concise and reference independently maintained child features.
-Shared requirements and mechanisms retain their authority sources; do not copy
-them into every child. Detail the current delivery and its necessary dependencies,
-keeping confirmed deferred work distinct from undecided future options. A dependency
-does not prohibit a feature from having its own acceptance and evolution.
+A small feature can use one combined document. When numbered feature directories
+are useful, numbers are stable identities, not execution order. Keep revisions of
+the same objective together; create a new objective when independently deliverable.
+Distinguish historical decisions, proposed changes, current intent and observed
+implementation. Deferred work does not become implemented by moving its label.
 
-Use `specs/README.md` as a lightweight feature index with a `Current feature` link.
-That link locates work; the selected feature's plan holds current tasks, evidence,
-gates and next actions. An explicit target or established conversation takes priority.
-Verify the link when resuming without a target; never choose by highest number or
-latest edit. Read-only requests do not update focus, and ongoing sessions retain
-their selected target if another session changes the link. See
-[feature organization and continuation](features.md) for examples and boundaries.
-
-These are document and navigation defaults, not a required stage sequence, branch
-manager or second task ledger. Each capability works independently and maintains
-only its own authorized content and permitted navigation links. Distinguish
-historical decisions, proposals, effective intent and observed implementation;
-deferred work does not become implemented by moving its label.
+See [feature organization and continuation](features.md) for numbered allocation,
+current-feature navigation, parent/child scope and concurrent-session boundaries.
+Navigation is not progress or approval; each task has one owning execution record.
 
 ## Migration
+
+Install the full Engflow group rather than updating a single entrypoint folder.
+Preserve customizations first; include all shared reference files and sibling paths.
+Independent entrypoint use is unchanged, but partial installs must be completed.
+General-purpose skills remain individually installable. Existing project documents
+need no migration merely because installation changed.
 
 | Previous folder / invocation | New folder / invocation |
 | --- | --- |
@@ -186,7 +323,7 @@ deferred work does not become implemented by moving its label.
 | refactor-assess | engflow-refactor-assess |
 | handoff | engflow-handoff |
 
-Replace only the corresponding installed skill folders and update explicit calls
+Install/update the complete Engflow group together and update explicit calls
 and project links. Preserve custom local changes before replacement. No duplicate
 legacy aliases are shipped: old invocation names stop resolving after migration.
 Existing Spec, Design, execution-plan and handoff files remain valid; do not rename
@@ -204,9 +341,6 @@ Retire only obsolete entry points and rules tied to the old workflow, not every
 `engflow-*` folder. Preserve project documents and unrelated rules.
 
 ## Validation scenarios
-
-See [numbered feature results](evaluation/numbered-features-results.md) for tested
-feature selection, allocation, continuation and compatibility boundaries.
 
 These are behavioral expectations, not test results by themselves. Use the
 [repeatable evaluation suite](evaluation/README.md) for fixtures and real-host runs;
@@ -227,16 +361,10 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | Spec edit exposes a conflict outside write scope | Report the conflict and affected work without rewriting unauthorized content |
 | Deep clarification changes an approved requirement | Preserve decision provenance in the summary and identify pending Spec/Design/Plan updates |
 | Clarify summary passed to Specify | Reuse settled decisions; no automatic invocation, new approval inference or repeated interview |
-| Spec/Design/Plan creation | Perform proportionate self-check; no invented independent approval |
+| Spec/Design/Plan/Tasks creation | Perform proportionate self-check; no invented independent approval |
+| Separate tasks.md | Tasks owns decomposition, Implement owns observed task state; Plan references evidence without a second task-status list |
+| Existing inline tasks | Preserve format/IDs/evidence; extract only with explicit authority for both sources |
 | Large implementation | Whole milestone route, detailed current tasks, coarse future work |
-| New feature with no path | Next numbered directory, only the requested document and allowed index links |
-| Existing 001 and 003; new feature | Allocate 004, preserve existing IDs and content |
-| Current link is 002 while 007 is newest | Resume 002; report its plan and current task |
-| Explicit 003 with current link 002 | Select 003; persist navigation only within write authority |
-| Preview another feature or inspect a dependency | No directory, number allocation or stored focus change |
-| Missing/stale current link with several candidates | Report ambiguity; do not guess or start implementation |
-| Parent and child features | Reference shared constraints and child progress; keep one owner per task |
-| Current feature ready, unrelated future semantics unknown | Proceed within current authority; preserve future questions |
 | M1 accepted; M2 coarse but within agreed contracts | Implement expands M2 as needed and continues without a planner call |
 | M2 expansion changes a binding interface or milestone dependency | Surface the planning/design decision; do not silently treat it as local refinement |
 | Refine M2 or split partial T3 | Modify needed scope only; preserve IDs, work and evidence |
@@ -244,11 +372,6 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | New session, dirty code or stale checks | Reconcile actual state and outstanding effects before execution |
 | View/preview or pending gate | No writes/implementation or implicit approval |
 | Plain code diff without documents | Review concrete defects and disclose requirements coverage limits |
-| Standalone Research or PoC without a save request | Return results in conversation; no automatic durable report |
-| Explicit save with no path | Allocate the next record in the appropriate default family |
-| Resume a saved investigation or save supplied observations | Reuse the record and preserve provenance; saving alone does not rerun |
-| Design/Implement selects Research or PoC | Return evidence for caller-owned integration; reuse adequate existing authority |
-| Execution gate pending or scope insufficient | Do not run a probe through another capability to bypass the boundary |
 | All tasks marked done | Still check milestone and final integrated acceptance |
 | Approved design change; code/Plan updated; Design stale | Keep approval evidence, stale path and next sync action visible; update only within authority |
 | Resume with a pending source update | Reconcile approval and current sources; do not revert accepted intent or silently approve a proposal |
