@@ -23,9 +23,12 @@ a supplied destination can be used. Temporary artifacts do not automatically tra
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`.
-Invoke explicitly through the host's supported mechanism. No repository or other
-Skill is required. A handoff references the execution record rather than replacing
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+A handoff references the execution record rather than replacing
 it; `engflow-implement` can resume a plan without Handoff. Preparing a handoff does
 not authorize changing source records, cancelling operations or replaying migrations.
 

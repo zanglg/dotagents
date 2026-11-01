@@ -39,7 +39,8 @@ small, auditable, and safe to copy between machines.
     |-- engflow-poc/          # Bounded execution-based verification
     |-- diagram-aesthetics/ # Shared technical diagram aesthetics
     |-- engflow-handoff/      # Standalone session transfer and resumption
-    |-- engflow-plan/ # Milestone planning and revision
+    |-- engflow-plan/         # Technical approach and delivery route
+    |-- engflow-tasks/        # Executable feature task decomposition
     |-- engflow-implement/    # Linear implementation and cross-session recovery
     |-- engflow-code-review/  # Read-only review of code changes
     |-- engflow-research/ # Standalone evidence-driven investigation
@@ -76,23 +77,27 @@ without searching the whole workspace.
 | [diagram-aesthetics](skills/diagram-aesthetics/README.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [engflow-plan](skills/engflow-plan/README.md) | Create and revise progressive milestone/task plans without implementing or publishing tickets |
+| [engflow-plan](skills/engflow-plan/README.md) | Connect requirements to technical approaches, milestone routes and validation; no implementation or ticket publishing |
+| [engflow-tasks](skills/engflow-tasks/README.md) | Decompose a plan into feature tasks.md with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](skills/engflow-implement/README.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
 | [engflow-code-review](skills/engflow-code-review/README.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
-| [engflow-design](skills/engflow-design/README.md) | Continuous feature design and an evolving proposal; optional Research and PoC within task authority |
+| [engflow-design](skills/engflow-design/README.md) | Technical design independently or within Plan; user participation for consequential decisions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
-| [engflow-specify](skills/engflow-specify/README.md) | Form and maintain testable specifications, resolving ordinary ambiguity; optional deep exploration through Clarify |
+| [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 See the [Engflow guide](docs/engflow/README.md) for responsibilities, composition,
 document scope and migration from the previous names.
 
 These skills are independent entry points, not a required workflow. Add other
-reusable skills to this catalog when useful. Dedicated planning owns the delivery
-structure; implementation owns observed progress and just-in-time refinement in
-the same plan. Code review checks changes; refactoring assessment evaluates existing
+reusable skills to this catalog when useful. Dedicated planning connects the
+technical approach and delivery structure, reusing the shared design method for
+unresolved technical choices. Existing designs stay authoritative through references.
+Simple plans keep inline tasks; optional Tasks separates larger task lists.
+Implementation owns observed progress and local refinement in the single task source. Plan references
+task evidence rather than duplicating task state. Code review checks changes; refactoring assessment evaluates existing
 maintenance burdens. Both return findings without edits. Handoff transfers essential
 context without becoming a second execution record. Small work can go straight to
 implementation. See the usage and validation scenarios for [planning](skills/engflow-plan/README.md),
@@ -100,13 +105,22 @@ implementation. See the usage and validation scenarios for [planning](skills/eng
 
 ## Installation
 
-For a repository-local installation, copy the desired skill folders from
-`skills/` into the target repository's `.agents/skills/`. Keep their supporting
-files together. Each skill installs independently, without workspace setup.
-Design and Implement can work alone; install `engflow-research` and `engflow-poc`
-alongside either to use optional evidence gathering within the task's authority.
-Research and PoC also work independently or for other authorized callers, returning
-results by default and saving numbered records only on request.
+Engflow is distributed as one group: install **all `skills/engflow-*` folders**
+together under the target repository's `.agents/skills/` (or the host's personal
+skill directory). Preserve sibling folder names, relative paths and supporting
+files. Partial Engflow installs are no longer supported. Preserve local
+customizations before replacing an installed group.
+
+Each entrypoint remains independently usable: installing the group does not impose
+a stage sequence, Init, router or automatic orchestration. Design, Research and PoC
+own shared method references beside their entrypoints; Plan/Implement read those
+references directly within their own authority, without invoking another Skill or
+creating its outputs. All Engflow entrypoints remain explicit-only.
+
+General tools such as `diagram-aesthetics` and `semver-bump` still install individually.
+No Spec, Design, saved plan or task file is required for a bounded implementation.
+Research/PoC independent requests retain conversational defaults and numbered saves
+only on explicit request.
 
 For a personal workspace, use these folders in the skill-discovery location
 supported by your host. This repository's `AGENTS.md` governs development of

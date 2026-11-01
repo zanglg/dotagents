@@ -1,49 +1,44 @@
-# Research and PoC collaboration
+# Evidence methods within Design
 
-Design owns the proposal and preserves the user's decisions. Use `engflow-research`
-for substantial source investigation and `engflow-poc` for execution-based evidence,
-loading their instructions when selected. Both are independent capabilities also
-usable by Implement and other authorized callers. Default to the current agent;
-using a Skill does not require a worker.
+Design owns the proposal, evidence integration and preservation of user decisions.
+The complete Engflow group supplies two reusable method references:
+- [Source investigation](../../engflow-research/references/research-core.md):
+  read-only evidence, counterevidence and uncertainty.
+- [Bounded experiments](../../engflow-poc/references/experiment-core.md):
+  execution permission, discriminating observations, stopping and live state.
 
-## Authority and evidence
+Read the relevant reference and apply it in the current Design task when it
+materially helps. Do not load Research/PoC SKILL.md, start another Skill task or
+create reports merely to borrow a method. Independent Research/PoC entrypoints
+remain explicit-only. No worker or separate task is required.
 
-An explicit Design request includes on-demand read-only Research for consequential
-evidence gaps in that active task, unless the user restricts it. No per-call approval
-is needed. This does not expand access or disclosure permissions, authorize separate
-research reports, or carry over to unrelated work. Research returns evidence; Design
-maintains its authorized proposal. PoC requires bounded execution authority: reuse
-any sufficient scope already granted, and obtain only missing authority before runs.
-Permission to design or save a report alone does not authorize experiments.
+## Authority and integration
 
-Use the host-supported invocation or composition mechanism; do not relax global
-Skill invocation settings or bypass host restrictions. If the host requires a
-separate explicit invocation, request it or continue direct read-only investigation.
+Read-only inspection is in scope unless restricted. Experimental runs require
+adequate bounded execution authority: reuse sufficient permission already granted
+and obtain only missing scope. Design-only, plan-only or save-only permission
+does not authorize probes. A read-only request or pending gate is never bypassed
+by selecting an experiment method. An explicitly requested Design support/preview
+inherits its stated write limits and does not acquire standalone proposal writes.
 
-Supply the question, relevant target state, essential constraints and authority
-limits. Research returns evidence and proposed checks to Design rather than starting
-PoC. Helpers do not take over design decisions or recursively delegate.
-
-Verify consequential results and reconcile affected choices. Keep the conclusion,
-conditions and decision impact in Design, referencing necessary evidence instead
-of copying logs or automatically creating another report. Independent use returns
-results in conversation; explicit save requests follow the capability's report
-convention. Durable reports are evidence, not competing design authority. If a collaborator
-is unavailable, continue direct read-only investigation or disclose the verification
-gap; do not invent execution or permission.
+Verify consequential findings and incorporate conclusions, conditions and decision
+impact in the owning proposal or conversational result. Reference durable evidence
+rather than copying logs; a report is evidence, not competing design authority.
+Keep unsupported premises conditional. Identify original sources and consumers
+needing synchronization, and update only those within actual write authority.
+Technical evidence does not approve a material change or override user intent.
 
 ## Optional workers
 
-Delegate only when the host provides meaningful benefit, required evidence access
-and safe coordination. Research workers remain read-only.
+Default to the current agent. Read-only helpers return evidence, do not write,
+execute probes or delegate further. A missing shared file is an incomplete group
+installation: identify the missing path; do not invent its contract or fetch/install
+resources automatically. Independent authorized reasoning can continue.
 
-Before a PoC worker mutates, record its handle, scope and unique write grant in the
-existing draft or conversation, then grant exclusive ownership. The parent pauses
-all writes during the grant. If preparation-before-grant is unsupported, execute
-in the parent.
-
-Return or pause expires the grant; a resumed worker needs a fresh one. Confirm
-worker and command quiescence before reclaiming writes or retrying; a timeout or
-result message is not proof. Check changed paths and consequential evidence against
-the initial state and scope. Preserve outstanding process/ownership facts in the
-existing draft or conversation; unknown liveness blocks new execution.
+For a separately authorized mutating experiment worker, record its handle, scope
+and exclusive write grant in the existing draft or conversation before execution.
+The parent pauses writes until the grant ends. If safe preparation-before-grant
+is unsupported, execute in the parent. Return/pause expires the grant; resumption
+needs a fresh grant. Verify worker/command quiescence before reclaiming writes;
+timeouts and result messages do not prove termination. Preserve unknown liveness
+and partial effects; they block conflicting work and retries.

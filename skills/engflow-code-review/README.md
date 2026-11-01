@@ -23,9 +23,12 @@ findings do not authorize fixes, publication or merge.
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. No Spec, tracker or other Skill is required. Invoke
-explicitly through the host's supported mechanism. Explicit implementation tasks
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+Explicit implementation tasks
 can use scoped read-only review through supported composition; hosts may require
 separate invocation. `engflow-refactor-assess` serves a different question: whether
 existing code warrants structural improvement.

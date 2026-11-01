@@ -16,6 +16,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
   `docs/research/NNN-short-name.md` and `docs/poc/NNN-short-name/report.md`, with
   necessary experiment code under `code/`. Reuse existing records on continuation;
   keep conversation/caller returns as the default and preserve supplied paths.
+- Add explicit-only `engflow-tasks` for feature-local `tasks.md` decomposition,
+  stable IDs, source/solution references, dependencies and observable checks.
+  Separate task state from Plan's technical route and feature-level continuity;
+  preserve existing inline task plans without forced migration or duplicate ledgers.
+  Tasks does not start implementation, experiments or automatic Research/Design.
 - Add read-only `engflow-clarify` for deep discovery and targeted clarification.
   Return conversational decisions, current/deferred scope and affected-source
   summaries; do not create or update Specs or interview records. `engflow-specify`
@@ -72,6 +77,44 @@ This project follows Semantic Versioning and uses Conventional Commits.
   Return evidence for caller-owned integration without automatic reports; reuse
   sufficient execution authority without expanding scope or bypassing gates.
   Keep Implement's mutating experiments in the current agent and helpers read-only.
+- Distribute Engflow as one complete group while retaining independent entrypoint
+  use and explicit-only invocation metadata. Partial independent installation is
+  no longer supported; general-purpose skills remain individually installable.
+  Extract shared design, source-investigation and bounded-experiment methods beside
+  their owning skills. Plan/Design/Implement read these references directly inside
+  their own authority, without invoking other Skill entrypoints or inheriting
+  outputs, report writes, experiment permission or approval. Preserve user decision
+  gates and caller-owned integration. Update bundle fixtures and deterministic
+  checks; historical invocation results do not validate the new method contract.
+  Implement accepts a plan
+  or feature entry and follows references; Tasks is optional for larger lists,
+  while simple new or existing plans keep inline tasks as the single state source.
+  Preserve main's navigation and investigation regression fixtures and historical
+  results; add Design-support, user-decision, inline-plan and linked-task entry
+  fixtures. Fixture preparation is not a real-host behavioral pass.
+- Default new feature specifications to `specs/NNN-short-name/spec.md` and
+  requested feature plans to neighboring `plan.md`, while honoring explicit paths,
+  existing conventions and standalone artifacts. Reuse a selected feature across
+  calls; ask on ambiguous context instead of guessing from branch/latest ID.
+  Do not create global Specs for local features, migrate documents, manage branches
+  or require Init. Specify handles blocking clarification within the same task;
+  consequential technical choices involve the user and feed back to authority sources.
+- Position Plan as the technical approach and delivery entry point, linking
+  requirements, effective design/contracts, verification and optional task
+  decomposition. Retain Design for optional deeper technical work and preserve
+  existing plans without migration. Use Tasks when separate task maintenance adds value;
+  retain new inline tasks and authorized inline refinement and keep task evidence in one authority.
+  No mandatory full artifact pipeline or Init is introduced.
+- Connect Engflow's optional specification/planning path with implementation
+  blocker routing, private-knowledge questions and confirmed solution intake.
+  Extend task-scoped read-only Research support to explicitly requested Plan and
+  Implement tasks after source inspection or routine diagnosis, without per-call
+  approval unless restricted;
+  preserve host invocation guards and evidence-only outputs. Integrate findings
+  into original authority sources and affected tasks, then resume implementation
+  and verification. Retain independent actively invoked entry points by user
+  decision; no unified router, orchestration scripts, parallel Research or
+  mandatory artifact stages.
 - Rename engineering entrypoints to `engflow-*`: specify, design, implement,
   code-review, technical-research, poc, refactor-assess and handoff; rename
   plan-implementation to `engflow-plan`. Old invocation names and installed folder
@@ -161,6 +204,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Compatibility and migration
 
+- Engflow now requires the complete sibling `engflow-*` group, including shared
+  method references. Preserve installed customizations and update the whole group;
+  no project-document migration or prior stage invocation is required. General
+  tools remain individually installable. Method reuse grants no new permissions.
 - Clarify is now conversation-only, including requests to save or revise a Spec.
   Use Specify for the authorized document update, carrying decisions and approval
   evidence without restarting clarification. Combined requests still respect host

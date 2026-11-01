@@ -2,9 +2,9 @@
 name: engflow-research
 description: >
   Investigate technical questions through source code, first-party specifications
-  and existing evidence. Return grounded conclusions and uncertainty. Use on
-  explicit research request or as authorized read-only support for another task,
-  including Design and Implement. Save a report only when explicitly requested;
+  and existing evidence. Return grounded conclusions, counterevidence and uncertainty.
+  Use on explicit research request. Other Engflow entrypoints reuse the shared
+  source-investigation method without invoking this Skill. Save a report only when explicitly requested;
   no experiment execution or production implementation.
 disable-model-invocation: true
 ---
@@ -15,46 +15,15 @@ Answer the user's technical question with a defensible explanation.
 Choose the investigation strategy and answer structure to fit the question;
 no predefined research category, workflow or document setup is required.
 
-Use on an explicit research request or within a coordinating task that permits
-read-only investigation. Design and Implement may select Research as needed within
-their active scope, without per-call confirmation unless restricted. Other callers
-can use the same capability with appropriate task authority. Neither a document
-reference nor an unrelated question invokes it automatically. Honor host invocation
-settings; using this Skill does not require a separate worker or other Engflow Skills.
+Engflow is installed as a complete group; this entrypoint is independently usable
+on an explicit Research request. Read and apply
+[the shared source-investigation method](references/research-core.md) before
+investigating. Other entrypoints read that method directly in their own tasks;
+they do not automatically invoke this Skill or acquire its report-write scope.
+Explicit support requests can return scoped findings to a caller. Honor host
+invocation guards and current access/disclosure restrictions.
 
-When supporting another task, return evidence and limitations to its caller. The
-caller owns decisions and integration into its authorized documents or execution
-record; support alone does not request a separate report or permit editing those
-sources. Stay within the question and existing access/disclosure limits. Helpers
-recruited for this investigation remain read-only, do not delegate further and
-suggest runtime checks rather than invoking PoC or starting implementation.
-
-## Evidence standard
-
-Ground claims in the target system's actual implementation, applicable
-first-party specifications and existing observations. General knowledge guides
-investigation; it does not establish facts about the target.
-
-Show why the evidence applies to the relevant version, configuration and
-conditions, and how it supports the conclusion. Trace the relevant implementation
-path and its governing conditions far enough to establish the claimed mechanism.
-
-Actively seek evidence that could change the explanation. Resolve material
-contradictions or retain them explicitly. Distinguish established facts,
-reasoned conclusions, proposed behavior and unknowns; do not turn a plausible
-explanation into a demonstrated cause.
-
-## Judgment and response
-
-Investigate consequential uncertainties without expanding into unrelated audits.
-Use accessible evidence before asking for missing information. Stop when the
-answer has adequate support or further progress is blocked by a specific limit.
-
-Answer directly, connecting evidence to reasoning rather than listing symbols.
-Do not add defect lists, alternatives or feasibility judgments unless they serve
-the question. Provide traceable source references and qualify changing or unknown
-source state. When evidence is insufficient, narrow the conclusion and identify
-the next discriminating check. Static analysis is not runtime verification.
+## Results and persistence
 
 Return findings to the caller or, when independent, directly in conversation.
 Save a report only when explicitly requested and within write authority. Reuse the

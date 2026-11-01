@@ -3,7 +3,8 @@ name: engflow-design
 description: >
   Design a feature from goals and actual constraints. Choose technical approaches,
   involve the user in consequential tradeoffs, and deliver a grounded proposal
-  that guides implementation. Use on explicit request; not production implementation.
+  that guides implementation. Use on explicit design request; other Engflow
+  entrypoints reuse the shared design method without invoking this Skill.
 disable-model-invocation: true
 ---
 
@@ -13,13 +14,24 @@ Develop a coherent proposal that solves the user's problem and gives implementat
 a reliable direction. Choose the strategy and document structure to fit the task;
 no Spec, Feature or other Skill is required.
 
-Explicit invocation starts or resumes the task. Follow-up answers continue it
-without reinvocation until the user pauses, ends or redirects it.
+Engflow is installed as a complete group; this remains an independently usable,
+explicit entrypoint. Read and apply [the shared design method](references/design-core.md)
+before technical selection or material revision. Plan reads that reference directly
+within its own task; method reuse does not invoke this Skill or grant its writes.
+
+## Invocation and participation
+
+An explicit request starts or resumes Design; follow-up answers continue within
+the same authority until the user pauses, ends or redirects it. Keep host invocation
+guards intact. An explicitly requested support/preview can return a focused design
+to a caller without saving a separate file. Independent proposal writes still need
+their actual authorization. Human participation follows decision significance and
+authority, not whether the result is conversational or persisted.
 
 ## Feature context
 
-Use the explicit feature ID/path or established conversation target. For an
-unspecified continuation, verify the current-feature link in `specs/README.md`
+In independent use, use the explicit feature ID/path or established conversation
+target. For an unspecified continuation, verify the current-feature link in `specs/README.md`
 (or the project equivalent). Do not infer focus from the largest number or most
 recent file; resolve a missing, stale or conflicting target before affected work.
 Reading another feature as a dependency does not switch the target, and a later
@@ -36,53 +48,24 @@ restricted. This is navigation, not progress
 or approval. Creating future/deferred features alone does not change established
 focus; preview/view requests change neither files nor focus.
 
-## Design judgment
+For an explicitly requested support/preview, inherit the caller's selected feature;
+do not allocate a feature or update navigation through support alone.
 
-Establish intended behavior, acceptance and constraints from available requirements,
-code and effective decisions. Do not silently change the problem to fit a solution.
+## Investigation and readiness
 
-Ground consequential choices in the target system's actual mechanisms and explain
-why their tradeoffs are worthwhile. Distinguish existing support, proposed extensions
-and unverified assumptions. Consider alternatives when they could change the decision,
-not to fill a comparison table.
-
-Make supported choices autonomously. Involve the user when unresolved priorities,
-changes to agreed scope or behavior, or substantial commitments exceed existing
-authority. Bring a recommendation and its concrete tradeoff, not questions the
-available evidence can answer. User approval establishes a decision or risk acceptance,
-not technical feasibility.
-
-## Continuous progress
-
-Resolve questions that determine the design's viability before elaborating dependent
-details. Reconcile affected choices when evidence or requirements change, and
-continue useful work within scope without routine permission to proceed. A blocked
-question need not stop independent work.
-
-Investigate ordinary questions directly. Explicitly starting Design also permits
-on-demand read-only Research for this task unless restricted. Select PoC when runtime
-evidence is needed and existing authority covers the bounded experiment; obtain only
-the missing scope when it does not. No per-call confirmation is needed within granted
-scope. Follow [the collaboration contract](references/investigation.md); Design owns
-the decisions and absorbs consequential evidence into its proposal. Neither capability
-is a mandatory stage or an automatic request for a separate report.
-
-Finish when implementation can proceed without rediscovering feature semantics,
-cross-component contracts or major technical choices. Make necessary invariants
-and the basis for verification clear; leave local details to implementation unless
-they determine correctness or viability.
-
-If a critical premise remains unsupported, deliver a conditional proposal stating
-what can proceed, what is blocked and what would resolve it. Stop at unavailable
-evidence, authority or decisions rather than inventing readiness or background progress.
+Use the shared design method's evidence, decision and readiness standards. For
+source investigation and separately authorized experiments, read
+[the evidence collaboration contract](references/investigation.md). Apply these
+methods directly in the current Design task; do not automatically invoke Research
+or PoC, create reports or start workers. Keep unsupported routes conditional.
 
 ## Proposal and continuity
 
-Writing the proposal is part of Design. Maintain one authorized draft at meaningful
+In independent use, writing the proposal is part of Design. Maintain one authorized draft at meaningful
 decisions, discoveries and pauses, using an appropriate existing document and
-user/project location or the numbered-feature default. Authorized feature
-navigation updates are in scope; preserve unrelated content. Preview and no-write
-requests stay conversational. Identify the selected feature and proposal path.
+user/project location or the numbered-feature default above. Authorized feature
+navigation writes are in scope. An explicitly requested support/preview returns findings to its caller instead. Preserve
+unrelated content. Preview and no-write requests stay conversational.
 
 Keep the current route, rationale, evidence, unresolved dependencies and next useful
 action sufficient for continuation, not a discussion transcript or second progress
@@ -108,10 +91,7 @@ Plan paths, supplied approval evidence and pending sync actions in the existing
 draft. Update only authorized design sources; report other needed revisions without
 silently rewriting them or invoking another stage. Recheck source consistency before
 closing pending updates; a revised proposal alone does not synchronize its consumers.
-Preserve confirmed deferred scope without designing it prematurely. For a large
-objective, reference common mechanisms and independently maintained feature detail.
-Judge readiness for the current delivery and its actual dependencies; later unknowns
-do not require a complete design now or silently weaken shared constraints.
+Preserve confirmed deferred scope without designing it prematurely.
 
 ## Boundaries
 

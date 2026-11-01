@@ -4,8 +4,8 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Turn goals, existing discussion and evidence into a specification of behavior,
-scope and observable acceptance, resolving ordinary requirement gaps directly. Use for synthesis or revision, not a new design exercise or
+Turn existing discussion and evidence into a specification of behavior, scope and
+observable acceptance. Use for synthesis or revision, not a new design exercise or
 a mechanical transcript save. Specify owns Spec consistency checks and authorized writes.
 
 ## Examples
@@ -14,8 +14,22 @@ a mechanical transcript save. Specify owns Spec consistency checks and authorize
 - "Save the agreed feature requirements in docs/specs/export.md."
 - "Update the existing Spec for the approved scope change, preserving requirement IDs."
 - "Use this Clarify summary to revise Spec.md, reconciling acceptance and constraints."
-- "Create the next numbered feature for multiple tabs; use the default location."
-- "Continue specifying feature 003; panes remain confirmed but deferred."
+
+## Feature files
+
+New feature Specs default to `specs/NNN-short-name/spec.md` unless you provide a
+path or the project already has a convention. Later calls reuse the same feature;
+ambiguous targets require a question, not choosing the newest directory. A feature
+request does not default to a global Spec. Existing layouts remain valid and are
+not migrated automatically; no Init, branch creation or setup script is required.
+Explicit targets and established conversation take precedence; otherwise verify
+`Current feature` in `specs/README.md` (or the project equivalent). Authorized feature
+creation/selection may maintain navigation unless restricted; previews stay read-only.
+See [feature organization](../../docs/engflow/features.md).
+
+Specify includes focused clarification when behavior/scope/acceptance needs your
+decision; your answers continue the same authorized Spec task. Independent Clarify
+is optional for deeper discussion.
 
 ## Inputs and outputs
 
@@ -24,21 +38,14 @@ or preview intent. Output is a Spec or preview, including unknowns and affected
 source updates. The [Spec outline](assets/spec.md) is optional; existing formats
 remain usable, and deferred requirements need not become current acceptance.
 
-## Feature selection
-
-Existing project paths remain valid. New features default to
-`specs/NNN-short-name/spec.md`; create documents only as needed. Feature numbers
-are stable identities, not priority or execution order. Resolve an explicit ID/path
-first; otherwise an unspecified continuation uses the verified `Current feature`
-link in `specs/README.md`. Authorized work may maintain those navigation links;
-preview and read-only requests do not. Progress and approval stay in feature
-documents. Ambiguity is reported rather than choosing the newest feature.
-
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-No other Skill is required. `engflow-clarify` is optional for deep interviewing and
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+`engflow-clarify` is optional for deep interviewing and
 returns conversation-only decisions; Specify consumes that discussion without
 reopening settled questions. Ordinary gaps can be handled here without Clarify.
 Design and Plan can consume the resulting Spec without a mandatory stage sequence.

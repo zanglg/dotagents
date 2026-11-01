@@ -23,9 +23,12 @@ refactor is a valid result; no report or implementation artifact is created.
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-No other Skill is required. Findings can inform Design or Plan when adopted;
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+Findings can inform Design or Plan when adopted;
 implementation requests do not implicitly invoke assessment. `engflow-code-review`
 checks proposed changes instead. See [read-only collaboration](references/context.md).
 

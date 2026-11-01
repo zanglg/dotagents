@@ -2,7 +2,11 @@
 status: draft
 ---
 
-# Specification
+# <Feature name> Specification
+
+<!-- Default location for a new feature: specs/NNN-short-name/spec.md.
+Reuse existing conventions and selected feature identity; do not migrate old files.
+Reference shared product constraints instead of recreating a global specification. -->
 
 ## Problem, Scope and Non-goals
 
@@ -18,10 +22,6 @@ conditions when useful. Deferred requirements are not current acceptance.
 ## Acceptance Criteria and Validation
 
 ## Constraints and Dependencies
-
-Reference parent/shared requirements and related features when applicable; keep
-their authoritative content in its owning source. Identify dependencies that
-affect the current delivery rather than detailing every future feature.
 
 ## Technical Approach (if needed; link existing Design)
 

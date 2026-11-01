@@ -5,9 +5,7 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 ## Purpose
 
 Explore an early idea or resolve consequential ambiguity in existing requirements.
-Use as an optional deep exploration mode when goals, assumptions or consequential
-choices need discussion. Specify remains a complete entry point for ordinary
-specification work, including routine clarification.
+Use when discussion and decisions are needed, rather than document synthesis.
 It reads existing material but returns content only in conversation; it never writes files.
 
 ## Examples
@@ -16,7 +14,6 @@ It reads existing material but returns content only in conversation; it never wr
 - "Clarify restart behavior in the existing Spec without reopening settled choices."
 - "Split panes are confirmed but deferred. Summarize the Spec changes needed; keep tabs current."
 - "Summarize our decisions conversationally; do not create a file."
-- "Challenge the assumptions behind feature 003; keep the current focus unchanged."
 
 ## Inputs and outputs
 
@@ -27,9 +24,12 @@ Spec is required, and no interview ledger or Spec file is created or updated.
 
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-It works independently. `engflow-specify` synthesizes the discussion, checks consistency
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+It can be used without invoking another stage. `engflow-specify` synthesizes the discussion, checks consistency
 and previews or writes an authorized Spec. Clarify does not automatically invoke it.
 If the user requests both clarification and a Spec update, finish the summary first,
 then use separately scoped Specify work only through permitted host composition.

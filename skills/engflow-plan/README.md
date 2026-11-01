@@ -4,11 +4,15 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Plan progressive milestones and tasks, not tickets or code edits. Use for initial
-planning or consequential structural revisions; small work need not use a planner.
+Connect requirements to a grounded technical approach, verification strategy and
+progressive milestones/tasks, not tickets or code edits. The plan is the technical
+and delivery entry point; existing design/contracts remain authoritative through
+references. Small work need not use a planner.
 
 ## Examples
 - "Plan implementation of this design as milestones. Preview only."
+- "Turn this Spec into a technical approach and delivery plan; no separate Design unless needed."
+- "Link this feature plan to its existing tasks.md without copying task statuses."
 - "Save a draft at docs/plans/plugin-reload.md and wait for my review."
 - "Split M2 without losing its completed work or evidence."
 - "Move M3 before M2 if dependencies allow; change only the plan."
@@ -20,29 +24,39 @@ planning or consequential structural revisions; small work need not use a planne
 
 Provide goals, available requirement/design sources or an existing plan, plus the
 requested scope and save destination or preview intent. Output is a new or revised
-plan with milestones, near-term detail, acceptance and unresolved decisions.
+plan with a technical approach or design references, constraints, validation,
+milestones, inline tasks or optional task references, acceptance and unresolved decisions.
 Milestones describe outcomes; tasks describe verifiable work; steps are optional.
 The [outline](assets/execution-plan.md) is optional, not a required format or an
 instruction to create files during installation. No function-body plan or fixed
 per-step TDD script is required.
 
-## Feature selection
-
-Existing project paths remain valid. New features default to
-`specs/NNN-short-name/plan.md`; create documents only as needed. Feature numbers
-are stable identities, not priority or execution order. Resolve an explicit ID/path
-first; otherwise an unspecified continuation uses the verified `Current feature`
-link in `specs/README.md`. Authorized work may maintain those navigation links;
-preview and read-only requests do not. Progress and approval stay in feature
-documents. Ambiguity is reported rather than choosing the newest feature.
-
 ## Installation and collaboration
 
-Copy this whole folder to your host's skill directory, such as `.agents/skills/`,
-including supporting files. Invoke explicitly through the host's supported mechanism.
-No Spec, tracker or other Skill is required. Any implementer can maintain progress
-in the same plan; `engflow-implement` can also create a minimal record itself.
-A new plan does not authorize implementation or automatically start another stage.
+Install all sibling `engflow-*` folders together in the host's skill directory,
+such as `.agents/skills/`, preserving their relative layout and supporting files.
+Each entrypoint remains independently usable; no prior stage invocation is required.
+Invoke this entrypoint explicitly through the host's supported mechanism.
+
+No Spec, tracker or prior Design/Tasks invocation is required. Read the selected
+feature's sources and reuse its plan. Explicit paths and conversation take priority;
+otherwise verify Current feature in specs/README.md. Authorized navigation writes
+are allowed unless restricted; previews stay read-only. See
+[feature organization](../../docs/engflow/features.md).
+
+For consequential technical choices, Plan reads
+[the shared design method](../engflow-design/references/design-core.md);
+for material source-evidence gaps it reads
+[the research method](../engflow-research/references/research-core.md).
+Apply these references in the current Plan task, not by loading another SKILL.md.
+Plan owns integration, decisions and authorized writes; neither method grants
+experiments, external source writes or independent reports. Existing designs stay
+authoritative through references. Involve the user for consequential changes
+beyond authority, not routine local choices.
+
+Keep simple tasks inline; explicitly use Tasks only when separate maintenance
+adds value. Tasks migration needs authority for both artifacts and one live state
+source. Plan-only work does not authorize implementation or automatic stage changes.
 
 ## Validation and references
 
@@ -53,10 +67,13 @@ subset and limits.
 | Scenario | Expected boundary |
 | --- | --- |
 | No Spec or tracker | Plan from available goals and code; no setup requirement |
+| Spec without separate Design | Ground the technical approach in code, link constraints/checks and plan delivery without fabricating a Design prerequisite |
+| New or existing inline tasks | Preserve settled choices, IDs and evidence; refine in place without forced migration |
+| Separate tasks.md | Reference it, keep task state there, report pending task updates outside plan-write scope |
+| Plan reuses shared design method | Read design-core.md, own the result in Plan; no Design invocation, new authority or mandatory design.md |
+| Consequential technical evidence gap | Apply the shared research method within Plan; integrate findings, not an independent report; no experiments or unapproved route changes |
 | Critical route unknown | Expose the question and blocked scope, not invented readiness |
-| Preview or view-only | No artifact creation, number allocation or focus changes |
-| Authorized new feature without a path | Use the numbered default and report the selected path |
-| Several features, unspecified continuation | Verify the current link; do not choose by highest ID |
+| Preview, view-only or missing destination | Respect write intent; no silent artifact creation |
 | Large task | Coarse future milestones, detailed near-term tasks and final acceptance |
 | Split/merge a partially completed task | Preserve valid work, successor references and evidence coverage |
 | External or milestone-only plan | Reuse it without forced migration or producer dependency |

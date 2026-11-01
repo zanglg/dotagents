@@ -1,8 +1,7 @@
 ---
 name: engflow-specify
 description: >
-  Form and maintain a coherent, testable specification from goals, discussion
-  and evidence, resolving ordinary requirement ambiguity as needed.
+  Synthesize existing discussion and evidence into a specification.
   Use on explicit request to create, update or preview a spec, not to
   develop a new design or start implementation.
 disable-model-invocation: true
@@ -18,10 +17,10 @@ No workspace setup or other Skill is required.
 Reuse settled answers and inspect only relevant documents and source. Do not
 restart an interview or invent requirements to fill a template. Resolve ordinary
 missing details from evidence; ask only when an essential ambiguity prevents a
-useful draft. Own ordinary clarification without requiring a separate interview.
-Deep exploration with Clarify is optional when goals, assumptions or consequential
-tradeoffs need sustained discussion. Reuse its conclusions without repeating the
-interview; synthesize a Spec rather than reformatting its summary.
+useful draft. Ask focused questions when scope, behavior or acceptance depends on
+an unresolved decision; follow-up answers continue this same Specify task and its
+authorized Spec update without a second invocation. Do not invent answers or
+require a separate Clarify call. Deep clarification remains optional.
 
 Accept discussion or an `engflow-clarify` summary as input. Synthesize it against
 the effective Spec and sources rather than copying a transcript or blindly applying
@@ -61,17 +60,15 @@ future/deferred features alone does not change established focus. Keep
 an established session target if another session changes the link. Preview and
 read-only requests never allocate numbers, create directories or change focus.
 
+A feature request does not authorize a project-wide Spec. Reference shared rules
+rather than collecting unrelated features into a root Spec. No Init is required.
+
 ## Content
 
 Default to one Spec per independently implementable, verifiable and evolving
 objective, containing as many requirements as needed. Split by independent scope,
 not by individual requirement or document length; respect existing project structure.
 Adapt [the outline](assets/spec.md), omitting unneeded sections and stating non-goals.
-For a large objective, keep shared intent and constraints concise and link separately
-evolving feature detail. A dependent feature can still have its own acceptance and
-lifetime. Detail the current delivery and its necessary dependencies; distinguish
-confirmed later scope from undecided possibilities without inventing future behavior.
-Unresolved later work blocks only the decisions that actually depend on it.
 
 - Make behavior and quality requirements testable, covering material edge cases
   and failures. Acceptance criteria describe externally observable results;
