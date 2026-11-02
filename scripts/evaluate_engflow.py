@@ -109,6 +109,15 @@ def initialize_git_fixture(case, work):
     git_run(work, "init", "--quiet")
     git_run(work, "config", "user.name", "Engflow Evaluation")
     git_run(work, "config", "user.email", "engflow-evaluation@example.invalid")
+    git_run(work, "config", "commit.gpgsign", "false")
+
+    # Ignore ambient global excludes and hooks for deterministic local fixtures.
+    empty_excludes = work / ".git" / "info" / "global-excludes"
+    empty_excludes.write_text("")
+    git_run(work, "config", "core.excludesfile", str(empty_excludes))
+    hooks = work / ".git" / "eval-hooks"
+    hooks.mkdir()
+    git_run(work, "config", "core.hooksPath", str(hooks))
 
     # Copied Skill resources are tooling, not part of the code under review.
     exclude = work / ".git" / "info" / "exclude"

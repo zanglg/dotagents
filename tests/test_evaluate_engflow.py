@@ -8,6 +8,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.evaluate_engflow import (
     CASES, ROOT, case_skill_names, execute, git_state, git_state_changes,
@@ -108,6 +109,28 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(subprocess.check_output(
             ["git", "log", "-1", "--format=%s"], cwd=work, text=True
         ).strip(), "evaluation baseline")
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
+    def test_git_fixture_ignores_ambient_global_rules(self):
+        global_ignore = self.root / "global-ignore"
+        global_ignore.write_text("*.py\\n")
+        global_hooks = self.root / "global-hooks"
+        global_hooks.mkdir()
+        hook = global_hooks / "pre-commit"
+        hook.write_text("#!/bin/sh\\nexit 99\\n")
+        hook.chmod(0o755)
+        global_config = self.root / "global.gitconfig"
+        global_config.write_text(
+            f"[core]\\n\\texcludesfile = {global_ignore}\\n"
+            f"\\thooksPath = {global_hooks}\\n[commit]\\n\\tgpgsign = true\\n"
+        )
+        with patch.dict(os.environ, {"GIT_CONFIG_GLOBAL": str(global_config)}):
+            work = prepare(self.load_case("code-review-findings"), self.root / "isolated")
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            cwd=work, text=True
+        ).splitlines()), {"calculator.py"})
+        self.assertEqual(git_state(work)["status"], {"calculator.py": "??"})
 
     @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
     def test_implement_fixture_has_committed_baseline_and_final_diff(self):
