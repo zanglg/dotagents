@@ -124,7 +124,7 @@ Implement's delivery responsibility, not an optional follow-up stage. Read and a
 task. Do not invoke or load the standalone Code Review Skill entrypoint to borrow
 its method, and do not require a separate user invocation for implementation review.
 
-Every implementation receives at least an honest self-review. For significant,
+Unless the user or host explicitly restricts all review, every implementation receives at least an honest self-review. If review is restricted entirely, respect that limit and disclose that no review occurred; do not imply it ran. For significant,
 high-risk or broadly coupled changes, prefer a fresh-context independent reviewer
 when the host supports one and the additional review is proportionate. Give that
 reviewer the exact target/baseline, relevant requirements and constraints, without
