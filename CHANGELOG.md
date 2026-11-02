@@ -75,7 +75,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
   retaining the standalone review entrypoint. Define finding severity/confidence,
   independent-review preference for significant work, honest self-review fallback,
   and fix/re-review/validation closure. Add artifact self-check and Implement
-  review-lifecycle evaluation fixtures; no behavioral pass is claimed by fixture
+  standalone finding-quality and Implement review-lifecycle evaluation fixtures;
+  no behavioral pass is claimed by fixture
   preparation alone.
 - Keep Specify a complete specification entry point with ordinary clarification;
   position Clarify as optional deep exploration and reuse its settled conclusions.
