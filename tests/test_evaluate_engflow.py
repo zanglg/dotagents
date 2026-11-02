@@ -110,19 +110,23 @@ class EvidenceTests(unittest.TestCase):
             ["git", "log", "-1", "--format=%s"], cwd=work, text=True
         ).strip(), "evaluation baseline")
 
-    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
+    @unittest.skipUnless(os.name == "posix" and shutil.which("git"),
+                         "POSIX Git CLI required for hook isolation")
     def test_git_fixture_ignores_ambient_global_rules(self):
         global_ignore = self.root / "global-ignore"
-        global_ignore.write_text("*.py\\n")
+        global_ignore.write_text("*.py" + os.linesep)
         global_hooks = self.root / "global-hooks"
         global_hooks.mkdir()
         hook = global_hooks / "pre-commit"
-        hook.write_text("#!/bin/sh\\nexit 99\\n")
+        hook.write_text("#!/bin/sh" + os.linesep + "exit 99" + os.linesep)
         hook.chmod(0o755)
         global_config = self.root / "global.gitconfig"
         global_config.write_text(
-            f"[core]\\n\\texcludesfile = {global_ignore}\\n"
-            f"\\thooksPath = {global_hooks}\\n[commit]\\n\\tgpgsign = true\\n"
+            "[core]" + os.linesep
+            + f"    excludesfile = {global_ignore}" + os.linesep
+            + f"    hooksPath = {global_hooks}" + os.linesep
+            + "[commit]" + os.linesep
+            + "    gpgsign = true" + os.linesep
         )
         with patch.dict(os.environ, {"GIT_CONFIG_GLOBAL": str(global_config)}):
             work = prepare(self.load_case("code-review-findings"), self.root / "isolated")
