@@ -10,7 +10,8 @@ import unittest
 from pathlib import Path
 
 from scripts.evaluate_engflow import (
-    CASES, ROOT, case_skill_names, execute, git_state, inspect_events, phase_prompt,
+    CASES, ROOT, case_skill_names, execute, git_state, git_state_changes,
+    inspect_events, phase_prompt,
     prepare, snapshot,
 )
 
@@ -124,9 +125,27 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(after["head"], before["head"])
         self.assertEqual(after["staged"], [])
         self.assertEqual(after["status"], {"config_store.py": " M"})
+        changes = git_state_changes(before, after)
+        self.assertEqual(changes["status_paths"], ["config_store.py"])
+        self.assertFalse(changes["head_changed"])
+        self.assertFalse(changes["staged_changed"])
         self.assertEqual(subprocess.check_output(
             ["git", "diff", "--name-only"], cwd=work, text=True
         ).splitlines(), ["config_store.py"])
+
+        subprocess.run(["git", "add", "config_store.py"], cwd=work, check=True)
+        staged = git_state(work)
+        self.assertTrue(git_state_changes(after, staged)["staged_changed"])
+        subprocess.run(["git", "commit", "--quiet", "-m", "test-only commit"],
+                       cwd=work, check=True)
+        committed = git_state(work)
+        self.assertTrue(git_state_changes(staged, committed)["head_changed"])
+        subprocess.run(["git", "checkout", "-b", "test-only-branch"],
+                       cwd=work, check=True)
+        branched = git_state(work)
+        branch_changes = git_state_changes(committed, branched)
+        self.assertTrue(branch_changes["branch_changed"])
+        self.assertTrue(branch_changes["branches_changed"])
 
     def test_snapshot_excludes_git_metadata(self):
         metadata = self.root / ".git"
