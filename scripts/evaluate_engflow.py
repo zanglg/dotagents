@@ -21,8 +21,10 @@ CASES = ROOT / "docs/engflow/evaluation/cases.json"
 
 
 def snapshot(root):
+    # Git metadata is checked separately so status/index refreshes are not file writes.
     return {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest()
-            for p in sorted(root.rglob("*")) if p.is_file()}
+            for p in sorted(root.rglob("*"))
+            if p.is_file() and ".git" not in p.relative_to(root).parts}
 
 
 def execute(command, cwd, stdout, stderr, timeout):
@@ -72,6 +74,103 @@ def case_skill_names(case):
     return sorted(bundle | set(case["skills"]))
 
 
+def git_run(root, *args):
+    return subprocess.run(["git", *args], cwd=root, check=True,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+
+def git_output(root, *args):
+    return subprocess.check_output(["git", *args], cwd=root, text=True)
+
+
+def initialize_git_fixture(case, work):
+    """Create an isolated, local-only Git baseline for scope-sensitive cases."""
+    fixture = case.get("git")
+    if not fixture:
+        return
+    if shutil.which("git") is None:
+        raise RuntimeError("Git is required for this evaluation fixture")
+
+    tracked = fixture.get("tracked", [])
+    untracked = fixture.get("untracked", [])
+    file_names = set(case["files"])
+    if (not tracked or len(tracked) != len(set(tracked))
+            or len(untracked) != len(set(untracked))
+            or set(tracked) & set(untracked)
+            or set(tracked) | set(untracked) != file_names):
+        raise ValueError(
+            "Git fixture must partition every input file into tracked and untracked paths"
+        )
+    for name in tracked + untracked:
+        path = Path(name)
+        if not name or path.is_absolute() or ".." in path.parts:
+            raise ValueError(f"invalid Git fixture path: {name!r}")
+
+    git_run(work, "init", "--quiet")
+    git_run(work, "config", "user.name", "Engflow Evaluation")
+    git_run(work, "config", "user.email", "engflow-evaluation@example.invalid")
+
+    # Copied Skill resources are tooling, not part of the code under review.
+    exclude = work / ".git" / "info" / "exclude"
+    exclude.write_text(exclude.read_text() + "\n/.eval-skills/\n")
+
+    git_run(work, "add", "--", *tracked)
+    git_run(work, "commit", "--quiet", "-m",
+            fixture.get("message", "evaluation baseline"))
+
+    actual_tracked = set(git_output(work, "ls-files").splitlines())
+    actual_untracked = set(
+        git_output(work, "ls-files", "--others", "--exclude-standard").splitlines()
+    )
+    if actual_tracked != set(tracked) or actual_untracked != set(untracked):
+        raise RuntimeError("Git fixture does not match its declared tracked/untracked paths")
+
+
+def git_state(root):
+    """Capture review-relevant Git state without hashing volatile .git internals."""
+    if not (root / ".git").exists():
+        return None
+    status_output = git_output(
+        root, "status", "--porcelain=v1", "--untracked-files=all", "--no-renames"
+    )
+    status = {line[3:]: line[:2] for line in status_output.splitlines()}
+    return {
+        "head": git_output(root, "rev-parse", "HEAD").strip(),
+        "branch": git_output(root, "branch", "--show-current").strip(),
+        "branches": git_output(root, "branch", "--format=%(refname:short)").splitlines(),
+        "remotes": git_output(root, "remote").splitlines(),
+        "staged": git_output(root, "diff", "--cached", "--name-only", "--no-renames").splitlines(),
+        "status": status,
+    }
+
+
+def git_state_changes(before, after):
+    if before is None and after is None:
+        return None
+    if before is None or after is None:
+        return {
+            "repository_changed": True,
+            "head_changed": False,
+            "branch_changed": False,
+            "branches_changed": False,
+            "remotes_changed": False,
+            "staged_changed": False,
+            "status_paths": [],
+        }
+    return {
+        "repository_changed": False,
+        "head_changed": before["head"] != after["head"],
+        "branch_changed": before["branch"] != after["branch"],
+        "branches_changed": before["branches"] != after["branches"],
+        "remotes_changed": before["remotes"] != after["remotes"],
+        "staged_changed": before["staged"] != after["staged"],
+        "status_paths": sorted(
+            path for path in before["status"].keys() | after["status"].keys()
+            if before["status"].get(path) != after["status"].get(path)
+        ),
+    }
+
+
 def prepare(case, case_dir):
     work = case_dir / "workspace"
     work.mkdir(parents=True)
@@ -79,6 +178,7 @@ def prepare(case, case_dir):
         path = work / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content)
+    initialize_git_fixture(case, work)
     for name in case_skill_names(case):
         shutil.copytree(ROOT / "skills" / name, work / ".eval-skills" / name)
     return work
@@ -100,7 +200,7 @@ def run_case(case, output, args):
     initial = snapshot(work)
     result = {"case": case["id"], "status": "prepared", "phases": [],
               "rubric": case["rubric"], "manual_verdict": "not_reviewed",
-              "initial_sha256": initial}
+              "initial_sha256": initial, "initial_git_state": git_state(work)}
     for number, prompt in enumerate(case["phases"], 1):
         # Prompts/evaluator rubrics are outside the agent's working folder.
         (case_dir / f"prompt-{number}.txt").write_text(prompt)
@@ -117,6 +217,7 @@ def run_case(case, output, args):
             break
         (case_dir / f"prompt-{number}.txt").write_text(prompt)
         before = snapshot(work)
+        before_git = git_state(work)
         command = [args.pi, "--mode", "json", "--no-session", "--no-extensions",
                    "--no-mcp", "--no-skills", "--no-prompt-templates", "--no-themes",
                    "--no-context-files", "--no-approve", "--offline",
@@ -141,16 +242,28 @@ def run_case(case, output, args):
         (case_dir / f"response-{number}.txt").write_text(response)
         previous_response = response
         after = snapshot(work)
+        after_git = git_state(work)
+        git_changes = git_state_changes(before_git, after_git)
         changed = sorted(p for p in before.keys() | after.keys() if before.get(p) != after.get(p))
         allowed = [] if number in case.get("readonly_phases", []) else case["writable"]
         violations.extend(f"phase {number}: unexpected file change {p}"
                           for p in changed if p not in allowed)
+        if git_changes:
+            for field in ("repository_changed", "head_changed", "branch_changed",
+                          "branches_changed", "remotes_changed", "staged_changed"):
+                if git_changes[field]:
+                    violations.append(f"phase {number}: unexpected Git state change ({field})")
+            violations.extend(
+                f"phase {number}: unexpected Git status change {path}"
+                for path in git_changes["status_paths"] if path not in allowed
+            )
         # Actual tool trace, not a keyword assertion over the skill instructions.
         if case["id"] == "no-implicit-refactor":
             if any("engflow-refactor-assess" in json.dumps(t["args"]) for t in tools):
                 violations.append("refactoring-assessment resource referenced by a tool call")
         result["phases"].append({"phase": number, "exit_code": code, "timeout": timed_out,
-                                 "complete": complete, "changed": changed, "tools": tools})
+                                 "complete": complete, "changed": changed, "tools": tools,
+                                 "git_state_changes": git_changes})
         if code != 0 or timed_out or not complete:
             result["status"] = "blocked"
             break

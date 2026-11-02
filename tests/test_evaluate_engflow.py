@@ -2,13 +2,16 @@
 
 import json
 import os
+import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.evaluate_engflow import (
-    ROOT, case_skill_names, execute, inspect_events, phase_prompt, prepare, snapshot,
+    CASES, ROOT, case_skill_names, execute, git_state, inspect_events, phase_prompt,
+    prepare, snapshot,
 )
 
 
@@ -80,6 +83,60 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             phase_prompt(case, 2)
 
+    def load_case(self, case_id):
+        return next(case for case in json.loads(CASES.read_text())
+                    if case["id"] == case_id)
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
+    def test_code_review_fixture_has_committed_baseline_and_untracked_target(self):
+        work = prepare(self.load_case("code-review-findings"), self.root / "review")
+        state = git_state(work)
+        self.assertIsNotNone(state)
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "ls-files"], cwd=work, text=True
+        ).splitlines()), {"Spec.md", "test_calculator.py"})
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            cwd=work, text=True
+        ).splitlines()), {"calculator.py"})
+        self.assertEqual(state["status"], {"calculator.py": "??"})
+        self.assertEqual(state["staged"], [])
+        self.assertEqual(subprocess.check_output(
+            ["git", "remote"], cwd=work, text=True
+        ).strip(), "")
+        self.assertEqual(subprocess.check_output(
+            ["git", "log", "-1", "--format=%s"], cwd=work, text=True
+        ).strip(), "evaluation baseline")
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
+    def test_implement_fixture_has_committed_baseline_and_final_diff(self):
+        work = prepare(self.load_case("implement-review-lifecycle"), self.root / "implement")
+        before = git_state(work)
+        self.assertIsNotNone(before)
+        self.assertEqual(before["status"], {})
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "ls-files"], cwd=work, text=True
+        ).splitlines()), {"Spec.md", "config_store.py", "test_config_store.py"})
+
+        source = work / "config_store.py"
+        source.write_text(source.read_text() + "\n# final-diff probe\n")
+        after = git_state(work)
+        self.assertEqual(after["head"], before["head"])
+        self.assertEqual(after["staged"], [])
+        self.assertEqual(after["status"], {"config_store.py": " M"})
+        self.assertEqual(subprocess.check_output(
+            ["git", "diff", "--name-only"], cwd=work, text=True
+        ).splitlines(), ["config_store.py"])
+
+    def test_snapshot_excludes_git_metadata(self):
+        metadata = self.root / ".git"
+        metadata.mkdir()
+        (metadata / "index").write_text("volatile index")
+        (self.root / "source.py").write_text("content")
+        state = snapshot(self.root)
+        self.assertIn("source.py", state)
+        self.assertNotIn(".git/index", state)
+
     def test_single_entry_case_installs_complete_group_and_shared_methods(self):
         case = {"skills": ["engflow-plan"], "files": {"Spec.md": "Requirements"}}
         work = prepare(case, self.root / "case")
@@ -96,6 +153,7 @@ class EvidenceTests(unittest.TestCase):
             self.assertTrue((work / ".eval-skills" / relative).is_file())
         self.assertEqual((work / "Spec.md").read_text(), "Requirements")
         self.assertFalse((work / "Plan.md").exists())
+        self.assertFalse((work / ".git").exists())
 
     def test_requested_general_tool_is_not_bundled_by_default(self):
         names = case_skill_names({"skills": ["engflow-plan", "semver-bump"]})

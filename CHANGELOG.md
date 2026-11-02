@@ -78,6 +78,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
   standalone finding-quality and Implement review-lifecycle evaluation fixtures;
   no behavioral pass is claimed by fixture
   preparation alone.
+- Give the code-review fixtures real temporary Git baselines: keep support
+  files committed, preserve the review target as untracked, and expose final
+  Implement diffs. Clarify that review mode follows the actual author/reviewer
+  context, not the presence of an additional reviewer.
 - Keep Specify a complete specification entry point with ordinary clarification;
   position Clarify as optional deep exploration and reuse its settled conclusions.
   Describe parent/child feature references and readiness scoped to the current

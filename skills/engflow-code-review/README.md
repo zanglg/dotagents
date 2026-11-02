@@ -25,6 +25,13 @@ mode and coverage limits. The [shared review method](references/review-core.md)
 defines evidence thresholds and finding quality. No report artifact is required;
 findings do not authorize fixes, publication or merge.
 
+Review mode follows the actual relationship between the authoring and reviewing
+contexts, not whether an additional reviewer was spawned. If the reviewer is
+assessing work they authored in the same context, disclose self-review. A reviewer
+in a separate context can provide independent review when distinct from the
+authoring context; do not infer self-review merely because no additional reviewer
+was available.
+
 ## Installation and collaboration
 
 Install all sibling `engflow-*` folders together in the host's skill directory,
@@ -56,7 +63,9 @@ prepared scenarios, not behavioral passes until run and inspected on a real host
 | Unsupported concern, cosmetic preference or no findings | No manufactured defect or unsupported correctness claim |
 | Severity/confidence | Separate impact from evidence strength; low-confidence concerns stay out of established findings |
 | Verification would mutate state | Inspect existing evidence; recommend missing checks to the implementer without running them |
-| No fresh reviewer | Disclose self-review; never claim independent review |
+| Same-context author review | Disclose self-review; do not claim independence |
+| Separate reviewer context | Can be independent when distinct from the authoring context; no second reviewer is required |
+| No additional reviewer | Does not determine review mode by itself; disclose the actual author/reviewer context relationship |
 | PR review request | No comments, approvals, merge or code edits |
 
 Static checks validate packaging and documented scope mechanics, not agent judgment
