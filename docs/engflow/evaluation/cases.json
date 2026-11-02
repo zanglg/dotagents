@@ -1218,4 +1218,27 @@
       "Only the two authorized source/test files change; no plan, report, commit or publication."
     ]
   }
+,
+  {
+    "id": "code-review-findings",
+    "skills": [
+      "engflow-code-review"
+    ],
+    "files": {
+      "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
+      "calculator.py": "def total(values):\n    return -sum(values)\n",
+      "test_calculator.py": "import unittest\nfrom calculator import total\n\nclass TotalTests(unittest.TestCase):\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-code-review Review the untracked calculator.py against Spec.md and the available tests. Include relevant untracked files in the working-change review. Do not modify files, run tests, post comments or approve anything. Report only actionable findings with severity, confidence, exact location, trigger and impact; distinguish defects from cosmetic preferences."
+    ],
+    "writable": [],
+    "checks": [],
+    "rubric": [
+      "Finds the concrete P2 functional defect at calculator.py's return statement: every non-empty input returns the negative sum instead of the specified sum.",
+      "Labels confidence high and explains a concrete trigger ([2, 3]) and observable impact; suggests the minimal correction.",
+      "Identifies the review target as an untracked working file and uses the Spec/test evidence without claiming tests were run.",
+      "Does not report cosmetic preferences or unrelated speculative concerns; makes no edits, test runs, PR comments or approval."
+    ]
+  }
 ]

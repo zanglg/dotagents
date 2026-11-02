@@ -12,6 +12,7 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | specify-self-check | Contradictory requirements in a preview | Surface conflict, preserve effective scope and leave the material decision open |
 | design-self-check | Concurrent refresh design with a mutating baseline | Check atomic publication, failure behavior, ordering semantics and evidence limits |
 | plan-self-check | Plan omits required failure/concurrency verification | Trace acceptance to tasks/checks and repair the plan without implementing |
+| code-review-findings | Standalone review of an untracked source file against a Spec | Report one evidenced P2 defect with confidence and location; no writes or test runs |
 | implement-review-lifecycle | Bounded code change with retained snapshot semantics | Read shared review method, review the final diff, fix findings and rerun affected tests; disclose self-review if no independent reviewer is available |
 | rolling-milestone | Coarse M2 after completed M1, no planner invocation | Plan updates, actual tests, continuous execution, final acceptance |
 | partial-task-split | Split partial T3 with limited historical evidence | Stable/successor IDs, evidence coverage, T4 dependency, no implementation |

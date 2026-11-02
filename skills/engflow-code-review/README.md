@@ -18,8 +18,9 @@ not design review, whole-repository refactoring assessment or automatic repair.
 ## Inputs and outputs
 
 Specify the target and baseline: working changes, index, commit, branch or PR.
-Provide relevant requirements and existing test evidence when available. Output is conversational findings with P0-P3 severity, confidence, precise
-location, trigger, impact and correction or verification direction, plus review
+Provide relevant requirements and existing test evidence when available. Output
+is conversational findings with P0-P3 severity, confidence, precise location,
+trigger, impact and correction or verification direction, plus review
 mode and coverage limits. The [shared review method](references/review-core.md)
 defines evidence thresholds and finding quality. No report artifact is required;
 findings do not authorize fixes, publication or merge.
