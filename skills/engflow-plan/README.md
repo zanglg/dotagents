@@ -58,6 +58,11 @@ Keep simple tasks inline; explicitly use Tasks only when separate maintenance
 adds value. Tasks migration needs authority for both artifacts and one live state
 source. Plan-only work does not authorize implementation or automatic stage changes.
 
+Plan's author self-check traces current acceptance through the technical approach,
+milestones/tasks and observable checks; it also checks dependency order, near-term
+readiness and integrated acceptance. Planned checks are not reported as executed.
+This is not a separate review Skill or independent approval.
+
 ## Validation and references
 
 These are expectations, not test results by themselves. In this repository, see

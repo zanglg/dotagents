@@ -83,10 +83,19 @@ Adapt [the outline](assets/spec.md), omitting unneeded sections and stating non-
 
 ## Self-check and revision
 
-Before delivery, check completeness within the stated scope, consistency, material
-edge cases, measurable acceptance and traceability to decisions or evidence. Resolve
-supported issues and report important unknowns. This is author self-check, not an
-independent review or approval.
+Before delivery, perform a proportionate author self-check against the effective
+requirements and source evidence:
+- Trace every material in-scope requirement to observable behavior and acceptance;
+  identify requirements with no acceptance or validation boundary.
+- Check scope, non-goals, constraints, stable IDs and deferred work remain distinct
+  from current acceptance; preserve the effective decision when a change is only
+  proposed.
+- Check material success, failure and edge cases, and ensure acceptance is
+  testable at an appropriate external interface or system boundary.
+- Find contradictions, duplicated or ambiguous requirements, unsupported claims
+  and acceptance that assumes an unapproved technical choice.
+Resolve supported issues; surface material conflicts and missing decisions rather
+than inventing intent. This is author self-check, not independent review or approval.
 
 Keep requirement certainty separate from delivery scope. Confirmed deferred work
 may remain in the Spec with its reason or supplied revisit condition, but is not

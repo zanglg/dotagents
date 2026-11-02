@@ -1,75 +1,66 @@
 ---
 name: engflow-code-review
 description: >
-  Review code changes for correctness, requirement coverage, regressions and
-  validation gaps. Use on explicit review request or as read-only support within
-  an explicitly requested implementation task. No Spec or tracker is required.
+  Independently review code changes for correctness, requirement coverage,
+  regressions and validation gaps. Use on explicit review request. No Spec or
+  tracker is required; Implement consumes the shared review method directly.
 disable-model-invocation: true
 ---
 
 # Engflow Code Review
 
-Find actionable problems in the requested change. Return evidence-backed findings
-in conversation, not a patch, broad refactoring agenda or approval to merge.
+Provide a standalone, read-only assessment of the requested code change. Return
+evidence-backed findings in conversation, not a patch, broad refactoring agenda
+or approval to merge. This entrypoint is for everyday working-tree, staged,
+commit, branch and PR reviews independent of who produced the code.
 
-## Scope and evidence
+## Review procedure
 
-Establish the requested target, baseline and actual source state. Follow
-[scope guidance](references/scope.md) to distinguish working files, staged content,
-commits and branch/PR comparisons. Ask only when ambiguity materially changes
-coverage; do not silently omit relevant untracked files or substitute the checkout
-for a different target revision.
+Establish the exact requested target, baseline and actual source state. Follow
+[Git scope guidance](references/scope.md) to distinguish working files, staged
+content, commits and branch/PR comparisons. Ask only when ambiguity materially
+changes coverage; do not silently omit relevant untracked files or substitute
+the checkout for a different target revision.
 
-Read the diff and enough surrounding code, consumers and tests to establish impact.
-Use project rules and available requirements; a Spec or tracker is not mandatory.
-Missing requirements limit coverage, not all review. Record source/access limits
-and recheck material changes before reporting; stale review is not current approval.
+Read and apply the [shared review contract](references/review-core.md) for review
+priorities, evidence thresholds, severity/confidence, counterevidence, reviewer
+independence and finding format. Inspect the diff and enough surrounding code,
+consumers, project rules, requirements and existing test evidence to establish
+impact. A Spec or tracker is not mandatory; missing artifacts limit coverage but
+do not block an otherwise useful review.
 
-Prioritize correctness, requirement gaps, failure handling, resource/concurrency
-hazards, compatibility, security and consequential performance regressions.
-Check whether validation exercises the claimed behavior and important edge cases.
+Use fresh-context read-only reviewers when supported and proportionate. Brief
+them neutrally with the target, baseline, requirements, source pointers and
+constraints, not the author's preferred conclusion. Verify consequential returns
+against the actual source and seek counterevidence. Otherwise review directly and
+disclose self-review when assessing work authored in the same context.
 
-A finding needs a concrete trigger or violated contract, applicable evidence and
-meaningful impact. Seek counterevidence. Distinguish introduced/exposed defects
-from relevant pre-existing issues, labeling provenance. Code smells are cues, not
-automatic bugs; omit cosmetic preferences, speculative abstractions and redundant
-lint output without material consequence. Honor a requested narrow focus.
+## Findings and limits
 
-## Workflow independence
+Report actionable findings with severity, confidence, precise path/line or diff
+location, trigger, impact and a minimal correction or verification direction.
+Rank by impact and consolidate duplicate causes. Separate established findings
+from material open questions and relevant pre-existing issues. Include the review
+scope, actual checks, coverage limits and whether review was independent or
+self-review. The absence of substantiated findings is not proof of correctness,
+successful tests or security, and does not approve a merge.
+
+## Workflow independence and authority
 
 Review suitable changes regardless of which tools or Skills produced them. When
 available, use effective Spec, Design and Plan material to check implementation
-coverage and justified deviations. Missing artifacts are a coverage limit, not a
-reason to demand the whole Engflow workflow. An ambiguous requirement is an open
-question, not permission to invent the intended behavior. This Skill assesses code
-and its compliance; it does not replace review of whether the requirements or
-technical proposal themselves are sound.
+coverage and justified deviations. An ambiguous requirement is an open question,
+not permission to invent intended behavior. This Skill assesses code and its
+compliance; it does not replace review of whether requirements or the technical
+proposal themselves are sound.
 
-## Findings
-
-For each actionable finding, provide severity, a precise path/line or diff location,
-the triggering conditions and impact, and a minimal correction or verification
-direction. Rank by impact and consolidate duplicate causes.
-
-Separate established findings from material open questions. Include review scope,
-actual checks, coverage limits and whether review was independent or self-review.
-The absence of substantiated findings is not proof of correctness, successful tests
-or security, and does not approve a merge.
-
-## Independence and authority
-
-Use fresh-context read-only reviewers when supported and useful. Brief them with
-scope, requirements, source pointers and constraints, not the author's preferred
-conclusion. Helpers do not write, run mutating checks or delegate further. Verify
-consequential returns. Otherwise review directly and disclose self-review when
-assessing work authored in the same context.
-
-Within explicit implementation tasks, honor host invocation settings; request
-separate invocation when required or let the implementer self-review without
-claiming this Skill ran. Other workflow references alone do not invoke review.
+Within an explicitly requested implementation task, Implement reads the shared
+review method directly and owns the review/fix/validation lifecycle. That method
+reuse does not invoke this Skill entrypoint. Other workflow references alone do
+not invoke review.
 
 All reviewers remain read-only. Inspect files and existing results; do not run
 mutating builds/tests/experiments, install dependencies, write reports or source,
-commit, switch branches, manage worktrees or publish comments/approvals.
-Recommend missing verification to the authorized implementer. Fixes or publication
-are separate operations requiring their own authority.
+commit, switch branches, manage worktrees or publish comments/approvals. Recommend
+missing verification to the authorized implementer. Fixes or publication require
+their own authority.

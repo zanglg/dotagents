@@ -51,6 +51,11 @@ reopening settled questions. Ordinary gaps can be handled here without Clarify.
 Design and Plan can consume the resulting Spec without a mandatory stage sequence.
 Saving requirements does not authorize implementation or approve a technical route.
 
+Specify's author self-check verifies requirement-to-acceptance traceability,
+observable validation boundaries, scope/deferred-work consistency, material edge
+cases and unresolved contradictions. This is not a separate review Skill or
+independent approval.
+
 ## Validation and references
 
 Check preview/no-write behavior, stable IDs, acceptance traceability and preservation

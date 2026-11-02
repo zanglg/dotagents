@@ -9,6 +9,10 @@ of general reliability, security, performance or every Engflow skill's behavior.
 
 | Case | Exercise | Inspect beyond the final answer |
 | --- | --- | --- |
+| specify-self-check | Contradictory requirements in a preview | Surface conflict, preserve effective scope and leave the material decision open |
+| design-self-check | Concurrent refresh design with a mutating baseline | Check atomic publication, failure behavior, ordering semantics and evidence limits |
+| plan-self-check | Plan omits required failure/concurrency verification | Trace acceptance to tasks/checks and repair the plan without implementing |
+| implement-review-lifecycle | Bounded code change with retained snapshot semantics | Read shared review method, review the final diff, fix findings and rerun affected tests; disclose self-review if no independent reviewer is available |
 | rolling-milestone | Coarse M2 after completed M1, no planner invocation | Plan updates, actual tests, continuous execution, final acceptance |
 | partial-task-split | Split partial T3 with limited historical evidence | Stable/successor IDs, evidence coverage, T4 dependency, no implementation |
 | stale-design-resume | Accepted D2 conflicts with old Design | Preserve accepted behavior; pending sync and authority remain explicit |
@@ -40,6 +44,11 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | implement-shared-evidence | Implement reads research/experiment methods | Caller-owned fix and tests, only owning Plan evidence, no Research/PoC entrypoint |
 | investigation-pending-gate | Experiment method present but approval pending | Read method and source only; no probes/tests, writes or inferred approval |
 | handoff-runtime-transfer | Two fresh sessions, outstanding synthetic operation | Runtime context survives via files only; no replay or invented liveness |
+
+The artifact self-check cases exercise Specify, Design and Plan without introducing
+separate review entrypoints. The Implement review case checks the embedded delivery
+responsibility and shared-method reuse; it does not require invoking the standalone
+Code Review Skill. These fixtures are not behavioral passes until run on a real host.
 
 Each case contains input files, prompts, permitted writes, optional executable
 acceptance checks and a manual rubric. Its `skills` field names requested entrypoints

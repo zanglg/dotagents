@@ -4,7 +4,8 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Deliver code through implementation, tests and review, with cross-session recovery.
+Deliver code through implementation, tests, review and final integrated verification,
+with cross-session recovery. Review is part of delivery, not an optional follow-up.
 Small tasks need no plan; large tasks use one living record. This is not a ticket
 system or an unattended runtime scheduler.
 
@@ -48,8 +49,13 @@ Loading a method grants no report writes, access expansion or experiment permiss
 reuse sufficient execution authority and obtain only missing scope. Private facts
 need precise questions, not guesses.
 
-Keep mutating probes in the current agent, helpers read-only. Use Code Review only
-through permitted host composition, or disclose self-review. Handoff is explicit-only
+Keep mutating probes in the current agent, helpers read-only. Read the shared
+[code-review method](../engflow-code-review/references/review-core.md) and
+[Git scope guidance](../engflow-code-review/references/scope.md) directly; do not
+invoke the standalone Code Review Skill. Perform at least self-review for each
+meaningful change. Prefer a fresh-context independent reviewer for significant or
+high-risk work when supported and proportionate; otherwise disclose self-review.
+Fix substantiated findings and rerun affected checks. Handoff is explicit-only
 and optional for resumption. A report or passing check alone does not close pending
 source synchronization.
 
@@ -68,7 +74,9 @@ the tested subset, failures/retries and limits.
 | Next milestone already executable without tasks | Execute against its acceptance; do not force a task layer |
 | Expanding M2 requires a changed interface or cross-milestone dependency | Surface the consequential planning/design change; await applicable agreement for affected work, not unrelated ready work |
 | Task structure changes after partial delivery | Preserve IDs, successor references, valid results and evidence |
-| Read-only review unavailable | Self-review and disclose limits; do not claim the review Skill ran |
+| Ordinary bounded change | Perform honest self-review; no forced helper or Skill invocation |
+| Significant/high-risk change | Prefer fresh-context independent review when supported and proportionate |
+| Independent reviewer unavailable/restricted | Self-review and disclose the limitation; never claim independence |
 | No approved record destination or notes forbidden | Respect write authority and disclose recovery limits |
 | Pending approval, status-only or plan-only request | No unauthorized implementation or record writes |
 | Reorder or stop during partial work | Preserve work, check dependencies/commands and record the next action |
@@ -77,6 +85,8 @@ the tested subset, failures/retries and limits.
 | Missing validation or failed integration | Report partial/blocked work, not completion |
 | Accepted change leaves Design stale | Record affected path, approval evidence and next sync action; update only within authority |
 | Resume with pending source updates | Reconcile effective decisions; distinguish documentation lag from decision blockers |
+| Finding fixed during review | Re-review the changed source and rerun affected validation |
+| Review finds an acceptance/approved-decision conflict | Pause affected work for the required user decision; do not weaken intent |
 | Helper/reviewer unavailable | Direct execution/self-review; no invented independence |
 | Commit, publication or handoff not authorized | Do not perform them automatically |
 

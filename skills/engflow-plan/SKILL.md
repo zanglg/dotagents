@@ -213,14 +213,22 @@ recovery of inaccessible artifacts. Full execution recovery belongs to implement
 
 ## Self-check
 
-Before delivering a new or materially revised plan, check requirement coverage,
-technical consistency, meaningful outcomes, clear task completion conditions,
-feasible dependencies, critical assumptions, near-term readiness and final
-integrated acceptance. Trace material requirements through the technical approach,
-affected tasks (if used) and validation; expose gaps without requiring a new matrix. Remove
-duplicate work, unnecessary dependencies, over-splitting and speculative detail.
+Before delivering a new or materially revised plan, perform a proportionate author
+self-check:
+- Trace each material current acceptance criterion through the technical approach,
+  milestone/task outcomes and an observable verification method; expose uncovered
+  requirements without requiring a separate traceability matrix.
+- Check milestone/task deliverables and completion conditions are meaningful,
+  dependencies are feasible and ordered, and no task silently changes scope,
+  approved contracts or acceptance.
+- Ensure near-term work is executable, later work stays appropriately coarse, and
+  final integrated acceptance covers interactions and regressions across tasks.
+- Check planned tests cover material success, failure and boundary behavior; do not
+  present planned checks as executed evidence.
+- Remove duplicate work, unjustified dependencies, over-splitting and speculative
+  implementation detail. Confirm referenced authority sources and task ownership.
 Fix supported problems; report unresolved gaps and blocked scope. This is author
-self-check, not a claim of independent review or human approval.
+self-check, not independent review or human approval.
 
 ## Output and authority
 

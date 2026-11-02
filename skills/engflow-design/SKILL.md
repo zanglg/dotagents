@@ -75,11 +75,21 @@ instructions and outstanding experiment state; missing context remains a limitat
 
 ## Self-check and document scope
 
-Before delivery, check that the approach satisfies effective requirements, explains
-consequential tradeoffs, defines necessary interfaces and invariants, and has an
-adequate basis for verification. Seek counterevidence for critical assumptions;
-keep unsupported premises conditional. This is author self-check, not independent
-review or approval. Research supplies evidence; it does not approve the design.
+Before delivery, perform a proportionate author self-check against effective
+requirements, actual architecture and available evidence:
+- Trace the chosen mechanism to the required behavior; check that interfaces,
+  ownership, data/control flow and invariants are coherent.
+- Cover material lifecycle and failure behavior, including retries, rollback,
+  concurrency, compatibility, security, resource and operational concerns where
+  relevant to the design.
+- Check consequential alternatives and tradeoffs are explained, assumptions have
+  evidence or remain conditional, and no hidden dependency or unsupported premise
+  is presented as established.
+- Ensure the verification basis exercises important success, failure and boundary
+  behavior, not merely the proposed implementation shape.
+Resolve supported gaps; surface missing private facts or consequential decisions
+rather than guessing. This is author self-check, not independent review or approval.
+Research supplies evidence; it does not approve the design.
 
 Reuse a suitable design for the current independently evolving objective. Use
 feature detail for this delivery and reference shared architecture and constraints.
