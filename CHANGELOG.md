@@ -69,6 +69,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Extend Engflow's Git-backed evaluation guard to detect refs/tags, linked
+  worktree registrations and local repository configuration changes. Add
+  regression checks for each metadata mutation and stable read-only inspection.
 - Make Specify, Design and Plan self-checks artifact-specific and proportionate;
   do not add separate artifact-review Skills. Make Code Review a first-class
   responsibility in Implement through a shared read-only review method while

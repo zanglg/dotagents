@@ -167,12 +167,67 @@ class EvidenceTests(unittest.TestCase):
                        cwd=work, check=True)
         committed = git_state(work)
         self.assertTrue(git_state_changes(staged, committed)["head_changed"])
+        self.assertTrue(git_state_changes(staged, committed)["refs_changed"])
         subprocess.run(["git", "checkout", "-b", "test-only-branch"],
                        cwd=work, check=True)
         branched = git_state(work)
         branch_changes = git_state_changes(committed, branched)
         self.assertTrue(branch_changes["branch_changed"])
         self.assertTrue(branch_changes["branches_changed"])
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
+    def test_git_state_is_stable_for_read_only_inspection(self):
+        work = prepare(self.load_case("code-review-findings"), self.root / "stable")
+        before = git_state(work)
+        subprocess.run(["git", "status", "--short"], cwd=work, check=True,
+                       stdout=subprocess.PIPE)
+        subprocess.run(["git", "diff", "--check"], cwd=work, check=True,
+                       stdout=subprocess.PIPE)
+        changes = git_state_changes(before, git_state(work))
+        self.assertFalse(any(changes[field] for field in (
+            "repository_changed", "head_changed", "branch_changed",
+            "branches_changed", "remotes_changed", "staged_changed",
+            "refs_changed", "worktrees_changed", "config_changed",
+        )))
+        self.assertEqual(changes["status_paths"], [])
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
+    def test_git_state_detects_tags_and_other_refs(self):
+        work = prepare(self.load_case("code-review-findings"), self.root / "refs")
+        before = git_state(work)
+        subprocess.run(["git", "tag", "review-probe"], cwd=work, check=True)
+        tagged = git_state(work)
+        self.assertTrue(git_state_changes(before, tagged)["refs_changed"])
+        self.assertEqual(before["head"], tagged["head"])
+        subprocess.run(["git", "update-ref", "refs/notes/review-probe", before["head"]],
+                       cwd=work, check=True)
+        updated = git_state(work)
+        self.assertTrue(git_state_changes(tagged, updated)["refs_changed"])
+        self.assertFalse(git_state_changes(tagged, updated)["head_changed"])
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
+    def test_git_state_detects_worktree_registration(self):
+        work = prepare(self.load_case("implement-review-lifecycle"), self.root / "worktrees")
+        before = git_state(work)
+        linked = self.root / "additional-worktree"
+        subprocess.run(["git", "worktree", "add", "--detach", str(linked),
+                        before["head"]], cwd=work, check=True,
+                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        changes = git_state_changes(before, git_state(work))
+        self.assertTrue(changes["worktrees_changed"])
+        self.assertFalse(changes["head_changed"])
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
+    def test_git_state_detects_local_config_changes(self):
+        work = prepare(self.load_case("implement-review-lifecycle"), self.root / "config")
+        before = git_state(work)
+        subprocess.run(["git", "config", "--local", "review.fixture", "changed"],
+                       cwd=work, check=True)
+        after = git_state(work)
+        changes = git_state_changes(before, after)
+        self.assertTrue(changes["config_changed"])
+        self.assertFalse(changes["refs_changed"])
+        self.assertNotIn("review.fixture", str(after))
 
     def test_snapshot_excludes_git_metadata(self):
         metadata = self.root / ".git"

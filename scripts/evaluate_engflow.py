@@ -150,6 +150,13 @@ def git_state(root):
         "remotes": git_output(root, "remote").splitlines(),
         "staged": git_output(root, "diff", "--cached", "--name-only", "--no-renames").splitlines(),
         "status": status,
+        "refs": git_output(root, "for-each-ref", "--sort=refname",
+                           "--format=%(refname) %(objectname)", "refs/").splitlines(),
+        # Hash path-bearing worktree metadata and local config without exposing values.
+        "worktrees_sha256": hashlib.sha256(
+            git_output(root, "worktree", "list", "--porcelain").encode()
+        ).hexdigest(),
+        "config_sha256": hashlib.sha256((root / ".git" / "config").read_bytes()).hexdigest(),
     }
 
 
@@ -164,6 +171,9 @@ def git_state_changes(before, after):
             "branches_changed": False,
             "remotes_changed": False,
             "staged_changed": False,
+            "refs_changed": False,
+            "worktrees_changed": False,
+            "config_changed": False,
             "status_paths": [],
         }
     return {
@@ -173,6 +183,9 @@ def git_state_changes(before, after):
         "branches_changed": before["branches"] != after["branches"],
         "remotes_changed": before["remotes"] != after["remotes"],
         "staged_changed": before["staged"] != after["staged"],
+        "refs_changed": before["refs"] != after["refs"],
+        "worktrees_changed": before["worktrees_sha256"] != after["worktrees_sha256"],
+        "config_changed": before["config_sha256"] != after["config_sha256"],
         "status_paths": sorted(
             path for path in before["status"].keys() | after["status"].keys()
             if before["status"].get(path) != after["status"].get(path)
@@ -259,7 +272,8 @@ def run_case(case, output, args):
                           for p in changed if p not in allowed)
         if git_changes:
             for field in ("repository_changed", "head_changed", "branch_changed",
-                          "branches_changed", "remotes_changed", "staged_changed"):
+                          "branches_changed", "remotes_changed", "staged_changed",
+                          "refs_changed", "worktrees_changed", "config_changed"):
                 if git_changes[field]:
                     violations.append(f"phase {number}: unexpected Git state change ({field})")
             violations.extend(
