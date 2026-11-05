@@ -79,8 +79,8 @@ without searching the whole workspace.
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
 | [engflow-plan](skills/engflow-plan/README.md) | Connect requirements to technical approaches, milestone routes and validation; no implementation or ticket publishing |
 | [engflow-tasks](skills/engflow-tasks/README.md) | Decompose a plan into feature tasks.md with stable IDs, dependencies, source constraints and checks |
-| [engflow-implement](skills/engflow-implement/README.md) | Code, tests and review; linear milestones and cross-session recovery from one execution record |
-| [engflow-code-review](skills/engflow-code-review/README.md) | Read-only, evidence-backed review of working changes, commits, branches or PRs |
+| [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
+| [engflow-code-review](skills/engflow-code-review/README.md) | Standalone read-only review of working changes, commits, branches or PRs; shares its review method with Implement |
 | [engflow-design](skills/engflow-design/README.md) | Technical design independently or within Plan; user participation for consequential decisions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |

@@ -4,7 +4,9 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Review code changes read-only for concrete defects and validation gaps. This is
+Review code changes read-only for concrete defects and validation gaps. Use this
+standalone entrypoint for everyday reviews of working changes, staged content,
+commits, branches and PRs, regardless of which agent produced the code. This is
 not design review, whole-repository refactoring assessment or automatic repair.
 
 ## Examples
@@ -17,9 +19,18 @@ not design review, whole-repository refactoring assessment or automatic repair.
 
 Specify the target and baseline: working changes, index, commit, branch or PR.
 Provide relevant requirements and existing test evidence when available. Output
-is conversational findings with severity, location, impact and correction or
-verification direction, plus coverage limits. No report artifact is required;
+is conversational findings with P0-P3 severity, confidence, precise location,
+trigger, impact and correction or verification direction, plus review
+mode and coverage limits. The [shared review method](references/review-core.md)
+defines evidence thresholds and finding quality. No report artifact is required;
 findings do not authorize fixes, publication or merge.
+
+Review mode follows the actual relationship between the authoring and reviewing
+contexts, not whether an additional reviewer was spawned. If the reviewer is
+assessing work they authored in the same context, disclose self-review. A reviewer
+in a separate context can provide independent review when distinct from the
+authoring context; do not infer self-review merely because no additional reviewer
+was available.
 
 ## Installation and collaboration
 
@@ -28,16 +39,18 @@ such as `.agents/skills/`, preserving their relative layout and supporting files
 Each entrypoint remains independently usable; no prior stage invocation is required.
 Invoke this entrypoint explicitly through the host's supported mechanism.
 
-Explicit implementation tasks
-can use scoped read-only review through supported composition; hosts may require
-separate invocation. `engflow-refactor-assess` serves a different question: whether
-existing code warrants structural improvement.
+Implement reads [the shared review method](references/review-core.md) and
+[Git scope guidance](references/scope.md) directly as part of its delivery loop;
+it does not invoke this standalone Skill entrypoint or require a second invocation.
+`engflow-refactor-assess` serves a different question: whether existing code
+warrants structural improvement.
 
 ## Validation and references
 
 These are expectations, not claimed behavioral results. The repository's
-[recorded evaluations](../../docs/engflow/evaluation/results.md) do not directly
-evaluate this Skill; use the scenarios below to check your host.
+[behavioral evaluation suite](../../docs/engflow/evaluation/README.md) now includes
+standalone finding-quality and Implement review-lifecycle fixtures. These are
+prepared scenarios, not behavioral passes until run and inspected on a real host.
 
 | Scenario | Expected boundary |
 | --- | --- |
@@ -48,9 +61,13 @@ evaluate this Skill; use the scenarios below to check your host.
 | Ambiguous merge parent or inaccessible target | Clarify material ambiguity or disclose missing evidence |
 | Changing source or old test results | Recheck or narrow claims to the inspected state |
 | Unsupported concern, cosmetic preference or no findings | No manufactured defect or unsupported correctness claim |
-| Verification would mutate state | Recommend it to the implementer; do not run it under review authority |
-| No fresh reviewer | Disclose self-review where applicable |
+| Severity/confidence | Separate impact from evidence strength; low-confidence concerns stay out of established findings |
+| Verification would mutate state | Inspect existing evidence; recommend missing checks to the implementer without running them |
+| Same-context author review | Disclose self-review; do not claim independence |
+| Separate reviewer context | Can be independent when distinct from the authoring context; no second reviewer is required |
+| No additional reviewer | Does not determine review mode by itself; disclose the actual author/reviewer context relationship |
 | PR review request | No comments, approvals, merge or code edits |
 
 Static checks validate packaging and documented scope mechanics, not agent judgment
-or host enforcement. See [scope guidance](references/scope.md).
+or host enforcement. See [scope guidance](references/scope.md) and the shared
+[review method](references/review-core.md).

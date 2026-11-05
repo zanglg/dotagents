@@ -117,12 +117,32 @@ linear sequence. Refine local steps against actual code and preserve task delive
 and binding interfaces. Use test-first development when useful; verify behavior and
 contracts rather than incidental internals. Run focused checks as changes accumulate.
 
-Review meaningful increments and the combined result for correctness, scope,
-regressions and validation coverage. An explicitly requested implementation task
-includes read-only code review within its scope unless restricted. Use `engflow-code-review`
-or fresh-context reviewers through supported host composition when available;
-otherwise self-review and disclose it. Do not bypass invocation restrictions or
-claim independent review. Fix substantiated findings and rerun affected checks.
+Review meaningful increments and the final integrated change; review is part of
+Implement's delivery responsibility, not an optional follow-up stage. Read and apply
+[the shared review method](../engflow-code-review/references/review-core.md) and
+[Git scope guidance](../engflow-code-review/references/scope.md) directly within this
+task. Do not invoke or load the standalone Code Review Skill entrypoint to borrow
+its method, and do not require a separate user invocation for implementation review.
+
+Unless the user or host explicitly restricts all review, every implementation
+receives at least an honest self-review. If review is restricted entirely, respect
+that limit and disclose that no review occurred; do not imply it ran. For significant,
+high-risk or broadly coupled changes, prefer a fresh-context independent reviewer
+when the host supports one and the additional review is proportionate. Give that
+reviewer the exact target/baseline, relevant requirements and constraints, without
+leading it toward the author's preferred conclusion. Review helpers remain
+read-only, do not run mutating checks or delegate further; pause edits while they
+inspect. Verify consequential returns against the actual source and counterevidence.
+If independent review is unavailable, unsupported, disproportionate or restricted,
+self-review and disclose that limitation; never imply an independent review ran.
+
+Fix substantiated findings within the existing implementation authority, then
+rerun affected tests/checks and re-review material edits against the updated source.
+Do not silently change requirements, approved decisions or scope to make a finding
+disappear; surface consequential changes for the applicable decision. Distinguish
+established defects from open questions and pre-existing issues. Record the reviewed
+scope, review mode, findings/fixes, actual rerun evidence and remaining limits in
+the execution record, or in the delivery response when no record is writable.
 
 Separate implemented, verified, partial and blocked work. Record observed checks
 and evidence, including pre-existing failures. A milestone is complete only when
@@ -162,6 +182,8 @@ alternative.
 The current agent is the only writer. Optional helpers investigate or review
 read-only, do not run mutating checks or delegate further, and return evidence
 for verification. Pause edits during review; work directly if helpers are unavailable.
+The shared review method does not invoke the standalone Code Review entrypoint or
+transfer its output/write authority.
 
 Task-scoped implementation and tests are in scope. Expanded, privileged, destructive
 or external effects require applicable authorization. Other Skills retain their own

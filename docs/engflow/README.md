@@ -205,13 +205,29 @@ fixes may go directly to implementation without saved documents.
 
 ## Checks and review
 
-Specify, Design, Plan and Tasks perform author self-checks for their own deliverables.
-Implement reviews meaningful increments and the combined result, fixes supported
-findings and reruns affected validation. Code Review is general-purpose: it checks
-correctness, compliance, regressions and evidence gaps without requiring a Spec.
-Independent reviewers are useful where supported; otherwise disclose self-review.
-Do not describe testing, author checks, independent review and human approval as
-interchangeable. No separate Spec/Design/Plan Review Skill is required by this set.
+Specify, Design, Plan and Tasks perform proportionate author self-checks for their
+own deliverables; no separate Spec Review, Design Review or Plan Review Skill is
+needed. Specify checks requirement/acceptance traceability, scope, contradictions
+and observable boundaries. Design checks requirement fit, interfaces/invariants,
+tradeoffs, relevant failure modes and evidence. Plan traces acceptance through
+deliverables, dependencies and verification, including final integrated coverage.
+These checks are part of producing the artifact, not independent approval.
+
+Implement owns code review as part of its delivery lifecycle: inspect meaningful
+increments and the final integrated change, fix substantiated findings within
+authority, and rerun affected validation. It reads the shared read-only
+[review method](../../skills/engflow-code-review/references/review-core.md) and
+[Git scope guidance](../../skills/engflow-code-review/references/scope.md) directly;
+it does not invoke the standalone Code Review Skill entrypoint. At least self-review
+is required where review is permitted. Prefer a fresh-context independent reviewer
+for significant/high-risk changes when supported and proportionate; otherwise
+disclose self-review and limits.
+
+Standalone [Code Review](../../skills/engflow-code-review/SKILL.md) remains the
+independent entrypoint for everyday working-tree, staged, commit, branch and PR
+reviews, including code produced by other agents. Reviewers are read-only;
+Implement owns authorized fixes and reruns. Do not conflate tests, artifact
+self-checks, independent review and human approval.
 
 Refactor Assess answers whether existing code merits structural improvement, not
 whether a patch is correct. Its recommendations are advisory until explicitly
@@ -361,7 +377,9 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | Spec edit exposes a conflict outside write scope | Report the conflict and affected work without rewriting unauthorized content |
 | Deep clarification changes an approved requirement | Preserve decision provenance in the summary and identify pending Spec/Design/Plan updates |
 | Clarify summary passed to Specify | Reuse settled decisions; no automatic invocation, new approval inference or repeated interview |
-| Spec/Design/Plan/Tasks creation | Perform proportionate self-check; no invented independent approval |
+| Specify deliverable | Trace requirements to observable acceptance; surface contradictions and unsupported assumptions |
+| Design deliverable | Check interfaces/invariants, tradeoffs, relevant failure modes and evidence-backed feasibility |
+| Plan deliverable | Trace acceptance to tasks and checks; verify dependencies and integrated acceptance |
 | Separate tasks.md | Tasks owns decomposition, Implement owns observed task state; Plan references evidence without a second task-status list |
 | Existing inline tasks | Preserve format/IDs/evidence; extract only with explicit authority for both sources |
 | Large implementation | Whole milestone route, detailed current tasks, coarse future work |
@@ -371,6 +389,9 @@ snapshots, failures/retries and limits. The old writable-Clarify result is histo
 | Missing planner or external plan | Independent work remains usable; report actual blockers |
 | New session, dirty code or stale checks | Reconcile actual state and outstanding effects before execution |
 | View/preview or pending gate | No writes/implementation or implicit approval |
+| Implement small/ordinary change | Self-review meaningful changes and disclose review mode |
+| Implement significant/high-risk change | Prefer a fresh-context independent reviewer when supported; otherwise disclose fallback |
+| Review finding fixed | Re-review the updated source and rerun affected checks |
 | Plain code diff without documents | Review concrete defects and disclose requirements coverage limits |
 | All tasks marked done | Still check milestone and final integrated acceptance |
 | Approved design change; code/Plan updated; Design stale | Keep approval evidence, stale path and next sync action visible; update only within authority |

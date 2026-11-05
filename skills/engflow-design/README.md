@@ -41,6 +41,11 @@ new writes, probes, approval or report. User participation follows decision
 significance and existing authority, not invocation mode. Independent Design still
 owns authorized proposal persistence and continuation.
 
+Design's author self-check verifies requirement fit, interfaces/invariants,
+consequential tradeoffs, relevant failure/concurrency/security concerns, evidence
+for assumptions and a meaningful verification basis. It is not independent review
+or approval.
+
 ## Validation and references
 
 Useful host checks include an incomplete group/shared reference, an unsupported premise,
