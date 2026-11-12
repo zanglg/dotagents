@@ -135,25 +135,25 @@ class ValidatorTests(unittest.TestCase):
 
 
     def test_retired_engflow_code_review_entrypoint_is_rejected(self):
-        (self.root / "README.md").write_text("Use engflow-code-review for changes.\\n")
+        (self.root / "README.md").write_text("Use engflow-code-review for changes.\n")
         self.assertTrue(any("retired engflow-code-review" in e for e in self.errors()))
-        (self.root / "README.md").write_text("No retired Skill reference.\\n")
-        (self.root / "CHANGELOG.md").write_text("engflow-code-review was retired.\\n")
+        (self.root / "README.md").write_text("No retired Skill reference.\n")
+        (self.root / "CHANGELOG.md").write_text("engflow-code-review was retired.\n")
         self.assertEqual(self.errors(), [])
 
     def test_converge_remains_explicit_only(self):
         converge = self.root / "skills/engflow-converge"
         converge.mkdir()
-        (converge / "README.md").write_text("[contract](SKILL.md).\\n")
+        (converge / "README.md").write_text("[contract](SKILL.md).\n")
         (converge / "SKILL.md").write_text(
-            "---\\nname: engflow-converge\\ndescription: >\\n  Read-only convergence.\\n"
-            "disable-model-invocation: true\\n---\\n# Converge\\n"
+            "---\nname: engflow-converge\ndescription: >\n  Read-only convergence.\n"
+            "disable-model-invocation: true\n---\n# Converge\n"
         )
         (converge / "agents").mkdir()
         policy = converge / "agents/openai.yaml"
-        policy.write_text("policy:\\n  allow_implicit_invocation: false\\n")
+        policy.write_text("policy:\n  allow_implicit_invocation: false\n")
         self.assertEqual(self.errors(), [])
-        policy.write_text("policy:\\n  allow_implicit_invocation: true\\n")
+        policy.write_text("policy:\n  allow_implicit_invocation: true\n")
         self.assertTrue(any("allow_implicit_invocation" in e for e in self.errors()))
 
 
