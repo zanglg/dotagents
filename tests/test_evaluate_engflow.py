@@ -289,6 +289,15 @@ class EvidenceTests(unittest.TestCase):
             cwd=work, text=True
         ).splitlines(), [])
 
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for stale-evidence fixture")
+    def test_converge_stale_fixture_preserves_mismatched_revision(self):
+        work = prepare(self.load_case("converge-stale-evidence"), self.root / "stale-converge")
+        state = git_state(work)
+        evidence = (work / ".eval-evidence" / "validation.md").read_text()
+        self.assertIn("Tested revision: 0000000000000000000000000000000000000000", evidence)
+        self.assertNotIn(state["head"], evidence)
+        self.assertEqual(state["status"], {})
+
     def test_requested_general_tool_is_not_bundled_by_default(self):
         names = case_skill_names({"skills": ["engflow-plan", "semver-bump"]})
         self.assertIn("semver-bump", names)
