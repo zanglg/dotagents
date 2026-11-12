@@ -41,8 +41,8 @@ small, auditable, and safe to copy between machines.
     |-- engflow-handoff/      # Standalone session transfer and resumption
     |-- engflow-plan/         # Technical approach and delivery route
     |-- engflow-tasks/        # Executable feature task decomposition
-    |-- engflow-implement/    # Linear implementation and cross-session recovery
-    |-- engflow-code-review/  # Read-only review of code changes
+    |-- engflow-implement/    # Linear implementation, review and cross-session recovery
+    |-- engflow-converge/     # Read-only cross-artifact and evidence consistency check
     |-- engflow-research/ # Standalone evidence-driven investigation
     |-- engflow-specify/      # Standalone specification synthesis
     |-- engflow-refactor-assess/ # Standalone read-only refactoring assessment
@@ -80,7 +80,7 @@ without searching the whole workspace.
 | [engflow-plan](skills/engflow-plan/README.md) | Connect requirements to technical approaches, milestone routes and validation; no implementation or ticket publishing |
 | [engflow-tasks](skills/engflow-tasks/README.md) | Decompose a plan into feature tasks.md with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
-| [engflow-code-review](skills/engflow-code-review/README.md) | Standalone read-only review of working changes, commits, branches or PRs; shares its review method with Implement |
+| [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, task, implementation and evidence consistency |
 | [engflow-design](skills/engflow-design/README.md) | Technical design independently or within Plan; user participation for consequential decisions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
@@ -96,12 +96,14 @@ reusable skills to this catalog when useful. Dedicated planning connects the
 technical approach and delivery structure, reusing the shared design method for
 unresolved technical choices. Existing designs stay authoritative through references.
 Simple plans keep inline tasks; optional Tasks separates larger task lists.
-Implementation owns observed progress and local refinement in the single task source. Plan references
-task evidence rather than duplicating task state. Code review checks changes; refactoring assessment evaluates existing
-maintenance burdens. Both return findings without edits. Handoff transfers essential
-context without becoming a second execution record. Small work can go straight to
-implementation. See the usage and validation scenarios for [planning](skills/engflow-plan/README.md),
-[implementation](skills/engflow-implement/README.md) and [review](skills/engflow-code-review/README.md).
+Implementation owns observed progress, local refinement and code review in the single task source. Plan references
+task evidence rather than duplicating task state. Converge independently checks
+cross-artifact consistency and evidence freshness without editing files; Refactor
+Assess evaluates existing maintenance burdens and returns recommendations. Handoff
+transfers essential context without becoming a second execution record. Small work
+can go straight to implementation. See the usage and validation scenarios for
+[planning](skills/engflow-plan/README.md), [implementation and review](skills/engflow-implement/README.md)
+and [convergence](skills/engflow-converge/README.md).
 
 ## Installation
 

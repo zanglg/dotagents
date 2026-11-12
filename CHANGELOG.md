@@ -50,8 +50,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Add standalone `code-review` for read-only review of working changes, commits,
   branches and PRs without requiring a Spec or tracker. Distinguish indexed,
   working and committed snapshots; report actionable findings with evidence and
-  scope limits. All three skills retain explicit-only host metadata, work
-  independently and introduce no workspace framework or automatic commits.
+  scope limits. This entrypoint was later retired in the same unreleased line;
+  its method remains internal to Engflow Implement.
 - Extract specification synthesis into standalone, explicit-only `specify`, with
   a compact outline and no EngFlow dependency. Organize Specs by independent
   objective, with explicit non-goals, observable acceptance and test boundaries.
@@ -69,6 +69,17 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Add explicit-only, read-only `engflow-converge` for cross-artifact consistency,
+  implementation coverage and validation-evidence freshness. It reports a status,
+  evidence-backed findings and owning next actions; it does not write artifacts,
+  run tests, perform general code review or approve delivery.
+- Retire the standalone `engflow-code-review` Skill. Move its read-only review
+  method and Git scope guidance under `engflow-implement/references/`; code review
+  remains part of Implement's delivery lifecycle, with no second invocation entry.
+  Replace the standalone review evaluation case with an Implement review case.
+- Add GitHub Actions CI for Python 3.10-3.13, static Skill/link validation,
+  deterministic unit tests and prepared-only Engflow behavior fixtures. Real-host
+  model evaluation remains opt-in and is not represented as a CI pass.
 - Extend Engflow's Git-backed evaluation guard to detect refs/tags, linked
   worktree registrations and local repository configuration changes. Add
   regression checks for each metadata mutation and stable read-only inspection.

@@ -121,7 +121,7 @@ def initialize_git_fixture(case, work):
 
     # Copied Skill resources are tooling, not part of the code under review.
     exclude = work / ".git" / "info" / "exclude"
-    exclude.write_text(exclude.read_text() + "\n/.eval-skills/\n")
+    exclude.write_text(exclude.read_text() + "\n/.eval-skills/\n/.eval-evidence/\n")
 
     git_run(work, "add", "--", *tracked)
     git_run(work, "commit", "--quiet", "-m",
@@ -201,6 +201,18 @@ def prepare(case, case_dir):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content)
     initialize_git_fixture(case, work)
+    evidence = case.get("evidence", {})
+    if evidence:
+        if not (work / ".git").exists():
+            raise ValueError("revision-bound evaluation evidence requires a Git fixture")
+        head = git_output(work, "rev-parse", "HEAD").strip()
+        for name, content in evidence.items():
+            relative = Path(name)
+            if relative.is_absolute() or ".." in relative.parts or not name:
+                raise ValueError(f"invalid evidence path: {name!r}")
+            path = work / ".eval-evidence" / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content.replace("@EVAL_HEAD_SHA@", head))
     for name in case_skill_names(case):
         shutil.copytree(ROOT / "skills" / name, work / ".eval-skills" / name)
     return work
@@ -220,7 +232,8 @@ def run_case(case, output, args):
     case_dir = output / case["id"]
     work = prepare(case, case_dir)
     initial = snapshot(work)
-    result = {"case": case["id"], "status": "prepared", "phases": [],
+    result = {"case": case["id"], "status": "prepared",
+              "expected_status": case.get("expected_status"), "phases": [],
               "rubric": case["rubric"], "manual_verdict": "not_reviewed",
               "initial_sha256": initial, "initial_git_state": git_state(work)}
     for number, prompt in enumerate(case["phases"], 1):

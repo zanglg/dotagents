@@ -1,9 +1,10 @@
-# Shared code review method
+# Implement code review method
 
-This reference defines the read-only review method shared by standalone Code
-Review and Implement. Reading it applies the method in the caller's current task;
-it does not invoke another Skill, launch a worker, create a report or grant
-additional read/write, execution, approval or publication authority.
+This reference defines the read-only code review method used internally by Engflow
+Implement. It is not an independently invocable Skill. Reading it applies the
+method within Implement's current task; it does not invoke another Skill, launch a
+worker, create a report or grant additional read/write, execution, approval or
+publication authority.
 
 ## Review target and evidence
 

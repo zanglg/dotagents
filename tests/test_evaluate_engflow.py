@@ -90,8 +90,8 @@ class EvidenceTests(unittest.TestCase):
                     if case["id"] == case_id)
 
     @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-backed fixtures")
-    def test_code_review_fixture_has_committed_baseline_and_untracked_target(self):
-        work = prepare(self.load_case("code-review-findings"), self.root / "review")
+    def test_implement_review_fixture_has_committed_baseline_and_untracked_target(self):
+        work = prepare(self.load_case("implement-review-untracked-source"), self.root / "implement-review")
         state = git_state(work)
         self.assertIsNotNone(state)
         self.assertEqual(set(subprocess.check_output(
@@ -129,7 +129,7 @@ class EvidenceTests(unittest.TestCase):
             + "    gpgsign = true" + os.linesep
         )
         with patch.dict(os.environ, {"GIT_CONFIG_GLOBAL": str(global_config)}):
-            work = prepare(self.load_case("code-review-findings"), self.root / "isolated")
+            work = prepare(self.load_case("implement-review-untracked-source"), self.root / "isolated")
         self.assertEqual(set(subprocess.check_output(
             ["git", "ls-files", "--others", "--exclude-standard"],
             cwd=work, text=True
@@ -177,7 +177,7 @@ class EvidenceTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
     def test_git_state_is_stable_for_read_only_inspection(self):
-        work = prepare(self.load_case("code-review-findings"), self.root / "stable")
+        work = prepare(self.load_case("implement-review-untracked-source"), self.root / "stable")
         before = git_state(work)
         subprocess.run(["git", "status", "--short"], cwd=work, check=True,
                        stdout=subprocess.PIPE)
@@ -193,7 +193,7 @@ class EvidenceTests(unittest.TestCase):
 
     @unittest.skipUnless(shutil.which("git"), "Git CLI required for Git-state checks")
     def test_git_state_detects_tags_and_other_refs(self):
-        work = prepare(self.load_case("code-review-findings"), self.root / "refs")
+        work = prepare(self.load_case("implement-review-untracked-source"), self.root / "refs")
         before = git_state(work)
         subprocess.run(["git", "tag", "review-probe"], cwd=work, check=True)
         tagged = git_state(work)
@@ -250,11 +250,44 @@ class EvidenceTests(unittest.TestCase):
             "engflow-design/references/design-core.md",
             "engflow-research/references/research-core.md",
             "engflow-poc/references/experiment-core.md",
+            "engflow-implement/references/review-core.md",
+            "engflow-implement/references/scope.md",
         ]:
             self.assertTrue((work / ".eval-skills" / relative).is_file())
+        self.assertIn("engflow-converge", expected)
+        self.assertNotIn("engflow-code-review", expected)
         self.assertEqual((work / "Spec.md").read_text(), "Requirements")
         self.assertFalse((work / "Plan.md").exists())
         self.assertFalse((work / ".git").exists())
+
+    def test_converge_cases_are_read_only_and_cover_all_statuses(self):
+        cases = [case for case in json.loads(CASES.read_text())
+                 if case["id"].startswith("converge-")]
+        expected = {
+            "converge-clean": "CONVERGED",
+            "converge-gaps": "GAPS_FOUND",
+            "converge-stale-evidence": "BLOCKED",
+            "converge-authority-conflict": "BLOCKED",
+            "converge-partial": "PARTIAL",
+        }
+        self.assertEqual({case["id"]: case["expected_status"] for case in cases}, expected)
+        for case in cases:
+            self.assertEqual(case["skills"], ["engflow-converge"])
+            self.assertEqual(case["writable"], [])
+            self.assertEqual(case["checks"], [])
+            self.assertTrue(case["phases"][0].startswith("/skill:engflow-converge"))
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required for revision-bound evidence")
+    def test_converge_clean_fixture_binds_evidence_to_current_head(self):
+        work = prepare(self.load_case("converge-clean"), self.root / "converge")
+        state = git_state(work)
+        evidence = (work / ".eval-evidence" / "validation.md").read_text()
+        self.assertIn(f"Tested revision: {state['head']}", evidence)
+        self.assertEqual(state["status"], {})
+        self.assertEqual(subprocess.check_output(
+            ["git", "ls-files", "--others", "--exclude-standard"],
+            cwd=work, text=True
+        ).splitlines(), [])
 
     def test_requested_general_tool_is_not_bundled_by_default(self):
         names = case_skill_names({"skills": ["engflow-plan", "semver-bump"]})

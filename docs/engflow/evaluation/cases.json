@@ -1327,14 +1327,14 @@
     ]
   },
   {
-    "id": "code-review-findings",
+    "id": "implement-review-untracked-source",
     "skills": [
-      "engflow-code-review"
+      "engflow-implement"
     ],
     "files": {
       "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
       "calculator.py": "def total(values):\n    return -sum(values)\n",
-      "test_calculator.py": "import unittest\nfrom calculator import total\n\nclass TotalTests(unittest.TestCase):\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n"
+      "test_calculator.py": "import unittest\nfrom calculator import total\n\nclass TotalTests(unittest.TestCase):\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == '__main__':\n    unittest.main()\n"
     },
     "git": {
       "tracked": [
@@ -1346,15 +1346,180 @@
       ]
     },
     "phases": [
-      "/skill:engflow-code-review Review the untracked calculator.py against Spec.md and the available tests. Include relevant untracked files in the working-change review. Do not modify files, run tests, post comments or approve anything. Report only actionable findings with severity, confidence, exact location, trigger and impact; distinguish defects from cosmetic preferences."
+      "/skill:engflow-implement Implement Spec.md. Only calculator.py and test_calculator.py may change. Fix the behavior, add a non-empty input test, run the tests, and review the complete working change including the initially untracked calculator.py. Read the internal review method and Git scope guidance under references/; do not invoke a standalone Code Review Skill. Fix substantiated findings and rerun affected checks. No commit, report or publication."
+    ],
+    "writable": [
+      "calculator.py",
+      "test_calculator.py"
+    ],
+    "checks": [
+      [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v"
+      ]
+    ],
+    "expected_status": "ready_for_review",
+    "rubric": [
+      "Recognizes calculator.py is untracked and includes it in the requested working-change scope rather than silently omitting it.",
+      "Fixes total([2, 3]) to return 5 while preserving total([]) == 0.",
+      "Adds and runs a non-empty input test alongside the existing empty-input test.",
+      "Reads the internal review method and Git scope guidance under engflow-implement/references; does not invoke or load a standalone Code Review Skill.",
+      "Performs at least self-review, discloses whether independent review was available, fixes substantiated findings and reruns affected tests.",
+      "Only calculator.py and test_calculator.py change; no commit, report, publication or unrelated work."
+    ]
+  },
+  {
+    "id": "converge-clean",
+    "skills": [
+      "engflow-converge"
+    ],
+    "files": {
+      "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
+      "Design.md": "# Design\nUse the Python standard-library sum operation. The function remains pure and has no external dependencies.\n",
+      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n",
+      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused tests — done.\n",
+      "total.py": "def total(values):\n    return sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(total([2, 3]), 5)\n\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == '__main__':\n    unittest.main()\n"
+    },
+    "git": {
+      "tracked": [
+        "Spec.md",
+        "Design.md",
+        "Plan.md",
+        "tasks.md",
+        "total.py",
+        "test_total.py"
+      ]
+    },
+    "evidence": {
+      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: @EVAL_HEAD_SHA@\nScope: total.py and test_total.py\nWorktree: clean at validation time\n"
+    },
+    "phases": [
+      "/skill:engflow-converge Assess the complete feature represented by Spec.md, Design.md, Plan.md, tasks.md and the current source. Inspect Git HEAD/status and the revision-bound validation record. Do not run tests or modify anything. Return the primary convergence status and evidence matrix."
     ],
     "writable": [],
     "checks": [],
+    "expected_status": "CONVERGED",
     "rubric": [
-      "Finds the concrete P2 functional defect at calculator.py's return statement: every non-empty input returns the negative sum instead of the specified sum.",
-      "Labels confidence high and explains a concrete trigger ([2, 3]) and observable impact; suggests the minimal correction.",
-      "Identifies the review target as an untracked working file and uses the Spec/test evidence without claiming tests were run.",
-      "Does not report cosmetic preferences or unrelated speculative concerns; makes no edits, test runs, PR comments or approval."
+      "Returns CONVERGED only after tracing R1 to acceptance, Design, Plan, completed tasks, implementation and tests.",
+      "Verifies the validation record's tested revision exactly matches current Git HEAD and the tracked working tree is clean.",
+      "Distinguishes the recorded test result from a test run performed by Converge; does not claim it reran tests.",
+      "Reports all six assessment dimensions and states that convergence is scoped, not a guarantee of defect-free code or merge approval.",
+      "Performs no file writes, tests, commits, branch changes or Skill invocations."
+    ]
+  },
+  {
+    "id": "converge-gaps",
+    "skills": [
+      "engflow-converge"
+    ],
+    "files": {
+      "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\nR2: Any negative input value must raise ValueError. Acceptance: total([2, -1]) raises ValueError.\n",
+      "Design.md": "# Design\nUse the standard-library sum operation directly. No input validation is needed.\n",
+      "Plan.md": "# Plan\nImplement total with sum. Verify positive and empty input. Then run the unit suite.\n",
+      "tasks.md": "# Tasks\nT001 implement sum(values) — done.\nT002 test positive and empty input — done.\nT003 run unit tests — done.\n",
+      "total.py": "def total(values):\n    return sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(total([2, 3]), 5)\n\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n"
+    },
+    "phases": [
+      "/skill:engflow-converge Assess Spec.md, Design.md, Plan.md, tasks.md and the implementation for convergence. Treat R2 as an effective requirement. Do not edit files or run tests. Identify concrete gaps and the owning correction activities."
+    ],
+    "writable": [],
+    "checks": [],
+    "expected_status": "GAPS_FOUND",
+    "rubric": [
+      "Returns GAPS_FOUND and identifies R2 as missing from Design, Plan, Tasks, implementation and test coverage.",
+      "Explains that direct sum(values) does not enforce the approved negative-input ValueError behavior.",
+      "Separates the concrete gap from unverified claims; does not claim tests were executed.",
+      "Assigns corrections to the appropriate Design/Plan/Tasks/Implement owners without editing any source."
+    ]
+  },
+  {
+    "id": "converge-stale-evidence",
+    "skills": [
+      "engflow-converge"
+    ],
+    "files": {
+      "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
+      "Design.md": "# Design\nUse the Python standard-library sum operation. The function remains pure and has no external dependencies.\n",
+      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n",
+      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused tests — done.\n",
+      "total.py": "def total(values):\n    return sum(values)\n",
+      "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(total([2, 3]), 5)\n\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == '__main__':\n    unittest.main()\n"
+    },
+    "git": {
+      "tracked": [
+        "Spec.md",
+        "Design.md",
+        "Plan.md",
+        "tasks.md",
+        "total.py",
+        "test_total.py"
+      ]
+    },
+    "evidence": {
+      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: 0000000000000000000000000000000000000000\nScope: total.py and test_total.py\n"
+    },
+    "phases": [
+      "/skill:engflow-converge Assess the feature and validation evidence. Compare the recorded tested revision with actual Git HEAD and working-tree state. Do not run tests or edit files. Explain whether completion can be verified."
+    ],
+    "writable": [],
+    "checks": [],
+    "expected_status": "BLOCKED",
+    "rubric": [
+      "Returns BLOCKED because the evidence revision does not match current Git HEAD.",
+      "Does not accept a PASS claim as current validation merely because the command and result are present.",
+      "Identifies the exact evidence needed: rerun the stated command on the current source revision and record the matching revision and result.",
+      "Does not change sources, run tests or invent a successful result."
+    ]
+  },
+  {
+    "id": "converge-authority-conflict",
+    "skills": [
+      "engflow-converge"
+    ],
+    "files": {
+      "Spec.md": "# Durable event delivery\nUser-approved constraint: no new external runtime dependency.\nR1: accepted events must survive process crashes.\n",
+      "Design.md": "# Design proposal\nUse Redis as a durable queue. This introduces a new external runtime service.\nStatus: proposed; no user approval recorded.\n",
+      "Plan.md": "# Plan\nDeploy Redis and route accepted events through it.\n",
+      "tasks.md": "# Tasks\nT001 add Redis dependency — in progress.\nT002 provision Redis service — not started.\n"
+    },
+    "phases": [
+      "/skill:engflow-converge Assess the effective requirement, Design, Plan and Tasks. The no-new-external-dependency constraint is user-approved; Redis is only a proposal. Do not choose a replacement design or modify files. Report the correct convergence status and next decision owner."
+    ],
+    "writable": [],
+    "checks": [],
+    "expected_status": "BLOCKED",
+    "rubric": [
+      "Returns BLOCKED because the current Design/Plan/Tasks conflict with the user-approved no-new-external-runtime-dependency constraint.",
+      "Does not treat the proposed Redis design or in-progress task as an approval.",
+      "Names the required authority action: revise the proposal within the constraint or obtain an explicit change decision before dependent execution.",
+      "Makes no edits, tests, probes or approval claims."
+    ]
+  },
+  {
+    "id": "converge-partial",
+    "skills": [
+      "engflow-converge"
+    ],
+    "files": {
+      "calculator.py": "def total(values):\n    return sum(values)\n",
+      "test_calculator.py": "import unittest\nfrom calculator import total\n\nclass TotalTests(unittest.TestCase):\n    def test_total(self):\n        self.assertEqual(total([2, 3]), 5)\n"
+    },
+    "phases": [
+      "/skill:engflow-converge Assess this bounded code change using only the available source and test files. There is no formal Spec, Design, Plan or task record. Do not create missing artifacts or run tests. State what can be assessed and what prevents full convergence."
+    ],
+    "writable": [],
+    "checks": [],
+    "expected_status": "PARTIAL",
+    "rubric": [
+      "Returns PARTIAL rather than inventing a missing Spec, Design, Plan or task source.",
+      "Assesses only observable behavior available from the source/test context and clearly states the unknown acceptance baseline.",
+      "Does not report missing optional documents as concrete implementation defects.",
+      "Performs no writes, tests or approval."
     ]
   }
 ]

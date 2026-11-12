@@ -1,7 +1,8 @@
 # Repository validation
 
 Run from the repository root with Python 3.10+; no third-party Python packages are
-required:
+required. GitHub Actions runs the same deterministic checks on pushes, pull requests
+and manual dispatch across Python 3.10-3.13:
 
 ```sh
 python3 scripts/validate_skills.py
@@ -33,16 +34,18 @@ new metadata convention before extending the checker. Historical changelog prose
 can retain old names; live Markdown links still need valid destinations.
 
 Unit tests cover missing README/contract links, malformed metadata, policy booleans,
-name mismatches, stale paths,
-links/anchors, evaluator completion/error/timeout handling and explicit inter-phase
-response transfer, complete Engflow-group fixture installation and individually
-requested general tools. They never call a
-model or assert skill quality by searching for magic instruction phrases.
+name mismatches, retired Skill paths, links/anchors, evaluator completion/error/timeout
+handling, explicit inter-phase response transfer, complete Engflow-group fixture
+installation, Converge status/read-only cases and revision-bound evidence preparation.
+They never call a model or assert skill quality by searching for magic instruction
+phrases. CI also prepares every synthetic behavior fixture without making model
+requests; this checks fixture integrity, not agent behavior.
 
 ## Behavior is a separate check
 
 Use [the Engflow evaluation procedure](engflow/evaluation/README.md) for real-host
-synthetic tasks, traces and human review. The optional Pi adapter makes model
+synthetic tasks, traces and human review. Real-host model runs remain opt-in and are
+not part of deterministic CI. The optional Pi adapter makes model
 requests only with `--run` and explicit provider/model choices. Generated evidence
 belongs outside this repository. A successful static check or `ready_for_review`
 status is not a behavioral pass, independent review or merge approval.

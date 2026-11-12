@@ -118,11 +118,13 @@ and binding interfaces. Use test-first development when useful; verify behavior 
 contracts rather than incidental internals. Run focused checks as changes accumulate.
 
 Review meaningful increments and the final integrated change; review is part of
-Implement's delivery responsibility, not an optional follow-up stage. Read and apply
-[the shared review method](../engflow-code-review/references/review-core.md) and
-[Git scope guidance](../engflow-code-review/references/scope.md) directly within this
-task. Do not invoke or load the standalone Code Review Skill entrypoint to borrow
-its method, and do not require a separate user invocation for implementation review.
+Implement's delivery responsibility, not an optional follow-up stage. The separate
+engflow-converge entrypoint is read-only and explicit-only; do not invoke it as a
+mandatory stage. Read and apply
+[the internal review method](references/review-core.md) and
+[Git scope guidance](references/scope.md) directly within this task. Review is part
+of Implement; do not invoke another Skill entrypoint to borrow the method or require
+a separate user invocation for implementation review.
 
 Unless the user or host explicitly restricts all review, every implementation
 receives at least an honest self-review. If review is restricted entirely, respect
@@ -182,8 +184,8 @@ alternative.
 The current agent is the only writer. Optional helpers investigate or review
 read-only, do not run mutating checks or delegate further, and return evidence
 for verification. Pause edits during review; work directly if helpers are unavailable.
-The shared review method does not invoke the standalone Code Review entrypoint or
-transfer its output/write authority.
+The review method is internal to Implement and grants no additional output or write
+authority.
 
 Task-scoped implementation and tests are in scope. Expanded, privileged, destructive
 or external effects require applicable authorization. Other Skills retain their own

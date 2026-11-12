@@ -97,7 +97,7 @@ plans remain valid; no forced migration or Init. Simple fixes need no workspace.
 | [engflow-plan](../../skills/engflow-plan/SKILL.md) | Ground the technical approach, milestone route and integrated validation; reference the task source |
 | [engflow-tasks](../../skills/engflow-tasks/SKILL.md) | Decompose the effective plan into tasks with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](../../skills/engflow-implement/SKILL.md) | Implement, validate, review and maintain observed progress |
-| [engflow-code-review](../../skills/engflow-code-review/SKILL.md) | General read-only review of code changes, with or without Engflow artifacts |
+| [engflow-converge](../../skills/engflow-converge/SKILL.md) | Independently assess cross-artifact consistency, implementation coverage and evidence freshness; read-only |
 | [engflow-research](../../skills/engflow-research/SKILL.md) | Investigate technical questions from sources and existing evidence |
 | [engflow-poc](../../skills/engflow-poc/SKILL.md) | Test premises within bounded execution authority; reuse adequate permission and save only on request |
 | [engflow-refactor-assess](../../skills/engflow-refactor-assess/SKILL.md) | Assess worthwhile behavior-preserving improvements to existing code, without edits |
@@ -161,10 +161,12 @@ No planner invocation is required for routine refinement. Do not create a
 competing plan or task ledger.
 
 References do not invoke Skill entrypoints. Reading shared methods preserves
-explicit-only metadata and creates no automatic stage transitions. Code Review,
-Clarify/Specify combinations and other entrypoint use still honor host invocation
-rules. Human approval follows the affected decision and existing gates, not which
-method was read.
+explicit-only metadata and creates no automatic stage transitions. Implement's
+code-review method is internal to its delivery lifecycle, not a separate Skill.
+Converge is an independent, explicit-only read-only entrypoint; it is never invoked
+automatically. Clarify/Specify combinations and other entrypoint use still honor
+host invocation rules. Human approval follows the affected decision and existing
+gates, not which method was read.
 
 ## Research and PoC
 
@@ -215,19 +217,18 @@ These checks are part of producing the artifact, not independent approval.
 
 Implement owns code review as part of its delivery lifecycle: inspect meaningful
 increments and the final integrated change, fix substantiated findings within
-authority, and rerun affected validation. It reads the shared read-only
-[review method](../../skills/engflow-code-review/references/review-core.md) and
-[Git scope guidance](../../skills/engflow-code-review/references/scope.md) directly;
-it does not invoke the standalone Code Review Skill entrypoint. At least self-review
-is required where review is permitted. Prefer a fresh-context independent reviewer
-for significant/high-risk changes when supported and proportionate; otherwise
-disclose self-review and limits.
+authority, and rerun affected validation. It reads the internal read-only
+[review method](../../skills/engflow-implement/references/review-core.md) and
+[Git scope guidance](../../skills/engflow-implement/references/scope.md) directly.
+At least self-review is required where review is permitted. Prefer a fresh-context
+independent reviewer for significant/high-risk changes when supported and
+proportionate; otherwise disclose self-review and limits.
 
-Standalone [Code Review](../../skills/engflow-code-review/SKILL.md) remains the
-independent entrypoint for everyday working-tree, staged, commit, branch and PR
-reviews, including code produced by other agents. Reviewers are read-only;
-Implement owns authorized fixes and reruns. Do not conflate tests, artifact
-self-checks, independent review and human approval.
+[Converge](../../skills/engflow-converge/SKILL.md) is a separate, explicit-only,
+read-only assessment of requirement coverage, design/plan/task consistency,
+implementation coverage and evidence validity. It does not perform general code
+defect review, run tests, fix findings or approve a merge. Do not conflate artifact
+self-checks, code review, convergence, executed tests and human approval.
 
 Refactor Assess answers whether existing code merits structural improvement, not
 whether a patch is correct. Its recommendations are advisory until explicitly
@@ -249,10 +250,11 @@ Specify updates the authorized Spec; Design its authorized design sources; Plan
 only the plan; Tasks only the task artifact, except an explicitly authorized
 inline-task migration. Implement may synchronize related sources within task
 write authority. Otherwise report the
-stale source and missing authority/access without silently rewriting it. Research,
-Review and Refactor Assess return evidence or recommendations, not effective
-changes or permission to revise sources. Handoff references pending sync work;
-it does not perform source updates as part of preparing a handoff.
+stale source and missing authority/access without silently rewriting it. Research
+and Refactor Assess return evidence or recommendations, not effective changes or
+permission to revise sources. Implement's internal review remains part of delivery;
+Converge reports consistency findings without editing sources. Handoff references
+pending sync work; it does not perform source updates as part of preparing a handoff.
 
 Close each pending source update only after verifying the accepted decision is
 accurately reflected and planned versus implemented behavior remains explicit.

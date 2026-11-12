@@ -50,14 +50,16 @@ reuse sufficient execution authority and obtain only missing scope. Private fact
 need precise questions, not guesses.
 
 Keep mutating probes in the current agent, helpers read-only. Read the shared
-[code-review method](../engflow-code-review/references/review-core.md) and
-[Git scope guidance](../engflow-code-review/references/scope.md) directly; do not
-invoke the standalone Code Review Skill. Perform at least self-review for each
+[internal code-review method](references/review-core.md) and
+[Git scope guidance](references/scope.md) directly; there is no standalone Code
+Review Skill. Perform at least self-review for each
 meaningful change. Prefer a fresh-context independent reviewer for significant or
 high-risk work when supported and proportionate; otherwise disclose self-review.
 Fix substantiated findings and rerun affected checks. Handoff is explicit-only
 and optional for resumption. A report or passing check alone does not close pending
-source synchronization.
+source synchronization. Use [Converge](../engflow-converge/README.md) only when
+an explicit, read-only cross-artifact assessment is requested; it is not an
+automatic Implement stage.
 
 ## Validation and references
 

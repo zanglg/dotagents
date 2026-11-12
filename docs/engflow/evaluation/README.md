@@ -12,8 +12,13 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | specify-self-check | Contradictory requirements in a preview | Surface conflict, preserve effective scope and leave the material decision open |
 | design-self-check | Concurrent refresh design with a mutating baseline | Check atomic publication, failure behavior, ordering semantics and evidence limits |
 | plan-self-check | Plan omits required failure/concurrency verification | Trace acceptance to tasks/checks and repair the plan without implementing |
-| code-review-findings | Standalone review of an untracked source file against a Spec in a Git-backed workspace | Report one evidenced P2 defect with confidence and location; no writes or test runs |
-| implement-review-lifecycle | Bounded code change with retained snapshot semantics and a committed Git baseline | Read shared review method, review the final diff, fix findings and rerun affected tests; disclose the actual review context |
+| implement-review-lifecycle | Bounded code change with retained snapshot semantics and a committed Git baseline | Read Implement's internal review method, review the final diff, fix findings and rerun affected tests; disclose the actual review context |
+| implement-review-untracked-source | Implement a bounded fix whose source starts untracked | Include the untracked source in the working-change review; fix, test and review without a standalone Skill |
+| converge-clean | Fully specified feature with matching revision-bound validation evidence | Return CONVERGED only when all applicable sources and current evidence agree |
+| converge-gaps | Requirement omitted from Design, Plan, Tasks and implementation | Return GAPS_FOUND with evidence and correction owners |
+| converge-stale-evidence | Validation record points to a different commit | Return BLOCKED; do not accept stale PASS evidence |
+| converge-authority-conflict | Proposed Design/Plan conflicts with a user-approved constraint | Return BLOCKED without selecting a new decision |
+| converge-partial | Bounded change without formal engineering artifacts | Return PARTIAL; do not invent missing documents |
 | rolling-milestone | Coarse M2 after completed M1, no planner invocation | Plan updates, actual tests, continuous execution, final acceptance |
 | partial-task-split | Split partial T3 with limited historical evidence | Stable/successor IDs, evidence coverage, T4 dependency, no implementation |
 | stale-design-resume | Accepted D2 conflicts with old Design | Preserve accepted behavior; pending sync and authority remain explicit |
@@ -47,9 +52,11 @@ of general reliability, security, performance or every Engflow skill's behavior.
 | handoff-runtime-transfer | Two fresh sessions, outstanding synthetic operation | Runtime context survives via files only; no replay or invented liveness |
 
 The artifact self-check cases exercise Specify, Design and Plan without introducing
-separate review entrypoints. The Implement review case checks the embedded delivery
-responsibility and shared-method reuse; it does not require invoking the standalone
-Code Review Skill. These fixtures are not behavioral passes until run on a real host.
+separate review entrypoints. Implement review cases exercise the embedded delivery
+responsibility and internal method; there is no standalone Code Review Skill.
+Converge cases cover all four result statuses and verify read-only behavior plus
+revision-bound evidence handling. These fixtures are not behavioral passes until
+run on a real host.
 
 Each case contains input files, prompts, permitted writes, optional executable
 acceptance checks and a manual rubric. Its `skills` field names requested entrypoints
@@ -57,12 +64,13 @@ or additional general tools, not an independently installed Engflow subset. Prep
 copies every engflow-* folder with sibling references intact; a one-entrypoint
 scenario still uses a complete installation. Rubrics are not supplied in the agent prompt.
 
-The code-review fixtures declare a `git.tracked`/`git.untracked` partition.
+The Git-backed Implement review fixtures declare a `git.tracked`/`git.untracked` partition.
 Preparation initializes a local-only repository and commits only the tracked
 baseline files. Explicitly untracked review targets remain untracked, while
-`.eval-skills/` is excluded from Git status. No remote is configured. This
-harness-created baseline is not an agent commit; fixture prompts still prohibit
-agent commits and publication.
+`.eval-skills/` and revision-bound `.eval-evidence/` records are locally excluded
+from Git status. Evidence placeholders are bound to the generated baseline SHA.
+No remote is configured. This harness-created baseline is not an agent commit;
+fixture prompts still prohibit agent commits and publication.
 Read and review all fixture content before authorizing execution. Extend cases for
 new boundaries instead of adding arbitrary keyword assertions to skill text.
 
@@ -173,7 +181,9 @@ Generated evidence stays outside the repository:
 - Modified fixture artifacts and outputs from acceptance checks.
 
 The adapter checks actual tool traces and filesystem/test outcomes, not skill-text
-keywords. JSON-mode exit code zero alone is insufficient: the adapter also requires
+keywords. Converge fixtures are read-only and do not run tests; the clean case
+binds its evidence to the generated Git baseline SHA, while stale-evidence cases
+use a deliberately mismatched revision. JSON-mode exit code zero alone is insufficient: the adapter also requires
 an un-aborted settled event and a final assistant `stop` reason. Missing output,
 errors, truncation and timeouts cannot become successful runs.
 
