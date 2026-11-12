@@ -84,15 +84,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
   worktree registrations and local repository configuration changes. Add
   regression checks for each metadata mutation and stable read-only inspection.
 - Make Specify, Design and Plan self-checks artifact-specific and proportionate;
-  do not add separate artifact-review Skills. Make Code Review a first-class
-  responsibility in Implement through a shared read-only review method while
-  retaining the standalone review entrypoint. Define finding severity/confidence,
-  independent-review preference for significant work, honest self-review fallback,
-  and fix/re-review/validation closure. Add artifact self-check and Implement
-  standalone finding-quality and Implement review-lifecycle evaluation fixtures;
+  do not add separate artifact-review Skills. Make code review a first-class
+  responsibility in Implement through a shared read-only review method. Define
+  finding severity/confidence, independent-review preference for significant work,
+  honest self-review fallback, and fix/re-review/validation closure. Add artifact
+  self-check and Implement review-lifecycle evaluation fixtures;
   no behavioral pass is claimed by fixture
   preparation alone.
-- Give the code-review fixtures real temporary Git baselines: keep support
+- Give the Implement review fixtures real temporary Git baselines: keep support
   files committed, preserve the review target as untracked, and expose final
   Implement diffs. Clarify that review mode follows the actual author/reviewer
   context, not the presence of an additional reviewer.
