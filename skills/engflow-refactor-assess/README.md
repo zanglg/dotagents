@@ -29,8 +29,7 @@ Each entrypoint remains independently usable; no prior stage invocation is requi
 Invoke this entrypoint explicitly through the host's supported mechanism.
 
 Findings can inform Design or Plan when adopted;
-implementation requests do not implicitly invoke assessment. `engflow-code-review`
-checks proposed changes instead. See [read-only collaboration](references/context.md).
+implementation requests do not implicitly invoke assessment. Engflow Implement includes code review as part of its delivery lifecycle. See [read-only collaboration](references/context.md).
 
 ## Validation and references
 

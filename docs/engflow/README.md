@@ -335,11 +335,11 @@ need no migration merely because installation changed.
 | design | engflow-design |
 | plan-implementation | engflow-plan |
 | implement | engflow-implement |
-| code-review | engflow-code-review |
 | technical-research | engflow-research |
 | poc | engflow-poc |
 | refactor-assess | engflow-refactor-assess |
 | handoff | engflow-handoff |
+Code review is now part of Engflow Implement; there is no separate Code Review entrypoint.
 
 Install/update the complete Engflow group together and update explicit calls
 and project links. Preserve custom local changes before replacement. No duplicate
