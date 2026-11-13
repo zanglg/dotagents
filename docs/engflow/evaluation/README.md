@@ -259,9 +259,17 @@ skill-text keywords. Codex JSON events and Pi JSON events have different
 completion and tool schemas; the adapter normalizes those differences but cannot
 guarantee equivalent runtime enforcement. Converge fixtures are read-only and do not run tests; the clean case
 binds its evidence to the generated Git baseline SHA, while stale-evidence cases
-use a deliberately mismatched revision. JSON-mode exit code zero alone is insufficient: the adapter also requires
-an un-aborted settled event and a final assistant `stop` reason. Missing output,
-errors, truncation and timeouts cannot become successful runs.
+use a deliberately mismatched revision. A JSON-mode exit code of zero alone is insufficient. The Pi adapter requires
+an un-aborted `agent_settled` event and a final assistant `stop` reason.
+The Codex adapter requires a started and completed turn, a final agent message
+and no reported failure/error. Missing output, errors, truncation and timeouts
+cannot become successful runs.
+
+For Codex, `collab_tool_call` events in the JSONL record include reviewer
+dispatch, recipient thread IDs, wait results and per-agent states. The adapter
+retains these fields in `results.json` (without copying reviewer prompts).
+A wait with zero recipients or a missing returned review cannot substantiate an
+independent-review claim. Verify the actual review result before assigning Pass.
 
 `ready_for_review` means only that mechanical checks passed. Inspect the full trace,
 file diffs and every rubric item before assigning a manual verdict. Final snapshots

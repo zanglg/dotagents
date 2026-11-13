@@ -124,9 +124,26 @@ Return exactly one primary status:
   evidence do not support a full convergence claim. Explain what was and was not
   assessed. Missing optional artifacts alone are not a defect.
 
-If a concrete gap and a separate critical authority blocker both exist, report
-both; use BLOCKED when the blocker prevents a trustworthy overall conclusion.
-Otherwise use GAPS_FOUND for established gaps.
+Choose the primary status by whether a trustworthy overall delivery conclusion is
+possible, not merely by whether an inconsistency is observable. Apply this order:
+
+1. **BLOCKED** when a critical authority decision or required validation evidence
+   is unresolved. This includes a proposed Design/Plan that conflicts with a
+   user-approved constraint and cannot proceed without an authorized correction
+   or change decision. It also includes a required PASS record tied to a different
+   Git revision: the stale claim is an observed defect in the evidence, but the
+   current delivery result cannot be verified without new evidence. Name the
+   concrete inconsistency and its owner while keeping BLOCKED primary.
+2. **GAPS_FOUND** when effective authority and enough evidence are available to
+   establish remediable omissions or implementation/acceptance coverage defects
+   without an independent critical blocker.
+3. **PARTIAL** only for a bounded assessment without a required full baseline;
+   do not classify known material defects or critical blockers as PARTIAL.
+4. **CONVERGED** only when all applicable areas and required current evidence pass.
+
+If gaps and a blocker coexist, report both. Do not relabel a critical blocker as
+GAPS_FOUND solely because you can identify its cause; do not turn every ordinary
+missing test or optional document into a BLOCKED result.
 
 ## Output
 

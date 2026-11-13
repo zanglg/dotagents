@@ -1379,8 +1379,8 @@
     "files": {
       "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
       "Design.md": "# Design\nUse the Python standard-library sum operation. The function remains pure and has no external dependencies.\n",
-      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n",
-      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused tests — done.\nEvidence: .eval-evidence/validation.md\n",
+      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n## Verification\nThe focused checks are the positive and empty unittest cases in test_total.py.\nThe final integrated check is python3 -B -m unittest -v from the feature root;\nit discovers both cases and covers the shipped total.py implementation.\n",
+      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused positive/empty cases and final integrated suite (python3 -B -m unittest -v, both included) — done.\nEvidence: .eval-evidence/validation.md\n",
       "total.py": "def total(values):\n    return sum(values)\n",
       "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(total([2, 3]), 5)\n\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == '__main__':\n    unittest.main()\n"
     },
@@ -1395,7 +1395,7 @@
       ]
     },
     "evidence": {
-      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: @EVAL_HEAD_SHA@\nScope: total.py and test_total.py\nWorktree: clean at validation time\n"
+      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: @EVAL_HEAD_SHA@\nScope: total.py and test_total.py\nFocused checks: test_positive and test_empty\nIntegrated check: both test cases discovered and passed in the full feature suite\nWorktree: clean at validation time\n"
     },
     "phases": [
       "/skill:engflow-converge Assess the complete feature represented by Spec.md, Design.md, Plan.md, tasks.md and the current source. Inspect Git HEAD/status and the revision-bound validation record at .eval-evidence/validation.md. Do not run tests or modify anything. Return the primary convergence status and evidence matrix."
@@ -1445,8 +1445,8 @@
     "files": {
       "Spec.md": "# Total\nR1: total(values) returns the sum of all values. Acceptance: total([2, 3]) == 5 and total([]) == 0.\n",
       "Design.md": "# Design\nUse the Python standard-library sum operation. The function remains pure and has no external dependencies.\n",
-      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n",
-      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused tests — done.\nEvidence: .eval-evidence/validation.md\n",
+      "Plan.md": "# Plan\n## Approach\nImplement total with the approved standard-library mechanism.\n## Delivery\nM1: implement total. M2: test positive and empty inputs. M3: run the focused suite and integrated checks.\n## Acceptance\nThe implementation returns the expected sum for positive and empty inputs.\n## Verification\nThe focused checks are the positive and empty unittest cases in test_total.py.\nThe final integrated check is python3 -B -m unittest -v from the feature root;\nit discovers both cases and covers the shipped total.py implementation.\n",
+      "tasks.md": "# Tasks\nT001 implement total(values) using the standard library — done.\nT002 test positive and empty inputs — done.\nT003 run focused positive/empty cases and final integrated suite (python3 -B -m unittest -v, both included) — done.\nEvidence: .eval-evidence/validation.md\n",
       "total.py": "def total(values):\n    return sum(values)\n",
       "test_total.py": "import unittest\nfrom total import total\n\nclass TotalTests(unittest.TestCase):\n    def test_positive(self):\n        self.assertEqual(total([2, 3]), 5)\n\n    def test_empty(self):\n        self.assertEqual(total([]), 0)\n\nif __name__ == '__main__':\n    unittest.main()\n"
     },
@@ -1461,7 +1461,7 @@
       ]
     },
     "evidence": {
-      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: 0000000000000000000000000000000000000000\nScope: total.py and test_total.py\n"
+      "validation.md": "# Validation evidence\nCommand: python3 -B -m unittest -v\nResult: PASS\nTested revision: 0000000000000000000000000000000000000000\nScope: total.py and test_total.py\nFocused checks: test_positive and test_empty\nIntegrated check: both test cases discovered and passed in the full feature suite\nWorktree: clean at validation time\n"
     },
     "phases": [
       "/skill:engflow-converge Assess the feature and validation evidence at .eval-evidence/validation.md. Compare the recorded tested revision with actual Git HEAD and working-tree state. Do not run tests or edit files. Explain whether completion can be verified."

@@ -65,7 +65,23 @@ def inspect_codex_events(path):
                     "server": item.get("server", ""),
                     "tool": item.get("tool", ""),
                 }})
-        elif typ == "item.started":
+        if typ in ("item.started", "item.updated", "item.completed"):
+            item = event.get("item", {})
+            if item.get("type") == "collab_tool_call":
+                # Codex 0.167.0 exports dispatch/return information here.
+                # Keep receiver IDs, status and reviewer state even for empty
+                # waits or failed attempts; neither implies a completed review.
+                items.append({"name": "collab_tool_call", "args": {
+                    "event": typ,
+                    "item_id": item.get("id"),
+                    "tool": item.get("tool"),
+                    "status": item.get("status"),
+                    "sender_thread_id": item.get("sender_thread_id"),
+                    "receiver_thread_ids": item.get("receiver_thread_ids", []),
+                    "agents_states": item.get("agents_states", {}),
+                    "has_prompt": bool(item.get("prompt")),
+                }})
+        if typ == "item.started":
             item = event.get("item", {})
             # Include attempted operations that may be denied before completion.
             if item.get("type") in ("command_execution", "file_change", "mcp_tool_call"):

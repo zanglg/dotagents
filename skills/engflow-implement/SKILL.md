@@ -135,8 +135,13 @@ reviewer the exact target/baseline, relevant requirements and constraints, witho
 leading it toward the author's preferred conclusion. Review helpers remain
 read-only, do not run mutating checks or delegate further; pause edits while they
 inspect. Verify consequential returns against the actual source and counterevidence.
-If independent review is unavailable, unsupported, disproportionate or restricted,
-self-review and disclose that limitation; never imply an independent review ran.
+Claim independent review only after a distinct reviewer was actually dispatched,
+returned findings or an explicit no-findings assessment, and the implementer
+inspected that result. A worker invitation, empty-recipient wait, pending status
+or unsupported tool attempt is not a completed review. If independent review is
+unavailable, unsupported, disproportionate, unconfirmed or restricted, perform
+self-review within scope and disclose that limitation; never imply an independent
+review ran.
 
 Fix substantiated findings within the existing implementation authority, then
 rerun affected tests/checks and re-review material edits against the updated source.
@@ -145,6 +150,11 @@ disappear; surface consequential changes for the applicable decision. Distinguis
 established defects from open questions and pre-existing issues. Record the reviewed
 scope, review mode, findings/fixes, actual rerun evidence and remaining limits in
 the execution record, or in the delivery response when no record is writable.
+Identify review mode explicitly at delivery: completed independent review with
+returned evidence, actual self-review only, or no review when restricted. If no
+independent result was received, state whether it was unavailable, attempted but
+unconfirmed/failed, or not proportionate; do not let a successful self-review
+silently imply an additional reviewer.
 
 Separate implemented, verified, partial and blocked work. Record observed checks
 and evidence, including pre-existing failures. A milestone is complete only when

@@ -73,6 +73,12 @@ builds/tests/experiments and do not delegate further. The caller verifies
 consequential findings against source and counterevidence; an agent's assertion
 alone is not proof.
 
+Do not infer independent review from a claimed delegation alone. Confirm a
+separate reviewer was actually dispatched, returned a review result and had the
+specified read-only scope. An empty-recipient wait, a failed dispatch or a missing
+review response is not proof of independence. Treat unconfirmed review as self-
+review only if the implementer actually inspected the code, and report the limit.
+
 For Implement, the implementer owns any authorized fix. Fix only substantiated
 findings within existing scope, then rerun affected tests/checks and re-review
 material edits against the updated source. A finding that requires changed

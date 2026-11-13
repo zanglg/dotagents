@@ -78,6 +78,58 @@ class EvidenceTests(unittest.TestCase):
         self.assertTrue(any(tool["name"] == "bash" for tool in tools))
         self.assertTrue(any(tool["name"] == "attempted_command_execution" for tool in tools))
 
+    def test_codex_collaboration_events_preserve_dispatch_and_return_evidence(self):
+        events = [
+            {"type": "turn.started"},
+            {"type": "item.started", "item": {
+                "type": "collab_tool_call", "id": "c1", "tool": "spawn_agent",
+                "sender_thread_id": "main", "receiver_thread_ids": [],
+                "agents_states": {}, "status": "in_progress"}},
+            {"type": "item.completed", "item": {
+                "type": "collab_tool_call", "id": "c1", "tool": "spawn_agent",
+                "sender_thread_id": "main", "receiver_thread_ids": ["reviewer1"],
+                "agents_states": {"reviewer1": {"status": "running", "message": None}},
+                "status": "completed"}},
+            {"type": "item.completed", "item": {
+                "type": "collab_tool_call", "id": "c2", "tool": "wait",
+                "sender_thread_id": "main", "receiver_thread_ids": ["reviewer1"],
+                "agents_states": {"reviewer1": {
+                    "status": "completed", "message": "No findings"}},
+                "status": "completed"}},
+            {"type": "item.completed", "item": {
+                "type": "agent_message", "text": "Self-check and reviewer completed."}},
+            {"type": "turn.completed"},
+        ]
+        self.events.write_text("\n".join(json.dumps(e) for e in events) + "\n")
+        completed, tools, response = inspect_codex_events(self.events)
+        self.assertTrue(completed)
+        collab = [t["args"] for t in tools if t["name"] == "collab_tool_call"]
+        self.assertEqual(len(collab), 3)
+        self.assertEqual(collab[1]["tool"], "spawn_agent")
+        self.assertEqual(collab[1]["receiver_thread_ids"], ["reviewer1"])
+        self.assertEqual(collab[2]["agents_states"]["reviewer1"]["status"], "completed")
+        self.assertIn("reviewer", response)
+
+    def test_codex_empty_wait_is_recorded_not_treated_as_review_proof(self):
+        events = [
+            {"type": "turn.started"},
+            {"type": "item.completed", "item": {
+                "type": "collab_tool_call", "id": "c3", "tool": "wait",
+                "sender_thread_id": "main", "receiver_thread_ids": [],
+                "agents_states": {}, "status": "completed"}},
+            {"type": "item.completed", "item": {
+                "type": "agent_message", "text": "Review complete"}},
+            {"type": "turn.completed"},
+        ]
+        self.events.write_text("\n".join(json.dumps(e) for e in events) + "\n")
+        completed, tools, _ = inspect_codex_events(self.events)
+        self.assertTrue(completed)
+        collab = [t["args"] for t in tools if t["name"] == "collab_tool_call"]
+        self.assertEqual(len(collab), 1)
+        self.assertEqual(collab[0]["receiver_thread_ids"], [])
+        self.assertEqual(collab[0]["agents_states"], {})
+        self.assertEqual(collab[0]["tool"], "wait")
+
     def test_codex_json_failed_or_incomplete_run_is_not_success(self):
         base = [
             {"type": "turn.started"},
@@ -123,7 +175,7 @@ class EvidenceTests(unittest.TestCase):
             env = build_codex_environment(args, self.root / "case")
         self.assertNotIn("OPENAI_API_KEY", env)
         self.assertNotIn("GITHUB_TOKEN", env)
-        self.assertEqual(Path(env["CODEX_HOME"]), auth_dir)
+        self.assertEqual(Path(env["CODEX_HOME"]).resolve(), auth_dir.resolve())
         self.assertNotEqual(env["HOME"], str(auth_dir))
 
     @unittest.skipUnless(shutil.which("git"), "Git CLI required")
@@ -357,12 +409,27 @@ class EvidenceTests(unittest.TestCase):
             self.assertEqual(case["checks"], [])
             self.assertTrue(case["phases"][0].startswith("/skill:engflow-converge"))
 
+    def test_converge_clean_and_stale_fixtures_differ_only_in_evidence_revision(self):
+        clean = self.load_case("converge-clean")
+        stale = self.load_case("converge-stale-evidence")
+        self.assertEqual(clean["files"], stale["files"])
+        self.assertEqual(clean["git"], stale["git"])
+        clean_record = clean["evidence"]["validation.md"]
+        stale_record = stale["evidence"]["validation.md"]
+        self.assertEqual(
+            clean_record.replace("@EVAL_HEAD_SHA@", "0" * 40), stale_record
+        )
+        self.assertIn("final integrated suite", clean["files"]["tasks.md"])
+
     @unittest.skipUnless(shutil.which("git"), "Git CLI required for revision-bound evidence")
     def test_converge_clean_fixture_binds_evidence_to_current_head(self):
         work = prepare(self.load_case("converge-clean"), self.root / "converge")
         state = git_state(work)
         evidence = (work / ".eval-evidence" / "validation.md").read_text()
         self.assertIn(f"Tested revision: {state['head']}", evidence)
+        self.assertIn("Integrated check:", evidence)
+        self.assertIn("focused suite and integrated checks", (work / "Plan.md").read_text())
+        self.assertIn("final integrated suite", (work / "tasks.md").read_text())
         self.assertEqual(state["status"], {})
         self.assertEqual(subprocess.check_output(
             ["git", "ls-files", "--others", "--exclude-standard"],

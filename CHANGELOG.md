@@ -69,6 +69,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Clarify Converge's primary-status precedence when a required current test
+  record is stale or a proposed Plan conflicts with an approved constraint:
+  these are blocking delivery conclusions, not merely a list of known gaps.
+  Complete the synthetic clean/stale fixtures' focused and integrated test
+  records without weakening acceptance. Preserve Codex 0.167.0 collaboration
+  dispatch/return events for manual reviewer verification, reject unsupported
+  claims of independent review and normalize macOS symlinked temporary paths
+  in the environment unit test.
 - Make Engflow behavioral evaluation host-neutral: share the same fixture/rubric,
   add a Codex CLI adapter with project Skill loading, JSONL normalization,
   per-phase sandbox policy and explicit authenticated Codex home. Keep Pi optional.
