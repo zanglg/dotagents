@@ -185,8 +185,11 @@ All entrypoints remain explicit-only. The shared-method cases test reading
 reference files, not invoking other entrypoints or loading their SKILL.md. The Design-to-Plan case separately tests
 an explicit support call followed by Plan with the actual returned design; its
 first phase is read-only. Neither path authorizes extra writes or approval.
-Other cases do not inherit response context. Ambient provider settings still apply. Record host version, provider/model,
-reasoning, resource hashes, authority restrictions and any other meaningful settings.
+Other cases do not inherit response context. The runner uses only the explicit
+provider/model/thinking settings and selected credential variable; it does not load
+ambient Pi auth, settings, extensions or other user configuration. Record host
+version, provider/model, reasoning, resource hashes, authority restrictions and
+any other meaningful settings.
 
 **A temporary working directory is not an OS sandbox.** Pi tools run with the
 execution account's permissions. Prompts and the minimal environment do not prevent

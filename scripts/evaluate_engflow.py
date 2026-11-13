@@ -22,7 +22,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "docs/engflow/evaluation/cases.json"
 RESERVED_CREDENTIAL_ENV_NAMES = {
-    "PATH", "HOME", "TMPDIR", "LANG", "LC_ALL", "TERM",
+    "PATH", "HOME", "TMPDIR", "TMP", "TEMP", "LANG", "LC_ALL", "TERM",
+    "SHELL", "USER", "LOGNAME", "XDG_CONFIG_HOME", "XDG_DATA_HOME", "XDG_CACHE_HOME",
     "PI_CODING_AGENT_DIR", "PI_OFFLINE", "PI_TELEMETRY",
     "PYTHONDONTWRITEBYTECODE", "GIT_CONFIG_NOSYSTEM",
 }
@@ -112,6 +113,9 @@ def build_pi_environment(args, case_dir):
         "HOME": str(home),
         "TMPDIR": str(temp_dir),
         "PI_CODING_AGENT_DIR": str(agent_dir),
+        "XDG_CONFIG_HOME": str(home / ".config"),
+        "XDG_DATA_HOME": str(home / ".local" / "share"),
+        "XDG_CACHE_HOME": str(home / ".cache"),
         "PI_OFFLINE": "1",
         "PI_TELEMETRY": "0",
         "PYTHONDONTWRITEBYTECODE": "1",
@@ -416,7 +420,10 @@ def main():
                 "started_at": datetime.now(timezone.utc).isoformat(),
                 "case_manifest_sha256": hashlib.sha256(CASES.read_bytes()).hexdigest()}
     if args.run:
-        metadata["host_version"] = subprocess.check_output([args.pi, "--version"], text=True).strip()
+        host_env = build_pi_environment(args, output / "pi-host")
+        metadata["host_version"] = subprocess.check_output(
+            [args.pi, "--version"], text=True, env=host_env
+        ).strip()
     print(f"Evidence: {output}", flush=True)
     for case in cases:
         if args.case and case["id"] not in args.case:

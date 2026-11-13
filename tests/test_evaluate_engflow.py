@@ -345,16 +345,20 @@ class EvidenceTests(unittest.TestCase):
         self.assertNotEqual(env["HOME"], original_home)
         self.assertTrue(Path(env["HOME"]).is_dir())
         self.assertTrue(Path(env["PI_CODING_AGENT_DIR"]).is_dir())
+        self.assertTrue(Path(env["XDG_CONFIG_HOME"]).is_relative_to(Path(env["HOME"])))
+        self.assertTrue(Path(env["XDG_DATA_HOME"]).is_relative_to(Path(env["HOME"])))
+        self.assertTrue(Path(env["XDG_CACHE_HOME"]).is_relative_to(Path(env["HOME"])))
         self.assertEqual(env["PI_OFFLINE"], "1")
         self.assertEqual(env["GIT_CONFIG_NOSYSTEM"], "1")
 
     def test_pi_environment_rejects_reserved_credential_variable(self):
-        with patch.dict(os.environ, {"HOME": "not-a-key"}, clear=True):
-            with self.assertRaisesRegex(ValueError, "reserved runtime variable"):
-                build_pi_environment(
-                    argparse.Namespace(credential_env="HOME"),
-                    self.root / "reserved-case",
-                )
+        for name in ("HOME", "SHELL", "PI_CODING_AGENT_DIR", "XDG_CONFIG_HOME"):
+            with self.subTest(name=name), patch.dict(os.environ, {name: "not-a-key"}, clear=True):
+                with self.assertRaisesRegex(ValueError, "reserved runtime variable"):
+                    build_pi_environment(
+                        argparse.Namespace(credential_env=name),
+                        self.root / f"reserved-{name.lower()}",
+                    )
 
     @unittest.skipUnless(os.name == "posix", "POSIX process groups")
     def test_execute_uses_only_explicit_environment_when_supplied(self):
