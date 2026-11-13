@@ -135,17 +135,40 @@ external output location. Existing output directories are never overwritten.
 
 ## Run on Pi
 
-The included adapter uses Pi 1.4.0's CLI/JSON event interface. It requires POSIX
-process groups, an installed `pi`, and existing authorized provider credentials.
-It does not install dependencies or print/copy credentials. Use an explicit model
-and provider; real runs consume model quota and may cost money.
+The adapter targets Pi 1.4.0's CLI/JSON event interface. Pi 1.4.0 requires
+Node.js 22.19.0 or newer. The runner requires POSIX process groups, an installed
+`pi`, and one provider API-key environment variable recognized by that provider.
+It intentionally does not load the user's global Pi auth/config directory.
+
+**Credential exposure is an explicit risk, not a sandbox boundary.** Pi 1.4.0's
+built-in Bash tool inherits the Pi process environment. The agent can therefore
+read the selected provider key with a shell command and can return it in model
+output. The runner isolates `HOME` and `PI_CODING_AGENT_DIR`, and forwards only
+the explicitly named key plus a small non-secret environment allowlist. It does
+not forward ambient CI/cloud credentials. However, the selected key remains
+visible to the agent. Use only a short-lived, low-quota evaluation key with no
+other privileges; assume it may be disclosed and revoke it after the run. Never
+use a long-lived personal, production or broadly privileged key. The runner
+requires both `--credential-env` and
+`--acknowledge-agent-visible-credentials` before making model requests.
+
+Set the provider's documented API-key environment variable in the execution
+environment. For example, use `ANTHROPIC_API_KEY` for an Anthropic API-key
+configuration or `OPENAI_API_KEY` for an OpenAI API-key configuration:
 
 ```sh
 python3 scripts/evaluate_engflow.py --run \
-  --provider "$PI_PROVIDER" --model "$PI_MODEL" --thinking low
+  --provider "$PI_PROVIDER" --model "$PI_MODEL" \
+  --credential-env ANTHROPIC_API_KEY \
+  --acknowledge-agent-visible-credentials \
+  --thinking low
 ```
 
-If these variables are not present, supply the intended provider/model IDs yourself.
+Change the credential variable name to the one used by the selected provider.
+OAuth-only auth files are not loaded by this isolated runner. Real runs consume
+model quota and may cost money. The `--offline` flag disables Pi's automatic
+startup network activity; it does not disable the model API request.
+
 `--timeout` bounds each phase/check (default 240 seconds). A timeout terminates the
 owned process group and records a blocked attempt. Preserve that attempt if a
 separate bounded rerun is warranted; never overwrite it with a successful retry.
@@ -165,12 +188,15 @@ first phase is read-only. Neither path authorizes extra writes or approval.
 Other cases do not inherit response context. Ambient provider settings still apply. Record host version, provider/model,
 reasoning, resource hashes, authority restrictions and any other meaningful settings.
 
-**A temporary working directory is not an OS sandbox.** Pi tools run with the user's
-permissions. Prompts restrict access, but cannot enforce filesystem or network
-isolation. Use a disposable container/account with restricted services for stronger
-isolation; expose only necessary fixtures and provider access. The supplied cases
-are benign local tasks, and simulated operation handles must never be queried as
-real jobs. No production services or actual migrations are part of this suite.
+**A temporary working directory is not an OS sandbox.** Pi tools run with the
+execution account's permissions. Prompts and the minimal environment do not prevent
+filesystem traversal or network access. Run in a disposable container/account with
+no unrelated secrets, no production access, restricted outbound networking and
+only the fixture workspace plus the short-lived evaluation key. Because Bash can
+read the key, the provider itself must enforce a strict quota and the key must be
+revoked after use. The supplied cases are benign local tasks, and simulated
+operation handles must never be queried as real jobs. No production services or
+actual migrations are part of this suite.
 
 ## Evidence and verdicts
 

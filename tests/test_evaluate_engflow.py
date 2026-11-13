@@ -1,5 +1,6 @@
 """Test evidence collection mechanics without model/network requests."""
 
+import argparse
 import json
 import os
 import shutil
@@ -11,7 +12,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from scripts.evaluate_engflow import (
-    CASES, ROOT, case_skill_names, execute, git_state, git_state_changes,
+    CASES, ROOT, build_pi_environment, case_skill_names, execute, git_state, git_state_changes,
     inspect_events, phase_prompt,
     prepare, snapshot,
 )
@@ -323,6 +324,50 @@ class EvidenceTests(unittest.TestCase):
                                 self.root, self.root / "out", self.root / "err", 5)
         self.assertFalse(timeout)
         self.assertEqual(code, 3)
+
+    def test_pi_environment_isolates_home_and_only_forwards_named_credential(self):
+        original_home = os.environ.get("HOME")
+        with patch.dict(os.environ, {
+            "PATH": os.environ.get("PATH", os.defpath),
+            "OPENAI_API_KEY": "disposable-test-key",
+            "GITHUB_TOKEN": "must-not-pass",
+            "AWS_SECRET_ACCESS_KEY": "must-not-pass",
+            "NODE_OPTIONS": "--require /tmp/untrusted.js",
+        }, clear=True):
+            env = build_pi_environment(
+                argparse.Namespace(credential_env="OPENAI_API_KEY"),
+                self.root / "pi-case",
+            )
+        self.assertEqual(env["OPENAI_API_KEY"], "disposable-test-key")
+        self.assertNotIn("GITHUB_TOKEN", env)
+        self.assertNotIn("AWS_SECRET_ACCESS_KEY", env)
+        self.assertNotIn("NODE_OPTIONS", env)
+        self.assertNotEqual(env["HOME"], original_home)
+        self.assertTrue(Path(env["HOME"]).is_dir())
+        self.assertTrue(Path(env["PI_CODING_AGENT_DIR"]).is_dir())
+        self.assertEqual(env["PI_OFFLINE"], "1")
+        self.assertEqual(env["GIT_CONFIG_NOSYSTEM"], "1")
+
+    def test_pi_environment_rejects_reserved_credential_variable(self):
+        with patch.dict(os.environ, {"HOME": "not-a-key"}, clear=True):
+            with self.assertRaisesRegex(ValueError, "reserved runtime variable"):
+                build_pi_environment(
+                    argparse.Namespace(credential_env="HOME"),
+                    self.root / "reserved-case",
+                )
+
+    @unittest.skipUnless(os.name == "posix", "POSIX process groups")
+    def test_execute_uses_only_explicit_environment_when_supplied(self):
+        with patch.dict(os.environ, {"AMBIENT_SECRET": "must-not-pass"}):
+            code, timeout = execute(
+                [sys.executable, "-c",
+                 "import os; print(os.getenv('VISIBLE')); print(os.getenv('AMBIENT_SECRET', ''))"],
+                self.root, self.root / "explicit-env.out", self.root / "explicit-env.err", 5,
+                env={"PATH": os.environ.get("PATH", os.defpath), "VISIBLE": "allowed"},
+            )
+        self.assertFalse(timeout)
+        self.assertEqual(code, 0)
+        self.assertEqual((self.root / "explicit-env.out").read_text(), "allowed\n\n")
 
 
 if __name__ == "__main__":

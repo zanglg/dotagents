@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Prepare synthetic Engflow cases; opt in to real Pi/model runs with --run.
 
-Uses current provider credentials without printing or copying them. Working
-folders are NOT OS sandboxes. See docs/engflow/evaluation/README.md before running.
+Real runs isolate Pi's HOME/config and forward only one explicitly named provider
+key variable. Pi's Bash child process can still read that key; explicit operator
+acknowledgement is required. Working folders are NOT OS sandboxes. See
+docs/engflow/evaluation/README.md before running.
 """
 
 import argparse
 import hashlib
 import json
 import os
+import re
 import shutil
 import signal
 import subprocess
@@ -18,6 +21,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "docs/engflow/evaluation/cases.json"
+RESERVED_CREDENTIAL_ENV_NAMES = {
+    "PATH", "HOME", "TMPDIR", "LANG", "LC_ALL", "TERM",
+    "PI_CODING_AGENT_DIR", "PI_OFFLINE", "PI_TELEMETRY",
+    "PYTHONDONTWRITEBYTECODE", "GIT_CONFIG_NOSYSTEM",
+}
 
 
 def snapshot(root):
@@ -27,12 +35,13 @@ def snapshot(root):
             if p.is_file() and ".git" not in p.relative_to(root).parts}
 
 
-def execute(command, cwd, stdout, stderr, timeout):
+def execute(command, cwd, stdout, stderr, timeout, env=None):
     """Bound the owned process group; never leave a timed-out group running."""
-    env = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", PI_TELEMETRY="0")
+    child_env = dict(os.environ if env is None else env)
+    child_env.update(PYTHONDONTWRITEBYTECODE="1", PI_TELEMETRY="0")
     with stdout.open("w") as out, stderr.open("w") as err:
         process = subprocess.Popen(command, cwd=cwd, stdin=subprocess.DEVNULL,
-                                   stdout=out, stderr=err, env=env,
+                                   stdout=out, stderr=err, env=child_env,
                                    start_new_session=True)
         try:
             return process.wait(timeout=timeout), False
@@ -72,6 +81,44 @@ def case_skill_names(case):
     bundle = {p.name for p in (ROOT / "skills").glob("engflow-*")
               if (p / "SKILL.md").is_file()}
     return sorted(bundle | set(case["skills"]))
+
+
+def build_pi_environment(args, case_dir):
+    """Isolate Pi config and forward only one explicitly selected API-key variable.
+
+    Pi's built-in Bash tool inherits this environment. The selected key is therefore
+    visible to the agent and its model; the CLI requires explicit acknowledgement.
+    """
+    credential_env = args.credential_env
+    if not credential_env or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", credential_env):
+        raise ValueError("a valid --credential-env name is required")
+    if credential_env in RESERVED_CREDENTIAL_ENV_NAMES:
+        raise ValueError(f"--credential-env cannot use a reserved runtime variable: {credential_env}")
+    credential = os.environ.get(credential_env)
+    if not credential:
+        raise ValueError(f"provider credential environment variable is empty or missing: {credential_env}")
+
+    home = case_dir / "pi-home"
+    agent_dir = case_dir / "pi-agent"
+    temp_dir = case_dir / "pi-tmp"
+    for directory in (home, agent_dir, temp_dir):
+        directory.mkdir(parents=True, exist_ok=True)
+
+    # Do not pass ambient cloud, CI, source-control or other provider credentials.
+    env = {name: os.environ[name] for name in
+           ("PATH", "LANG", "LC_ALL", "TERM") if name in os.environ}
+    env.setdefault("PATH", os.defpath)
+    env.update({
+        "HOME": str(home),
+        "TMPDIR": str(temp_dir),
+        "PI_CODING_AGENT_DIR": str(agent_dir),
+        "PI_OFFLINE": "1",
+        "PI_TELEMETRY": "0",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "GIT_CONFIG_NOSYSTEM": "1",
+        credential_env: credential,
+    })
+    return env
 
 
 def git_run(root, *args):
@@ -241,6 +288,7 @@ def run_case(case, output, args):
         (case_dir / f"prompt-{number}.txt").write_text(prompt)
     if not args.run:
         return result
+    pi_env = build_pi_environment(args, case_dir)
     violations = []
     previous_response = ""
     for number in range(1, len(case["phases"]) + 1):
@@ -269,7 +317,8 @@ def run_case(case, output, args):
                     "Python tests must use PYTHONDONTWRITEBYTECODE=1. "
                     "Report genuine blockers instead of inventing results.", prompt]
         code, timed_out = execute(command, work, case_dir / f"events-{number}.jsonl",
-                                  case_dir / f"stderr-{number}.txt", args.timeout)
+                                  case_dir / f"stderr-{number}.txt", args.timeout,
+                                  env=pi_env)
         try:
             complete, tools, response = inspect_events(case_dir / f"events-{number}.jsonl")
         except (ValueError, KeyError, TypeError):
@@ -326,11 +375,25 @@ def main():
     parser.add_argument("--pi", default="pi")
     parser.add_argument("--provider")
     parser.add_argument("--model")
+    parser.add_argument("--credential-env",
+                        help="name of the provider API-key environment variable to expose to Pi")
+    parser.add_argument("--acknowledge-agent-visible-credentials", action="store_true",
+                        help="acknowledge that Pi's Bash tool can read the selected provider key")
     parser.add_argument("--thinking", default="low")
     parser.add_argument("--timeout", type=int, default=240)
     args = parser.parse_args()
     if args.run and (not args.provider or not args.model):
         parser.error("--run requires explicit --provider and --model")
+    if args.run and not args.credential_env:
+        parser.error("--run requires --credential-env; ambient Pi auth files are intentionally isolated")
+    if args.credential_env and not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", args.credential_env):
+        parser.error("--credential-env must be a valid environment variable name")
+    if args.credential_env in RESERVED_CREDENTIAL_ENV_NAMES:
+        parser.error("--credential-env cannot use a reserved runtime variable")
+    if args.run and not os.environ.get(args.credential_env):
+        parser.error(f"--credential-env is empty or missing: {args.credential_env}")
+    if args.run and not args.acknowledge_agent_visible_credentials:
+        parser.error("--run requires --acknowledge-agent-visible-credentials; Pi Bash can read the selected key")
     if args.timeout <= 0:
         parser.error("--timeout must be positive")
     if args.run and os.name != "posix":
@@ -347,6 +410,8 @@ def main():
     else:
         output = Path(tempfile.mkdtemp(prefix="engflow-eval-"))
     metadata = {"provider": args.provider, "model": args.model, "thinking": args.thinking,
+                "credential_env": args.credential_env,
+                "credential_exposure_acknowledged": args.acknowledge_agent_visible_credentials,
                 "host": "pi", "run": args.run, "results": [],
                 "started_at": datetime.now(timezone.utc).isoformat(),
                 "case_manifest_sha256": hashlib.sha256(CASES.read_bytes()).hexdigest()}
