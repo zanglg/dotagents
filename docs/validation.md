@@ -45,9 +45,10 @@ requests; this checks fixture integrity, not agent behavior.
 
 Use [the Engflow evaluation procedure](engflow/evaluation/README.md) for real-host
 synthetic tasks, traces and human review. Real-host model runs remain opt-in and are
-not part of deterministic CI. The optional Pi adapter makes model
-requests only with `--run` and explicit provider/model choices. Generated evidence
-belongs outside this repository. A successful static check or `ready_for_review`
+not part of deterministic CI. Codex and Pi are alternative evaluation adapters,
+not dependencies of Engflow's Skill contracts. Model requests require `--run`,
+an explicit `--host` and the selected host's authentication/configuration.
+Generated evidence belongs outside this repository. A successful static check or `ready_for_review`
 status is not a behavioral pass, independent review or merge approval.
 
 See [original smoke results](engflow/evaluation/results.md) and the

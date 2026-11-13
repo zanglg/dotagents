@@ -13,8 +13,11 @@ from unittest.mock import patch
 
 from scripts.evaluate_engflow import (
     CASES, ROOT, build_pi_environment, case_skill_names, execute, git_state, git_state_changes,
-    inspect_events, phase_prompt,
-    prepare, snapshot,
+    inspect_events, phase_prompt, prepare, snapshot,
+)
+from scripts.engflow_eval_hosts import (
+    build_codex_environment, codex_command, codex_prompt,
+    inspect_codex_events,
 )
 
 
@@ -54,6 +57,82 @@ class EvidenceTests(unittest.TestCase):
     def test_empty_stream_is_not_completion(self):
         self.events.write_text("")
         self.assertFalse(inspect_events(self.events)[0])
+
+    def test_codex_json_completed_run_preserves_response_and_tools(self):
+        events = [
+            {"type": "thread.started", "thread_id": "example"},
+            {"type": "turn.started"},
+            {"type": "item.started", "item": {
+                "type": "command_execution", "command": "git status --short"}},
+            {"type": "item.completed", "item": {
+                "type": "command_execution", "command": "git status --short",
+                "exit_code": 0, "status": "completed"}},
+            {"type": "item.completed", "item": {
+                "type": "agent_message", "text": "CONVERGED", "id": "m1"}},
+            {"type": "turn.completed", "usage": {"input_tokens": 6}},
+        ]
+        self.events.write_text("\n".join(json.dumps(event) for event in events) + "\n")
+        completed, tools, response = inspect_codex_events(self.events)
+        self.assertTrue(completed)
+        self.assertEqual(response, "CONVERGED")
+        self.assertTrue(any(tool["name"] == "bash" for tool in tools))
+        self.assertTrue(any(tool["name"] == "attempted_command_execution" for tool in tools))
+
+    def test_codex_json_failed_or_incomplete_run_is_not_success(self):
+        base = [
+            {"type": "turn.started"},
+            {"type": "item.completed", "item": {"type": "agent_message", "text": "done"}},
+        ]
+        for ending in ([], [{"type": "turn.failed", "error": {"message": "fail"}}],
+                       [{"type": "error", "message": "transport"}],
+                       [{"type": "turn.completed"}, {"type": "error", "message": "late"}]):
+            with self.subTest(ending=ending):
+                self.events.write_text("\n".join(
+                    json.dumps(e) for e in base + ending) + "\n")
+                self.assertFalse(inspect_codex_events(self.events)[0])
+
+    def test_codex_prompt_translates_only_explicit_skill_invocation(self):
+        prompt = "/skill:engflow-converge Assess Spec.md."
+        transformed = codex_prompt(prompt)
+        self.assertIn("$engflow-converge", transformed)
+        self.assertIn(".agents/skills/engflow-converge/SKILL.md", transformed)
+        self.assertIn("Assess Spec.md.", transformed)
+        self.assertEqual(codex_prompt("Assess Spec.md."), "Assess Spec.md.")
+
+    def test_codex_command_enforces_read_only_and_workspace_write(self):
+        args = argparse.Namespace(codex="codex", model="test-model", thinking="low")
+        work = self.root / "workspace"
+        read_only = codex_command(args, work, "/skill:engflow-converge Check.", read_only=True)
+        writable = codex_command(args, work, "/skill:engflow-implement Fix.", read_only=False)
+        self.assertEqual(read_only[:2], ["codex", "exec"])
+        self.assertIn("--json", read_only)
+        self.assertIn("--ephemeral", read_only)
+        self.assertIn("--ignore-user-config", read_only)
+        self.assertEqual(read_only[read_only.index("--sandbox") + 1], "read-only")
+        self.assertEqual(writable[writable.index("--sandbox") + 1], "workspace-write")
+        self.assertIn('approval_policy="never"', read_only)
+        self.assertIn("sandbox_workspace_write.network_access=false", writable)
+        self.assertNotIn("danger-full-access", writable)
+
+    def test_codex_environment_does_not_forward_ambient_secrets(self):
+        auth_dir = self.root / "isolated-codex-auth"
+        auth_dir.mkdir()
+        args = argparse.Namespace(codex_home=auth_dir)
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "do-not-forward",
+                                      "GITHUB_TOKEN": "do-not-forward"}, clear=True):
+            env = build_codex_environment(args, self.root / "case")
+        self.assertNotIn("OPENAI_API_KEY", env)
+        self.assertNotIn("GITHUB_TOKEN", env)
+        self.assertEqual(Path(env["CODEX_HOME"]), auth_dir)
+        self.assertNotEqual(env["HOME"], str(auth_dir))
+
+    @unittest.skipUnless(shutil.which("git"), "Git CLI required")
+    def test_codex_skill_installation_does_not_contaminate_git_fixture(self):
+        work = prepare(self.load_case("converge-clean"), self.root / "codex", host="codex")
+        skills = work / ".agents" / "skills"
+        self.assertTrue((skills / "engflow-converge" / "SKILL.md").is_file())
+        self.assertTrue((skills / "engflow-implement" / "SKILL.md").is_file())
+        self.assertEqual(git_state(work)["status"], {})
 
     def test_response_transfer_is_explicit_and_preserves_invocation(self):
         case = {"phases": ["first", "/skill:engflow-specify Update Spec.md."],

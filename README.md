@@ -89,7 +89,9 @@ without searching the whole workspace.
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 See the [Engflow guide](docs/engflow/README.md) for responsibilities, composition,
-document scope and migration from the previous names.
+document scope and migration from the previous names. Engflow is host-neutral;
+Codex and Pi are alternative real-host evaluation adapters, not runtime dependencies
+of the Skills.
 
 These skills are independent entry points, not a required workflow. Add other
 reusable skills to this catalog when useful. Dedicated planning connects the

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Prepare synthetic Engflow cases; opt in to real Pi/model runs with --run.
+"""Prepare host-neutral Engflow cases; opt in to real host runs with --run.
 
-Real runs isolate Pi's HOME/config and forward only one explicitly named provider
-key variable. Pi's Bash child process can still read that key; explicit operator
-acknowledgement is required. Working folders are NOT OS sandboxes. See
-docs/engflow/evaluation/README.md before running.
+The shared manifest, acceptance checks and evidence format are host-independent.
+Codex and Pi adapters use their own CLI protocol and credential handling.
+Working folders are not OS sandboxes. Consult docs/engflow/evaluation/README.md.
 """
 
 import argparse
@@ -18,6 +17,17 @@ import subprocess
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+
+if __package__:
+    from .engflow_eval_hosts import (
+        build_codex_environment, codex_command, install_codex_skills,
+        inspect_codex_events,
+    )
+else:
+    from engflow_eval_hosts import (
+        build_codex_environment, codex_command, install_codex_skills,
+        inspect_codex_events,
+    )
 
 ROOT = Path(__file__).resolve().parents[1]
 CASES = ROOT / "docs/engflow/evaluation/cases.json"
@@ -172,7 +182,8 @@ def initialize_git_fixture(case, work):
 
     # Copied Skill resources are tooling, not part of the code under review.
     exclude = work / ".git" / "info" / "exclude"
-    exclude.write_text(exclude.read_text() + "\n/.eval-skills/\n/.eval-evidence/\n")
+    exclude.write_text(exclude.read_text()
+                       + "\n/.eval-skills/\n/.eval-evidence/\n/.agents/skills/\n")
 
     git_run(work, "add", "--", *tracked)
     git_run(work, "commit", "--quiet", "-m",
@@ -244,7 +255,7 @@ def git_state_changes(before, after):
     }
 
 
-def prepare(case, case_dir):
+def prepare(case, case_dir, host=None):
     work = case_dir / "workspace"
     work.mkdir(parents=True)
     for name, content in case["files"].items():
@@ -264,8 +275,11 @@ def prepare(case, case_dir):
             path = work / ".eval-evidence" / relative
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(content.replace("@EVAL_HEAD_SHA@", head))
-    for name in case_skill_names(case):
+    names = case_skill_names(case)
+    for name in names:
         shutil.copytree(ROOT / "skills" / name, work / ".eval-skills" / name)
+    if host == "codex":
+        install_codex_skills(work, names)
     return work
 
 
@@ -281,7 +295,7 @@ def phase_prompt(case, number, previous_response=""):
 
 def run_case(case, output, args):
     case_dir = output / case["id"]
-    work = prepare(case, case_dir)
+    work = prepare(case, case_dir, host=args.host)
     initial = snapshot(work)
     result = {"case": case["id"], "status": "prepared",
               "expected_status": case.get("expected_status"), "phases": [],
@@ -292,7 +306,8 @@ def run_case(case, output, args):
         (case_dir / f"prompt-{number}.txt").write_text(prompt)
     if not args.run:
         return result
-    pi_env = build_pi_environment(args, case_dir)
+    host_env = (build_codex_environment(args, case_dir) if args.host == "codex"
+                else build_pi_environment(args, case_dir))
     violations = []
     previous_response = ""
     for number in range(1, len(case["phases"]) + 1):
@@ -305,26 +320,31 @@ def run_case(case, output, args):
         (case_dir / f"prompt-{number}.txt").write_text(prompt)
         before = snapshot(work)
         before_git = git_state(work)
-        command = [args.pi, "--mode", "json", "--no-session", "--no-extensions",
-                   "--no-mcp", "--no-skills", "--no-prompt-templates", "--no-themes",
-                   "--no-context-files", "--no-approve", "--offline",
-                   "--tools", "read,bash,edit,write", "--provider", args.provider,
-                   "--model", args.model, "--thinking", args.thinking]
-        for name in case_skill_names(case):
-            command += ["--skill", str(work / ".eval-skills" / name)]
-        command += ["--append-system-prompt",
-                    "This is a synthetic local evaluation. Stay within the current working "
-                    "folder for task files and use only the explicit skill resources. "
-                    "Do not access credentials, network services, other projects or the "
-                    "parent directory. Do not install packages, commit, publish or start "
-                    "background processes. Only perform task-authorized writes. "
-                    "Python tests must use PYTHONDONTWRITEBYTECODE=1. "
-                    "Report genuine blockers instead of inventing results.", prompt]
+        if args.host == "codex":
+            read_only = number in case.get("readonly_phases", []) or not case["writable"]
+            command = codex_command(args, work, prompt, read_only=read_only)
+        else:
+            command = [args.pi, "--mode", "json", "--no-session", "--no-extensions",
+                       "--no-mcp", "--no-skills", "--no-prompt-templates", "--no-themes",
+                       "--no-context-files", "--no-approve", "--offline",
+                       "--tools", "read,bash,edit,write", "--provider", args.provider,
+                       "--model", args.model, "--thinking", args.thinking]
+            for name in case_skill_names(case):
+                command += ["--skill", str(work / ".eval-skills" / name)]
+            command += ["--append-system-prompt",
+                        "This is a synthetic local evaluation. Stay within the current working "
+                        "folder for task files and use only the explicit skill resources. "
+                        "Do not access credentials, network services, other projects or the "
+                        "parent directory. Do not install packages, commit, publish or start "
+                        "background processes. Only perform task-authorized writes. "
+                        "Python tests must use PYTHONDONTWRITEBYTECODE=1. "
+                        "Report genuine blockers instead of inventing results.", prompt]
         code, timed_out = execute(command, work, case_dir / f"events-{number}.jsonl",
                                   case_dir / f"stderr-{number}.txt", args.timeout,
-                                  env=pi_env)
+                                  env=host_env)
         try:
-            complete, tools, response = inspect_events(case_dir / f"events-{number}.jsonl")
+            reader = inspect_codex_events if args.host == "codex" else inspect_events
+            complete, tools, response = reader(case_dir / f"events-{number}.jsonl")
         except (ValueError, KeyError, TypeError):
             complete, tools, response = False, [], ""
         (case_dir / f"response-{number}.txt").write_text(response)
@@ -374,9 +394,14 @@ def run_case(case, output, args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="make actual model requests")
+    parser.add_argument("--host", choices=["codex", "pi"],
+                        help="Host adapter for real runs; omitted in host-neutral preparation")
     parser.add_argument("--case", action="append", help="case ID; repeatable; default all")
     parser.add_argument("--output", type=Path, help="new output folder outside the repository")
     parser.add_argument("--pi", default="pi")
+    parser.add_argument("--codex", default="codex")
+    parser.add_argument("--codex-home", type=Path,
+                        help="existing dedicated Codex auth directory for real runs")
     parser.add_argument("--provider")
     parser.add_argument("--model")
     parser.add_argument("--credential-env",
@@ -386,18 +411,28 @@ def main():
     parser.add_argument("--thinking", default="low")
     parser.add_argument("--timeout", type=int, default=240)
     args = parser.parse_args()
-    if args.run and (not args.provider or not args.model):
-        parser.error("--run requires explicit --provider and --model")
-    if args.run and not args.credential_env:
-        parser.error("--run requires --credential-env; ambient Pi auth files are intentionally isolated")
+    if args.run and not args.host:
+        parser.error("--run requires --host codex or --host pi")
+    if args.run and not args.model:
+        parser.error("--run requires --model")
+    if args.run and args.host == "pi":
+        if not args.provider:
+            parser.error("--host pi requires --provider")
+        if not args.credential_env:
+            parser.error("--host pi requires --credential-env")
+        if not os.environ.get(args.credential_env):
+            parser.error(f"--credential-env is empty or missing: {args.credential_env}")
+        if not args.acknowledge_agent_visible_credentials:
+            parser.error("--host pi requires --acknowledge-agent-visible-credentials")
+    if args.run and args.host == "codex":
+        if not args.codex_home or not args.codex_home.expanduser().is_dir():
+            parser.error("--host codex requires an existing --codex-home directory")
+        if args.provider or args.credential_env:
+            parser.error("--host codex uses --codex-home; omit Pi provider/credential flags")
     if args.credential_env and not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", args.credential_env):
         parser.error("--credential-env must be a valid environment variable name")
     if args.credential_env in RESERVED_CREDENTIAL_ENV_NAMES:
         parser.error("--credential-env cannot use a reserved runtime variable")
-    if args.run and not os.environ.get(args.credential_env):
-        parser.error(f"--credential-env is empty or missing: {args.credential_env}")
-    if args.run and not args.acknowledge_agent_visible_credentials:
-        parser.error("--run requires --acknowledge-agent-visible-credentials; Pi Bash can read the selected key")
     if args.timeout <= 0:
         parser.error("--timeout must be positive")
     if args.run and os.name != "posix":
@@ -413,16 +448,18 @@ def main():
         output.mkdir(parents=True, exist_ok=False)
     else:
         output = Path(tempfile.mkdtemp(prefix="engflow-eval-"))
-    metadata = {"provider": args.provider, "model": args.model, "thinking": args.thinking,
-                "credential_env": args.credential_env,
+    metadata = {"host": args.host, "provider": args.provider, "model": args.model,
+                "thinking": args.thinking, "credential_env": args.credential_env,
                 "credential_exposure_acknowledged": args.acknowledge_agent_visible_credentials,
-                "host": "pi", "run": args.run, "results": [],
+                "run": args.run, "results": [],
                 "started_at": datetime.now(timezone.utc).isoformat(),
                 "case_manifest_sha256": hashlib.sha256(CASES.read_bytes()).hexdigest()}
     if args.run:
-        host_env = build_pi_environment(args, output / "pi-host")
+        host_env = (build_codex_environment(args, output / "host")
+                    if args.host == "codex" else build_pi_environment(args, output / "host"))
+        executable = args.codex if args.host == "codex" else args.pi
         metadata["host_version"] = subprocess.check_output(
-            [args.pi, "--version"], text=True, env=host_env
+            [executable, "--version"], text=True, env=host_env
         ).strip()
     print(f"Evidence: {output}", flush=True)
     for case in cases:

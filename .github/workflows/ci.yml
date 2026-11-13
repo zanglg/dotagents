@@ -36,4 +36,6 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Prepare all behavioral evaluation fixtures
         if: matrix.python-version == '3.13'
-        run: python scripts/evaluate_engflow.py
+        run: |
+          python scripts/evaluate_engflow.py
+          python scripts/evaluate_engflow.py --host codex

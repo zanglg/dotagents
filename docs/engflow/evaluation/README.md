@@ -1,7 +1,9 @@
 # Engflow behavior evaluation
 
-Run synthetic tasks with real tools in fresh host/model sessions. This is distinct
-from static validation and from checking whether a prompt contains certain words.
+Run synthetic tasks with real tools in fresh host/model sessions. Engflow cases,
+expected outcomes and evidence requirements are **host-neutral**: Codex and Pi
+are optional adapters, not Engflow dependencies. This is distinct from static
+validation and from checking whether a prompt contains certain words.
 The small suite in [cases.json](cases.json) is a smoke regression suite, not proof
 of general reliability, security, performance or every Engflow skill's behavior.
 
@@ -126,6 +128,8 @@ From the repository root, with Python 3.10+:
 
 ```sh
 python3 scripts/evaluate_engflow.py
+# Also exercise Codex Skill installation without running a model:
+python3 scripts/evaluate_engflow.py --host codex
 ```
 
 This creates fixture workspaces and copied skill resources under a new OS temporary
@@ -133,7 +137,45 @@ directory. It makes no model request and reports `prepared`, never `passed`. Use
 `--case <id>` (repeatable) to select cases and `--output <new-directory>` for a new
 external output location. Existing output directories are never overwritten.
 
-## Run on Pi
+## Real-host adapters
+
+The same manifest and rubric run on either host. Select the adapter only when
+running real model requests with `--run --host codex` or `--run --host pi`.
+Codex uses project Skills in `.agents/skills/`, while Pi uses explicit
+`--skill` paths. The runner normalizes completion, attempted tool operations,
+file/Git changes and check results. Both return `ready_for_review` only after
+mechanical checks; neither grants an automatic behavioral pass.
+
+### Codex CLI
+
+Use a disposable, dedicated, already authenticated `CODEX_HOME` and a model
+available to that Codex login. This supports Codex's own authentication,
+including its login mechanism; it does not force a Pi provider or API-key
+environment variable. The evaluator does not copy your regular Codex auth
+directory. Authenticate the dedicated directory separately before running.
+
+```sh
+python3 scripts/evaluate_engflow.py --run --host codex \
+  --codex-home "$EVAL_CODEX_HOME" --model "$CODEX_MODEL" \
+  --thinking low \
+  --case converge-clean --case converge-gaps \
+  --case converge-stale-evidence --case converge-authority-conflict \
+  --case converge-partial \
+  --case implement-review-lifecycle \
+  --case implement-review-untracked-source
+```
+
+Codex uses `exec --json --ephemeral --ignore-user-config`, explicit
+`approval_policy=never` and the least sandbox permission for each phase:
+`read-only` for Converge or other read-only phases and `workspace-write`
+for authorized implementation. Workspace-write disables model-tool network
+access. The runner isolates the ordinary process environment and user HOME,
+while using the explicit `--codex-home` for authentication. That home
+directory and its tokens may still be readable by the Codex process or tools;
+use a restricted, disposable account/credential and an OS sandbox. Codex CLI
+option and JSON-event support must be checked against the installed version.
+
+### Pi CLI (optional)
 
 The adapter targets Pi 1.4.0's CLI/JSON event interface. Pi 1.4.0 requires
 Node.js 22.19.0 or newer. The runner requires POSIX process groups, an installed
@@ -157,7 +199,7 @@ environment. For example, use `ANTHROPIC_API_KEY` for an Anthropic API-key
 configuration or `OPENAI_API_KEY` for an OpenAI API-key configuration:
 
 ```sh
-python3 scripts/evaluate_engflow.py --run \
+python3 scripts/evaluate_engflow.py --run --host pi \
   --provider "$PI_PROVIDER" --model "$PI_MODEL" \
   --credential-env ANTHROPIC_API_KEY \
   --acknowledge-agent-visible-credentials \
@@ -173,9 +215,11 @@ startup network activity; it does not disable the model API request.
 owned process group and records a blocked attempt. Preserve that attempt if a
 separate bounded rerun is warranted; never overwrite it with a successful retry.
 
-The adapter disables ambient skills, context files, extensions, MCP and prompt
-templates; loads the complete copied Engflow group (plus any explicitly listed general tool); and uses a fresh `--no-session`
-process per phase. Explicit invocations use `/skill:name`. For the handoff case,
+The Pi adapter disables ambient skills, context files, extensions, MCP and
+prompt templates; loads the complete copied Engflow group (plus any explicitly
+listed general tool) and uses a fresh `--no-session` process per phase. Explicit
+Pi invocations use `/skill:name`. Codex runs receive the equivalent explicit
+`$skill-name` invocation and a fresh ephemeral `codex exec` process per phase. For the handoff case,
 the second process receives only its new prompt and files, not prior conversation.
 The Clarify-to-Specify, Research-to-Implement and explicit Design-to-Plan cases declare
 `carry_response_phases: [2]`; the adapter appends the actual preceding response
@@ -191,13 +235,14 @@ ambient Pi auth, settings, extensions or other user configuration. Record host
 version, provider/model, reasoning, resource hashes, authority restrictions and
 any other meaningful settings.
 
-**A temporary working directory is not an OS sandbox.** Pi tools run with the
-execution account's permissions. Prompts and the minimal environment do not prevent
+**A temporary working directory is not an OS sandbox.** Host tools run with
+the execution account's permissions subject to their own sandbox restrictions.
+Prompts and the minimal environment do not prevent
 filesystem traversal or network access. Run in a disposable container/account with
 no unrelated secrets, no production access, restricted outbound networking and
-only the fixture workspace plus the short-lived evaluation key. Because Bash can
-read the key, the provider itself must enforce a strict quota and the key must be
-revoked after use. The supplied cases are benign local tasks, and simulated
+only the fixture workspace plus the dedicated authentication context. For Pi,
+Bash can read the forwarded key: enforce a quota and revoke it after use. For
+Codex, use an explicitly designated credential directory with restricted access. The supplied cases are benign local tasks, and simulated
 operation handles must never be queried as real jobs. No production services or
 actual migrations are part of this suite.
 
@@ -209,8 +254,10 @@ Generated evidence stays outside the repository:
 - Per-phase JSONL events, stderr and responses; exact prompts outside each workspace.
 - Modified fixture artifacts and outputs from acceptance checks.
 
-The adapter checks actual tool traces and filesystem/test outcomes, not skill-text
-keywords. Converge fixtures are read-only and do not run tests; the clean case
+Both adapters check recorded tool traces and filesystem/test outcomes, not
+skill-text keywords. Codex JSON events and Pi JSON events have different
+completion and tool schemas; the adapter normalizes those differences but cannot
+guarantee equivalent runtime enforcement. Converge fixtures are read-only and do not run tests; the clean case
 binds its evidence to the generated Git baseline SHA, while stale-evidence cases
 use a deliberately mismatched revision. JSON-mode exit code zero alone is insufficient: the adapter also requires
 an un-aborted settled event and a final assistant `stop` reason. Missing output,
@@ -229,7 +276,9 @@ credentials, machine state or scratch output. Temporary evidence is not guarante
 to survive. See [the original smoke evaluation](results.md) and the
 [Clarify/Specify follow-up](clarify-specify-results.md) for inspected snapshots and limits.
 
-For another host, use the same fixture inputs and rubric with its actual invocation
-and policy mechanisms. Do not assume Pi results establish Claude Code or Codex
-policy enforcement. Multiple repetitions, models and restart environments remain
-necessary before claiming robust cross-host behavior.
+For an additional host, reuse the same fixture inputs and rubric through its
+own invocation and policy mechanism. Pi results do not establish Codex behavior,
+and Codex results do not establish Pi behavior. P0 behavioral acceptance may be
+performed on the selected target host; claim cross-host portability only for
+hosts and configurations that have actually been run. Repeat important cases
+before claiming statistical reliability.

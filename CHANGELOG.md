@@ -69,6 +69,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Make Engflow behavioral evaluation host-neutral: share the same fixture/rubric,
+  add a Codex CLI adapter with project Skill loading, JSONL normalization,
+  per-phase sandbox policy and explicit authenticated Codex home. Keep Pi optional.
+  Real-host results remain unverified until actual model runs are reviewed.
 - Add explicit-only, read-only `engflow-converge` for cross-artifact consistency,
   implementation coverage and validation-evidence freshness. It reports a status,
   evidence-backed findings and owning next actions; it does not write artifacts,
