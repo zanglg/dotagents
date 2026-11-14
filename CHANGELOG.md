@@ -6,6 +6,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-14
+
 ### Added
 
 - Add independent engineering entrypoints for clarification, specification,
