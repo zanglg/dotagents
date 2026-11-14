@@ -1,76 +1,10 @@
 # dotagents
 
-Portable content for a personal `.agents` workspace.
+Portable, prompt-only skills for a personal agent workspace. Copy the skill
+folders into your host's skill directory; using them requires no Python runtime,
+evaluation framework or specific agent host.
 
-This repository is intended to hold durable, reusable agent-facing assets such as
-skills, workflow scaffolding, templates, and project instructions. It should stay
-small, auditable, and safe to copy between machines.
-
-## What Belongs Here
-
-- Reusable skills under `skills/<skill-name>/`
-- Agent instructions and workflow notes
-- Templates, references, and scripts owned by a specific skill
-- Documentation that explains how the workspace is organized
-
-## What Does Not Belong Here
-
-- Secrets, tokens, credentials, or private machine state
-- Caches, generated scratch output, dependency folders, or build artifacts
-- Tool-specific local configuration that cannot be safely shared
-- `.DS_Store` and other operating-system metadata
-
-## Repository Layout
-
-```text
-.
-|-- AGENTS.md          # Instructions for agents working in this repository
-|-- CHANGELOG.md       # Human-readable release history
-|-- CONTRIBUTING.md    # Contribution and commit conventions
-|-- LICENSE            # MIT License
-|-- README.md          # Repository overview
-|-- VERSION            # Current repository content version
-|-- docs/              # Guides and sanitized evaluation results
-|-- scripts/           # Static checks and opt-in behavior evaluation
-|-- tests/             # Deterministic validation-tool tests
-`-- skills/
-    |-- engflow-clarify/ # Deep discovery and requirement clarification
-    |-- engflow-design/       # Feature design and sustained technical decisions
-    |-- engflow-poc/          # Bounded execution-based verification
-    |-- diagram-aesthetics/ # Shared technical diagram aesthetics
-    |-- engflow-handoff/      # Standalone session transfer and resumption
-    |-- engflow-plan/         # Technical approach and delivery route
-    |-- engflow-tasks/        # Executable feature task decomposition
-    |-- engflow-implement/    # Linear implementation, review and cross-session recovery
-    |-- engflow-converge/     # Read-only cross-artifact and evidence consistency check
-    |-- engflow-research/ # Standalone evidence-driven investigation
-    |-- engflow-specify/      # Standalone specification synthesis
-    |-- engflow-refactor-assess/ # Standalone read-only refactoring assessment
-    `-- semver-bump/   # General-purpose SemVer recommendation and updates
-```
-
-Each reusable skill should live in its own directory:
-
-```text
-skills/<skill-name>/
-|-- README.md          # User-facing usage guide
-|-- SKILL.md           # Authoritative agent instructions
-|-- references/
-|-- scripts/
-|-- assets/
-`-- templates/
-```
-
-Every skill has a short README with Purpose, Examples, Inputs and outputs,
-Installation and collaboration, and Validation and references. Link to SKILL.md
-for authoritative behavior rather than maintaining a second instruction set.
-Repository-only validation links are documentation, not installation dependencies.
-
-Only add supporting directories when the skill actually needs them. Keep files
-near the skill that owns them so future agents can audit and update the content
-without searching the whole workspace.
-
-## Available Skills
+## Available skills
 
 | Skill | Purpose |
 | --- | --- |
@@ -88,116 +22,63 @@ without searching the whole workspace.
 | [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
-See the [Engflow guide](docs/engflow/README.md) for responsibilities, composition,
-document scope and migration from the previous names. Engflow is host-neutral;
-Codex and Pi are alternative real-host evaluation adapters, not runtime dependencies
-of the Skills.
-
-These skills are independent entry points, not a required workflow. Add other
-reusable skills to this catalog when useful. Dedicated planning connects the
-technical approach and delivery structure, reusing the shared design method for
-unresolved technical choices. Existing designs stay authoritative through references.
-Simple plans keep inline tasks; optional Tasks separates larger task lists.
-Implementation owns observed progress, local refinement and code review in the single task source. Plan references
-task evidence rather than duplicating task state. Converge independently checks
-cross-artifact consistency and evidence freshness without editing files; Refactor
-Assess evaluates existing maintenance burdens and returns recommendations. Handoff
-transfers essential context without becoming a second execution record. Small work
-can go straight to implementation. See the usage and validation scenarios for
-[planning](skills/engflow-plan/README.md), [implementation and review](skills/engflow-implement/README.md)
-and [convergence](skills/engflow-converge/README.md).
-
 ## Installation
 
-Engflow is distributed as one group: install **all `skills/engflow-*` folders**
-together under the target repository's `.agents/skills/` (or the host's personal
-skill directory). Preserve sibling folder names, relative paths and supporting
-files. Partial Engflow installs are no longer supported. Preserve local
-customizations before replacing an installed group.
+Install all `skills/engflow-*` folders together, preserving sibling names and
+references. Each entrypoint is independently usable and explicitly invoked;
+there is no required Spec -> Design -> Plan -> Tasks sequence. See the
+[Engflow guide](docs/engflow/README.md) for choosing and combining them.
 
-Each entrypoint remains independently usable: installing the group does not impose
-a stage sequence, Init, router or automatic orchestration. Design, Research and PoC
-own shared method references beside their entrypoints; Plan/Implement read those
-references directly within their own authority, without invoking another Skill or
-creating its outputs. All Engflow entrypoints remain explicit-only.
+`diagram-aesthetics` and `semver-bump` install individually. Preserve local
+customizations when updating. This repository's `AGENTS.md` governs its own
+development; do not inject it as a global policy into target projects.
 
-General tools such as `diagram-aesthetics` and `semver-bump` still install individually.
-No Spec, Design, saved plan or task file is required for a bounded implementation.
-Research/PoC independent requests retain conversational defaults and numbered saves
-only on explicit request.
+## Layout
 
-For a personal workspace, use these folders in the skill-discovery location
-supported by your host. This repository's `AGENTS.md` governs development of
-dotagents; it is not a global policy to inject into every project.
+- `skills/<name>/SKILL.md`: authoritative agent instructions.
+- `skills/<name>/README.md`: short human-facing usage guide.
+- Skill-local `references/`, `assets/` and `agents/`: methods, optional templates
+  and host invocation metadata. Keep these with their owning skill.
+- `docs/engflow/README.md`: group installation, composition and manual checks.
+- `scripts/validate_skills.py` and `tests/test_validate_skills.py`: optional
+  repository maintenance checks, not Skill runtime dependencies.
 
-## Adding A Skill
+Keep credentials, caches, machine configuration, temporary handoffs and session
+transcripts outside Git. Reusable handoff instructions belong in their Skill;
+individual task handoffs do not belong in this library.
 
-1. Create `skills/<skill-name>/SKILL.md`.
-2. Describe invocation and behavior in SKILL.md; add README.md using the five
-   user-guide sections above and link it to SKILL.md.
-3. Put supporting scripts, references, templates, or assets beside that skill.
-4. Run the smallest relevant validation for any executable content.
-5. Review `git status --short` before committing.
+## Maintenance checks
 
-## Contribution Conventions
+With Python 3.10+ and no third-party packages:
 
-Use [Conventional Commits](https://www.conventionalcommits.org/) for commit
-messages. Common types for this repository are:
+```sh
+python3 scripts/validate_skills.py
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+git diff --check
+git status --short
+```
 
-- `feat`: add a reusable skill, template, workflow, or documented capability
-- `fix`: correct broken instructions, scripts, references, or links
-- `docs`: update documentation only
-- `chore`: repository maintenance with no user-facing content change
+The checker validates skill metadata, Engflow's explicit-only settings, README
+contract links and local Markdown links/anchors. It supports this repository's
+small metadata subset; it is not a general YAML or Markdown parser. External
+URLs are not fetched. Review prose and unusual syntax manually.
 
-See [CHANGELOG.md](CHANGELOG.md) for release history and
-[CONTRIBUTING.md](CONTRIBUTING.md) for development and release conventions.
+CI runs these deterministic checks on Python 3.13. Static checks do not establish
+agent behavior. For material contract changes, use a few relevant isolated tasks
+on your chosen host and inspect actual actions; see the guide's
+[manual checks](docs/engflow/README.md#manual-checks). No model request is part of CI.
 
-Create a short-lived `feature/<name>` branch from current `main`. After
-validation and user approval, open a PR to `main` and use Squash and merge.
-Verify the result, then delete the completed feature branch and start the next
-one from updated `main`. There is no long-lived `dev` or release back-merge.
-Keep `main` linear and protected by PRs; never push to it directly or force-push.
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full policy.
+## Contributing and versions
 
-For personal use, the skill folders on `main` provide the latest reviewed
-content. New changes accumulate under `[Unreleased]`; `VERSION` records the
-latest declared release, so later `main` commits may contain additional work.
-Prepare a separate release PR when a new version is wanted. No tag, GitHub
-Release, or downloadable package is required. Pin a commit SHA for an exact
-revision, including the commit that introduced a declared version.
+Keep changes focused and add reusable skills under `skills/<name>/` with a
+`SKILL.md`, a short README linking it, and only necessary supporting resources.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for commit, PR and release conventions.
+Integrate authorized changes through PRs to `main` using Squash and merge.
 
-## Version Skill
-
-[semver-bump](skills/semver-bump/SKILL.md) is a general-purpose, prompt-only skill
-for recommending SemVer upgrades and updating existing version metadata and
-release notes. It discovers each project's conventions rather than assuming
-branch names, file paths, tag formats, or pre-1.0 rules. No helper scripts or
-runtime dependencies are required.
-
-Example requests:
-
-- "Use semver-bump to recommend the next version without editing anything."
-- "Use semver-bump to apply the confirmed version and update the changelog;
-  do not commit."
-
-Analysis is read-only by default, and edits require confirmation. The skill does
-not integrate branches or publish releases. This repository compares the last
-verified version-release commit on `main` with current `main`; using the current
-tip as both baseline and target would miss unreleased changes. The version
-source is `VERSION`; [CONTRIBUTING.md](CONTRIBUTING.md) defines the process.
-
-## Agent Development Notes
-
-This repository is expected to be edited by agents. Changes should be focused,
-plain-text where practical, and easy for a human to review. Prefer documenting
-non-obvious behavior in the relevant skill or README instead of relying on
-commit messages.
-
-Run `python3 scripts/validate_skills.py` and manually review Markdown for clarity.
-Run `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v` when changing
-validation tools. See [validation guidance](docs/validation.md) for checker limits
-and opt-in real-host behavior evaluation; static checks do not prove skill behavior.
-Record actual checks and remaining coverage limits in the final response.
+`main` holds reviewed content, including changes under `[Unreleased]` in
+[CHANGELOG.md](CHANGELOG.md). `VERSION` records the last declared release;
+update it only for an authorized release. A tag, GitHub Release or bundle is
+optional. Pin a commit SHA when an exact content revision is needed.
 
 ## License
 

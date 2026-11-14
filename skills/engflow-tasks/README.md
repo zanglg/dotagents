@@ -4,48 +4,28 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Convert a technical plan into executable tasks without changing its approved
-route or starting implementation. This is a separate, explicitly invoked capability,
-not a mandatory stage. Keep simple new or existing tasks inline in Plan; separate
-tasks.md only when task volume or independent maintenance makes it useful.
+Create or refine a separate task list when useful, without changing the approved
+technical route or starting implementation. Simple plans can keep inline tasks.
 
 ## Examples
 
-- "Use engflow-tasks for specs/003-search/plan.md; create tasks.md beside it."
-- "Refine the next milestone's tasks, preserving IDs and completed evidence."
-- "Inject this confirmed solution into affected task constraints; do not redesign."
-- "Preview task decomposition without writing files."
+- "Create tasks.md beside specs/003-search/plan.md."
+- "Refine the next milestone, preserving IDs and completed evidence."
 
 ## Inputs and outputs
 
-Provide the selected feature/plan, effective requirements, design references and
-write limits. Output is a task list with stable IDs, deliverables, dependencies,
-relative source references and observable checks. The [outline](assets/tasks.md)
-is optional. Default new location is `specs/NNN-short-name/tasks.md`; explicit
-paths and project conventions take precedence.
+Provide the selected plan, requirement/design references and write limits. Receive
+stable task IDs, deliverables, dependencies and observable checks. Default to the
+feature-local tasks.md; the [outline](assets/tasks.md) is optional. Extraction
+from inline tasks requires authority for both sources.
 
 ## Installation and collaboration
 
-Install all sibling `engflow-*` folders together in the host's skill directory,
-such as `.agents/skills/`, preserving their relative layout and supporting files.
-Each entrypoint remains independently usable; no prior stage invocation is required.
-Invoke this entrypoint explicitly through the host's supported mechanism.
-
-Plan supplies the technical
-route and milestone structure; Tasks decomposes it; Implement maintains actual
-task progress and validation. Separate tasks.md owns task state; plan.md links
-that evidence and keeps feature-level continuity without duplicating statuses.
-
-Existing tasks inside plans remain valid. Do not extract them into a second
-live list without authority to update both sources and preserve history. Tasks
-does not automatically invoke Research/Design or grant implementation permission.
-User decisions and findings update affected task constraints within write scope;
-stale upstream documents remain explicit pending synchronization.
+Install all sibling `engflow-*` folders together, preserving references.
+Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for composition.
 
 ## Validation and references
 
-Check settled design preservation, source/requirement links, genuine dependencies,
-integration coverage, stable IDs and evidence limits. Confirm no implementation,
-mutating checks or unauthorized upstream edits occurred. See the
-[evaluation suite](../../docs/engflow/evaluation/README.md) for fixtures and real-host
-review requirements; static checks and prepared fixtures are not behavioral passes.
+Check source links, dependencies, integration coverage and evidence limits.
+Tasks owns task state when present; Plan references it, and Implement updates
+actual progress. No competing live list or implicit execution is introduced.
