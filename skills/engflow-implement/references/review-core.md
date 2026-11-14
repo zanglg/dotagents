@@ -1,9 +1,10 @@
-# Shared code review method
+# Implement code review method
 
-This reference defines the read-only review method shared by standalone Code
-Review and Implement. Reading it applies the method in the caller's current task;
-it does not invoke another Skill, launch a worker, create a report or grant
-additional read/write, execution, approval or publication authority.
+This reference defines the read-only code review method used internally by Engflow
+Implement. It is not an independently invocable Skill. Reading it applies the
+method within Implement's current task; it does not invoke another Skill, launch a
+worker, create a report or grant additional read/write, execution, approval or
+publication authority.
 
 ## Review target and evidence
 
@@ -71,6 +72,12 @@ author's preferred conclusion. Reviewers are read-only, do not run mutating
 builds/tests/experiments and do not delegate further. The caller verifies
 consequential findings against source and counterevidence; an agent's assertion
 alone is not proof.
+
+Do not infer independent review from a claimed delegation alone. Confirm a
+separate reviewer was actually dispatched, returned a review result and had the
+specified read-only scope. An empty-recipient wait, a failed dispatch or a missing
+review response is not proof of independence. Treat unconfirmed review as self-
+review only if the implementer actually inspected the code, and report the limit.
 
 For Implement, the implementer owns any authorized fix. Fix only substantiated
 findings within existing scope, then rerun affected tests/checks and re-review

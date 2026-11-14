@@ -1,4 +1,4 @@
-# Review scope
+# Git change scope
 
 Choose the comparison from intent, not a universal diff command. Pin available
 references to commit IDs and state included/excluded work. Do not alter repository

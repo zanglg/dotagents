@@ -13,7 +13,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 LEGACY = {
-    "specify", "design", "plan-implementation", "implement", "code-review",
+    "specify", "design", "plan-implementation", "implement", "code-review", "engflow-code-review",
     "technical-research", "poc", "refactor-assess", "handoff",
 }
 NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
@@ -179,6 +179,8 @@ def validate(root):
             for old in LEGACY:
                 if re.search(rf"(?<![\w-])skills/{re.escape(old)}/", text):
                     errors.append(f"{path.relative_to(root)}: stale skills/{old}/ reference")
+            if re.search(r"(?<![\w-])engflow-code-review(?![\w-])", text):
+                errors.append(f"{path.relative_to(root)}: retired engflow-code-review entrypoint")
         for target in links(text):
             parts = urlsplit(target)
             if parts.scheme or parts.netloc:

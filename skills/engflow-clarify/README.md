@@ -4,43 +4,26 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Explore an early idea or resolve consequential ambiguity in existing requirements.
-Use when discussion and decisions are needed, rather than document synthesis.
-It reads existing material but returns content only in conversation; it never writes files.
+Explore an idea or resolve consequential uncertainty. Returns decisions in
+conversation only; it never creates or edits a Spec.
 
 ## Examples
 
-- "Use engflow-clarify to explore who this terminal feature serves and its first scope."
-- "Clarify restart behavior in the existing Spec without reopening settled choices."
-- "Split panes are confirmed but deferred. Summarize the Spec changes needed; keep tabs current."
-- "Summarize our decisions conversationally; do not create a file."
+- "Clarify restart behavior without reopening settled choices."
+- "Split panes are deferred. Summarize the needed Spec changes; write nothing."
 
 ## Inputs and outputs
 
-Start with an idea, discussion or existing Spec and relevant constraints. Output
-is a decision/change summary with current/deferred scope, unknowns, supplied approval
-evidence and impacts on requirements, acceptance and downstream material. No complete
-Spec is required, and no interview ledger or Spec file is created or updated.
+Provide an idea or existing sources and constraints. Receive confirmed decisions,
+current/deferred scope, unknowns and affected acceptance. Use Specify separately
+for an authorized document update.
 
 ## Installation and collaboration
 
-Install all sibling `engflow-*` folders together in the host's skill directory,
-such as `.agents/skills/`, preserving their relative layout and supporting files.
-Each entrypoint remains independently usable; no prior stage invocation is required.
-Invoke this entrypoint explicitly through the host's supported mechanism.
-
-It can be used without invoking another stage. `engflow-specify` synthesizes the discussion, checks consistency
-and previews or writes an authorized Spec. Clarify does not automatically invoke it.
-If the user requests both clarification and a Spec update, finish the summary first,
-then use separately scoped Specify work only through permitted host composition.
-A host may require a separate explicit invocation; Clarify itself remains read-only.
+Install all sibling `engflow-*` folders together, preserving references.
+Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for composition.
 
 ## Validation and references
 
-See [judgment examples](references/judgment.md) for confirmed versus authorized work
-and deferred versus rejected requirements. Check that even requests to save produce
-conversation-only output, that proposals stay distinct from decisions, and that a
-later Specify invocation receives the needed context without restarting discovery.
-See the repository's [evaluation suite](../../docs/engflow/evaluation/README.md) and
-[recorded results](../../docs/engflow/evaluation/results.md); the original writable
-Clarify result is historical, not evidence for the new read-only contract.
+Check read-only output and the distinction between proposals, decisions and
+write approval. See [judgment examples](references/judgment.md).
