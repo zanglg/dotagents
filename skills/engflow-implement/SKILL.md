@@ -130,9 +130,12 @@ Unless the user or host explicitly restricts all review, every implementation
 receives at least an honest self-review. If review is restricted entirely, respect
 that limit and disclose that no review occurred; do not imply it ran. For significant,
 high-risk or broadly coupled changes, prefer a fresh-context independent reviewer
-when the host supports one and the additional review is proportionate. Give that
-reviewer the exact target/baseline, relevant requirements and constraints, without
-leading it toward the author's preferred conclusion. Review helpers remain
+when the host supports one and the additional review is proportionate. Check
+that an actual reviewer dispatch tool is available before announcing independent
+review: a wait/status tool alone cannot dispatch
+a reviewer. If dispatch is unavailable, proceed with disclosed self-review.
+Give the reviewer the exact target/baseline, relevant requirements and constraints,
+without leading it toward the author's preferred conclusion. Review helpers remain
 read-only, do not run mutating checks or delegate further; pause edits while they
 inspect. Verify consequential returns against the actual source and counterevidence.
 Claim independent review only after a distinct reviewer was actually dispatched,
@@ -151,9 +154,12 @@ established defects from open questions and pre-existing issues. Record the revi
 scope, review mode, findings/fixes, actual rerun evidence and remaining limits in
 the execution record, or in the delivery response when no record is writable.
 Identify review mode explicitly at delivery: completed independent review with
-returned evidence, actual self-review only, or no review when restricted. If no
-independent result was received, state whether it was unavailable, attempted but
-unconfirmed/failed, or not proportionate; do not let a successful self-review
+returned evidence, actual self-review only, or no review when restricted. Apply
+the same evidence standard to progress messages and final delivery.
+For a completed independent review, identify the actual reviewer and summarize
+its returned assessment so the claim can be checked against the dispatch/result.
+If no independent result was received, state whether it was unavailable, attempted
+but unconfirmed/failed, or not proportionate; do not let a successful self-review
 silently imply an additional reviewer.
 
 Separate implemented, verified, partial and blocked work. Record observed checks

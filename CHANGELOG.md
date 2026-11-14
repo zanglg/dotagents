@@ -69,6 +69,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Check actual reviewer dispatch availability before announcing independent
+  Implement review, and identify the reviewer and returned assessment when
+  claiming completion. Codex P0 follow-up still observes unsupported independent
+  review claims; this instruction hardening is not a behavioral acceptance pass.
 - Clarify Converge's primary-status precedence when a required current test
   record is stale or a proposed Plan conflicts with an approved constraint:
   these are blocking delivery conclusions, not merely a list of known gaps.

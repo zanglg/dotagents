@@ -283,6 +283,8 @@ Keep durable sanitized summaries here; do not commit raw transcripts, private pa
 credentials, machine state or scratch output. Temporary evidence is not guaranteed
 to survive. See [the original smoke evaluation](results.md) and the
 [Clarify/Specify follow-up](clarify-specify-results.md) for inspected snapshots and limits.
+See [the Codex P0 follow-up](p0-codex-results.md) for preserved diagnostic failures
+and the distinction between mechanical readiness and unsupported review claims.
 
 For an additional host, reuse the same fixture inputs and rubric through its
 own invocation and policy mechanism. Pi results do not establish Codex behavior,
