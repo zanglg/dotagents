@@ -4,11 +4,11 @@ Use this separate file only when task volume, coordinated contributors, independ
 task review or external tracking makes it more useful than inline tasks in
 `plan.md`. A task list is not required to execute a milestone.
 
-This file is the single detailed task list and task-level execution record when
+This file is the single detailed task list and Task-level execution record when
 present. Plan may define or refine intended task deliverables and dependencies
-within its authority. Implement alone records observed status, checks, blockers
-and execution evidence here. Do not maintain a duplicate inline list or progress
-ledger in `plan.md`.
+within its authority. Implement alone records Task status, checks, blockers and
+task-level evidence here. `plan.md` remains the Feature/Milestone checkpoint and
+must not duplicate Task definitions, statuses or evidence.
 
 ## Read first
 

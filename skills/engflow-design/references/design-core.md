@@ -1,78 +1,100 @@
 # Shared technical design method
 
-> Draft proposal: Decision-Driven Progressive Design. This shared method is
-> intentionally used by Plan in lightweight mode and Design in targeted/deep mode.
+> This method belongs to Design. Plan consumes its outputs and does not reuse
+> this method to make technical decisions.
 
-This reference is reusable reasoning, not a Skill entrypoint, an invocation grant
-or an independent task. The active caller owns its scope, authority, outputs and
-source synchronization. Read and apply it in the current task; do not load another
-SKILL.md, start a worker or create a design document merely to use this method.
+This reference is reusable reasoning, not a Skill entrypoint, invocation grant or
+independent task. Design owns its scope, technical proposal, evidence integration
+and design-source synchronization. Read and apply it in the current Design task;
+do not load another SKILL.md, start a worker or create reports merely to use it.
 Project/host restrictions and explicit user limits still apply.
 
-## Establish scope and authority
+## Authority and lifecycle
 
-Read the user's goal, effective requirements, relevant source, existing decisions
-and the current feature artifacts before proposing a route. Distinguish requirements,
-confirmed decisions, preferences, proposals and unverified assumptions.
+Use the canonical feature lifecycle:
 
-Use these authority boundaries:
+1. **Spec** clarifies requirements, scope, acceptance and user-supplied constraints.
+2. **Design** defines the technical solution, decisions, architecture and optional
+   code skeleton; it deepens consequential topics when needed.
+3. **Plan** turns the accepted design and Spec into delivery milestones,
+   dependencies, acceptance mapping and optional task definitions.
+4. **Implement** changes the code, verifies behavior and maintains execution state.
 
-- Spec owns requirements, scope and acceptance.
-- A feature's single `design.md`, when present, owns its technical decisions.
-- Plan owns the delivery route, milestones, dependencies and milestone acceptance.
-- Implement maintains the observed feature-level checkpoint and execution evidence.
-- When no separate design exists, Plan may own a proportional technical approach
-  and its compact decision record inside `plan.md`.
-- Plan owns intended task definitions when it pre-decomposes work; task lists are
-  optional and normally remain inline in `plan.md`.
-- Implement owns all observed task/milestone status, verification, blockers and
-  execution evidence. A separate `tasks.md`, when justified, is the single
-  detailed task list and task-level execution record; it is not a separate stage.
-- Without a separate task record, Implement keeps just-in-time task refinement and
-  execution state in the existing `plan.md`.
+Keep authority distinct:
 
-Do not treat a proposal, draft, plan, task checkbox or generic continuation as
-approval. A caller's write authority does not grant authority to change another
-artifact or override a decision source.
+- Spec owns requirements, scope, externally observable acceptance and constraints
+  supplied by the user or effective external sources. It does not choose internal
+  technical solutions.
+- Design owns feature-level technical decisions, rationale, evidence, decision
+  threads, architecture and the implementation-oriented code skeleton.
+- Plan owns the delivery route, milestone outcomes, dependencies, milestone
+  acceptance and intended task definitions. It references Design; it does not
+  select or redefine technical solutions.
+- Implement owns source changes and observed execution state. The Plan is the
+  authoritative feature/milestone checkpoint; a separate `tasks.md`, when used,
+  is the task-level definition/status/evidence source.
 
-## Select the design depth
+The canonical order is not a one-way lock. The user may re-enter Design after Plan
+or during/after Implement to challenge, investigate or replace a specific technical
+decision. A material Design change requires downstream reconciliation, not a
+restart of the entire feature.
 
-Both callers use this same method and decision protocol. The difference is depth,
-scope and output ownership, not a second prompt or a different decision model.
+## Establish scope and evidence
 
-### Plan: lightweight mode
+Read the user's goal, effective Spec, existing Design and Plan, relevant code,
+runtime/version context, shared contracts and current execution evidence before
+proposing a route. Distinguish requirements, user constraints, confirmed decisions,
+preferences, agent proposals and unverified assumptions.
 
-Use the minimum design needed to establish a safe, coherent delivery route:
+If the Spec exposes missing product behavior or acceptance, identify a Spec gap.
+Do not invent behavior or turn Design into a second requirements interview. If a
+technical constraint is missing, state the assumption and its impact; ask only
+when it materially changes the solution.
 
-- Resolve decisions that materially affect architecture, interfaces, sequencing,
-  dependencies or verification.
-- Select routine, reversible and in-scope mechanisms autonomously.
-- Keep the technical result compact in `plan.md` when no separate design exists.
-- If `design.md` exists, consume it as the technical authority and summarize only
-  the selected route, binding constraints and relevant references in Plan.
-- Do not create `design.md`, invoke Design or expand a routine choice into a
-  comprehensive design exercise.
+For a targeted intervention, identify the requested Topic and inspect its current
+decision thread, dependent decisions, skeleton elements, implementation attempts,
+tests and failure evidence. Do not restart unrelated design work.
 
-If a decision needs deeper investigation or broad alternative analysis, expose
-the exact uncertainty and affected work. The user may explicitly invoke Design;
-do not invoke it automatically.
+## Choose proportional design depth
 
-### Design: targeted/deep mode
+Every feature needs a usable standard technical design. Keep it proportional to
+the feature and existing architecture. It should give Plan and Implement enough
+information to understand the intended solution, including relevant:
 
-Use Design only on explicit request. Focus on the requested design objective or
-the specific Plan decision the user wants challenged or refined.
+- Technical approach and architecture boundaries.
+- Component responsibilities and dependency direction.
+- Important data/control flows and lifecycle.
+- Core data structures, interfaces and externally relevant contracts.
+- Consequential decisions, constraints, assumptions and risks.
+- Correctness invariants and verification implications.
 
-- If Plan already exists, read it and treat its technical approach as the current
-  proposal to assess, not as a reason to restart the whole feature.
-- If `design.md` already exists, continue that document and preserve unaffected
-  decisions.
-- Investigate and compare alternatives deeply only where evidence or consequences
-  justify it.
-- Maintain one consolidated `design.md` per feature by default. Put multiple
-  decision threads and technical areas in that document; do not create one design
-  file per question, component or technical detail.
-- A separate ADR/contract document is justified only when it has an independently
-  maintained lifecycle or is an authoritative shared contract across features.
+Do not create irrelevant sections or over-design routine details.
+
+Deep design is topic-oriented and selective. Investigate a topic in depth when its
+uncertainty, consequences or trade-offs justify it, for example data structure
+selection, concurrency/locking, performance, consistency, failure recovery,
+security, compatibility, resource ownership or operational behavior. Keep multiple
+topics and decision threads in one consolidated feature-level `design.md`.
+
+A code skeleton is optional. Include representative source-language snippets when
+they clarify important types, data structures, ownership, interfaces, signatures,
+module boundaries, state transitions or algorithms. A skeleton may include a
+directory/module map, type definitions, interface contracts, pseudocode or key
+control flows. Do not write full implementation bodies or freeze routine helper
+decomposition.
+
+Classify consequential skeleton elements so Implement can distinguish authority:
+
+- **Binding**: an effective requirement, mandate or explicitly user-confirmed
+  contract that must be preserved.
+- **Selected**: an evidence-backed, in-scope agent choice that guides implementation
+  but is not represented as user confirmation.
+- **Proposed**: awaiting required user authority; dependent implementation remains
+  blocked until resolved.
+- **Illustrative**: an explanatory example only; Implement may adapt it.
+
+The presence of code in Design does not automatically approve every line. Preserve
+the status and provenance of each consequential decision.
 
 ## Build dependency-aware decision threads
 
@@ -88,23 +110,21 @@ proposal and not a fixed questionnaire.
 3. Resolve prerequisite or evidence questions before dependent choices. Do not
    ask about a downstream choice whose constraints are still unknown.
 4. In each interaction, address at most one consequential unresolved decision
-   that needs user input. Do not bundle several independent questions. Explain
-   why the decision matters, show the relevant evidence and constraints, offer
-   viable alternatives, state a recommendation and tradeoffs, then wait for the
-   user's answer before advancing to the next user decision.
+   that needs user input. Explain why it matters, show relevant evidence and
+   constraints, offer viable alternatives, state a recommendation and trade-offs,
+   then wait for the user's answer before advancing to the next user decision.
 5. Do not ask the user to decide routine implementation details. Select supported,
    reversible, in-scope choices autonomously and record the evidence and rationale.
-6. If a question exposes a missing product behavior or acceptance rule, identify
-   it as a Spec gap. Do not silently turn a technical design session into a second
-   requirements interview or invent product behavior to unblock design.
+6. If a question exposes missing product behavior or acceptance, identify it as a
+   Spec gap. Do not silently resolve it through technical design.
 
-Keep decision IDs stable within the artifact (for example, D001, D002). A decision
-record should be proportional, but material decisions normally retain:
+Keep decision IDs stable within the artifact (for example, D001, D002). A material
+decision record should retain:
 
 - Decision question and applicable scope.
 - Dependencies and affected components, interfaces or milestones.
 - Context, source evidence and binding constraints.
-- Viable alternatives, recommendation and consequential tradeoffs.
+- Viable alternatives, recommendation and consequential trade-offs.
 - Selected outcome and rationale, or the exact unresolved choice.
 - Decision status and provenance (who/what selected or confirmed it).
 - Consequences for the architecture skeleton and verification.
@@ -129,8 +149,8 @@ A decision must change the design model, not only add prose to a discussion log.
 After each material decision is selected, confirmed or invalidated, update the
 single design artifact's current skeleton and its decision dependencies.
 
-Build only the structural detail needed to guide implementation. Depending on
-the system, the skeleton may include:
+Build only the structural detail needed to guide implementation. Depending on the
+system, the skeleton may include:
 
 - Component/module map, responsibilities, ownership and dependency direction.
 - Important types, data structures, storage model and resource ownership.
@@ -140,7 +160,7 @@ the system, the skeleton may include:
 - Relevant concurrency, synchronization and cancellation semantics.
 - Failure paths, retries, rollback, recovery and lifecycle behavior.
 - Security, performance and operational constraints that affect the design.
-- Verification boundaries tied to the chosen mechanisms and requirements.
+- Verification boundaries tied to chosen mechanisms and requirements.
 
 Use concise trees, tables, sequence/state diagrams or signatures where they
 communicate structure better than prose. Signatures are appropriate when they are
@@ -151,73 +171,142 @@ When a decision changes, update current guidance and identify dependent decision
 or skeleton elements that are now stale. Preserve the previous decision and reason
 as history; never leave contradictory alternatives looking simultaneously current.
 
-## Respect decision authority and evidence
+## Re-entrant Design intervention
 
-A confirmed or mandated solution is binding within its supplied scope. Inspect its
-basis and relevant sources; check consistency and feasibility without restarting
-settled selection. If new evidence contradicts a user-approved core choice, request
-a change decision before incompatible work, not a preference-based replacement.
+### User-initiated intervention
 
-Use supported in-scope choices autonomously. For material behavior/scope changes,
-changes to user-approved core choices or consequential commitments beyond the
-caller's authority, bring the user evidence, a recommendation, alternatives and
-affected work before dependent execution. Approval establishes a decision or risk
-acceptance, not feasibility. Pause affected/dependent work only; continue
-independent authorized work.
+The user may invoke Design at any point before or after planning, during
+implementation, or after partial delivery. Treat the request as a targeted
+intervention. The user may challenge an agent-selected design, provide a preferred
+direction to investigate, request alternatives, or ask for a specific data
+structure, interface, concurrency, performance or other technical topic to be
+redesigned.
 
-For source-evidence gaps, read [the shared research method](../../engflow-research/references/research-core.md).
-When runtime evidence is necessary, read
-[the shared experiment method](../../engflow-poc/references/experiment-core.md);
-design or planning permission alone authorizes no experiment.
+A supplied direction is a constraint or hypothesis to evaluate according to its
+stated authority; it is not automatically a technically validated solution unless
+the user explicitly mandates it. Present evidence, trade-offs and consequences.
+Do not reopen unrelated decisions.
+
+### Implement-triggered escalation
+
+Implement may identify technical non-convergence and request a Design intervention.
+Escalation is warranted when materially different hypotheses or approaches have
+been tried without meaningful progress or new evidence, when the current design
+cannot satisfy a material constraint, or when the problem requires a consequential
+architectural/data/concurrency/performance trade-off beyond routine debugging.
+
+The escalation request should preserve:
+
+- The exact unresolved technical question and affected behavior/constraint.
+- The current Design decision IDs and relevant skeleton elements.
+- Distinct approaches/hypotheses attempted and their actual results.
+- Evidence, counterevidence and remaining gaps.
+- Affected code paths, tasks, milestones and verification claims.
+- Independent work that can continue safely.
+
+Stop speculative changes to the affected/dependent work. Do not retry the same
+approach without a changed hypothesis or new evidence, silently weaken acceptance,
+or block unrelated ready work. Engflow entrypoints are explicit-only: an
+Implement escalation requests user-directed Design invocation; it does not
+automatically invoke another Skill.
+
+### Resume after intervention
+
+After the Design decision is sufficiently resolved, record the selected route,
+remaining uncertainty and downstream synchronization required. Plan reconciles
+affected milestone/task definitions and delivery checks. Implement reassesses
+affected code, statuses and evidence, then resumes from the earliest affected
+unblocked work. Preserve unaffected implementation and valid evidence; revalidate
+only claims invalidated by the change.
 
 ## Integrate artifacts without duplicating authority
 
-The active caller integrates the technical result into its own authorized artifact.
+The active Design task owns updates to the technical design source.
 
-- Independent Design maintains one `design.md` per feature by default. All
-  feature-level decision threads, rationale and the evolving code skeleton belong
-  there. Do not create a separate design document for each thread or detail.
-- Plan with an existing `design.md` links to the relevant sections and carries
-  only a concise selected-approach summary, binding implementation constraints,
-  verification needs and delivery implications. Do not copy the full rationale,
-  alternatives, decision history or skeleton into `plan.md`.
-- Plan without a separate design may keep the proportional technical approach and
-  compact decision records in `plan.md`. Shared-method reuse creates no file and
-  does not invoke Design.
-- If Design is invoked after Plan and no `design.md` exists yet, initialize the
-  single design artifact by carrying forward all still-binding technical decisions
-  from the Plan as concise inherited records. Preserve each decision's original
-  status, rationale and provenance; do not reopen unaffected choices. Deeply
-  investigate only the decisions the user targeted and their dependencies.
-  Once Design becomes the technical authority, Plan should reference it and retain
-  only delivery-relevant summaries and constraints.
-- If `design.md` already exists, continue it, record only the targeted technical
-  revisions and preserve unaffected choices. Accepted changes must be reconciled
-  into affected Plan sections and, where a separate task record exists, its
-  affected entries before dependent implementation proceeds.
-- Design identifies affected Plan and optional task-record paths, sections,
-  decisions and pending synchronization. It updates only sources within its write
-  authority; it does not silently rewrite Plan or Implement-owned task state. Plan likewise identifies stale Design or
-  contract sources instead of silently rewriting them.
+- Maintain one feature-level `design.md` by default. Keep all feature-level
+  decision threads, rationale, evidence and the evolving code skeleton there.
+  Do not create a separate design document for each thread or detail.
+- Plan references Design decision IDs and sections. It carries only delivery
+  implications: selected route summary, milestone outcomes, dependencies,
+  acceptance mapping, implementation constraints and verification needs. It does
+  not copy full design rationale, alternatives, decision history or code skeleton,
+  and does not make new technical decisions.
+- For a legacy feature whose Plan contains technical decisions but has no
+  `design.md`, migrate relevant decisions as inherited records, preserving
+  original status, rationale and provenance. Do not approve drafts or reopen
+  unaffected choices. Design becomes the technical authority; Plan then references
+  it and retains delivery-relevant summaries only.
+- When a material design decision changes, identify affected Plan sections,
+  milestone IDs, inline task IDs or optional `tasks.md` entries, source paths,
+  code and verification evidence. Record each synchronization item as pending
+  until its owning source is checked.
+- Design does not silently rewrite Plan-owned delivery definitions, Implement-owned
+  observed status/evidence, Spec requirements or production code. Plan reconciles
+  delivery definitions; Implement updates execution records and code within its
+  authority. If the user explicitly authorizes a broader coordinated update, keep
+  each artifact's ownership boundary intact.
+- If a technical finding exposes missing or changed product behavior/acceptance,
+  return that question to Specify. Design must not silently change the Spec.
 - Split out a shared ADR/contract only when its authority and lifecycle are
   genuinely independent. Reference it from the feature design; do not keep
   competing copies.
 
-Within the caller's write authority, record essential constraints, applicable
-scope, supplied decision evidence and observable checks in the owning artifact.
-A proposal or task edit alone does not synchronize its consumers.
+A proposal or task edit alone does not synchronize its consumers. Close a pending
+item only after verifying that the owning source reflects the accepted decision.
+Keep stale code/evidence visible until Implement has reassessed it.
 
-## Readiness and self-check
+## Evidence, experiments and readiness
 
-Resolve viability questions before dependent detail. Finish when implementation
-does not need to rediscover feature semantics, cross-component contracts or major
-technical choices. The design should provide a usable implementation-oriented
-skeleton, not a complete code listing or a document of arbitrary length.
+Use supported sources and actual code/runtime context. For source-evidence gaps,
+read [the shared research method](../../engflow-research/references/research-core.md).
+When runtime evidence is necessary, read
+[the shared experiment method](../../engflow-poc/references/experiment-core.md).
+Design or planning permission alone authorizes no experiment. Apply these methods
+within the current task's authority; do not automatically invoke Research or PoC,
+create reports or start workers.
 
-State mechanisms, invariants, rationale, verification basis, unknowns, blocked
-scope and required user decisions. If a premise lacks evidence, give a conditional
-route with the discriminating next check.
+Resolve viability questions before dependent detail. Finish when Plan can produce
+a coherent delivery route and Implement will not need to rediscover feature
+semantics, cross-component contracts or major technical choices. State mechanisms,
+invariants, rationale, evidence basis, verification needs, unknowns, blocked scope
+and required user decisions. If a premise lacks evidence, give a conditional route
+with the discriminating next check.
 
-Check requirement coverage, consistency, interfaces/invariants, material failure
-behavior, critical counterevidence and verification adequacy. This is author
-self-check, not independent review, user approval or runtime proof.
+## Self-check
+
+Before delivery, perform a proportionate author self-check against effective
+requirements, actual architecture and available evidence:
+
+- Trace each selected mechanism to required behavior; check component
+  responsibilities, ownership, interfaces, data/control flow and invariants.
+- Ensure the code skeleton, when present, is coherent and detailed enough that
+  implementation will not need to rediscover major contracts, while leaving
+  routine algorithms and implementation bodies to the implementer.
+- Cover material lifecycle and failure behavior, including retries, rollback,
+  concurrency, compatibility, security, resource and operational concerns where
+  relevant.
+- Check consequential alternatives and trade-offs are explained, assumptions have
+  evidence or remain conditional, and no hidden dependency or unsupported premise
+  is presented as established.
+- Ensure verification exercises important success, failure and boundary behavior,
+  not merely the proposed implementation shape.
+- Confirm decision threads, statuses, dependencies and current skeleton agree;
+  superseded decisions are not presented as current guidance.
+- Confirm downstream synchronization is explicit and no unaffected decision or
+  completed work was unnecessarily reopened.
+
+Resolve supported gaps; surface missing private facts or consequential decisions
+rather than guessing. This is author self-check, not independent review or approval.
+Research supplies evidence; it does not approve the design.
+
+## Boundaries
+
+Read-only investigation and authorized design-document writes are in scope.
+Experiments need separately bounded execution authority. Do not initiate production
+implementation, modify production configuration, commit, push, publish or manage
+branches/worktrees.
+
+Honor effective requirements and ADRs; do not silently supersede them. New
+proposals are drafts, and substantive revisions do not inherit prior approval.
+Preserve provenance and report the resulting proposal, readiness limits, affected
+work and remaining synchronization.

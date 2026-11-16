@@ -11,10 +11,10 @@ evaluation framework or specific agent host.
 | [diagram-aesthetics](skills/diagram-aesthetics/README.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [engflow-plan](skills/engflow-plan/README.md) | Develop a lightweight technical approach, milestone route and validation; consume deeper Design when present |
+| [engflow-plan](skills/engflow-plan/README.md) | Turn accepted Spec and Design into milestones, dependencies and delivery validation |
 | [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
 | [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, task, implementation and evidence consistency |
-| [engflow-design](skills/engflow-design/README.md) | Targeted, decision-driven technical design with one consolidated design.md per feature |
+| [engflow-design](skills/engflow-design/README.md) | Standard and deep topic-level technical design, decision threads and optional code skeletons |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
@@ -24,10 +24,12 @@ evaluation framework or specific agent host.
 ## Installation
 
 Install all `skills/engflow-*` folders together, preserving sibling names and
-references. Each entrypoint is independently usable and explicitly invoked;
-there is no required document pipeline. Task decomposition is optional and
-handled within Plan or Implement, not a separate stage. See the
-[Engflow guide](docs/engflow/README.md) for choosing and combining them.
+references. Engflow feature work follows Spec → Design → Plan → Implement. Each entrypoint
+remains explicitly invoked and can also be used for focused work; Design can be
+re-entered at any lifecycle point for a targeted technical intervention. Task
+decomposition is optional and handled within Plan or Implement, not a separate
+stage. See the [Engflow guide](docs/engflow/README.md) for artifact authority and
+composition.
 
 `diagram-aesthetics` and `semver-bump` install individually. Preserve local
 customizations when updating. This repository's `AGENTS.md` governs its own

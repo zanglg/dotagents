@@ -28,7 +28,12 @@ suggested edits. Preserve accepted decisions and supplied approval evidence; a
 summary's recommendations are not approval, write authority or proof of feasibility.
 Do not reopen settled questions merely because another Skill gathered the answers.
 
-Distinguish requirements, preferences, technical choices and assumptions.
+Distinguish requirements, user preferences, externally mandated constraints and
+assumptions. Record technology or implementation directions only when the user or
+an effective external authority supplied them; preserve their source and strength.
+Do not independently choose, recommend or expand technical solutions in Spec.
+Route unresolved technical questions to Design rather than answering them in the
+specification.
 Review recommendations are not decisions; approval is not proof of feasibility.
 Honor effective requirements and ADRs, including accepted decisions under
 reevaluation until an approved replacement supersedes them.
@@ -74,12 +79,14 @@ Adapt [the outline](assets/spec.md), omitting unneeded sections and stating non-
   and failures. Acceptance criteria describe externally observable results;
   validation identifies the interfaces or system boundaries used to check them.
   Prefer existing test boundaries over new ones, not internal implementation details.
-- Include known contracts, constraints, dependencies and technical choices needed
-  for implementation, separately from user needs. Leave file layout and function
-  decomposition to implementers unless essential to the contract. Include code
-  snippets only when they express a contract more precisely than prose.
-- Link existing Design material rather than duplicating it. A combined Spec may
-  include the necessary approach without requiring separate documents.
+- Capture user-supplied or externally mandated constraints, dependencies and
+  existing contracts separately from behavioral requirements, preserving their
+  source and authority. Do not select a technical approach, architecture, internal
+  data structure, module layout, interface or implementation decomposition; those
+  belong to Design. Include code only when preserving a user-supplied externally
+  observable contract is clearer than prose.
+- Reference existing Design material when useful, but do not copy its technical
+  approach into Spec. Design is the authority for technical solutions.
 
 ## Self-check and revision
 

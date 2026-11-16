@@ -21,7 +21,7 @@ not require using every entrypoint or creating a full document suite.
 | Discuss an idea or consequential uncertainty without writing | [Clarify](../../skills/engflow-clarify/README.md) |
 | Synthesize decisions into requirements and acceptance | [Specify](../../skills/engflow-specify/README.md) |
 | Run targeted, decision-driven technical design and maintain the consolidated design | [Design](../../skills/engflow-design/README.md) |
-| Build a lightweight technical approach and progressive delivery route | [Plan](../../skills/engflow-plan/README.md) |
+| Turn accepted Spec and Design into milestones, dependencies and delivery validation | [Plan](../../skills/engflow-plan/README.md) |
 | Implement, test and review a change | [Implement](../../skills/engflow-implement/README.md) |
 | Check cross-artifact consistency and evidence freshness, read-only | [Converge](../../skills/engflow-converge/README.md) |
 | Investigate existing sources, without experiments | [Research](../../skills/engflow-research/README.md) |
@@ -29,44 +29,55 @@ not require using every entrypoint or creating a full document suite.
 | Assess worthwhile refactoring without edits | [Refactor Assess](../../skills/engflow-refactor-assess/README.md) |
 | Transfer essential context between sessions | [Handoff](../../skills/engflow-handoff/README.md) |
 
-A small fix goes directly to Implement. Add clarification, design or planning
-only when the work needs it. Converge, Refactor Assess and Handoff are optional,
-explicit requests; they are not automatic implementation stages. Code review is
-internal to Implement.
+The canonical feature lifecycle is Spec → Design → Plan → Implement. Spec clarifies
+requirements; Design owns the technical solution and can deepen selected topics;
+Plan defines delivery; Implement changes and verifies the code. Keep each artifact
+proportional to the feature. A bounded maintenance fix may go directly to Implement
+when no feature-level lifecycle is warranted. Converge, Refactor Assess and Handoff
+remain optional, explicit requests. Code review is internal to Implement.
 
-Plan, Design and Implement can read sibling design, research and experiment
-methods within their own task. Reading a reference invokes no other entrypoint
-and grants no additional output, execution or approval authority.
+Design is re-entrant: the user may invoke it at any point to challenge or redesign
+a specific technical Topic. Implement must request a targeted Design intervention
+when materially different attempts fail to converge or the current design cannot
+satisfy a consequential constraint. Preserve attempts and evidence, stop affected
+speculative work, and continue independent work. Skills remain explicit-only; an
+escalation request does not automatically invoke Design.
+
+Design owns the shared technical-design method. Plan consumes Design outputs and
+must not use that method to select technical solutions. Design, Plan and Implement
+may read shared research/experiment methods within their own task authority.
+Reading a reference invokes no other entrypoint and grants no additional output,
+execution or approval authority.
 
 ## Documents and continuation
 
-Honor supplied paths and existing project conventions. Otherwise, new feature
-documents use `specs/NNN-short-name/`, with `spec.md`, optional `design.md`,
-`plan.md` and optional `tasks.md` created only as needed. Allocate above retained
-IDs, do not fill gaps or rename existing features, and reuse the same feature
-across sessions. Explicit context wins over `Current feature` in `specs/README.md`;
-ask when the target remains ambiguous.
+Honor supplied paths and existing project conventions. Otherwise, feature
+artifacts use `specs/NNN-short-name/` with `spec.md`, `design.md` and `plan.md`.
+Create `tasks.md` only when separate Task-level tracking has clear value. Allocate
+above retained IDs, do not fill gaps or rename existing features, and reuse the
+same feature across sessions. Explicit context wins over `Current feature` in
+`specs/README.md`; ask when the target remains ambiguous.
 
-Spec owns requirements and acceptance. When a separate design exists, one
-consolidated `design.md` per feature owns its technical decisions, rationale,
-evidence, decision threads and evolving architecture/code skeleton. Keep multiple
-technical topics in that file; do not create one design document per decision.
-Split a shared ADR/contract only when it has an independently maintained lifecycle
-or shared authority across features.
+Spec owns requirements, scope, observable acceptance and constraints supplied by
+the user or effective external sources. It does not select internal technical
+solutions. Design owns the feature's technical approach, architecture, decisions,
+rationale, evidence, decision threads and evolving code skeleton. Keep multiple
+technical topics in one consolidated `design.md`; do not create one design document
+per decision. Every feature gets a proportional standard design. Deep investigation
+and code skeleton detail are expanded only when useful. Split a shared ADR/contract
+only when it has an independently maintained lifecycle or shared authority across
+features.
 
 Plan owns the delivery route, milestones, dependencies and milestone acceptance.
-When `design.md` exists, Plan references it and carries only a concise selected-route
-summary, binding implementation constraints and verification needs. Without a
-separate design, Plan may own a proportional technical approach inside `plan.md`.
-Plan may optionally define near-term task deliverables and dependencies when this
-improves execution clarity; default to inline tasks and leave distant work coarse.
-Implement owns the observed feature checkpoint, all task/milestone statuses,
-verification results, blockers and execution evidence. It decomposes the next
-milestone just in time by default.
-A separate `tasks.md` is optional for unusually large task volume, coordinated
-contributors, independent review or external tracking; when present it is the
-single detailed task list and task-level execution record. No separate Tasks Skill
-or stage is required. Small work needs none of these files. Templates are optional.
+It consumes Design decisions and references relevant sections; it does not make
+technical decisions or copy the full rationale/skeleton. Plan may optionally define
+near-term task deliverables and dependencies; default to inline tasks and leave
+distant work coarse. Implement owns observed Feature/Milestone status, acceptance
+evidence, blockers and integrated verification in `plan.md`. A separate `tasks.md`
+is optional for unusually large task volume, coordinated contributors, independent
+review or external tracking; when present it is the sole detailed task list and
+Task-level status/evidence source. With inline tasks, both levels remain in
+`plan.md`. Implement decomposes the next milestone just in time by default.
 
 Research and PoC return conclusions conversationally by default. Explicit saves
 use supplied/project paths, otherwise numbered files under `docs/research/` or
@@ -91,8 +102,11 @@ boundaries; no model runner or permanent result archive is required.
 | Converge: complete, omitted requirement, stale evidence, conflicting authority, limited baseline | Correct primary status; evidence tied to current source; no writes, tests or implicit workers |
 | Clarify followed by an authorized Specify request | Clarify writes nothing; Specify receives actual decisions and preserves scope/acceptance |
 | Resume partial work or encounter missing facts | Preserve valid evidence and pending gates; continue independent work without guessing private facts |
-| Plan followed by targeted Design revision | Design consumes the existing Plan, asks one consequential decision at a time, preserves unaffected decisions, and identifies delivery/task-record synchronization |
-| Multiple technical decision threads | Keep one feature-level design.md, model decision dependencies, evolve the code skeleton incrementally, and avoid duplicate design content in Plan |
+| Spec → Design → Plan → Implement | Spec contains requirements only; Design owns technical decisions; Plan maps accepted Design to milestones; Implement follows both authorities |
+| User-initiated Design intervention during Plan/Implement | Redesign only the targeted Topic, preserve unrelated decisions/progress, and identify affected downstream synchronization |
+| Implement technical non-convergence | Preserve distinct attempts/results, stop affected speculative work, request explicit Design intervention, and continue independent work |
+| Multiple technical decision threads and code skeleton | Keep one feature-level design.md, model dependencies, include optional code snippets/contracts, and distinguish Binding, Selected, Proposed and Illustrative elements |
+| Separate tasks.md | plan.md always retains Feature/Milestone state; tasks.md alone owns detailed Task state/evidence |
 | Research, PoC or Handoff preview/save | Respect source-only versus experiment authority, requested persistence and outstanding-operation limits |
 
 For Converge, expect CONVERGED for a complete verified scope, GAPS_FOUND for a

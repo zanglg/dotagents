@@ -4,10 +4,11 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Deliver code through implementation, actual tests and review. Small fixes need
-no saved plan; larger work maintains one living execution record, normally
-`plan.md`. Implement decomposes the next milestone just in time by default;
-a separate `tasks.md` is optional for unusually large or coordinated work.
+Deliver code through implementation, actual tests and review. Feature work follows
+Spec → Design → Plan → Implement. Implement decomposes the next milestone just in
+time by default; a separate `tasks.md` is optional for unusually large or
+coordinated work. `plan.md` always retains Feature/Milestone execution state;
+`tasks.md` owns Task-level state only when separate.
 
 ## Examples
 
@@ -16,11 +17,12 @@ a separate `tasks.md` is optional for unusually large or coordinated work.
 
 ## Inputs and outputs
 
-Provide a request, Spec/Design/Plan or optional task-record path and
+Provide the effective Spec, Design, Plan or a bounded maintenance request, plus
 acceptance/write limits. Receive implemented changes, actual validation, review
-mode, remaining limits and authorized progress updates in the single execution
-record. Ordinary diagnosis and just-in-time task refinement stay in scope; changed
-requirements or approved decisions need the applicable user decision.
+mode, remaining limits and authorized progress updates. Ordinary diagnosis and
+just-in-time task refinement stay in scope. If a technical problem cannot converge,
+Implement preserves evidence and requests targeted Design intervention rather than
+continuing speculative changes.
 
 ## Installation and collaboration
 

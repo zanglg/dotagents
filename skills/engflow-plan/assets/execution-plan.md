@@ -1,9 +1,10 @@
 # <Objective title>
 
-Plan status: Draft. This document alone does not authorize execution. Plan owns
-intended milestones and optional planned task definitions. Implement owns observed
-status, verification results and execution evidence in this record (or the
-referenced tasks.md when a separate task record is justified).
+Plan status: Draft. This document alone does not authorize execution. Design owns
+the technical solution. Plan owns intended milestones and optional planned task
+definitions. Implement maintains Feature/Milestone status and evidence in this
+record; Task-level status and evidence move to the referenced tasks.md only when a
+separate task record is justified.
 
 ## Objective and acceptance
 
@@ -19,8 +20,7 @@ Record essential context unavailable there, distinguishing decisions, proposals
 and unverified assumptions.
 
 - Requirements authority: `spec.md` or supplied source:
-- Technical design authority: `design.md` and relevant sections, or "Plan-owned
-  compact technical approach; no separate Design":
+- Technical design authority: `design.md` and relevant sections:
 - Shared contracts / ADRs:
 - Actual implementation entry points:
 
@@ -29,28 +29,20 @@ For user-confirmed/mandated solutions, record the source path/section, supplied
 confirmation evidence, applicable scope, essential constraints and observable
 checks. Follow relevant references before dependent work.
 
-## Technical approach and design integration (as needed)
+## Design integration
 
-Use this section proportionally.
+Reference the authoritative Design sections and decision IDs. Summarize only the
+delivery implications: selected route, affected interfaces/invariants, binding
+implementation constraints, dependencies and verification needs. Do not copy full
+design rationale, alternatives, decision history or code skeleton into Plan. If a
+material technical decision is unresolved or contradicted by source evidence,
+record the affected work and request Design intervention; do not decide it here.
 
-When `design.md` exists, it owns technical decisions. Reference the relevant
-decision IDs and sections. Summarize only the selected route, binding
-implementation constraints, affected interfaces/invariants and verification
-needs. Do not copy the full design rationale, alternatives, decision history or
-architecture/code skeleton into Plan. If Design is first introduced after Plan,
-carry forward the Plan's still-binding decisions into that single design artifact
-without reopening them, then reconcile this section to reference it.
-
-When no separate design exists, Plan may own a compact technical approach and
-decision record using the shared design method in lightweight mode. Do not create
-`design.md` merely to fill this template or reuse the method.
-
-- Technical authority and sections:
-- Selected mechanisms / concise route summary:
-- Binding interfaces, invariants and implementation constraints:
-- Material failure, compatibility, security or lifecycle concerns:
-- Assumptions, evidence gaps and the work they block:
-- Verification strategy tied to requirements and system boundaries:
+- Design authority and sections:
+- Relevant decision IDs and selected route:
+- Delivery constraints and affected interfaces/invariants:
+- Milestones/tasks depending on unresolved decisions:
+- Verification strategy tied to Spec acceptance:
 
 ## Milestones
 
@@ -101,11 +93,12 @@ do not transfer approval to changed scope or reopen it for routine progress.
 
 ## Current checkpoint
 
-Implement maintains all observed progress, status, blockers and verification evidence
-here. If tasks are inline, Implement updates their status/evidence in this record.
-If a separate tasks.md exists, keep task-level status/evidence there and retain
-only milestone-level summaries and references here. Plan revisions preserve
-Implement-owned observations and do not claim execution progress.
+Implement maintains the Feature checkpoint and all observed Milestone status,
+acceptance evidence, cross-milestone blockers and integrated verification here.
+If tasks are inline, Implement also updates Task status/evidence in this record.
+If a separate tasks.md exists, keep Task-level status/evidence there; retain
+Milestone-level state and references here. Plan revisions preserve Implement-owned
+observations and do not claim execution progress.
 
 - Last reconciled source/environment state:
 - Verified completion and commands/results:
@@ -115,9 +108,9 @@ Implement-owned observations and do not claim execution progress.
 
 ## Decisions and discoveries
 
-If no separate `design.md` exists, keep only the compact Plan-owned technical
-decisions needed to explain the delivery route. If Design exists, reference its
-decision IDs and sections; do not duplicate full technical records here.
+Do not record new technical decisions in Plan. Reference Design decision IDs and
+sections; preserve any legacy Plan-owned technical records only as historical
+context until Design migrates them.
 
 Keep consequential findings and changes with reasons. Preserve successor references
 for retired tasks, valid historical evidence and reasons evidence became stale.

@@ -14,8 +14,8 @@ selected feature. For authorized new feature records, default to
 retained index identities (at least three digits, starting at `001`). Recheck
 collisions and preserve existing identities; do not create placeholder Spec/Design
 files or branches. Record creation still needs write authority. Preserve existing
-formats, stable milestone/task IDs, user content and history. No planner or template
-is required.
+formats, stable milestone/task IDs, user content and history. No additional
+planner invocation or template is required to maintain a suitable existing record.
 
 When feature creation or selection permits navigation writes, maintain its link
 and `Current feature` in the same resolved project index (default
@@ -50,13 +50,16 @@ Keep enough information for a fresh session:
 - Observed completion, partial work, actual checks, consequential discoveries,
   blockers, outstanding commands/side effects and the next concrete action.
 
-Dedicated planning owns the intended milestone route and any ahead-of-time
-task definitions. Implement owns observed task/milestone status, actual checks,
-blockers and execution evidence, as well as just-in-time refinement within the
-agreed structure. Before starting a coarse milestone, inspect the actual code and
-add only the tasks or local steps needed for safe execution. Preserve agreed scope,
-contracts, acceptance and cross-milestone dependencies. Routine expansion in the
-same record needs no planner invocation.
+Plan owns the intended milestone route and ahead-of-time task definitions.
+Implement owns observed Feature/Milestone status, milestone acceptance evidence,
+cross-milestone blockers and integrated verification in `plan.md`. Task-level
+status, checks, blockers and evidence live in the authoritative task source:
+`tasks.md` when separate, otherwise inline in `plan.md`. Implement also performs
+just-in-time refinement within the agreed structure. Before starting a coarse
+milestone, inspect actual code and add only the tasks or local steps needed for
+safe execution. Preserve agreed scope, Design contracts, acceptance and
+cross-milestone dependencies. Routine expansion in the same record needs no
+planner invocation.
 
 By default, keep the task breakdown and execution record inline in `plan.md`.
 Implement writes observed status and evidence there; Plan revisions must preserve

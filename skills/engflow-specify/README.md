@@ -5,7 +5,9 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 ## Purpose
 
 Synthesize discussion and evidence into behavioral requirements, scope and
-observable acceptance; resolve ordinary clarification within the same task.
+observable acceptance; resolve ordinary clarification within the same task. Spec
+records user-supplied constraints but does not select technical solutions; Design
+owns architecture, decisions and implementation-oriented contracts.
 
 ## Examples
 

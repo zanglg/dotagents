@@ -4,9 +4,10 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Resolve consequential technical decisions through a focused, evidence-backed
-decision thread. Build an implementation-oriented architecture and code skeleton
-incrementally rather than generating a broad, ambiguous design narrative.
+Produce a proportional technical design for every feature, then deepen only the
+technical topics that justify further investigation. Design may include data
+structures, interfaces, concurrency models and optional source-language code
+skeletons. It can be re-entered at any lifecycle point for targeted intervention.
 
 ## Examples
 
@@ -16,14 +17,16 @@ incrementally rather than generating a broad, ambiguous design narrative.
 
 ## Inputs and outputs
 
-Read the goal, effective requirements, current code and any existing Plan/design.
-A formal Spec is optional. When persisted, maintain one consolidated `design.md`
-per feature by default; multiple decision threads and technical areas belong in
-that file. A preview stays conversational. Split a shared ADR/contract only when
-it has an independently maintained lifecycle or shared authority.
+Read the Spec, current code, existing Design and (when present) Plan and execution
+record. Maintain one consolidated `design.md` per feature; multiple decision
+threads and technical areas belong in that file. A preview stays conversational.
+Split a shared ADR/contract only when it has an independently maintained lifecycle
+or shared authority.
 
-Design owns technical decisions. Plan owns delivery sequencing and summarizes the
-selected approach and binding constraints without duplicating the full design.
+Design owns all feature-level technical decisions, rationale, evidence and the
+optional code skeleton. Plan consumes that authority and owns delivery sequencing;
+Implement may request a targeted Design intervention when technical work cannot
+converge.
 
 ## Installation and collaboration
 

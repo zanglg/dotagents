@@ -8,16 +8,16 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
-- Add a draft Decision-Driven Progressive Design method shared by Plan and
-  Design: one consequential decision per interaction, dependency-aware decision
-  threads and an incrementally maintained implementation-oriented code skeleton.
-  Keep one consolidated feature-level design.md; Plan references its technical
-  authority and summarizes only delivery-relevant constraints. Without a separate
-  design, Plan may own a proportional technical approach.
-- Remove the standalone Tasks Skill. Plan may pre-decompose near-term work when
-  useful; Implement performs just-in-time decomposition by default. Implement owns
-  observed task/milestone status and execution evidence. Keep task breakdown inline
-  in plan.md by default; tasks.md remains an exceptional optional task record.
+- Establish the canonical Spec → Design → Plan → Implement feature lifecycle.
+  Spec owns requirements only; Design owns standard and deep topic-level technical
+  design, decisions, evidence and optional code skeletons; Plan owns delivery
+  milestones and consumes Design; Implement executes and may request re-entrant
+  Design intervention when technical work cannot converge. Preserve explicit user
+  authority and synchronize only affected downstream work.
+- Keep task decomposition optional. Plan may pre-decompose near-term work when
+  useful; Implement performs just-in-time decomposition by default. plan.md always
+  owns Feature/Milestone execution state; a separate tasks.md, when justified,
+  owns the sole detailed Task list and Task-level status/evidence.
 
 ### Removed
 

@@ -7,6 +7,8 @@ or technical area.
 
 ## Design objective and scope
 
+- Design depth: Standard / Deep topics (identify only where applicable):
+
 - Problem / design objective:
 - In-scope components and boundaries:
 - Non-goals and confirmed deferred scope:
@@ -69,8 +71,17 @@ authority. Do not conflate these states.
 
 ## Architecture and code skeleton
 
-Update this section incrementally after material decisions. Include only the
-structure needed to guide implementation; omit irrelevant dimensions.
+This is an optional, implementation-oriented structure. Update it incrementally
+after material decisions. Include only the structure needed to guide implementation;
+omit irrelevant dimensions. Use source-language snippets when they clarify core
+types, data structures, ownership, interfaces, signatures or algorithms. Do not
+include full implementation bodies.
+
+Classify consequential elements as **Binding** (effective requirement, mandate or
+user-confirmed contract), **Selected** (evidence-backed agent choice, not user
+confirmation), **Proposed** (awaiting required authority) or **Illustrative**
+(reference example only). Mark the status and provenance near each relevant
+snippet or contract.
 
 ### Component map and responsibilities
 
@@ -117,12 +128,14 @@ contracts or major technical choices. Keep unsupported routes conditional.
 
 ## Downstream synchronization
 
-When a material technical decision changes, identify affected consumers.
+Design may be invoked before planning or as a targeted intervention during or
+after implementation. When a material technical decision changes, identify affected consumers.
 
 | Source | Affected section / IDs | Required update | Status / authority |
 | --- | --- | --- | --- |
 | `plan.md` | <Sections / milestones> | <Route, constraint or verification update> | Pending / Updated |
 | `tasks.md` (if present) | <Task IDs> | <Dependencies, constraints or checks> | Pending / Updated |
+| Implemented source / evidence | <Paths / claims> | <Reassess, change or revalidate affected work> | Pending / Updated |
 | Shared contract (if any) | <Path / section> | <Authorized contract update> | Pending / Updated |
 
 Update only sources within the current write authority. A revised Design does not

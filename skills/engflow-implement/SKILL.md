@@ -10,9 +10,12 @@ disable-model-invocation: true
 # Engflow Implement
 
 Deliver the requested behavior, not just a patch. Work linearly in the existing
-checkout and branch, preserving user-owned changes. Engflow is installed as a
-group, but no Spec, tracker or prior Skill invocation is required. Follow-up answers continue the task within existing authority
-until the user pauses, ends or redirects it.
+checkout and branch, preserving user-owned changes. The canonical feature lifecycle
+is Spec → Design → Plan → Implement. Implement consumes the effective requirements,
+technical design and delivery plan; bounded maintenance fixes may use a direct
+request and existing contracts without manufacturing a feature document suite.
+Follow-up answers continue within existing authority until the user pauses, ends or
+redirects the task.
 
 ## Judgment and scope
 
@@ -31,24 +34,28 @@ plan path, optional task-record path or feature directory as an entry; the user
 need not supply every file. Resolve the selected feature through explicit context
 and permitted feature navigation, then follow the plan and optional task-record
 references to effective requirements, technical design and acceptance. Read
-relevant Spec/design sources when available; missing optional files alone do not
-block adequate implementation inputs.
+effective Spec, Design and Plan sources for feature delivery. Do not treat missing
+canonical feature inputs as permission to invent requirements, technical design or
+a delivery route. A bounded maintenance fix may rely on a clear request and existing
+contracts when no feature-level artifacts are warranted.
 
-Implement is executable directly from an adequate request, Spec and Design; neither
-Plan nor a task list is mandatory for a bounded change. For planned work, Plan owns
-the delivery route and any ahead-of-time task definitions. Implement owns all
-observed task/milestone status, actual verification, blockers and execution
-evidence. By default, keep the task breakdown and execution record inline in
-`plan.md`. When a separate `tasks.md` exists, it is the only detailed task list
-and task-level execution record; update it rather than maintaining duplicate
-inline state. No standalone Tasks Skill or stage is required.
+For feature delivery, follow the accepted Plan. A separate task list is not
+required: execute a clear milestone directly or decompose only the next milestone
+just in time. Plan owns the delivery route and planned task definitions. Implement
+owns observed execution state with distinct record boundaries: `plan.md` always
+holds the Feature checkpoint, Milestone statuses, milestone acceptance evidence,
+cross-milestone blockers and integrated verification; a separate `tasks.md` holds
+the sole detailed Task list and Task-level status/evidence when present. With inline
+tasks, both levels remain in `plan.md`. No standalone Tasks Skill or stage is
+required.
 
-Cross-milestone restructuring, changes to binding contracts or acceptance, and
-unresolved major technical choices need dedicated planning or design judgment.
-Record the evidence, affected work and next decision needed; obtain agreement for
-material changes before affected execution. Use `engflow-plan` when requested and
-available, or surface the planning need without blocking unrelated authorized work.
-Do not automatically invoke another stage or bypass explicit-only host settings.
+Cross-milestone restructuring belongs to Plan. New or changed technical decisions
+belong to Design. The user may invoke Design at any point, including during
+implementation, to challenge or redesign a specific Topic. Do not resolve a
+consequential design problem by silently changing code or the Plan. Preserve the
+problem, evidence and affected work, then request the owning Design/Plan activity.
+Entrypoints are explicit-only: do not automatically invoke another Skill or bypass
+host invocation settings.
 
 ## Confirmed solution intake
 
@@ -59,13 +66,13 @@ again just to choose another preferred approach. Check consistency and feasibili
 New evidence against a user-approved core decision needs an explicit change
 decision before incompatible work, not an unauthorized replacement.
 
-Within write authority, inject short solutions into existing plan decisions and
-affected task constraints. For longer detail, reuse the suitable existing design,
-contract or research source; link relative paths and sections from the plan and
-affected tasks and summarize essential constraints there. Preserve supplied
-confirmation evidence, scope and observable checks without inventing a status
-system. Follow those references before executing dependent tasks. Do not create
-a plan or document layer solely for a bounded fix that needs none.
+Keep the authoritative technical decision in `design.md`; do not create a competing
+technical decision record in Plan or Tasks. If the user supplies a confirmed or
+mandated solution that is not yet reflected in Design, preserve its exact authority
+and evidence in the execution record, identify the Design synchronization needed,
+and request or perform only an explicitly authorized Design update. Follow the
+accepted design before dependent implementation. A bounded fix need not create a
+new document layer.
 
 ## Blocker routing
 
@@ -96,24 +103,49 @@ first inspect accessible documentation/code and attempt bounded relevant diagnos
 Never fill the gap with plausible general knowledge. Ask a precise question naming
 the missing fact, evidence checked, affected task and what answer would unblock it.
 Pause only affected/dependent work and continue independent authorized tasks.
+
+### Technical non-convergence and Design escalation
+
+Distinguish ordinary debugging/evidence gathering from a design problem. Request a
+targeted Design intervention when materially different hypotheses or approaches
+have been tried without meaningful progress or new evidence; the current design
+cannot satisfy a material constraint; repeated local changes only move the failure;
+or resolution requires a consequential architecture, data-structure, concurrency,
+performance, consistency or lifecycle trade-off.
+
+Before escalating, preserve the exact question, relevant Design decision IDs and
+skeleton elements, constraints, distinct attempts and actual results, evidence and
+gaps, affected code/tasks/milestones, and independent work that can continue. Do
+not impose an arbitrary retry count: retry only when the hypothesis changes or new
+evidence is available. Stop speculative changes to affected/dependent work, do not
+weaken acceptance, and keep unrelated ready work moving. Because Skills are
+explicit-only, report the Design intervention needed and let the user invoke
+`engflow-design`; do not invoke it automatically.
+
+When Design returns an accepted change, wait for affected Plan/task definitions to
+be reconciled before dependent implementation. Reassess affected code, completion
+claims and verification evidence. Preserve unaffected work and revalidate only
+claims invalidated by the change.
 Changing required behavior/acceptance or a user-approved core decision needs the
 user's decision; an ordinary in-scope fix does not.
 
-After credible findings or a user decision, correct the original affected
-plan/design/contract assumptions and task constraints within authority, preserving
-evidence and history. Reopen invalidated work, follow the updated references and
+After credible findings or a user decision, update the execution record and code
+within Implement authority, preserving evidence and history. Do not silently rewrite
+Design-owned technical decisions; request Design synchronization for a material
+technical change. Reopen invalidated work, follow the reconciled Design/Plan and
 resume implementation and regression checks. Update Spec only for an agreed change
-to requirements/acceptance. A standalone report or a fixed test is not source
-synchronization; disclose missing authority, pending source updates and verification
+to requirements/acceptance through its owning activity. A standalone report or a
+fixed test is not source synchronization; disclose pending updates and verification
 limits rather than claiming closure.
 
 ## Delivery standard
 
-Before starting each milestone, check its prerequisites and whether its current
-detail supports safe execution. Just-in-time decomposition is the default: inspect
-the actual code and expand only the next milestone into the minimum verifiable tasks
-or local steps needed. Record this in the existing plan's execution section, or in
-the single tasks.md record when one already exists. Do not pre-decompose all distant
+Before starting each milestone, check its prerequisites, accepted Design contracts
+and whether the Plan contains enough detail for safe execution. Just-in-time
+decomposition is the default: inspect the actual code and expand only the next
+milestone into the minimum verifiable tasks or local steps needed. Record Feature
+and Milestone progress in `plan.md`; record Task-level progress in the single
+`tasks.md` when one exists, or inline in `plan.md` otherwise. Do not pre-decompose all distant
 milestones. This is routine refinement within execution and record-write authority
 when agreed scope, outcomes, binding contracts, acceptance and cross-milestone
 dependencies remain unchanged; no planner invocation or new approval is needed.
@@ -123,7 +155,9 @@ contributors, independent task review or external tracking warrants it and curre
 write authority permits it. For ambiguous boundaries, consult
 [judgment examples](references/judgment.md).
 
-Implement owns the observed status and evidence for every task and milestone.
+Implement maintains all observed status and evidence. `plan.md` always owns the
+Feature checkpoint and Milestone status/evidence. A separate `tasks.md` owns
+Task-level status/evidence only; without it, inline Tasks remain in `plan.md`.
 Advance the next ready task, or the milestone directly when no task breakdown is
 useful, in the agreed linear sequence. Refine local steps against actual code and
 preserve task deliverables and binding interfaces. Use test-first development when useful; verify behavior and
@@ -184,11 +218,12 @@ revise the remaining sequence with reasons. Preserve valid results. Retry only
 with a changed hypothesis or new information; stop at a concrete blocker rather
 than inventing progress.
 
-After an accepted material change, identify affected requirement/design sources
-and their sync status in the existing record, or conversation when no record is
-writable. Update them only within write authority; otherwise keep the decision
-evidence, stale paths and next sync action explicit. Code and Plan updates alone
-do not close source synchronization. Report outstanding sync work at delivery;
+After an accepted material change, identify affected Spec/Design/Plan sources and
+their sync status in the existing record, or conversation when no record is
+writable. Implement does not own Spec or technical Design decisions; request their
+owning activity when synchronization is needed. Update Plan execution state and
+code only within Implement authority. Keep decision evidence, stale paths and next
+sync action explicit. Code and Plan updates alone do not close source synchronization. Report outstanding sync work at delivery;
 block execution only where unresolved authority or conflicting intent affects it.
 
 ## Continuation and steering
@@ -216,8 +251,9 @@ The review method is internal to Implement and grants no additional output or wr
 authority.
 
 Task-scoped implementation and tests are in scope. Expanded, privileged, destructive
-or external effects require applicable authorization. Other Skills retain their own
-invocation rules. Shared research/experiment references are permitted within
+or external effects require applicable authorization. Design intervention remains
+available at any lifecycle point but must be explicitly invoked; non-convergence
+escalation does not bypass that rule. Other Skills retain their own invocation rules. Shared research/experiment references are permitted within
 this task's existing authority; they neither invoke those Skill entrypoints nor
 relax their guards. Reuse adequate execution scope and obtain only missing scope. Mutating probes stay in the
 current agent; helpers remain read-only. Return evidence to the owning record,

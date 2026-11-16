@@ -25,10 +25,12 @@ and references. Do not infer the target from the newest directory, current branc
 or conversation topic when more than one candidate exists. Ask for the target if
 it cannot be determined safely.
 
-Converge is useful when formal engineering artifacts exist. For a bounded change
-without a Spec, Design or Plan, assess only the available scope and report PARTIAL
-when the missing baseline prevents a full convergence claim. Do not create
-artifacts to make the workflow look complete.
+For feature delivery, the canonical baseline is Spec, Design and Plan. Report a
+missing or inconsistent required artifact as a concrete gap or blocker; do not
+invent its authority. For a bounded maintenance change without feature-level
+artifacts, assess only the available scope and report PARTIAL when the missing
+baseline prevents a full convergence claim. Do not create artifacts to make the
+workflow look complete.
 
 ## Authority and non-goals
 

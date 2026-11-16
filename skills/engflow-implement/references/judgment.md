@@ -30,3 +30,17 @@ Passing tests written for that recommendation does not establish approval.
 
 Document synchronization can be complete while code is unfinished, or vice versa.
 Report those states separately; neither implies the other's completion.
+
+
+## Technical non-convergence
+
+A milestone promises an agreed memory bound. Implement tries a streaming
+implementation, then a chunked implementation. The second attempt reveals that
+the public interface and two consumers must change to satisfy the bound.
+
+This is not a local refinement. Preserve the distinct attempts, measurements,
+affected Design decision and consumers. Stop changes to the affected path and
+request a targeted Design intervention. Continue independent milestones that do
+not depend on the unresolved interface. After Design selects an accepted route,
+Plan reconciles affected milestones/tasks and Implement revalidates only the
+invalidated work.
