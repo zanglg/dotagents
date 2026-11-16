@@ -70,8 +70,8 @@ Keep the authoritative technical decision in `design.md`; do not create a compet
 technical decision record in Plan or Tasks. If the user supplies a confirmed or
 mandated solution that is not yet reflected in Design, preserve its exact authority
 and evidence in the execution record, identify the Design synchronization needed,
-and request or perform only an explicitly authorized Design update. Follow the
-accepted design before dependent implementation. A bounded fix need not create a
+and request an explicit Design update. Follow the accepted design before
+dependent implementation. A bounded fix need not create a
 new document layer.
 
 ## Blocker routing

@@ -1,9 +1,10 @@
 # Execution continuity
 
-Use one living execution plan for large or cross-session work, normally
-`plan.md`. It is the default execution record, not a runtime checkpoint engine or
-ticket system. Task decomposition is optional; Implement expands only the next
-milestone just in time unless advance task detail has clear value.
+Use one living delivery/execution plan for feature work, normally `plan.md`. It
+is the Feature/Milestone checkpoint, not a runtime checkpoint engine or ticket
+system. Design is the technical authority. Task decomposition is optional;
+Implement expands only the next milestone just in time unless advance task detail
+has clear value.
 
 ## The record
 
@@ -22,9 +23,12 @@ and `Current feature` in the same resolved project index (default
 `specs/README.md`), unless the user restricts writes. Store
 only navigation there; creating future/deferred features alone does not switch
 established focus. The plan owns intended milestones and any planned task
-definitions. Implement owns all observed progress, task/milestone status, checks,
-blockers and execution evidence. Store these in the plan by default, or in the
-single linked tasks.md record when one is justified.
+definitions. Implement owns observed Feature/Milestone status, milestone acceptance
+evidence,
+cross-milestone blockers and integrated verification in `plan.md`. A separate
+`tasks.md`, when justified, owns the sole detailed Task list and Task-level status,
+checks, blockers and evidence. With inline tasks, Task state also remains in
+`plan.md`.
 A focus link is neither execution permission nor a lock. Keep
 an explicit session target during concurrent work; do not follow later pointer
 changes silently. Inspection/preview and restricted-file tasks leave it unchanged.
@@ -33,8 +37,10 @@ If focus cannot be saved, report the selected path for the next session.
 For related features, follow parent/shared-source and dependency references as
 needed. Overall plans own cross-feature outcomes and integrated acceptance; child
 execution records own their tasks and observations. Do not duplicate their progress.
-If no plan exists, use the selected feature's available sources to identify readiness and the
-next useful action; do not invent a previous task or bypass a pending gate.
+If no plan exists for feature delivery, identify the missing planning input and
+next useful action; do not invent a previous task or bypass a pending gate. A
+bounded maintenance fix may use a conversational checkpoint when no feature plan
+is warranted.
 
 Resolve explicit feature paths/IDs and established conversation before the current
 link; verify that link for an unspecified continuation. Never choose by newest ID
@@ -61,16 +67,16 @@ safe execution. Preserve agreed scope, Design contracts, acceptance and
 cross-milestone dependencies. Routine expansion in the same record needs no
 planner invocation.
 
-By default, keep the task breakdown and execution record inline in `plan.md`.
-Implement writes observed status and evidence there; Plan revisions must preserve
-those observations. A milestone may have no task list when it can be executed
-safely as a unit. Create a separate `tasks.md` only when task volume, coordinated
-contributors, independent review or external tracking makes it valuable and
-current write authority permits it. When present, `tasks.md` is the sole detailed
-task list and task-level execution record; Plan references it and keeps milestone
-delivery continuity. Plan may create or revise planned task definitions within its
-authority; Implement alone updates observed status and evidence. No standalone
-Tasks Skill or stage is required.
+By default, keep task definitions inline in `plan.md`. Implement always writes
+Feature/Milestone checkpoint, milestone status and milestone acceptance evidence
+there; Plan revisions must preserve those observations. A milestone may have no
+task list when it can be executed safely as a unit. Create a separate `tasks.md` only
+when task volume, coordinated contributors, independent review or external
+tracking makes it valuable and current write authority permits it. When present,
+`tasks.md` is the sole detailed Task list and Task-level execution record; Plan
+references it and retains Feature/Milestone continuity. Plan may create or revise
+planned Task definitions within its authority; Implement alone updates observed
+status and evidence. No standalone Tasks Skill or stage is required.
 
 Do not create a duplicate task list or migrate existing inline tasks without
 explicit authority for both sources. Preserve stable IDs, user content, actual
@@ -82,11 +88,12 @@ dependencies or invalidated evidence. Retired IDs are not reused; replaced tasks
 retain successor references. Past evidence does not automatically prove new
 completion conditions.
 
-Use `plan.md` as the default execution record. If a separate `tasks.md` exists,
-it is the sole detailed task record and `plan.md` references it. In either layout,
-Plan is authoritative for intended delivery structure and planned task definitions;
-Implement is authoritative for observed status and execution evidence. Reference
-effective requirement and design sources rather than overriding them. Keep proposed
+Use `plan.md` as the Feature/Milestone execution record. If a separate `tasks.md`
+exists, it is the sole detailed Task record and `plan.md` references it. Plan is
+authoritative for intended delivery structure and planned Task definitions;
+Implement is authoritative for observed status and execution evidence at each
+level. Design is authoritative for technical decisions; Spec is authoritative for
+requirements and acceptance. Reference these sources rather than overriding them. Keep proposed
 material changes and pending agreement distinguishable from still-effective
 content. Only affected and dependent work is blocked; preserve valid authorization
 elsewhere.
@@ -110,8 +117,8 @@ Do not claim an unsaved checkpoint is durable.
 
 ## Source synchronization
 
-When a material change is accepted, identify affected authoritative requirements,
-designs or shared contracts by path/section. In the existing decision record, keep
+When a material change is accepted, identify affected authoritative Spec, Design
+or shared-contract sources by path/section. In the existing decision record, keep
 its approval evidence, affected work and whether each source is synchronized or
 pending, with the next update action and any missing authority/access. No separate
 sync ledger or mandatory status schema is needed. If record writes are unavailable,
@@ -171,11 +178,17 @@ Honor an immediate stop request; report if saving state is not safely possible.
 3. Recheck material drift and stale evidence. Do not blindly replay migrations or
    other non-idempotent effects. Missing access or unresolved process state blocks
    affected execution, not grounds to invent a successful recovery.
-4. Within current execution and record-write authority, update the single execution
-   record (the plan, or its linked tasks.md when present), and continue the earliest
+4. Within current execution and record-write authority, update Feature/Milestone
+   state in `plan.md` and Task-level state in the authoritative task source
+   (`tasks.md` when separate, otherwise inline in `plan.md`). Continue the earliest
    unfinished, unblocked task or directly executable milestone in the reconciled
    sequence.
    Do not repeat still-valid completed work or skip final integrated acceptance.
+
+Design can be explicitly re-entered at any point. If implementation attempts have
+not converged, preserve the distinct hypotheses, results, constraints and affected
+work in the execution record and request a targeted `engflow-design` intervention;
+do not continue speculative retries or invoke another Skill automatically.
 
 `engflow-handoff` can supplement the record when requested, but is not required to
 resume. It references pending source updates and decisions, not a second sync ledger.

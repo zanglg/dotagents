@@ -23,7 +23,9 @@ Plan may include optional near-term task definitions; default to inline tasks in
 `plan.md` and leave distant work coarse. A separate `tasks.md` is justified only
 for unusually large task volume, coordinated contributors, independent review or
 external tracking. It is an optional record, not a separate Skill or stage.
-Implement owns all observed task/milestone status and execution evidence.
+Implement maintains Feature/Milestone status and evidence in `plan.md`, plus
+Task-level status and evidence in `tasks.md` when separate; otherwise both remain
+inline in `plan.md`.
 
 Design is the technical authority. Plan references its decisions and carries
 only delivery-relevant constraints and verification needs. If Design is missing or
