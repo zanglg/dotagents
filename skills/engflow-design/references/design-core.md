@@ -41,6 +41,23 @@ restart of the entire feature.
 
 ## Establish scope and evidence
 
+### Spec readiness gate
+
+Canonical feature Design requires an effective Spec: the current `spec.md` or a
+project-equivalent authoritative requirements artifact explicitly identified by
+the user. An existing Plan, legacy Design, source code or conversational context
+alone does not substitute. If no effective Spec exists, stop before canonical
+design work: do not create/update `design.md` or record technical proposals as
+current feature decisions. Explain the prerequisite and ask the user to supply
+the Spec or explicitly invoke Specify; do not invoke it automatically.
+
+A conversational Preview/Exploration may proceed without a Spec only when the
+user explicitly requests that mode. Label it provisional, identify missing
+product semantics, acceptance and assumptions, and state that it is not a
+canonical Design or Plan-ready. Do not persist it in `design.md`. Reassess any
+preview material against the effective Spec before adopting it into canonical
+Design; preview proposals do not become decisions by being discussed.
+
 Read the user's goal, effective Spec, existing Design and Plan, relevant code,
 runtime/version context, shared contracts and current execution evidence before
 proposing a route. Distinguish requirements, user constraints, confirmed decisions,
