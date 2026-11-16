@@ -105,7 +105,7 @@ provenance. If the user requests a targeted redesign, revise only the affected
 decision thread and dependent skeleton elements; identify any downstream impacts.
 
 When a material design decision changes, record affected Plan paths/sections,
-milestones, inline task IDs or separate `tasks.md` items, supplied approval
+milestones, inline task IDs or optional `tasks.md` items, supplied approval
 evidence and pending synchronization. Update only authorized Design sources.
 Do not silently rewrite Plan or task state, invoke another Skill or claim that a
 revised proposal has synchronized its consumers. Recheck source consistency

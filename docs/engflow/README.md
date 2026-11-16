@@ -22,7 +22,6 @@ not require using every entrypoint or creating a full document suite.
 | Synthesize decisions into requirements and acceptance | [Specify](../../skills/engflow-specify/README.md) |
 | Run targeted, decision-driven technical design and maintain the consolidated design | [Design](../../skills/engflow-design/README.md) |
 | Build a lightweight technical approach and progressive delivery route | [Plan](../../skills/engflow-plan/README.md) |
-| Maintain a separate task list when useful | [Tasks](../../skills/engflow-tasks/README.md) |
 | Implement, test and review a change | [Implement](../../skills/engflow-implement/README.md) |
 | Check cross-artifact consistency and evidence freshness, read-only | [Converge](../../skills/engflow-converge/README.md) |
 | Investigate existing sources, without experiments | [Research](../../skills/engflow-research/README.md) |
@@ -59,9 +58,14 @@ Plan owns the delivery route, milestones, dependencies and feature checkpoint.
 When `design.md` exists, Plan references it and carries only a concise selected-route
 summary, binding implementation constraints and verification needs. Without a
 separate design, Plan may own a proportional technical approach inside `plan.md`.
-Separate Tasks owns task state when present; otherwise keep it inline in Plan.
-Use references instead of duplicate checklists or competing decision ledgers.
-Small work needs none of these files. Templates are optional.
+Plan may optionally define near-term task deliverables and dependencies when this
+improves execution clarity; default to inline tasks and leave distant work coarse.
+Implement owns all observed task/milestone status, verification results, blockers
+and execution evidence. It decomposes the next milestone just in time by default.
+A separate `tasks.md` is optional for unusually large task volume, coordinated
+contributors, independent review or external tracking; when present it is the
+single detailed task list and task-level execution record. No separate Tasks Skill
+or stage is required. Small work needs none of these files. Templates are optional.
 
 Research and PoC return conclusions conversationally by default. Explicit saves
 use supplied/project paths, otherwise numbered files under `docs/research/` or
@@ -86,7 +90,7 @@ boundaries; no model runner or permanent result archive is required.
 | Converge: complete, omitted requirement, stale evidence, conflicting authority, limited baseline | Correct primary status; evidence tied to current source; no writes, tests or implicit workers |
 | Clarify followed by an authorized Specify request | Clarify writes nothing; Specify receives actual decisions and preserves scope/acceptance |
 | Resume partial work or encounter missing facts | Preserve valid evidence and pending gates; continue independent work without guessing private facts |
-| Plan followed by targeted Design revision | Design consumes the existing Plan, asks one consequential decision at a time, preserves unaffected decisions, and identifies Plan/Tasks synchronization |
+| Plan followed by targeted Design revision | Design consumes the existing Plan, asks one consequential decision at a time, preserves unaffected decisions, and identifies delivery/task-record synchronization |
 | Multiple technical decision threads | Keep one feature-level design.md, model decision dependencies, evolve the code skeleton incrementally, and avoid duplicate design content in Plan |
 | Research, PoC or Handoff preview/save | Respect source-only versus experiment authority, requested persistence and outstanding-operation limits |
 

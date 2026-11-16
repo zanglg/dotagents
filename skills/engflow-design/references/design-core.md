@@ -22,8 +22,13 @@ Use these authority boundaries:
 - Plan owns the delivery route, milestones, dependencies and feature checkpoint.
 - When no separate design exists, Plan may own a proportional technical approach
   and its compact decision record inside `plan.md`.
-- Separate `tasks.md`, when used, owns task decomposition and task state.
-- Implement owns observed execution, implementation evidence and verification.
+- Plan owns intended task definitions when it pre-decomposes work; task lists are
+  optional and normally remain inline in `plan.md`.
+- Implement owns all observed task/milestone status, verification, blockers and
+  execution evidence. A separate `tasks.md`, when justified, is the single
+  detailed task list and task-level execution record; it is not a separate stage.
+- Without a separate task record, Implement keeps just-in-time task refinement and
+  execution state in the existing `plan.md`.
 
 Do not treat a proposal, draft, plan, task checkbox or generic continuation as
 approval. A caller's write authority does not grant authority to change another

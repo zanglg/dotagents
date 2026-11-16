@@ -14,6 +14,16 @@ This project follows Semantic Versioning and uses Conventional Commits.
   Keep one consolidated feature-level design.md; Plan references its technical
   authority and summarizes only delivery-relevant constraints. Without a separate
   design, Plan may own a proportional technical approach.
+- Remove the standalone Tasks Skill. Plan may pre-decompose near-term work when
+  useful; Implement performs just-in-time decomposition by default. Implement owns
+  observed task/milestone status and execution evidence. Keep task breakdown inline
+  in plan.md by default; tasks.md remains an exceptional optional task record.
+
+### Removed
+
+- Retire the standalone `engflow-tasks` entrypoint; optional ahead-of-time task
+  decomposition is part of Plan, while just-in-time decomposition and execution
+  state belong to Implement.
 
 ## [0.3.0] - 2026-11-14
 

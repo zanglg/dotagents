@@ -4,9 +4,9 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Create a lightweight technical approach and progressive delivery route. Plan
-resolves routine technical choices, identifies consequential decisions and turns
-the selected route into milestones, dependencies and verification.
+Create a grounded feature delivery route. Plan defines milestones, prerequisites,
+delivery sequence and acceptance. It may optionally pre-decompose near-term work
+when this improves execution clarity; it does not need to enumerate every task.
 
 ## Examples
 
@@ -17,14 +17,20 @@ the selected route into milestones, dependencies and verification.
 ## Inputs and outputs
 
 Provide goals or an existing Spec, Design, Plan, code and write limits. Receive
-a delivery route, milestone acceptance, task decomposition when useful and
-unresolved decisions. If a separate `design.md` exists, Plan references it and
-carries only concise implementation constraints and verification needs. Without
-one, Plan may hold the proportional technical approach in `plan.md`. It does not
-create a separate design file or require a Design stage.
+a delivery route, milestones, dependencies, acceptance and unresolved decisions.
+Plan may include optional near-term task definitions; default to inline tasks in
+`plan.md` and leave distant work coarse. A separate `tasks.md` is justified only
+for unusually large task volume, coordinated contributors, independent review or
+external tracking. It is an optional record, not a separate Skill or stage.
+Implement owns all observed task/milestone status and execution evidence.
 
-Keep simple tasks inline; reference an existing `tasks.md` without copying state.
-The [outline](assets/execution-plan.md) is optional.
+If a separate `design.md` exists, Plan references it and carries only concise
+implementation constraints and verification needs. Without one, Plan may hold
+the proportional technical approach in `plan.md`. It does not create a separate
+design file or require a Design stage.
+
+The [execution outline](assets/execution-plan.md) and optional
+[task-record outline](assets/tasks.md) are available as needed.
 
 ## Installation and collaboration
 

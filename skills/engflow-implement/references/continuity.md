@@ -1,7 +1,9 @@
 # Execution continuity
 
-Use one living execution plan for large or cross-session work. This is recoverable
-task state, not a runtime checkpoint engine or ticket system.
+Use one living execution plan for large or cross-session work, normally
+`plan.md`. It is the default execution record, not a runtime checkpoint engine or
+ticket system. Task decomposition is optional; Implement expands only the next
+milestone just in time unless advance task detail has clear value.
 
 ## The record
 
@@ -19,8 +21,10 @@ When feature creation or selection permits navigation writes, maintain its link
 and `Current feature` in the same resolved project index (default
 `specs/README.md`), unless the user restricts writes. Store
 only navigation there; creating future/deferred features alone does not switch
-established focus. Feature-level checkpoints and gates stay in the owning plan;
-task state stays in its linked tasks.md when present, otherwise in the plan.
+established focus. The plan owns intended milestones and any planned task
+definitions. Implement owns all observed progress, task/milestone status, checks,
+blockers and execution evidence. Store these in the plan by default, or in the
+single linked tasks.md record when one is justified.
 A focus link is neither execution permission nor a lock. Keep
 an explicit session target during concurrent work; do not follow later pointer
 changes silently. Inspection/preview and restricted-file tasks leave it unchanged.
@@ -46,32 +50,43 @@ Keep enough information for a fresh session:
 - Observed completion, partial work, actual checks, consequential discoveries,
   blockers, outstanding commands/side effects and the next concrete action.
 
-Dedicated planning owns the overall delivery structure and consequential revisions;
-implementation owns observed progress and just-in-time refinement within that structure.
-Before starting a coarse milestone, add only the tasks or local steps needed for
-safe execution, preserving agreed scope, contracts, acceptance and cross-milestone
-dependencies. Routine expansion in the same record needs no planner invocation.
-Keep one task-state authority, not parallel ledgers. Keep simple tasks inline;
-use separate tasks.md only when task volume or independent maintenance warrants
-it and creation is authorized. When present, tasks.md owns task decomposition,
-status and evidence; plan.md owns the approach, milestone route and feature-level checkpoint and references task evidence.
-Read both and keep affected references/constraints synchronized within write authority.
-Existing combined plans keep inline task state and require no extraction. Do not
-create a duplicate tasks.md over existing inline tasks; migration needs explicit
-authority for both sources and must preserve IDs/evidence and replace the old live
-list with references. Milestones and tasks may span
-sessions. Near-term tasks carry deliverables, dependencies and observable completion
-conditions; optional steps are local lists. Existing milestone-only plans remain
-valid. Routine refinement needs no planner invocation. Structural changes preserve
-valid work and explain new dependencies or invalidated evidence. Retired IDs are
-not reused; replaced tasks retain successor references. Past evidence does not
-automatically prove new completion conditions.
+Dedicated planning owns the intended milestone route and any ahead-of-time
+task definitions. Implement owns observed task/milestone status, actual checks,
+blockers and execution evidence, as well as just-in-time refinement within the
+agreed structure. Before starting a coarse milestone, inspect the actual code and
+add only the tasks or local steps needed for safe execution. Preserve agreed scope,
+contracts, acceptance and cross-milestone dependencies. Routine expansion in the
+same record needs no planner invocation.
 
-Use the plan and its task source as the execution record, each authoritative for
-its own scope, referencing effective requirement and design sources rather than
-overriding them. Keep proposed material changes and
-pending agreement distinguishable from still-effective content. Only affected and
-dependent work is blocked; preserve valid authorization elsewhere.
+By default, keep the task breakdown and execution record inline in `plan.md`.
+Implement writes observed status and evidence there; Plan revisions must preserve
+those observations. A milestone may have no task list when it can be executed
+safely as a unit. Create a separate `tasks.md` only when task volume, coordinated
+contributors, independent review or external tracking makes it valuable and
+current write authority permits it. When present, `tasks.md` is the sole detailed
+task list and task-level execution record; Plan references it and keeps milestone
+delivery continuity. Plan may create or revise planned task definitions within its
+authority; Implement alone updates observed status and evidence. No standalone
+Tasks Skill or stage is required.
+
+Do not create a duplicate task list or migrate existing inline tasks without
+explicit authority for both sources. Preserve stable IDs, user content, actual
+progress and evidence. Milestones and tasks may span sessions. Near-term tasks
+carry deliverables, genuine dependencies and observable completion conditions;
+optional steps are local lists, not another hierarchy. Existing milestone-only
+plans remain valid. Structural changes preserve valid work and explain new
+dependencies or invalidated evidence. Retired IDs are not reused; replaced tasks
+retain successor references. Past evidence does not automatically prove new
+completion conditions.
+
+Use `plan.md` as the default execution record. If a separate `tasks.md` exists,
+it is the sole detailed task record and `plan.md` references it. In either layout,
+Plan is authoritative for intended delivery structure and planned task definitions;
+Implement is authoritative for observed status and execution evidence. Reference
+effective requirement and design sources rather than overriding them. Keep proposed
+material changes and pending agreement distinguishable from still-effective
+content. Only affected and dependent work is blocked; preserve valid authorization
+elsewhere.
 
 ## Approval and changes
 
@@ -153,10 +168,10 @@ Honor an immediate stop request; report if saving state is not safely possible.
 3. Recheck material drift and stale evidence. Do not blindly replay migrations or
    other non-idempotent effects. Missing access or unresolved process state blocks
    affected execution, not grounds to invent a successful recovery.
-4. Within current execution and record-write authority, update the existing plan
-   and task source where applicable, and
-   continue the earliest unfinished, unblocked task (or milestone without tasks)
-   in the reconciled sequence.
+4. Within current execution and record-write authority, update the single execution
+   record (the plan, or its linked tasks.md when present), and continue the earliest
+   unfinished, unblocked task or directly executable milestone in the reconciled
+   sequence.
    Do not repeat still-valid completed work or skip final integrated acceptance.
 
 `engflow-handoff` can supplement the record when requested, but is not required to

@@ -1,6 +1,9 @@
 # <Objective title>
 
-Plan status: Draft. This document alone does not authorize execution.
+Plan status: Draft. This document alone does not authorize execution. Plan owns
+intended milestones and optional planned task definitions. Implement owns observed
+status, verification results and execution evidence in this record (or the
+referenced tasks.md when a separate task record is justified).
 
 ## Objective and acceptance
 
@@ -53,38 +56,39 @@ decision record using the shared design method in lightweight mode. Do not creat
 
 Keep future work coarse. Preserve IDs on reorder; include integrated acceptance.
 
-| ID | Outcome | Prerequisites | Acceptance check | Observed status / evidence |
+| ID | Outcome | Prerequisites | Acceptance check | Implement-maintained status / evidence |
 | --- | --- | --- | --- | --- |
 | M1 | <Behavior or evidence> | <What must hold> | <How to verify> | Not started |
 | M2 | <Final integration> | <Required increments> | <Whole-task and regression checks> | Not started |
 
-## Task source
+## Optional task breakdown (default: inline)
 
-Keep simple work inline. When independent task maintenance adds value, link
-neighboring `tasks.md` once explicitly requested and created.
-`engflow-tasks` creates it only on request; Plan does not pre-create it. That file
-owns task decomposition/status/evidence. Keep milestone/feature continuity here
-and reference task evidence rather than copying a second status list.
+A milestone with clear deliverables, prerequisites and acceptance can be executed
+without a task list. Decompose only near-term work when it reduces ambiguity,
+exposes real dependencies, coordinates contributors or makes verification clearer.
+Keep distant milestones coarse. Plan defines intended task deliverables and
+dependencies; Implement owns observed status and execution evidence.
 
-## Inline tasks (when no separate task source)
-
-Create or refine inline tasks when useful and authorized; do not duplicate them
-into a separate live list. Extraction requires authority to update both artifacts
-and retain references, IDs and evidence. Omit this section for separate tasks.md
-or milestone-only plans.
-
-| ID | Milestone | Deliverable | Dependencies | Completion / verification | Observed status / evidence |
+| ID | Milestone | Deliverable / entry points | Dependencies | Completion / verification | Implement-maintained status / evidence |
 | --- | --- | --- | --- | --- | --- |
-| T1 | M1 | <Behavior or evidence> | <Only necessary dependencies> | <Observable conditions> | Not started |
+| T001 | M1 | <Behavior and relevant paths> | <Only necessary prerequisites> | <Observable conditions> | Not started |
 
-Link each task to relevant requirement IDs/sections and technical approach or
-existing design sections where useful. Include integration/regression tasks when
-needed; tasks-only refinement does not reopen settled technical choices.
-Add binding interfaces, invariants or file entry points where needed. Steps are
-optional local lists, not a separate tracking system. For affected tasks, cite
-the solution path/section and state essential execution constraints and checks.
-Evidence supports only the conditions it covers; all tasks checked off is not
-milestone or final acceptance.
+Link tasks to relevant requirement IDs/sections and Design contracts where useful.
+Include integration/regression tasks when needed. Steps are optional local lists,
+not another task hierarchy. Task checkboxes do not prove milestone or final
+acceptance. Implement may add or refine tasks just in time while preserving the
+agreed scope, outcomes, contracts and cross-milestone dependencies.
+
+## Optional separate task record
+
+Create neighboring `tasks.md` only when task volume, coordinated contributors,
+independent task review or external tracking makes a separate source valuable and
+the current write authority permits it. The [optional task-record outline](tasks.md)
+can be used. When `tasks.md` exists, it is the sole detailed task list and
+task-level execution record; omit the inline task table above and reference the
+file here. Plan may update planned task definitions within its authority.
+Implement alone updates observed task status, verification and evidence. Do not
+keep duplicate live task lists or progress ledgers.
 
 ## Plan review, if requested
 
@@ -97,9 +101,11 @@ do not transfer approval to changed scope or reopen it for routine progress.
 
 ## Current checkpoint
 
-Implementation maintains feature-level observations here. Preserve them during
-plan revision; task-level progress/checks stay in tasks.md when present. Reference
-task evidence instead of keeping duplicate status ledgers.
+Implement maintains all observed progress, status, blockers and verification evidence
+here. If tasks are inline, Implement updates their status/evidence in this record.
+If a separate tasks.md exists, keep task-level status/evidence there and retain
+only milestone-level summaries and references here. Plan revisions preserve
+Implement-owned observations and do not claim execution progress.
 
 - Last reconciled source/environment state:
 - Verified completion and commands/results:

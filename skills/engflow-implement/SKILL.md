@@ -27,17 +27,22 @@ bring a recommendation. Do not change requirements or acceptance to make work pa
 Small changes need no saved plan. For large or cross-session work, read
 [the continuity contract](references/continuity.md) and reuse one execution plan.
 Consume suitable plans regardless of their producer. Accept the user's request,
-plan path, task path or feature directory as an entry; the user need not supply
-every file. Resolve the selected feature through explicit context and permitted
-feature navigation, then follow the plan/task references to effective requirements,
-technical design and acceptance. Plan is the technical/delivery entry point;
-tasks.md, when present, is the executable task source, not a replacement for the
-plan's constraints. Read relevant Spec/design sources when available; missing
-optional files alone do not block adequate implementation inputs.
-Maintain task decomposition/progress in tasks.md when present; plan.md owns the
-technical route and feature-level checkpoint, referencing task evidence rather
-than copying statuses. With an existing combined plan, keep task state there.
-Neither `engflow-plan` nor `engflow-tasks` is required for local refinement.
+plan path, optional task-record path or feature directory as an entry; the user
+need not supply every file. Resolve the selected feature through explicit context
+and permitted feature navigation, then follow the plan and optional task-record
+references to effective requirements, technical design and acceptance. Read
+relevant Spec/design sources when available; missing optional files alone do not
+block adequate implementation inputs.
+
+Implement is executable directly from an adequate request, Spec and Design; neither
+Plan nor a task list is mandatory for a bounded change. For planned work, Plan owns
+the delivery route and any ahead-of-time task definitions. Implement owns all
+observed task/milestone status, actual verification, blockers and execution
+evidence. By default, keep the task breakdown and execution record inline in
+`plan.md`. When a separate `tasks.md` exists, it is the only detailed task list
+and task-level execution record; update it rather than maintaining duplicate
+inline state. No standalone Tasks Skill or stage is required.
+
 Cross-milestone restructuring, changes to binding contracts or acceptance, and
 unresolved major technical choices need dedicated planning or design judgment.
 Record the evidence, affected work and next decision needed; obtain agreement for
@@ -104,17 +109,24 @@ limits rather than claiming closure.
 
 ## Delivery standard
 
-Before starting the next milestone, check its prerequisites and whether its current
-detail supports safe execution. If it is still coarse, expand it in place into
-verifiable tasks or local steps as needed, within execution and record-write
-authority. This is routine refinement when agreed scope, outcomes, binding contracts,
-acceptance and cross-milestone dependencies remain unchanged; no planner invocation
-or new approval is needed. Keep later work coarse; an executable milestone needs
-no task layer. For ambiguous boundaries, consult [judgment examples](references/judgment.md).
+Before starting each milestone, check its prerequisites and whether its current
+detail supports safe execution. Just-in-time decomposition is the default: inspect
+the actual code and expand only the next milestone into the minimum verifiable tasks
+or local steps needed. Record this in the existing plan's execution section, or in
+the single tasks.md record when one already exists. Do not pre-decompose all distant
+milestones. This is routine refinement within execution and record-write authority
+when agreed scope, outcomes, binding contracts, acceptance and cross-milestone
+dependencies remain unchanged; no planner invocation or new approval is needed.
+A milestone with a clear outcome and acceptance can be executed directly without
+persisted tasks. Create a separate tasks.md only when task volume, coordinated
+contributors, independent task review or external tracking warrants it and current
+write authority permits it. For ambiguous boundaries, consult
+[judgment examples](references/judgment.md).
 
-Advance the next ready task, or the milestone when it has no tasks, in the agreed
-linear sequence. Refine local steps against actual code and preserve task deliverables
-and binding interfaces. Use test-first development when useful; verify behavior and
+Implement owns the observed status and evidence for every task and milestone.
+Advance the next ready task, or the milestone directly when no task breakdown is
+useful, in the agreed linear sequence. Refine local steps against actual code and
+preserve task deliverables and binding interfaces. Use test-first development when useful; verify behavior and
 contracts rather than incidental internals. Run focused checks as changes accumulate.
 
 Review meaningful increments and the final integrated change; review is part of
@@ -190,8 +202,8 @@ Preserve pending approval gates across sessions and revisions. Routine refinemen
 does not reopen approval, and a reorder does not grant execution permission.
 
 For a requested reorder, verify prerequisites and capture partial work first.
-Update the existing task source and affected plan references within authority,
-preserving stable IDs and valid evidence.
+Update the one existing task source and affected plan references within authority.
+Preserve stable IDs and valid evidence; do not create a second task list.
 If dependencies prevent the order, explain the conflict and propose a safe
 alternative.
 

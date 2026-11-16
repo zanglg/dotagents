@@ -4,8 +4,8 @@ User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
 
 ## Purpose
 
-Assess agreement between requirements, decisions, plans, tasks, implementation
-and current validation evidence. This entrypoint is strictly read-only.
+Assess agreement between requirements, decisions, plans, optional task breakdown,
+implementation and current validation evidence. This entrypoint is strictly read-only.
 
 ## Examples
 

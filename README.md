@@ -12,7 +12,6 @@ evaluation framework or specific agent host.
 | [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
 | [engflow-plan](skills/engflow-plan/README.md) | Develop a lightweight technical approach, milestone route and validation; consume deeper Design when present |
-| [engflow-tasks](skills/engflow-tasks/README.md) | Decompose a plan into feature tasks.md with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
 | [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, task, implementation and evidence consistency |
 | [engflow-design](skills/engflow-design/README.md) | Targeted, decision-driven technical design with one consolidated design.md per feature |
@@ -26,7 +25,8 @@ evaluation framework or specific agent host.
 
 Install all `skills/engflow-*` folders together, preserving sibling names and
 references. Each entrypoint is independently usable and explicitly invoked;
-there is no required Spec -> Design -> Plan -> Tasks sequence. See the
+there is no required document pipeline. Task decomposition is optional and
+handled within Plan or Implement, not a separate stage. See the
 [Engflow guide](docs/engflow/README.md) for choosing and combining them.
 
 `diagram-aesthetics` and `semver-bump` install individually. Preserve local

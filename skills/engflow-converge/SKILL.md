@@ -17,8 +17,8 @@ a code-review substitute or an approval to merge.
 ## Entry and scope
 
 Use only when the user explicitly requests convergence, completeness assessment
-or a cross-artifact consistency check. Accept a feature directory, Spec/Design/
-Plan/Tasks paths, an implementation target or a bounded set of sources.
+or a cross-artifact consistency check. Accept a feature directory, Spec/Design/Plan paths, an optional task-record
+path, an implementation target or a bounded set of sources.
 
 Establish the requested feature and review boundary first. Follow explicit paths
 and references. Do not infer the target from the newest directory, current branch
@@ -55,8 +55,10 @@ equally authoritative:
 1. Explicit user-approved requirements, decisions and constraints.
 2. Accepted Design or shared contracts within their stated scope.
 3. The current Plan and its milestone/acceptance route.
-4. The single authoritative task source: tasks.md when linked, otherwise inline
-   tasks in the Plan or execution record.
+4. Optional task breakdown/record: `tasks.md` when present, otherwise inline
+   tasks in the Plan or execution record. A milestone-only plan is valid; absence
+   of a task list is not a gap when the work can be implemented directly or
+   decomposed just in time.
 5. Actual source code, configuration, tests and observable interfaces.
 6. Validation records and execution evidence.
 
@@ -89,13 +91,16 @@ implementation or evidence is correct.
    proposed, deferred and unresolved intent.
 3. **Trace requirements.** For each material in-scope requirement, locate its
    observable acceptance condition, relevant design/contract, planned deliverable,
-   task and implementation/test coverage. Do not require a formal matrix.
+   optional task coverage when a task breakdown exists, and implementation/test
+   coverage. Do not require a formal matrix or a task list.
 4. **Check design and plan consistency.** Find contradictions, obsolete technical
    assumptions, missing interfaces/invariants, infeasible dependencies and
    milestones that no longer represent the effective route.
-5. **Check task completeness.** Identify missing work, orphan tasks, invalid
-   dependencies, inaccurate completion claims and absent integrated acceptance.
-   Respect the existing single task-state authority; do not create a second ledger.
+5. **Check optional task breakdown.** If tasks exist, identify missing work, orphan
+   tasks, invalid dependencies, inaccurate completion claims and absent integrated
+   acceptance. If no task list exists, assess whether milestones are sufficiently
+   clear for direct or just-in-time implementation; absence alone is not a defect.
+   Respect the single task-state authority; do not create a second ledger.
 6. **Check implementation coverage.** Inspect relevant code and tests against
    acceptance and approved contracts. Report material coverage gaps, not style
    preferences or an unrelated refactoring agenda.
@@ -152,8 +157,9 @@ Return:
 2. Scope: feature, revision/baseline, included and excluded paths, working-tree state.
 3. Sources: effective requirements, decisions, design, plan and task authority.
 4. A compact assessment matrix for requirement coverage, design consistency,
-   plan consistency, task completeness, implementation coverage and evidence
-   validity. Use PASS, GAP, BLOCKED, PARTIAL or NOT APPLICABLE per dimension.
+   plan consistency, optional task-breakdown completeness, implementation coverage
+   and evidence validity. Use PASS, GAP, BLOCKED, PARTIAL or NOT APPLICABLE per
+   dimension; mark task breakdown NOT APPLICABLE when none is needed.
 5. Findings with severity, confidence, precise source/location, evidence,
    impact and owning correction activity.
 6. Required next actions in dependency order, without executing them.

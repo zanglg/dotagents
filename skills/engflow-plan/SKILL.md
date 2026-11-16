@@ -12,13 +12,19 @@ disable-model-invocation: true
 
 # Engflow Plan
 
-Turn intended behavior into a grounded technical approach and verifiable delivery
-route for linear execution across sessions. Plan always owns the delivery
-route: milestone outcomes, sequencing, dependencies, milestone acceptance checks
-and the feature checkpoint. It translates but does not redefine Spec's requirements,
-scope or acceptance. Plan owns a compact technical approach only when no separate
-Design artifact exists. When a feature has `design.md`, that document owns technical
-decisions; Plan references it and carries only the selected route summary, binding
+Turn intended behavior into a grounded, verifiable delivery
+route for linear execution across sessions. Plan owns the intended delivery
+structure: milestone outcomes, sequencing, dependencies and milestone acceptance.
+It translates but does not redefine Spec's requirements, scope or acceptance.
+Plan may optionally pre-decompose near-term milestones into tasks when this
+materially improves execution clarity; a task list is not required. Plan owns
+intended task definitions, not observed execution status or evidence. Implement
+owns all observed progress, completion states, verification results, blockers and
+execution evidence, recorded in the single execution record.
+
+Plan owns a compact technical approach only when no separate Design artifact
+exists. When a feature has `design.md`, that document owns technical decisions;
+Plan references it and carries only the selected route summary, binding
 implementation constraints and verification needs. Design is useful but never a
 mandatory prerequisite.
 
@@ -54,19 +60,28 @@ and overall verification targets; do not redefine Spec's requirements or accepta
 Deferred requirements stay visible when relevant but do not become current tasks
 or current acceptance by implication.
 Build an overall milestone path with genuine prerequisites and final integrated
-acceptance. Keep distant work coarse; detail only what is close enough to implement
-reliably. The implementer may expand a coarse milestone when it becomes next, within
-existing authority and without another planner invocation, provided scope, outcomes,
-binding contracts, acceptance and cross-milestone dependencies remain unchanged.
-Do not design unsupported internals to make the plan look complete.
+acceptance. Do not produce a complete task tree by default. Plan may optionally
+decompose near-term milestones into executable tasks when this exposes real
+dependencies, supports coordinated work, or makes delivery and verification
+materially clearer. Keep task breakdown inline in `plan.md` by default and leave
+distant work coarse. Implement owns just-in-time decomposition of the next milestone
+when advance decomposition adds little value. A milestone with a clear outcome,
+prerequisites and acceptance can be implemented directly without a task list.
+Implement may expand a coarse milestone within existing authority, provided scope,
+outcomes, binding contracts, acceptance and cross-milestone dependencies remain
+unchanged. Do not design unsupported internals to make the plan look complete.
 
 Use only the hierarchy the work needs:
 - Milestone: a coherent delivered outcome or decisive validation result, with a
-  stable ID, prerequisites, observable acceptance and observed status or reference.
-- Task: an implementable, verifiable unit within a milestone, with a stable
-  plan-wide ID, deliverable, necessary dependencies and completion conditions.
-- Step: an optional local sequence or checkpoint inside a complex task. Use a
-  simple list; no independent status or approval system is required.
+  stable ID, prerequisites and observable acceptance.
+- Task: an optional, implementable and verifiable unit within a milestone. Give
+  persisted tasks stable IDs, deliverables, genuine dependencies and completion
+  conditions. A milestone may be executed directly without task decomposition.
+- Step: an optional local sequence inside a complex task. Use a simple list; no
+  independent status or approval system is required.
+
+These are planned work definitions, not observed progress. Implement owns actual
+task/milestone status and evidence. Do not mark work complete during planning.
 
 Prefer useful behavior or evidence over mechanical splits by file, layer or session.
 A task may span sessions. Specify constraints, shared interfaces, invariants, file
@@ -149,30 +164,47 @@ leave routine algorithms and helper decomposition to implementation.
 
 Use only the hierarchy the work needs:
 - Milestone: a coherent delivered outcome or decisive validation result, with a
-  stable ID, prerequisites, observable acceptance and observed status or reference.
-- Task: an implementable, verifiable unit within a milestone, with a stable
-  plan-wide ID, deliverable, necessary dependencies and completion conditions.
-- Step: an optional local sequence or checkpoint inside a complex task. Use a
-  simple list; no independent status or approval system is required.
+  stable ID, prerequisites and observable acceptance.
+- Task: an optional, implementable and verifiable unit within a milestone. Give
+  persisted tasks stable IDs, deliverables, genuine dependencies and completion
+  conditions. A milestone may be executed directly without task decomposition.
+- Step: an optional local sequence inside a complex task. Use a simple list; no
+  independent status or approval system is required.
+
+These are planned work definitions, not observed progress. Implement owns actual
+task/milestone status and evidence. Do not mark work complete during planning.
 
 Prefer useful behavior or evidence over mechanical splits by file, layer or session.
 A task may span sessions. Specify file entry points and verification methods when
 needed to remove real ambiguity. Keep distant work coarse and detail only what is
 close enough to implement reliably.
 
-Keep tasks inline for simple work. When task volume or independent maintenance
-makes separation useful, explicitly requested `engflow-tasks` can create neighboring
-`tasks.md`. Plan does not create that file or automatically invoke Tasks. Reference
-an existing task source instead of duplicating its state; decomposition needs no
-mandatory separate stage or file. New plans may include inline tasks.
+### Optional task breakdown
 
-Inline task plans, new or existing, remain valid. Refine their authorized task
-sections when requested, preserving settled choices, stable IDs, actual progress
-and evidence; no migration or Tasks invocation is required. When separate tasks
-already exist, propose affected task IDs/dependencies/checks and pending
-synchronization in the plan rather than silently updating a second live list.
-Extraction of inline tasks requires explicit authority to update both artifacts
-and leave one task-state source.
+Milestones are the default planning unit. Add tasks only when near-term work needs
+more explicit deliverables, dependencies, ownership boundaries or verification.
+Do not decompose mechanically by file, layer or session; do not detail distant
+work before the code and prerequisites are understood.
+
+Keep tasks inline in `plan.md` by default. A separate `tasks.md` is an optional
+record for unusually large task volume, coordinated contributors, independent
+task review or external tracking. Create it only when the separation has clear
+value and current write authority permits it. When present, it is the sole detailed
+task list; Plan references it and must not maintain a duplicate inline list.
+There is no standalone Tasks stage or Skill prerequisite.
+
+Plan owns planned task deliverables and dependencies. Implement owns observed
+task/milestone statuses, completion claims, actual checks, blockers and execution
+evidence. Implement updates the execution section in `plan.md` by default, or
+the single `tasks.md` record when one exists. Plan may revise planned task
+definitions within its authority but must preserve Implement-owned status/evidence.
+Implement may add just-in-time tasks to the same authoritative task source.
+
+When an existing separate `tasks.md` is present, update its planned definitions
+only within Plan's write authority and leave observed status/evidence to Implement.
+If Plan cannot update an affected source, record the exact task IDs and pending
+synchronization instead of creating a second live list. Existing inline or
+milestone-only plans remain valid; no migration is required.
 
 ## Source investigation
 
@@ -190,8 +222,9 @@ Verify consequential findings against sources. If no separate Design exists,
 integrate supported technical constraints and compact decisions into the plan. If
 `design.md` owns the affected decision, reference the evidence and identify the
 stale design section and pending synchronization; do not rewrite that authority
-from Plan. In either case, revise affected plan summaries, inline tasks,
-dependencies and checks within Plan authority. Keep the question, target
+from Plan. In either case, revise affected plan summaries, milestone dependencies,
+acceptance checks and planned task definitions within Plan authority. Leave
+observed task/milestone statuses and execution evidence to Implement. Keep the question, target
 version/configuration, known evidence and affected sources explicit.
 
 Plan writes remain limited to the requested plan: identify stale Spec, Design or
@@ -217,23 +250,30 @@ there; Plan references its path/section and carries only the constraints and che
 needed by delivery. Do not duplicate the full solution or maintain competing
 decision records.
 
-Within plan-write authority, update the plan's selected-route summary, milestone
-dependencies and inline task constraints. For separate `tasks.md`, identify
-affected task IDs, constraints and pending updates without rewriting that file.
-When findings invalidate a plan assumption, correct current guidance and affected
-tasks while preserving decision history and valid evidence. Reopen affected
-completion claims with reasons. Identify stale Design/contract sources for
-authorized synchronization; plan-only work does not rewrite them. Do not alter
+Within plan-write authority, update the selected-route summary, milestone
+dependencies and planned task definitions/constraints. If a separate `tasks.md`
+exists, update planned definitions there only when authorized; preserve all
+Implement-owned statuses and evidence. Otherwise identify affected task IDs and
+pending synchronization without creating a second list. When findings invalidate
+a plan assumption, correct current guidance and affected planned work while
+preserving decision history. Do not rewrite observed completion claims; Implement
+reassesses them against current evidence. Identify stale Design/contract sources
+for authorized synchronization; plan-only work does not rewrite them. Do not alter
 effective requirements or acceptance without user agreement.
 
 ## Revision and continuity
 
 Reuse one suitable execution plan, including formats created by other tools.
-This is the delivery entry point. A separate design.md remains authoritative for
-technical decisions; without one, the plan may own a compact technical approach.
-With separate tasks.md, Tasks owns decomposition and task progress while Plan
-keeps milestone/feature continuity and concise design references/constraints.
-Combined plans remain authoritative for their inline tasks and progress.
+This is the delivery entry point. A separate `design.md` remains authoritative
+for technical decisions; without one, the plan may own a compact technical approach.
+Plan owns milestone delivery structure and optional planned task definitions.
+Implement owns all observed task/milestone progress and execution evidence.
+By default, keep task definitions and the execution record inline in `plan.md`.
+When a separate `tasks.md` is justified, it becomes the only detailed task list
+and task-level execution record; Plan references it and retains milestone-level
+delivery continuity. Plan may maintain planned definitions within its authority;
+Implement alone updates observed status and evidence. No separate Tasks Skill or
+mandatory Tasks stage is required.
 A large objective may reference separately numbered features. Keep shared outcomes,
 cross-feature dependencies and integrated acceptance at the overall entry point;
 keep each task and its evidence in one owning task source. Reference child progress
