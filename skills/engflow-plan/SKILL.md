@@ -13,12 +13,14 @@ disable-model-invocation: true
 # Engflow Plan
 
 Turn intended behavior into a grounded technical approach and verifiable delivery
-route for linear execution across sessions. Plan always owns scope, acceptance,
-milestones, dependencies, delivery sequencing and the feature checkpoint. It owns
-a compact technical approach only when no separate Design artifact exists. When
-a feature has `design.md`, that document owns technical decisions; Plan references
-it and carries only the selected route summary, binding implementation constraints
-and verification needs. Design is useful but never a mandatory prerequisite.
+route for linear execution across sessions. Plan always owns the delivery
+route: milestone outcomes, sequencing, dependencies, milestone acceptance checks
+and the feature checkpoint. It translates but does not redefine Spec's requirements,
+scope or acceptance. Plan owns a compact technical approach only when no separate
+Design artifact exists. When a feature has `design.md`, that document owns technical
+decisions; Plan references it and carries only the selected route summary, binding
+implementation constraints and verification needs. Design is useful but never a
+mandatory prerequisite.
 
 ## Feature context
 
@@ -47,8 +49,10 @@ code and available verification. A Spec and Design are useful inputs, not mandat
 prerequisites or documents to invent. Surface material conflicts and their affected
 scope; do not silently replace approved decisions or treat assumptions as evidence.
 
-Define scope, non-goals and overall acceptance. Deferred requirements stay visible
-when relevant but do not become current tasks or current acceptance by implication.
+Translate effective scope, non-goals and acceptance into delivery milestones
+and overall verification targets; do not redefine Spec's requirements or acceptance.
+Deferred requirements stay visible when relevant but do not become current tasks
+or current acceptance by implication.
 Build an overall milestone path with genuine prerequisites and final integrated
 acceptance. Keep distant work coarse; detail only what is close enough to implement
 reliably. The implementer may expand a coarse milestone when it becomes next, within
