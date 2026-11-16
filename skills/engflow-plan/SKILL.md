@@ -92,7 +92,7 @@ approve a material change. Route scope/acceptance changes to the user/Specify
 and technical changes to Design. Do not automatically invoke another Skill.
 Preview stays conversational; view requests are read-only.
 
-Only authorized Plan/navigation edits and read-only source inspection are in
+Only authorized Plan/task-record/navigation edits and read-only inspection are in
 scope. Do not implement, run mutating checks, publish tickets, commit, push or
 manage branches/worktrees. Optional helpers remain read-only.
 
