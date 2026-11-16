@@ -19,7 +19,8 @@ Use these authority boundaries:
 
 - Spec owns requirements, scope and acceptance.
 - A feature's single `design.md`, when present, owns its technical decisions.
-- Plan owns the delivery route, milestones, dependencies and feature checkpoint.
+- Plan owns the delivery route, milestones, dependencies and milestone acceptance.
+- Implement maintains the observed feature-level checkpoint and execution evidence.
 - When no separate design exists, Plan may own a proportional technical approach
   and its compact decision record inside `plan.md`.
 - Plan owns intended task definitions when it pre-decomposes work; task lists are
@@ -192,11 +193,11 @@ The active caller integrates the technical result into its own authorized artifa
   only delivery-relevant summaries and constraints.
 - If `design.md` already exists, continue it, record only the targeted technical
   revisions and preserve unaffected choices. Accepted changes must be reconciled
-  into affected Plan sections and, where used, Tasks before dependent implementation
-  proceeds.
-- Design identifies affected Plan/Tasks paths, sections, decisions and pending
-  synchronization. It updates only sources within its write authority; it does not
-  silently rewrite Plan or task state. Plan likewise identifies stale Design or
+  into affected Plan sections and, where a separate task record exists, its
+  affected entries before dependent implementation proceeds.
+- Design identifies affected Plan and optional task-record paths, sections,
+  decisions and pending synchronization. It updates only sources within its write
+  authority; it does not silently rewrite Plan or Implement-owned task state. Plan likewise identifies stale Design or
   contract sources instead of silently rewriting them.
 - Split out a shared ADR/contract only when its authority and lifecycle are
   genuinely independent. Reference it from the feature design; do not keep

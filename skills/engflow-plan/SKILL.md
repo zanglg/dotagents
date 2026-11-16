@@ -289,12 +289,13 @@ Split details only when useful, keeping a clear entry point and references.
 Adapt [the optional outline](assets/execution-plan.md); old milestone-only plans
 remain valid and need no mandatory migration.
 
-Refine the requested milestone or task in place. Check partial work and dependencies
-before splitting, merging or reordering. Preserve stable IDs on reorder; never
-reuse a retired ID. Retain an ID only while its meaning remains recognizable.
-For replaced or merged tasks, retain a concise successor reference and allocate
-new IDs as needed. Keep valid completion evidence with what it actually proves;
-it does not automatically prove a replacement task complete.
+Refine planned milestone/task definitions in place. Check partial work and
+dependencies before splitting, merging or reordering. Preserve stable IDs on
+reorder; never reuse a retired ID. Retain an ID only while its meaning remains
+recognizable. For replaced or merged tasks, retain a concise successor reference
+and allocate new IDs as needed. Do not change Implement-owned observed status or
+evidence. Keep valid completion evidence with what it actually proves; it does
+not automatically prove a replacement task complete.
 
 Preserve user content, valid results and implementation-owned observations. Explain
 consequential changes and mark affected evidence stale with reasons rather than

@@ -54,7 +54,8 @@ technical topics in that file; do not create one design document per decision.
 Split a shared ADR/contract only when it has an independently maintained lifecycle
 or shared authority across features.
 
-Plan owns the delivery route, milestones, dependencies and feature checkpoint.
+Plan owns the delivery route, milestones, dependencies and milestone acceptance.
+Implement maintains the observed feature checkpoint and execution evidence.
 When `design.md` exists, Plan references it and carries only a concise selected-route
 summary, binding implementation constraints and verification needs. Without a
 separate design, Plan may own a proportional technical approach inside `plan.md`.
