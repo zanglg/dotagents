@@ -34,7 +34,9 @@ When `design.md` exists, it owns technical decisions. Reference the relevant
 decision IDs and sections. Summarize only the selected route, binding
 implementation constraints, affected interfaces/invariants and verification
 needs. Do not copy the full design rationale, alternatives, decision history or
-architecture/code skeleton into Plan.
+architecture/code skeleton into Plan. If Design is first introduced after Plan,
+carry forward the Plan's still-binding decisions into that single design artifact
+without reopening them, then reconcile this section to reference it.
 
 When no separate design exists, Plan may own a compact technical approach and
 decision record using the shared design method in lightweight mode. Do not create

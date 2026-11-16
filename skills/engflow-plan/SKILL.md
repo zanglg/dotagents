@@ -113,12 +113,16 @@ to make a plan look complete.
   merely to reuse the method.
 - Reuse confirmed decisions and existing shared contracts. Do not reopen a settled
   choice for preference or duplicate its authority in the plan.
-- If Design is explicitly invoked after Plan, Design consumes the existing plan
-  and targets the decisions the user wants reviewed. After a material design
-  change is accepted, reconcile the affected plan summary, constraints, milestones,
-  dependencies and verification before dependent implementation. Design records
-  pending synchronization; Plan does not assume a design revision has synchronized
-  itself automatically.
+- If Design is explicitly invoked after Plan and no `design.md` exists,
+  Design carries forward all still-binding Plan technical decisions into its
+  consolidated `design.md` as inherited records, preserving their original status
+  and provenance without reopening them. It deeply redesigns only the targeted
+  decisions and their dependents. Plan then references the new technical authority
+  and retains only delivery-relevant summaries and constraints.
+- After a material design change is accepted, reconcile affected plan summaries,
+  constraints, milestones, dependencies and verification before dependent
+  implementation. Design records pending synchronization; Plan does not assume
+  a design revision has synchronized itself automatically.
 
 ### Decision thread in Plan
 

@@ -178,10 +178,17 @@ The active caller integrates the technical result into its own authorized artifa
 - Plan without a separate design may keep the proportional technical approach and
   compact decision records in `plan.md`. Shared-method reuse creates no file and
   does not invoke Design.
-- If Design is invoked after Plan, Design consumes the Plan, records only the
-  targeted technical decisions in the consolidated `design.md`, and preserves
-  unaffected choices. Accepted changes must be reconciled into affected Plan
-  sections and, where used, Tasks before dependent implementation proceeds.
+- If Design is invoked after Plan and no `design.md` exists yet, initialize the
+  single design artifact by carrying forward all still-binding technical decisions
+  from the Plan as concise inherited records. Preserve each decision's original
+  status, rationale and provenance; do not reopen unaffected choices. Deeply
+  investigate only the decisions the user targeted and their dependencies.
+  Once Design becomes the technical authority, Plan should reference it and retain
+  only delivery-relevant summaries and constraints.
+- If `design.md` already exists, continue it, record only the targeted technical
+  revisions and preserve unaffected choices. Accepted changes must be reconciled
+  into affected Plan sections and, where used, Tasks before dependent implementation
+  proceeds.
 - Design identifies affected Plan/Tasks paths, sections, decisions and pending
   synchronization. It updates only sources within its write authority; it does not
   silently rewrite Plan or task state. Plan likewise identifies stale Design or

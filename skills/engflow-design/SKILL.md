@@ -52,6 +52,13 @@ identify the most consequential unresolved or weak decision and make the propose
 focus explicit. Do not restart the entire design or reopen unaffected decisions
 merely because Design was invoked.
 
+If this is the feature's first `design.md`, carry forward all still-binding
+technical decisions from the existing Plan as inherited records, preserving their
+original status, rationale and provenance. This consolidates technical authority;
+it does not approve draft choices or require unaffected decisions to be reconsidered.
+Deeply redesign only the targeted decisions and their dependents. Record the
+resulting Plan synchronization as pending until Plan references the new authority.
+
 Reuse existing paths. Otherwise, authorized new features default to
 `specs/NNN-short-name/`: use the next number above existing directories and retained
 index identities, starting at `001` with at least three digits; preserve IDs and

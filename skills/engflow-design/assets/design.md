@@ -20,6 +20,7 @@ or technical area.
 - Actual implementation and runtime/version context:
 - Shared contracts / ADRs:
 - Existing decisions and supplied approval evidence:
+- Carried-forward technical decisions from Plan, with original status/provenance:
 
 Spec remains authoritative for requirements and acceptance. This document owns
 feature-level technical decisions. Plan owns delivery sequencing and acceptance
