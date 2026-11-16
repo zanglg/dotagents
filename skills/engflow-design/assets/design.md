@@ -1,6 +1,10 @@
 # <Feature title> — Technical Design
 
-Design status: Draft. This document records technical decisions; it does not
+Design status: Draft. This canonical artifact requires an effective Spec:
+the current `spec.md` or a project-equivalent authoritative requirements source.
+If none exists, do not instantiate or save this template; only an explicitly
+requested conversational Preview/Exploration may proceed, marked provisional
+and not Plan-ready. This document records technical decisions; it does not
 authorize implementation. Maintain one consolidated `design.md` per feature.
 Keep all feature-level decision threads here; do not create one file per decision
 or technical area.
@@ -17,7 +21,7 @@ or technical area.
 
 ## Read first and authority
 
-- Requirements: `spec.md` and relevant sections, if present:
+- Effective Spec: `spec.md` or project-equivalent authoritative requirements source:
 - Existing delivery route: `plan.md` and relevant sections, if present:
 - Actual implementation and runtime/version context:
 - Shared contracts / ADRs:
