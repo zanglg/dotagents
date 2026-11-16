@@ -63,3 +63,11 @@ When changing a Skill, test the relevant boundaries in realistic tasks:
 
 Inspect actual changes and evidence. A plausible response or successful process
 exit alone is not a behavioral pass.
+
+## Migration
+
+Replace older installed Engflow copies as a group so sibling references remain
+consistent. Preserve project artifacts, stable IDs and local customizations.
+The four core Skills define responsibilities; Clarify, Research, PoC, Converge,
+Refactor Assess and Handoff remain optional capabilities. Do not create every
+feature artifact or invoke every capability merely because the group is installed.
