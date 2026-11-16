@@ -3,6 +3,8 @@
 Use one living execution record for substantial or cross-session feature work,
 normally `plan.md`. It is a durable checkpoint, not a ticket system or a
 transcript. Reuse an existing suitable record and project conventions.
+Follow the [shared feature-record convention](../../engflow-specify/references/feature-records.md)
+for target selection, paths, numbering and authorized navigation updates.
 
 ## Ownership
 
@@ -29,6 +31,10 @@ only information needed to continue safely:
 - Completed and partial work, actual commands/results and review status.
 - Failed approaches or discoveries that affect future decisions.
 - Blockers, pending approvals, outstanding operations and known side effects.
+
+For outstanding write-capable operations, retain the handle, environment, scope,
+last observed liveness, uncertain effects and next safe check. Record enough source
+identity and environment context to tell whether verification still applies.
 
 Distinguish planned, implemented and verified work. A checkbox or intended test
 is not evidence. Do not copy whole source documents or every tool call.
@@ -58,7 +64,8 @@ material change. Reconcile affected work after accepted requirement or design
 changes, but preserve unaffected progress and evidence.
 
 Update each authoritative source only within current write authority. Record
-pending source updates with their owner and next action when useful; no separate
+pending accepted source updates with supplied decision evidence, affected paths,
+owner and next action; no separate
 synchronization ledger is required. Verify a source before calling it updated.
 Documentation synchronization, implementation and validation are distinct
 outcomes.

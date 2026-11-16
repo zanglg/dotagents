@@ -35,11 +35,17 @@ choosing a data structure, concurrency model, consistency boundary, recovery
 strategy, performance trade-off or compatibility contract. A focused deep dive
 may change one part of an existing design; it does not require a full redesign.
 
-The user may supply a preferred approach or challenge an existing choice. Evaluate
-it against requirements, evidence and trade-offs. Treat it as a binding constraint
-only when the user or effective authority makes it one. Make routine, reversible
-choices autonomously. Seek user judgment when a consequential choice cannot be
-resolved responsibly from available evidence.
+Make routine, low-impact, reversible choices autonomously. Involve the user in
+complex or consequential choices, deep exploration, evidence gaps or problems
+without a reliable solution. Bring evidence, attempts, options and a recommendation;
+look up discoverable facts instead of turning every uncertainty into a question.
+
+The user may supply a preferred approach or reopen a completed design even when
+the existing solution is sound. Evaluate the requested direction against
+requirements, feasibility and trade-offs. Technical preferences guide selection;
+explicit constraints bind it, but neither proves feasibility. Preserve the current
+effective decision while a replacement is only proposed. User agreement on a
+replacement resolves that decision without an additional approval loop.
 
 ## Use structure only when it helps
 
@@ -55,19 +61,23 @@ Do not prescribe routine implementation details or write full implementation.
 
 ## Evidence and completion
 
-Use source investigation when code or documentation evidence is missing. Use
-experiments only with explicit, adequate execution authority; a design request
-alone grants none. Research and experiment methods may be read as references
-without invoking those Skills.
+For consequential code or documentation evidence gaps, read and apply the
+[shared research method](../../engflow-research/references/research-core.md).
+Trace relevant sources and versions, seek counterevidence and keep unsupported
+premises conditional. Integrate findings and their decision impact into `design.md`.
+Use the [evidence methods](investigation.md) for runtime questions, only with
+adequate execution authority; a design request alone grants no experiments.
+Reading these references invokes no other Skill or independent report.
 
 Design is sufficient when the implementation can proceed without rediscovering
 important behavior, architecture or contracts. State material assumptions,
 unresolved choices, verification needs and known limitations.
 
-When a decision changes, update the current design and preserve useful rationale
-and history. Identify affected delivery or implementation work; each owning
-activity remains responsible for its own records. Reassess only what the change
-could invalidate.
+Readiness does not freeze a design. When direction changes, update the affected
+parts of the current design and preserve useful rationale and decision history.
+Identify affected requirements, delivery, implementation and verification; each
+owning activity remains responsible for its records. Reassess only what the change
+could invalidate and distinguish agreed changes from proposals awaiting a decision.
 
 Before delivery, check that the solution addresses the Spec, fits the actual
 system, exposes important trade-offs and can be verified. This is an author

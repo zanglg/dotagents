@@ -18,6 +18,12 @@ Read the Spec, Design, relevant code and existing delivery records. Identify
 the outcomes that must be delivered, their real dependencies and how each
 milestone and the whole feature will be accepted.
 
+Read and follow the
+[shared feature-record convention](../engflow-specify/references/feature-records.md).
+Save authorized planning work to `specs/NNN-short-name/plan.md`, reusing existing
+project paths. Preview stays conversational. The
+[plan outline](assets/execution-plan.md) and [task outline](assets/tasks.md) are optional.
+
 Use milestones as the default planning unit. Add tasks only when they clarify
 near-term deliverables, ownership, dependencies or verification. Keep distant
 work coarse; Implement can refine the next milestone as the code becomes clear.
@@ -25,6 +31,11 @@ work coarse; Implement can refine the next milestone as the code becomes clear.
 Reuse the existing plan and stable IDs. Keep task definitions inline in
 `plan.md` by default. A separate `tasks.md` is optional and should exist only
 when separate tracking has clear value.
+
+For consequential source-evidence gaps, apply the
+[shared research method](../engflow-research/references/research-core.md) within
+this task. Integrate findings into delivery dependencies and verification;
+unresolved technical selection remains Design's responsibility.
 
 ## Principles
 

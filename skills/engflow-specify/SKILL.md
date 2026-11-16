@@ -29,8 +29,9 @@ non-goals, constraints and observable acceptance.
 
 ## Boundaries
 
-Reuse the selected feature's Spec and project conventions. Create or update files
-only within the user's write authority; a preview stays in conversation.
+Read and follow the [shared feature-record convention](references/feature-records.md).
+Create or update the selected feature's `spec.md` within write authority;
+the default is `specs/NNN-short-name/spec.md`. A preview stays in conversation.
 Preserve existing content, stable IDs and approval history. A proposed revision
 does not inherit approval, and changing Spec does not automatically update Design
 or Plan.

@@ -7,6 +7,16 @@ The depth should match the problem: ordinary features need a clear standard
 design; consequential questions can receive a focused deep dive. Topics,
 decision records and code skeletons are optional tools, not required structure.
 
+The agent resolves routine, low-impact choices. Complex questions, uncertain
+evidence and difficult trade-offs can involve the user. The user may also reopen
+a completed design to fit a preferred technical direction; completion is not a
+freeze, and preference does not prove feasibility.
+
+Authorized design work maintains `specs/NNN-short-name/design.md`, following
+existing project paths and the [feature-record convention](../engflow-specify/references/feature-records.md).
+Preview stays in conversation. Research methods supply evidence within Design;
+no separate Research invocation or report is needed.
+
 Examples:
 - "Design this feature using the existing architecture."
 - "Compare a tree and a hash map for this data model."

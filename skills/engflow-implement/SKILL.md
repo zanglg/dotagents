@@ -16,19 +16,30 @@ in the existing codebase, then verify and review the result.
 
 Establish the target, applicable requirements, technical contracts, current
 repository state and permitted effects. Preserve user changes and existing work.
+A bounded maintenance fix may proceed directly from an adequate request; do not
+invent feature artifacts. When feature records are involved, read and follow the
+[shared convention](../engflow-specify/references/feature-records.md): normally
+`specs/NNN-short-name/plan.md` holds execution state, with optional `tasks.md`.
 
 Implement autonomously within the agreed scope. Resolve routine coding choices
 locally. Refine the next milestone into tasks or steps only when that helps
 execution; do not create a second planning system.
 
 Run proportionate checks as work proceeds, then relevant integration and
-regression checks. Review meaningful changes. Record what actually changed,
-what was tested, the results and what remains unverified.
+regression checks. Review meaningful changes and the integrated result using the
+[review method](references/review-core.md) and [Git scope guidance](references/scope.md).
+Record actual changes, tests/results, review mode and what remains unverified.
 
 For substantial or resumed work, use the [execution continuity guidance](references/continuity.md)
 to reconcile the record with the actual repository and outstanding operations.
 
 ## When to seek direction
+
+For consequential evidence gaps after ordinary diagnosis, apply the
+[shared research method](../engflow-research/references/research-core.md).
+Use the [experiment method](../engflow-poc/references/experiment-core.md) when
+runtime evidence is needed, within existing execution authority. These methods
+do not invoke another Skill or create separate reports.
 
 Resolve ordinary defects and implementation details directly. If a technical
 problem exposes a consequential design choice or cannot be resolved with

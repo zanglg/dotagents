@@ -8,6 +8,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Keep core entrypoints concise while restoring shared feature paths, stable
+  numbering, persistence and navigation rules under `specs/NNN-short-name/`.
+  Preserve existing combined documents and the single authoritative task record.
+- Clarify user participation in complex design and reopening completed designs
+  for technical preferences. Reconnect shared source-investigation, experiment
+  and implementation-review methods without implicit Skill invocation or reports.
 - Establish the canonical Spec → Design → Plan → Implement feature lifecycle.
   Spec owns requirements only; Design owns standard and deep topic-level technical
   design, decisions, evidence and optional code skeletons; Plan owns delivery

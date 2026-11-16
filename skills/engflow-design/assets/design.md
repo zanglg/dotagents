@@ -35,6 +35,7 @@ Use a focused Topic when a consequential question needs alternatives or evidence
 - Context and constraints:
 - Options and trade-offs:
 - Recommendation or decision:
+- Decision source/status and reason for any revision:
 - Evidence and remaining uncertainty:
 - Consequences for the design:
 
@@ -53,3 +54,5 @@ Keep one current design. Preserve the provenance of consequential decisions and
 revise only what new direction or evidence affects. Do not maintain separate
 decision maps, open-decision lists, synchronization matrices or history tables
 unless the project has a demonstrated need for them.
+An implementation-ready design may be reopened to reflect user technical direction.
+Keep proposals distinct from effective decisions and identify affected downstream work.
