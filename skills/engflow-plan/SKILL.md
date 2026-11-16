@@ -20,7 +20,9 @@ Plan may optionally pre-decompose near-term milestones into tasks when this
 materially improves execution clarity; a task list is not required. Plan owns
 intended task definitions, not observed execution status or evidence. Implement
 owns all observed progress, completion states, verification results, blockers and
-execution evidence, recorded in the single execution record.
+execution evidence. Store them in `plan.md` by default; when a separate
+`tasks.md` is justified, keep task-level execution state there and reference it
+from the Plan. Maintain one authoritative task-state source, never parallel lists.
 
 Plan owns a compact technical approach only when no separate Design artifact
 exists. When a feature has `design.md`, that document owns technical decisions;

@@ -55,14 +55,14 @@ Split a shared ADR/contract only when it has an independently maintained lifecyc
 or shared authority across features.
 
 Plan owns the delivery route, milestones, dependencies and milestone acceptance.
-Implement maintains the observed feature checkpoint and execution evidence.
 When `design.md` exists, Plan references it and carries only a concise selected-route
 summary, binding implementation constraints and verification needs. Without a
 separate design, Plan may own a proportional technical approach inside `plan.md`.
 Plan may optionally define near-term task deliverables and dependencies when this
 improves execution clarity; default to inline tasks and leave distant work coarse.
-Implement owns all observed task/milestone status, verification results, blockers
-and execution evidence. It decomposes the next milestone just in time by default.
+Implement owns the observed feature checkpoint, all task/milestone statuses,
+verification results, blockers and execution evidence. It decomposes the next
+milestone just in time by default.
 A separate `tasks.md` is optional for unusually large task volume, coordinated
 contributors, independent review or external tracking; when present it is the
 single detailed task list and task-level execution record. No separate Tasks Skill
