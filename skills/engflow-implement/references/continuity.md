@@ -26,7 +26,9 @@ Update the record when meaningful work is verified or before a pause. Preserve
 only information needed to continue safely:
 
 - Objective, scope, non-goals and applicable approval/authority limits.
-- Relevant Spec, Design, code and shared-contract paths.
+- Effective requirements and relevant existing Spec, Design, code or contract paths.
+  Preserve essential request context when it has no durable source; do not create
+  missing stage documents merely to populate the checkpoint.
 - Milestones, prerequisites and the next actionable work.
 - Completed and partial work, actual commands/results and review status.
 - Failed approaches or discoveries that affect future decisions.

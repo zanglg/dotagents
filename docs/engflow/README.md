@@ -12,9 +12,22 @@ Engflow is a small set of explicit, composable engineering skills. Each
 | [Plan](../../skills/engflow-plan/README.md) | Organize the solution into deliverable work. | What needs to be done, and in what order? |
 | [Implement](../../skills/engflow-implement/README.md) | Change code and verify the result. | Does it work? |
 
-The normal feature path is **Spec → Design → Plan → Implement**. Keep each
-artifact proportional to the work. A bounded maintenance fix may go directly
-to Implement when feature-level artifacts add no value.
+Each Skill can start from an adequate request and available context. No preceding
+Skill invocation or complete document set is required. Read existing authoritative
+records when present; do not create missing stage artifacts merely to begin work.
+Install the group together for shared references; independent use does not imply
+that an individual folder has no installation dependencies.
+
+| Situation | Possible path |
+| --- | --- |
+| Clear small feature or fix | Request or Spec → Implement |
+| A technical question needing a solution | Design alone, optionally followed by Implement |
+| Work needing sequencing or investigation milestones | Plan alone, optionally followed by Implement |
+| A complex feature needing all responsibilities | Spec → Design → Plan → Implement |
+
+These are examples, not enforced transitions. Important missing intent, design
+facts or authority can block dependent work; a missing optional document alone
+cannot. Users may still require particular records or review gates.
 
 The agent resolves routine, low-impact choices. Complex or consequential questions,
 deep exploration, insufficient evidence and problems without a reliable solution
@@ -85,6 +98,13 @@ For this workflow, also exercise a user-requested redesign of a sound solution,
 a source-evidence gap, a new numbered feature and continuation of a legacy combined
 plan. Check actual saved paths, evidence integration, affected downstream work and
 preservation of decisions/IDs. Preview must leave files and navigation unchanged.
+
+Also check direct implementation of a simple Spec without Design/Plan files,
+standalone Design from a clear request, and Plan with a pending technical decision.
+Expect no forced preceding invocation, no placeholder documents and no invented
+resolution of important unknowns. Converge should assess a simple completed feature
+against its requirements and current evidence without requiring optional artifacts;
+an explicitly required missing record must still be reported.
 
 Inspect actual changes and evidence. A plausible response or successful process
 exit alone is not a behavioral pass.

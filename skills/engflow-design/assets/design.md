@@ -7,7 +7,7 @@ value.
 ## Objective and context
 
 - Problem and intended outcome:
-- Effective Spec and acceptance:
+- Effective requirements and acceptance (link Spec when available):
 - Relevant existing architecture, contracts and constraints:
 
 ## Proposed solution

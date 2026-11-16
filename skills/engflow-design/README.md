@@ -2,7 +2,8 @@
 
 [SKILL.md](SKILL.md) is the authoritative contract.
 
-Design develops the technical solution from the Spec and the actual system.
+Design develops a technical solution from a clear request, effective requirements
+and the actual system. No Spec document or prior Skill invocation is required.
 The depth should match the problem: ordinary features need a clear standard
 design; consequential questions can receive a focused deep dive. Topics,
 decision records and code skeletons are optional tools, not required structure.
@@ -20,6 +21,7 @@ no separate Research invocation or report is needed.
 Examples:
 - "Design this feature using the existing architecture."
 - "Compare a tree and a hash map for this data model."
+- "Design a retry strategy from this description; preview only, no Spec exists."
 - "I prefer an event-driven design; assess the trade-offs and update the proposal."
 - "Revisit only the concurrency strategy; preserve the rest of the design."
 

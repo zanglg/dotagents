@@ -10,6 +10,8 @@ disable-model-invocation: true
 # Engflow Specify
 
 Define **what should be built**, not how it should be implemented.
+Start from a request or available discussion; no prior Clarify or other Skill
+invocation, project setup or existing feature documents are required.
 
 Read the relevant discussion, existing Spec and supporting sources. Synthesize
 the user's intent into a concise, testable description of behavior, scope,

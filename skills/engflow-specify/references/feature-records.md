@@ -3,6 +3,11 @@
 Apply this convention when selecting, reading or writing feature records. It is
 shared by Engflow capabilities, not a separate stage or a grant of write authority.
 
+Each capability can start from an adequate request and available sources. Depend
+on the information needed for the work, not prior Skill calls or a complete set of
+documents. Existing decisions and project-required records remain binding. Default
+paths specify where needed artifacts belong; they do not require all artifacts.
+
 ## Select and reuse
 
 Use the explicit feature path/ID or established conversation target first. For an

@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Make each Engflow capability independently usable from adequate task context.
+  Allow direct implementation of simple requests/Specs and standalone Design or
+  Plan without preceding invocations or placeholder documents. Converge evaluates
+  the task's actual baseline while preserving project-required records and gates.
 - Allow user-directed reconsideration in Clarify while preserving effective
   decisions until replacement. Extract Converge's assessment method behind an
   explicit entrypoint reference, with proportional output for focused reviews.
@@ -18,7 +22,7 @@ This project follows Semantic Versioning and uses Conventional Commits.
 - Clarify user participation in complex design and reopening completed designs
   for technical preferences. Reconnect shared source-investigation, experiment
   and implementation-review methods without implicit Skill invocation or reports.
-- Establish the canonical Spec → Design → Plan → Implement feature lifecycle.
+- Offer Spec → Design → Plan → Implement as a composable feature workflow.
   Spec owns requirements only; Design owns standard and deep topic-level technical
   design, decisions, evidence and optional code skeletons; Plan owns delivery
   milestones and consumes Design; Implement executes and may request re-entrant

@@ -6,11 +6,11 @@ order to fit the question; preserve the evidence and classification standards be
 
 ## Effective sources and evidence
 
-Establish the effective source of truth rather than treating every document as
-equally authoritative:
+Establish effective authority from the request and available records, rather than
+requiring every document below or treating all sources as equally authoritative:
 1. Explicit user-approved requirements, decisions and constraints.
-2. Accepted Design or shared contracts within their stated scope.
-3. The current Plan and its milestone/acceptance route.
+2. Accepted technical decisions, any Design and shared contracts within their scope.
+3. Any current Plan and its milestone/acceptance route.
 4. Optional task breakdown/record: `tasks.md` when present, otherwise inline
    tasks in the Plan or execution record. A milestone-only plan is valid; absence
    of a task list is not a gap when the work can be implemented directly or
@@ -42,20 +42,21 @@ implementation or evidence is correct.
 1. **Establish scope.** Identify the feature, target revision, working-tree state,
    requested files and explicit exclusions. Include relevant staged, unstaged and
    untracked source when the requested target is the working change.
-2. **Resolve authority.** Read the effective Spec, accepted decisions/contracts,
-   Design, Plan and task source through their references. Distinguish accepted,
+2. **Resolve authority.** Read the request, effective requirements, accepted decisions,
+   contracts and any Spec, Design, Plan or task records. Distinguish accepted,
    proposed, deferred and unresolved intent.
 3. **Trace requirements.** For each material in-scope requirement, locate its
-   observable acceptance condition, relevant design/contract, planned deliverable,
+   observable acceptance condition, applicable design/contract, planned outcome if any,
    optional task coverage when a task breakdown exists, and implementation/test
    coverage. Do not require a formal matrix or a task list.
-4. **Check design and plan consistency.** Find contradictions, obsolete technical
+4. **Check applicable design and plan consistency.** Find contradictions, obsolete technical
    assumptions, missing interfaces/invariants, infeasible dependencies and
    milestones that no longer represent the effective route.
 5. **Check optional task breakdown.** If tasks exist, identify missing work, orphan
    tasks, invalid dependencies, inaccurate completion claims and absent integrated
    acceptance. If no task list exists, assess whether milestones are sufficiently
-   clear for direct or just-in-time implementation; absence alone is not a defect.
+   clear for direct or just-in-time implementation when milestones exist. Direct
+   implementation from a request or Spec needs no invented plan or task list.
    Respect the single task-state authority; do not create a second ledger.
 6. **Check implementation coverage.** Inspect relevant code and tests against
    acceptance and approved contracts. Report material coverage gaps, not style
@@ -93,3 +94,9 @@ missing test or optional document into a BLOCKED result.
 A CONVERGED result establishes consistency and adequate evidence for the assessed
 scope, not defect-free code, independent code review, security certification or
 merge approval. State missing source identity, access and coverage limitations.
+
+A simple Spec implemented directly may be CONVERGED when all its requirements and
+applicable contracts are covered by current, adequate evidence. Missing optional
+Design/Plan files are not gaps. Conversely, missing acceptance, unresolved critical
+contracts or an explicitly required design record cannot be dismissed merely
+because the user chose a short workflow. Classify the actual gap or blocker.

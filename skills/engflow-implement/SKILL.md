@@ -9,15 +9,19 @@ disable-model-invocation: true
 
 # Engflow Implement
 
-Own **making the agreed behavior work**. Implement the effective Spec and Design
-in the existing codebase, then verify and review the result.
+Own **making the agreed behavior work**. Implement a clear request, Spec or plan
+in the existing codebase, honoring effective requirements and design decisions,
+then verify and review the result. No prior Skill invocation is required.
 
 ## Work
 
 Establish the target, applicable requirements, technical contracts, current
 repository state and permitted effects. Preserve user changes and existing work.
-A bounded maintenance fix may proceed directly from an adequate request; do not
-invent feature artifacts. When feature records are involved, read and follow the
+Simple features and maintenance fixes may proceed directly from a request or Spec
+when behavior and acceptance are clear, existing conventions supply the approach,
+and no consequential design question remains unresolved. Separate Design/Plan
+documents are not prerequisites; do not create them just to start implementation.
+When feature records are involved, read and follow the
 [shared convention](../engflow-specify/references/feature-records.md): normally
 `specs/NNN-short-name/plan.md` holds execution state, with optional `tasks.md`.
 
@@ -47,8 +51,10 @@ reasonable investigation, stop speculative changes to the affected work.
 Explain the problem, evidence, attempts and viable options, then ask the user
 whether to adjust the design. Continue independent, authorized work where safe.
 
-A changed Design may require Plan to reconcile affected delivery work before
-implementation continues. Product behavior or acceptance changes belong in Spec.
+After an agreed change, reconcile affected delivery work and existing records
+within authority. Routine adjustments need no separate Plan invocation; substantial
+replanning may warrant it. Product intent changes need user agreement and updates
+to any maintained Spec. Missing stage documents alone do not block execution.
 Do not invoke another Skill automatically.
 
 ## Boundaries

@@ -8,14 +8,16 @@ permission.
 - Outcome and current scope:
 - Non-goals:
 - Whole-feature acceptance:
-- Effective Spec:
-- Technical Design:
+- Requirements source (request, Spec or other effective record):
+- Existing technical decisions or Design, when applicable:
 - Constraints and approval gates:
 
 ## Milestones
 
 Keep milestones outcome-oriented and independently verifiable. Detail near-term
 work; leave distant work coarse.
+Include investigation or design work where important choices remain open, with
+dependent delivery conditional on its outcome. Do not invent prerequisite documents.
 
 | ID | Outcome | Dependencies | Acceptance | Status / evidence |
 | --- | --- | --- | --- | --- |

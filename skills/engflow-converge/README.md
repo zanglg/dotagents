@@ -18,6 +18,9 @@ Provide feature/source paths and the review boundary. Receive one primary status
 CONVERGED, GAPS_FOUND, BLOCKED or PARTIAL, with findings, correction owners and
 limitations. Full assessments include an evidence matrix; focused assessments
 cover relevant dimensions and state exclusions.
+The baseline follows the task's actual requirements and project obligations.
+A simple Spec plus implementation and current evidence can support convergence;
+optional Design/Plan files and previous Skill calls are not prerequisites.
 
 ## Installation and collaboration
 

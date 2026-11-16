@@ -6,20 +6,22 @@ mandatory checklist or fixed sequence.
 
 ## Authority
 
-- **Spec** defines behavior, scope, acceptance and user-supplied constraints.
+- Effective requirements define behavior, scope, acceptance and constraints;
+  **Spec** records them when a specification is maintained.
 - **Design** owns the technical approach, architecture, contracts and rationale.
-- **Plan** turns the accepted solution into delivery work.
+- **Plan** organizes delivery and any unresolved prerequisites into work.
 - **Implement** changes code and records observed execution.
 
-Do not use Design to invent product behavior or Plan to make technical decisions.
+Do not use Design to invent product behavior or Plan to settle consequential
+architecture choices without the needed design work.
 
 ## Understand the problem
 
-Read the effective Spec, existing Design, relevant code, contracts and available
-evidence. Confirm the target environment and identify material constraints.
-If canonical feature design has no effective Spec, request one. An explicitly
-requested preview may proceed provisionally; label assumptions and do not present
-it as an accepted design.
+Read the request, effective requirements, relevant code, contracts and evidence,
+including existing Spec or Design records when available. Confirm the target
+environment and material constraints. No separate Spec or prior invocation is
+required. Resolve important intent gaps directly, label assumptions and keep
+unsupported parts conditional; do not present a proposal as accepted.
 
 Separate required behavior from user preferences, technical facts and assumptions.
 Ask only when a missing fact or choice materially changes the solution.
@@ -79,6 +81,6 @@ Identify affected requirements, delivery, implementation and verification; each
 owning activity remains responsible for its records. Reassess only what the change
 could invalidate and distinguish agreed changes from proposals awaiting a decision.
 
-Before delivery, check that the solution addresses the Spec, fits the actual
-system, exposes important trade-offs and can be verified. This is an author
+Before delivery, check that the solution addresses effective requirements, fits
+the actual system, exposes important trade-offs and can be verified. This is an author
 self-check, not independent approval.

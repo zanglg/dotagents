@@ -25,12 +25,14 @@ requirements through design, delivery and implementation, and check that validat
 evidence applies to the actual source state. Choose investigation depth to fit the
 scope; a checklist or passing test suite alone does not establish convergence.
 
-For full feature assessment, the baseline is Spec, Design and Plan. Apply the
+Determine the necessary baseline from the requested scope, effective requirements,
+contracts and project obligations. A clear request or simple Spec plus code and
+current evidence may suffice. No prior Skill invocation is required. Apply the
 [feature-record convention](../engflow-specify/references/feature-records.md)
 read-only: effective sections in existing combined documents are valid inputs.
-Missing required substance is a gap or blocker; optional tasks and separate
-filenames are not requirements. For bounded maintenance work, assess the available
-baseline and disclose when it cannot support a full conclusion.
+Missing required substance is a gap or blocker; absent optional Design, Plan or
+task documents alone do not force PARTIAL or BLOCKED. Disclose genuine coverage
+limits and preserve any explicit project requirement for those records.
 
 ## Boundaries
 
@@ -62,5 +64,6 @@ approval, source identity or successful check.
 
 For a full assessment, include a compact matrix covering requirements, design,
 plan, optional tasks, implementation and evidence. Use PASS, GAP, BLOCKED, PARTIAL
-or NOT APPLICABLE; mark tasks NOT APPLICABLE when none are needed. For a focused
+or NOT APPLICABLE; mark optional artifact dimensions NOT APPLICABLE when no such
+record is needed, while still checking actual requirements and contracts. For a focused
 assessment, report only relevant dimensions and state what was not assessed.

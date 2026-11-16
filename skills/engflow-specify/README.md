@@ -5,6 +5,7 @@
 Specify turns user intent and existing evidence into behavioral requirements,
 scope, constraints and observable acceptance. It does not select internal
 technical solutions; Design owns those.
+It can start from a clear request without prior Clarify or project setup.
 
 Examples:
 - "Turn this discussion into a Spec preview."

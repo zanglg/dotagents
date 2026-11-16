@@ -1,7 +1,7 @@
 ---
 name: engflow-design
 description: >
-  Develop a feature's technical solution from its Spec and actual constraints.
+  Develop a technical solution from a clear goal, requirements and constraints.
   Use for initial design or a focused deep dive into any technical question.
   Resolve routine choices directly; involve the user in consequential questions
   and revisit existing designs when technical direction changes.
@@ -10,9 +10,9 @@ disable-model-invocation: true
 
 # Engflow Design
 
-Own **how the feature should work**. Turn the effective Spec, existing system
-and technical constraints into a coherent solution that Plan and Implement can
-use.
+Own **how the solution should work**. Turn effective requirements, the existing
+system and technical constraints into a coherent design. A clear request is a
+valid starting point; no Spec document or prior Skill invocation is required.
 
 ## Work
 
@@ -46,7 +46,8 @@ Method reuse invokes no other Skill and creates no independent report.
 
 ## Principles
 
-- Spec defines required behavior; Design selects the technical approach.
+- Effective requirements define behavior; Design selects the technical approach.
+  Honor an existing Spec without requiring one to be created.
 - Keep one coherent feature-level design. Use Topics, decision records, diagrams
   or code skeletons only when they make a complex problem easier to understand.
 - Preserve the source and status of important decisions. Distinguish binding
@@ -65,9 +66,10 @@ existing feature and project paths. Preview stays conversational. Use the
 [design method](references/design-core.md) for deeper reasoning and the
 [outline](assets/design.md) only where useful.
 
-Canonical feature design requires an effective Spec. An explicitly requested
-preview may proceed without one, but must be marked provisional. Do not change
-requirements, define delivery tasks, modify production code or run experiments
+Establish enough intended behavior and constraints for the requested design from
+the request, discussion or existing sources. Resolve material ambiguity directly;
+keep unsupported parts conditional rather than requiring a preliminary Spec stage.
+Do not change requirements, define delivery tasks, modify production code or run experiments
 without the relevant authority. Plan consumes the design; Implement owns code
 and execution evidence. Do not invoke another Skill automatically.
 
