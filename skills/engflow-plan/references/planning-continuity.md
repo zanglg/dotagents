@@ -44,7 +44,7 @@ its own evidence.
 An explicitly requested Plan task permits read-only investigation of material
 delivery-evidence gaps unless restricted. Inspect accessible code and documents
 first; for substantial source gaps read and apply the shared
-[research method](../engflow-research/references/research-core.md). This is
+[research method](../../engflow-research/references/research-core.md). This is
 investigation within Plan, not an invocation of Research's entrypoint. It expands
 no access/disclosure or report-writing scope and permits no tests, probes or
 implementation.
