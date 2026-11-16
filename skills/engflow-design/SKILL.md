@@ -34,6 +34,14 @@ milestones, tasks, actual attempts and verification before changing a decision.
 For a legacy Plan without Design, treat inherited technical choices as records
 to assess, not as automatically approved design authority.
 
+Canonical feature Design requires an effective Spec: the current `spec.md` or a
+project-equivalent authoritative requirements artifact explicitly identified by
+the user. An existing Plan, legacy Design, source code or conversational context
+alone does not substitute. If no effective Spec exists, do not start the canonical
+Design loop, create/update `design.md` or report Plan-ready status. Explain the
+missing prerequisite and ask the user to supply the Spec or explicitly invoke
+Specify. Do not invoke Specify automatically.
+
 ## Design loop
 
 Read and apply the [decision-driven design method](references/design-core.md)
@@ -69,9 +77,14 @@ for material design work. For each meaningful iteration:
   [evidence collaboration](references/investigation.md) and the relevant shared
   method. Investigate within current authority; do not start Research/PoC Skills,
   reports or workers merely to borrow their method.
-- **Explicit support/preview or no-write request:** return a scoped proposal
+- **Explicit preview/exploration or no-write request:** return a scoped proposal
   conversationally. Inherit the caller's target and write limits; do not create
-  a feature, change navigation or save a proposal without authorization.
+  a feature, change navigation or save a proposal without authorization. If no
+  effective Spec exists, this path is allowed only when the user explicitly asks
+  for a preview/exploration. Label the result provisional, identify missing
+  product semantics and assumptions, and state that it is not a canonical
+  Design or Plan-ready. Never persist a no-Spec preview as `design.md` or present
+  its proposals as accepted decisions.
 
 ## Artifact, continuity and handoff
 
