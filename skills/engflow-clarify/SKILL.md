@@ -34,8 +34,11 @@ Ask the smallest useful set of questions, grounded in what is already known.
 Prefer one consequential question at a time when answers determine the next.
 Offer a recommendation and its tradeoff when useful; do not turn supported,
 ordinary choices into an interview. Accept explicit user decisions as premises.
-Revisit settled decisions only for new evidence or a concrete conflict, explaining
-why. Never invent answers to complete a questionnaire.
+Do not reopen settled questions without cause. The user may reconsider them or
+change direction even when the earlier choice remains sound. Revisit affected
+decisions on that request, new evidence or a concrete conflict; explain impacts
+and keep alternatives distinct from effective decisions until agreed. Never
+invent answers to complete a questionnaire.
 
 Distinguish requirements, preferences, recommendations and unverified assumptions.
 Keep decision certainty separate from delivery scope: a confirmed requirement may
@@ -62,23 +65,17 @@ do not invent IDs or force the discussion into a complete Spec template.
 
 Preserve supplied approval evidence and pending gates in the summary. Distinguish
 agreed changes from proposals and identify sources still awaiting synchronization;
-user agreement does not mean those files were updated. Do not restart settled
-questions or hand off after every answer merely to follow a stage sequence.
+user agreement does not mean those files were updated. Continue the discussion
+without handing off after every answer merely to follow a stage sequence.
 
 ## Specification handoff and boundaries
 
-`engflow-specify` owns specification synthesis, consistency checks, previews and
-authorized writes. Supply the discussion or decision summary as input, not a second
-interview ledger. It can resolve ordinary missing details without requiring Clarify.
+Clarify returns a conversational summary; Specify owns Spec synthesis, previews
+and authorized writes. A save request does not turn Clarify into a writer. For an
+explicit clarification-then-Spec request, finish the summary and continue separately
+scoped Specify work only through permitted host composition, retaining valid write
+authority. If the host requires another explicit invocation, explain the next step.
+Do not silently invoke another Skill or claim a save that did not happen.
 
-This Skill is read-only even when asked to save its output or edit a Spec. Return
-the content and identify Specify as the next capability; do not write files or
-silently invoke it. If the user explicitly requests clarification followed by Spec
-creation/update, finish the clarification summary first. The current agent may then
-perform the separately scoped Specify work through permitted host invocation or
-composition, retaining valid write authority. If the host needs a separate explicit
-invocation, explain that next step rather than bypassing it or claiming a save.
-
-No other Skill is required for discussion. Do not create reports or scratch files,
-run experiments, modify code or documents, manage branches, commit or publish.
-Any helpers remain read-only and return findings to the conversation.
+Do not create files, run experiments, modify code or documents, manage branches,
+commit or publish. Any helpers remain read-only and return conversational findings.

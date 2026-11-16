@@ -15,8 +15,9 @@ implementation and current validation evidence. This entrypoint is strictly read
 ## Inputs and outputs
 
 Provide feature/source paths and the review boundary. Receive one primary status:
-CONVERGED, GAPS_FOUND, BLOCKED or PARTIAL, with an evidence matrix, findings,
-correction owners and limitations.
+CONVERGED, GAPS_FOUND, BLOCKED or PARTIAL, with findings, correction owners and
+limitations. Full assessments include an evidence matrix; focused assessments
+cover relevant dimensions and state exclusions.
 
 ## Installation and collaboration
 
@@ -25,6 +26,7 @@ Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for compo
 
 ## Validation and references
 
-Verify source authority, scope and evidence freshness. Converge runs no tests,
+Apply the [assessment method](references/assessment.md) to source authority,
+coverage, evidence freshness and status precedence. Converge runs no tests,
 makes no edits, starts no workers and grants no merge approval. Code review
 remains part of Implement.

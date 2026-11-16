@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Allow user-directed reconsideration in Clarify while preserving effective
+  decisions until replacement. Extract Converge's assessment method behind an
+  explicit entrypoint reference, with proportional output for focused reviews.
+  Deduplicate PoC lifecycle guidance through the shared experiment method.
 - Keep core entrypoints concise while restoring shared feature paths, stable
   numbering, persistence and navigation rules under `specs/NNN-short-name/`.
   Preserve existing combined documents and the single authoritative task record.

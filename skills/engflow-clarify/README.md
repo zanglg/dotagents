@@ -11,11 +11,13 @@ conversation only; it never creates or edits a Spec.
 
 - "Clarify restart behavior without reopening settled choices."
 - "Split panes are deferred. Summarize the needed Spec changes; write nothing."
+- "Reconsider the restart behavior we agreed on; keep the rest of the scope."
 
 ## Inputs and outputs
 
 Provide an idea or existing sources and constraints. Receive confirmed decisions,
-current/deferred scope, unknowns and affected acceptance. Use Specify separately
+current/deferred scope, unknowns and affected acceptance. Users may reopen settled
+choices; alternatives remain proposals until adopted. Use Specify separately
 for an authorized document update.
 
 ## Installation and collaboration
