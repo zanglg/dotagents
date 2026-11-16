@@ -11,10 +11,10 @@ evaluation framework or specific agent host.
 | [diagram-aesthetics](skills/diagram-aesthetics/README.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [engflow-plan](skills/engflow-plan/README.md) | Turn accepted Spec and Design into milestones, dependencies and delivery validation |
-| [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
-| [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, task, implementation and evidence consistency |
-| [engflow-design](skills/engflow-design/README.md) | Standard and deep topic-level technical design, decision threads and optional code skeletons |
+| [engflow-plan](skills/engflow-plan/README.md) | Turn accepted Spec and Design into practical delivery milestones and dependencies |
+| [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and verify code |
+| [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, implementation and evidence consistency |
+| [engflow-design](skills/engflow-design/README.md) | Autonomous technical design with optional deep dives into consequential questions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
@@ -24,12 +24,12 @@ evaluation framework or specific agent host.
 ## Installation
 
 Install all `skills/engflow-*` folders together, preserving sibling names and
-references. Engflow feature work follows Spec → Design → Plan → Implement. Each entrypoint
-remains explicitly invoked and can also be used for focused work; Design can be
-re-entered at any lifecycle point for a targeted technical intervention. Task
-decomposition is optional and handled within Plan or Implement, not a separate
-stage. See the [Engflow guide](docs/engflow/README.md) for artifact authority and
-composition.
+references. The core feature path is **Spec → Design → Plan → Implement**.
+Each entrypoint remains explicitly invoked and can also be used for focused work.
+Design can examine one technical question in depth at any point; this does not
+restart the entire feature. Task decomposition is optional and handled within
+Plan or Implement, not as a separate stage. See the
+[Engflow guide](docs/engflow/README.md) for responsibilities and composition.
 
 `diagram-aesthetics` and `semver-bump` install individually. Preserve local
 customizations when updating. This repository's `AGENTS.md` governs its own
@@ -41,7 +41,7 @@ development; do not inject it as a global policy into target projects.
 - `skills/<name>/README.md`: short human-facing usage guide.
 - Skill-local `references/`, `assets/` and `agents/`: methods, optional templates
   and host invocation metadata. Keep these with their owning skill.
-- `docs/engflow/README.md`: group installation, composition and manual checks.
+- `docs/engflow/README.md`: group installation, composition and validation guidance.
 - `scripts/validate_skills.py` and `tests/test_validate_skills.py`: optional
   repository maintenance checks, not Skill runtime dependencies.
 
@@ -68,7 +68,8 @@ URLs are not fetched. Review prose and unusual syntax manually.
 CI runs these deterministic checks on Python 3.13. Static checks do not establish
 agent behavior. For material contract changes, use a few relevant isolated tasks
 on your chosen host and inspect actual actions; see the guide's
-[manual checks](docs/engflow/README.md#manual-checks). No model request is part of CI.
+[validation guidance](docs/engflow/README.md#validation). No model request is
+part of CI.
 
 ## Contributing and versions
 
