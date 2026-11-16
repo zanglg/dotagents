@@ -1,153 +1,55 @@
-# <Feature title> — Technical Design
+# <Feature> — Technical Design
 
-Design status: Draft. This canonical artifact requires an effective Spec:
-the current `spec.md` or a project-equivalent authoritative requirements source.
-If none exists, do not instantiate or save this template; only an explicitly
-requested conversational Preview/Exploration may proceed, marked provisional
-and not Plan-ready. This document records technical decisions; it does not
-authorize implementation. Maintain one consolidated `design.md` per feature.
-Keep all feature-level decision threads here; do not create one file per decision
-or technical area.
+Status: Draft. This document records the technical approach; it does not
+authorize implementation. Keep it proportional and omit sections that add no
+value.
 
-## Design objective and scope
+## Objective and context
 
-- Design depth: Standard / Deep topics (identify only where applicable):
+- Problem and intended outcome:
+- Effective Spec and acceptance:
+- Relevant existing architecture, contracts and constraints:
 
-- Problem / design objective:
-- In-scope components and boundaries:
-- Non-goals and confirmed deferred scope:
-- Effective requirements and acceptance:
-- Constraints and authority limits:
+## Proposed solution
 
-## Read first and authority
+Describe the chosen approach and why it fits. Include only the components,
+responsibilities, data, interfaces and flows that matter.
 
-- Effective Spec: `spec.md` or project-equivalent authoritative requirements source:
-- Existing delivery route: `plan.md` and relevant sections, if present:
-- Actual implementation and runtime/version context:
-- Shared contracts / ADRs:
-- Existing decisions and supplied approval evidence:
-- Carried-forward technical decisions from Plan, with original status/provenance:
+## Important details
 
-Spec remains authoritative for requirements and acceptance. This document owns
-feature-level technical decisions. Plan owns delivery sequencing and acceptance
-checkpoints. Link sources; do not copy their full content.
+Add subsections only where useful, for example:
 
-## Decision thread map
+- Data structures and ownership
+- Interfaces and compatibility
+- State transitions and concurrency
+- Invariants and consistency
+- Failure, recovery and resource lifecycle
+- Performance, security and operations
 
-Group related decisions into threads. Model prerequisites and downstream effects
-as a dependency graph, not a mandatory linear checklist. Independent threads may
-progress independently.
+## Deep dives (optional)
 
-| Thread | Design question / scope | Depends on | Status | Skeleton areas |
-| --- | --- | --- | --- | --- |
-| DT-01 | <Architecture / boundary question> | <Decision IDs or none> | Open | <Components / interfaces> |
-| DT-02 | <Data / behavior question> | <Decision IDs> | Open | <Types / flows> |
+Use a focused Topic when a consequential question needs alternatives or evidence.
 
-Use stable decision IDs within this artifact. Ask at most one consequential
-unresolved decision per user interaction. Do not ask routine implementation
-questions or repeat questions already answered by effective requirements.
+### <Question or Topic>
 
-## Decision threads
+- Context and constraints:
+- Options and trade-offs:
+- Recommendation or decision:
+- Evidence and remaining uncertainty:
+- Consequences for the design:
 
-### DT-01 — <Thread name>
+## Verification
 
-#### D001 — <One answerable technical decision>
+Describe the important behaviors, boundaries and failure cases that must be
+checked. Do not present planned checks as completed evidence.
 
-- Status: Open
-- Scope / affected components:
-- Depends on:
-- Context and evidence:
-- Binding constraints:
-- Viable alternatives:
-- Recommendation:
-- Tradeoffs:
-- Decision and rationale:
-- Provenance / authority:
-- Consequences for the skeleton:
-- Verification basis:
+## Open questions and limitations
 
-<!-- Repeat decision records and thread sections in this same file as needed. -->
+Record only unresolved issues that affect the solution or its readiness.
 
-Decision statuses: Open, Proposed, Selected, Confirmed, Mandated, Blocked,
-Deferred, Rejected and Superseded. Selected means an in-scope agent choice;
-Confirmed means explicit user confirmation; Mandated means an effective supplied
-authority. Do not conflate these states.
+---
 
-## Architecture and code skeleton
-
-This is an optional, implementation-oriented structure. Update it incrementally
-after material decisions. Include only the structure needed to guide implementation;
-omit irrelevant dimensions. Use source-language snippets when they clarify core
-types, data structures, ownership, interfaces, signatures or algorithms. Do not
-include full implementation bodies.
-
-Classify consequential elements as **Binding** (effective requirement, mandate or
-user-confirmed contract), **Selected** (evidence-backed agent choice, not user
-confirmation), **Proposed** (awaiting required authority) or **Illustrative**
-(reference example only). Mark the status and provenance near each relevant
-snippet or contract.
-
-### Component map and responsibilities
-
-- <Component>: <responsibility, ownership and dependencies>
-
-### Data model and ownership
-
-- <Type / entity / storage>: <shape, invariants and lifecycle>
-
-### Interfaces and contracts
-
-- <Interface / API / signature>: <semantics, errors and compatibility>
-
-### Key flows and state transitions
-
-- <Primary flow, control path, state machine or sequence>
-
-### Correctness constraints
-
-- <Invariant, consistency boundary, concurrency or synchronization rule>
-
-### Failure, recovery and lifecycle
-
-- <Relevant failure path, retry, rollback, cleanup or resource ownership>
-
-## Verification design
-
-- Requirement / decision:
-- Observable behavior:
-- Success, failure and boundary cases:
-- Integration and regression boundaries:
-- Evidence still required:
-
-Do not describe planned verification as executed evidence.
-
-## Open decisions and readiness
-
-| Decision | Status | Blocked work | Evidence or user decision needed | Next action |
-| --- | --- | --- | --- | --- |
-| D001 | <Open / Blocked / Proposed> | <Affected scope> | <Exact missing input> | <Discriminating next step> |
-
-Finish when implementation need not rediscover feature semantics, cross-component
-contracts or major technical choices. Keep unsupported routes conditional.
-
-## Downstream synchronization
-
-Design may be invoked before planning or as a targeted intervention during or
-after implementation. When a material technical decision changes, identify affected consumers.
-
-| Source | Affected section / IDs | Required update | Status / authority |
-| --- | --- | --- | --- |
-| `plan.md` | <Sections / milestones> | <Route, constraint or verification update> | Pending / Updated |
-| `tasks.md` (if present) | <Task IDs> | <Dependencies, constraints or checks> | Pending / Updated |
-| Implemented source / evidence | <Paths / claims> | <Reassess, change or revalidate affected work> | Pending / Updated |
-| Shared contract (if any) | <Path / section> | <Authorized contract update> | Pending / Updated |
-
-Update only sources within the current write authority. A revised Design does not
-silently synchronize Plan or Tasks. Close a pending item only after checking the
-consumer reflects the accepted decision.
-
-## Decision and change history
-
-| Date / sequence | Decision IDs | Change | Reason / evidence | Supersedes |
-| --- | --- | --- | --- | --- |
-| <When> | <D001> | <What changed> | <Why> | <Prior decision, if any> |
+Keep one current design. Preserve the provenance of consequential decisions and
+revise only what new direction or evidence affects. Do not maintain separate
+decision maps, open-decision lists, synchronization matrices or history tables
+unless the project has a demonstrated need for them.

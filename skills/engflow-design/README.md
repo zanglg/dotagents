@@ -1,40 +1,19 @@
 # Engflow Design
 
-User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
+[SKILL.md](SKILL.md) is the authoritative contract.
 
-## Purpose
+Design develops the technical solution from the Spec and the actual system.
+The depth should match the problem: ordinary features need a clear standard
+design; consequential questions can receive a focused deep dive. Topics,
+decision records and code skeletons are optional tools, not required structure.
 
-Produce a proportional technical design for every feature, then deepen only the
-technical topics that justify further investigation. Design may include data
-structures, interfaces, concurrency models and optional source-language code
-skeletons. It can be re-entered at any lifecycle point for targeted intervention.
+Examples:
+- "Design this feature using the existing architecture."
+- "Compare a tree and a hash map for this data model."
+- "I prefer an event-driven design; assess the trade-offs and update the proposal."
+- "Revisit only the concurrency strategy; preserve the rest of the design."
 
-## Examples
-
-- "Design this feature one decision at a time; keep all threads in one design.md."
-- "Review the concurrency decision in the existing Plan and redesign only that part."
-- "Compare approaches for live configuration reload; return a preview."
-
-## Inputs and outputs
-
-Read the Spec, current code, existing Design and (when present) Plan and execution
-record. Maintain one consolidated `design.md` per feature; multiple decision
-threads and technical areas belong in that file. A preview stays conversational.
-Split a shared ADR/contract only when it has an independently maintained lifecycle
-or shared authority.
-
-Design owns all feature-level technical decisions, rationale, evidence and the
-optional code skeleton. Plan consumes that authority and owns delivery sequencing;
-Implement may request a targeted Design intervention when technical work cannot
-converge.
-
-## Installation and collaboration
-
-Install all sibling `engflow-*` folders together, preserving references.
-Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for composition.
-
-## Validation and references
-
-Use the shared [decision-thread design method](references/design-core.md) and
-the [evidence contract](references/investigation.md). A self-check or proposed
-experiment is not proof of feasibility, permission to execute or user approval.
+Design owns technical decisions. Plan owns delivery sequencing; Implement owns
+code and observed execution state. Use the [design method](references/design-core.md)
+for deeper guidance and [evidence methods](references/investigation.md) when
+source investigation or an authorized experiment is needed.

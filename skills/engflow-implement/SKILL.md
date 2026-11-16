@@ -1,123 +1,60 @@
 ---
 name: engflow-implement
 description: >
-  Implement a request or plan through code, tests and review. Use on explicit
-  request to start or resume implementation. For large or cross-session work,
-  advance through verifiable milestones and maintain one living execution record.
+  Implement an accepted request or delivery plan, then verify and review the
+  result. Work autonomously within the effective requirements, design and
+  execution authority.
 disable-model-invocation: true
 ---
 
 # Engflow Implement
 
-Deliver observable behavior, actual checks and a reviewed change. The canonical
-feature lifecycle is Spec → Design → Plan → Implement, but bounded maintenance
-fixes can use a clear request and existing contracts without new feature files.
-Follow-up instructions continue existing implementation authority until paused,
-ended or redirected. Work in the existing checkout; preserve user changes.
+Own **making the agreed behavior work**. Implement the effective Spec and Design
+in the existing codebase, then verify and review the result.
 
-## Entry and execution loop
+## Work
 
-Identify the target, effective requirements, acceptance, technical contracts,
-current code and permitted effects. For feature work, read Spec, Design, Plan
-and the optional Task record through the supplied path/feature context; the
-user need not enumerate every file. Do not invent missing canonical inputs,
-approval or a technical solution. Status/view and plan-only requests do not
-authorize implementation.
+Establish the target, applicable requirements, technical contracts, current
+repository state and permitted effects. Preserve user changes and existing work.
 
-For large, resumed or multi-session work, read and apply the
-[execution continuity contract](references/continuity.md). Reconcile actual
-source, pending commands, previous evidence, authority and approval gates
-before continuing; never infer clean state from a previous checkpoint.
+Implement autonomously within the agreed scope. Resolve routine coding choices
+locally. Refine the next milestone into tasks or steps only when that helps
+execution; do not create a second planning system.
 
-1. Start the earliest ready Milestone/Task with satisfied prerequisites and
-   accepted Design constraints. A clear Milestone may be implemented directly.
-2. Inspect current code; split only the next Milestone into verifiable Tasks
-   or local Steps when necessary. This is routine refinement within agreed
-   scope and record authority, not a mandatory Tasks stage or new Plan review.
-   Material cross-Milestone changes belong to Plan.
-3. Implement the agreed behavior, preserving binding interfaces and scope.
-   Resolve routine coding choices autonomously; ask only for consequential
-   ambiguity, missing authorization or a change to accepted requirements.
-4. Run proportionate focused checks as work proceeds, then relevant integration
-   and regression checks. Distinguish actual results from intended tests;
-   a code change, Task checkbox or prior passing check is not proof of
-   current Milestone acceptance.
-5. Review meaningful changes and the final integrated result. Read and apply
-   [the internal review method](references/review-core.md) and
-   [Git snapshot guidance](references/scope.md). Unless review is restricted,
-   perform at least an actual self-review. Prefer an independent reviewer for
-   significant changes when available and proportionate; claim independence
-   only after a distinct reviewer returned a result you inspected.
-6. Repair supported defects within authority, rerun affected checks and
-   re-review changed code. Record observed outcomes, review mode, partial
-   work, blockers and stale evidence. Close a Milestone only on its own
-   acceptance evidence; close the feature only after integrated acceptance.
+Run proportionate checks as work proceeds, then relevant integration and
+regression checks. Review meaningful changes. Record what actually changed,
+what was tested, the results and what remains unverified.
 
-## Technical blockers and re-entry
+For substantial or resumed work, use the [execution continuity guidance](references/continuity.md)
+to reconcile the record with the actual repository and outstanding operations.
 
-Debug routine errors, build problems and integration failures directly. Retry
-only with a changed hypothesis or new evidence; do not guess missing private
-hardware/protocol semantics. If a material source question persists, read
-[the research method](../engflow-research/references/research-core.md). For
-discriminating runtime experiments, read
-[the experiment method](../engflow-poc/references/experiment-core.md).
-These are methods within existing authority, not automatic Skill invocations
-or permission for additional access, writes, reports or mutating workers.
+## When to seek direction
 
-Escalate to an explicitly requested Design intervention when distinct technical
-approaches fail to converge, the design cannot meet a binding constraint, or
-resolution requires a consequential architecture/data/concurrency/performance
-trade-off. Record the exact question, Design decision IDs, hypotheses and
-observed results, evidence gaps, affected code/tasks/milestones and independent
-work that can continue. Stop speculative changes to dependent work, not
-unrelated authorized work. Use
-[judgment examples](references/judgment.md) for borderline cases. Do not
-automatically invoke Design, Plan, Converge, Research or PoC.
+Resolve ordinary defects and implementation details directly. If a technical
+problem exposes a consequential design choice or cannot be resolved with
+reasonable investigation, stop speculative changes to the affected work.
+Explain the problem, evidence, attempts and viable options, then ask the user
+whether to adjust the design. Continue independent, authorized work where safe.
 
-After an accepted Design change, obtain reconciliation of affected Plan/Task
-definitions before dependent work. Reassess affected code, status and
-verification; preserve unaffected work. Product behavior/acceptance changes
-require their own user/Specify decision. Neither a report nor passing tests
-synchronize missing authoritative documents.
+A changed Design may require Plan to reconcile affected delivery work before
+implementation continues. Product behavior or acceptance changes belong in Spec.
+Do not invoke another Skill automatically.
 
-## Records, decisions and continuation
+## Boundaries
 
-Plan owns planned Milestones and Task definitions; Implement owns observed
-execution state. `plan.md` holds the Feature checkpoint, Milestone statuses,
-milestone acceptance, cross-Milestone blockers and integrated verification.
-Tasks remain inline in `plan.md` unless a justified, authorized `tasks.md`
-exists; then it is the sole detailed Task list and Task-level status/evidence
-record. Do not maintain parallel lists or progress ledgers.
+Respect effective requirements, approved decisions, review gates and execution
+permissions. Do not guess missing private facts or claim planned checks passed.
+Destructive, privileged, external or otherwise expanded effects need appropriate
+authority. Preserve user work; do not reset, clean or stash it to simplify execution.
+Commits, pushes, publication and branch/worktree management require separate
+authorization.
 
-Treat a user-confirmed or mandated solution as effective within its scope,
-subject to feasibility and its source evidence; do not silently substitute
-a preferred approach. If Design has not recorded an accepted change, preserve
-the supplied approval evidence and pending Design synchronization. A stale
-source does not silently erase a verified decision, but an unapproved Plan
-recommendation cannot override an effective requirement.
+Use helpers only within their granted scope; verify returned work and evidence.
+Never treat a helper's report, a task checkbox or a prior test result as proof
+that the current code is correct.
 
-Update the same living record at meaningful checkpoints. Preserve actual
-checks, unsuccessful hypotheses, pending gates, outstanding side effects and
-the next unblocked action. On reorder or resumption, inspect prerequisites,
-actual source and existing work; preserve stable IDs and valid evidence.
-Mark invalidated completion claims stale with reasons rather than rewriting
-history. For detailed handling, use
-[execution continuity](references/continuity.md).
+## Completion
 
-Keep affected Spec/Design/Plan sources, owning activity, approval evidence
-and pending synchronization explicit. Update only authorized execution
-records and code; source synchronization is complete only after checking
-the owning source, and does not itself prove implementation or verification.
-
-## Boundaries and delivery
-
-The current agent is the only writer. Helpers for research or review stay
-read-only, do not delegate or run mutating checks; verify their results.
-Task-scoped code edits/tests require applicable execution authority;
-privileged, destructive, expanded or external effects need their own scope.
-Do not manage branches/worktrees or assume edit permission authorizes
-commits, pushes or publication. Other Skill entrypoints remain explicit-only.
-
-Report delivered and verified behavior separately, commands/results,
-review mode and limitations, missing approvals, unsynchronized sources
-and remaining actions. Never promise automatic background continuation.
+Report delivered behavior separately from verified behavior. Include actual
+commands and results, review scope, remaining risks, partial work and any
+pending approvals or actions. Never promise automatic background continuation.

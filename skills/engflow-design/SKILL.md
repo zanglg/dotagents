@@ -1,124 +1,56 @@
 ---
 name: engflow-design
 description: >
-  Produce and evolve a feature's technical design from its Spec and actual
-  constraints. Support targeted deep design and user intervention at any point
-  in the lifecycle. Use on explicit design request; other Engflow entrypoints
-  may identify the need for Design without invoking this Skill automatically.
+  Develop a feature's technical solution from its Spec and actual constraints.
+  Use for initial design or a focused deep dive into any technical question.
+  The agent designs autonomously and involves the user when direction or a
+  consequential decision is needed.
 disable-model-invocation: true
 ---
 
 # Engflow Design
 
-Own the feature's technical solution: consequential decisions, rationale,
-architecture, interfaces, invariants and optional code skeleton. The feature
-lifecycle is Spec → Design → Plan → Implement; Design is re-entrant, not a
-one-time gate. Plan owns delivery sequencing, Implement owns code and observed
-progress, and Spec owns required behavior and acceptance.
+Own **how the feature should work**. Turn the effective Spec, existing system
+and technical constraints into a coherent solution that Plan and Implement can
+use.
 
-## Entry and context
+## Work
 
-An explicit request starts or resumes Design; follow-up answers continue in
-the same authority until paused, ended or redirected. Other Skills may request
-a Design intervention but may not invoke this entrypoint automatically.
+Start with the relevant requirements, current architecture, code and contracts.
+Produce a design proportional to the problem: explain the important components,
+data, interfaces, flows, invariants, failure behavior and verification needs.
 
-Use the user's feature ID/path or established target. For an unspecified
-continuation verify the current-feature link in `specs/README.md` (or project
-equivalent); resolve missing/conflicting focus instead of guessing from file
-timestamps or IDs. A dependency read or later link change does not redirect
-an already scoped task.
+Make routine, reversible technical choices autonomously. Go deeper only where
+complexity, uncertainty or consequences justify it. A focused request may examine
+one question—such as a tree versus a map, a concurrency strategy or an interface—
+without redesigning the whole feature.
 
-Read the effective Spec, existing Design, relevant code, shared contracts and
-available evidence. When Plan or implementation exists, inspect affected
-milestones, tasks, actual attempts and verification before changing a decision.
-For a legacy Plan without Design, treat inherited technical choices as records
-to assess, not as automatically approved design authority.
+The user may challenge the current design, supply a preferred direction or
+participate in the analysis at any point. Evaluate suggestions on their merits;
+a preference is not evidence of feasibility unless it is an explicit constraint.
+When a consequential choice cannot be resolved responsibly from available
+evidence, explain the uncertainty, alternatives and trade-offs, then ask for
+the specific human judgment needed. Do not loop through speculative options.
 
-Canonical feature Design requires an effective Spec: the current `spec.md` or a
-project-equivalent authoritative requirements artifact explicitly identified by
-the user. An existing Plan, legacy Design, source code or conversational context
-alone does not substitute. If no effective Spec exists, do not start the canonical
-Design loop, create/update `design.md` or report Plan-ready status. Explain the
-missing prerequisite and ask the user to supply the Spec or explicitly invoke
-Specify. Do not invoke Specify automatically.
+## Principles
 
-## Design loop
+- Spec defines required behavior; Design selects the technical approach.
+- Keep one coherent feature-level design. Use Topics, decision records, diagrams
+  or code skeletons only when they make a complex problem easier to understand.
+- Preserve the source and status of important decisions. Distinguish binding
+  requirements, user direction, agent choices and proposals.
+- Revisit only the parts affected by new direction or evidence. Preserve sound
+  decisions and work elsewhere.
+- Finish when the implementation can proceed without rediscovering important
+  system behavior or technical contracts.
 
-Read and apply the [decision-driven design method](references/design-core.md)
-for material design work. For each meaningful iteration:
+## Boundaries
 
-1. Identify the technical objective, effective constraints and consequential
-   unknowns. Distinguish requirements, mandates, user confirmations, agent
-   selections, proposals and unsupported assumptions.
-2. Produce a proportional standard design. Deepen only topics with consequential
-   uncertainty or trade-offs; do not turn routine implementation choices into
-   user decisions.
-3. Build decision threads with prerequisites and downstream effects. Resolve
-   evidence and prerequisite questions before dependent choices. Ask at most
-   one consequential unresolved user decision per interaction, with alternatives,
-   recommendation and trade-offs.
-4. Integrate each selected/confirmed decision into the current architecture,
-   contracts and optional code skeleton; mark binding, selected, proposed and
-   illustrative elements according to their actual authority.
-5. Record unresolved or blocked decisions and a discriminating next step; never
-   manufacture feasibility, user approval or verification evidence.
-6. Check the resulting mechanism against requirements, invariants, failure
-   behavior, interfaces and verifiable acceptance. Correct supported defects and
-   state remaining limits; author self-check is not independent approval.
+Canonical feature design requires an effective Spec. An explicitly requested
+preview may proceed without one, but must be marked provisional. Do not change
+requirements, define delivery tasks, modify production code or run experiments
+without the relevant authority. Plan consumes the design; Implement owns code
+and execution evidence. Do not invoke another Skill automatically.
 
-## Conditional paths
-
-- **Targeted redesign, technical non-convergence, legacy migration or a material
-  decision change:** read [re-entry and synchronization](references/reentry.md).
-  Redesign only the affected Topic and its dependents. Preserve unrelated choices,
-  completed work and still-valid evidence. Identify affected Plan definitions,
-  tasks, code and verification as pending until their owners reconcile them.
-- **Significant source uncertainty or separately authorized experiment:** read
-  [evidence collaboration](references/investigation.md) and the relevant shared
-  method. Investigate within current authority; do not start Research/PoC Skills,
-  reports or workers merely to borrow their method.
-- **Explicit preview/exploration or no-write request:** return a scoped proposal
-  conversationally. Inherit the caller's target and write limits; do not create
-  a feature, change navigation or save a proposal without authorization. If no
-  effective Spec exists, this path is allowed only when the user explicitly asks
-  for a preview/exploration. Label the result provisional, identify missing
-  product semantics and assumptions, and state that it is not a canonical
-  Design or Plan-ready. Never persist a no-Spec preview as `design.md` or present
-  its proposals as accepted decisions.
-
-## Artifact, continuity and handoff
-
-Maintain one feature-level `design.md` containing the standard design and all
-deeper decision threads, provenance, dependencies, current skeleton and remaining
-questions. Update at meaningful decisions and pauses; keep the artifact usable
-on resume, not a transcript or parallel progress ledger. An optional
-[design outline](assets/design.md) is a template, not mandatory padding.
-
-Reuse established paths. Authorized new features default to
-`specs/NNN-short-name/design.md`: preserve existing identities, use the next
-available number above directories and retained index IDs, and recheck
-collisions. Create no placeholder documents. Update feature navigation only
-when authorized; preview and deferred feature creation do not switch focus.
-
-After a material change, record which authoritative sources and decision/task
-IDs are affected, the approval evidence, pending synchronization and next
-owning action. Design writes only its authorized source; Plan reconciles the
-delivery route, Implement reassesses code and observed evidence, and Specify
-resolves changed product behavior. Do not claim closure until the owning
-sources have been checked. Re-entry does not restart the whole feature.
-
-Split an ADR/shared contract only for an independently maintained authority;
-otherwise reference the consolidated feature design. Preserve superseded
-decisions as history without presenting them as current guidance.
-
-## Boundaries and delivery
-
-Read-only inspection and authorized design-document writes are in scope.
-Experiments need separately bounded execution authority. Do not modify
-production code/configuration, commit, push, publish or manage worktrees.
-Honor effective requirements, ADRs, approval gates and write limits; new
-proposals and material revisions do not inherit prior approval.
-
-Report the technical route, decision status and provenance, evidence and
-readiness limits, outstanding user choices, affected work and pending
-downstream synchronization. Do not claim Plan/Implement have run.
+Report the chosen approach, important rationale, assumptions, open questions and
+any affected downstream work. Do not claim implementation or verification.
