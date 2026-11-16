@@ -9,29 +9,43 @@ Plan status: Draft. This document alone does not authorize execution.
 - Whole-task acceptance:
 - Constraints and authority limits:
 
-## Read first
+## Read first and authority
 
-Link effective requirements, design and actual source. Record essential context
-unavailable there, distinguishing decisions, proposals and unverified assumptions.
-This plan tracks execution; summaries do not override its requirement/design sources.
-For user-confirmed/mandated solutions, give relative source paths and sections,
-supplied confirmation evidence, scope, essential constraints and observable checks.
-Follow the relevant references before dependent work; do not reselect the route
-without authority. Omit extra fields or documents when unnecessary.
+Link effective requirements, existing design, actual source and shared contracts.
+Record essential context unavailable there, distinguishing decisions, proposals
+and unverified assumptions.
 
-## Technical approach (as needed)
+- Requirements authority: `spec.md` or supplied source:
+- Technical design authority: `design.md` and relevant sections, or "Plan-owned
+  compact technical approach; no separate Design":
+- Shared contracts / ADRs:
+- Actual implementation entry points:
 
-Omit settled detail already accessible through the references above. This section
-may hold a compact approach grounded with the shared design method when useful;
-Plan owns its technical result and integration. Method reuse invokes no other Skill. Existing authoritative designs
-stay referenced. No mandatory call, separate file or new architecture is needed.
+Do not treat Plan summaries as replacements for requirement or design sources.
+For user-confirmed/mandated solutions, record the source path/section, supplied
+confirmation evidence, applicable scope, essential constraints and observable
+checks. Follow relevant references before dependent work.
 
-- Relevant runtime, dependencies and existing implementation entry points:
-- Chosen mechanisms, rationale and confirmed constraints:
-- Interfaces, data flow/model and correctness-critical invariants:
-- Material failure/compatibility/security concerns within scope:
+## Technical approach and design integration (as needed)
+
+Use this section proportionally.
+
+When `design.md` exists, it owns technical decisions. Reference the relevant
+decision IDs and sections. Summarize only the selected route, binding
+implementation constraints, affected interfaces/invariants and verification
+needs. Do not copy the full design rationale, alternatives, decision history or
+architecture/code skeleton into Plan.
+
+When no separate design exists, Plan may own a compact technical approach and
+decision record using the shared design method in lightweight mode. Do not create
+`design.md` merely to fill this template or reuse the method.
+
+- Technical authority and sections:
+- Selected mechanisms / concise route summary:
+- Binding interfaces, invariants and implementation constraints:
+- Material failure, compatibility, security or lifecycle concerns:
 - Assumptions, evidence gaps and the work they block:
-- Verification strategy tied to effective requirements and system boundaries:
+- Verification strategy tied to requirements and system boundaries:
 
 ## Milestones
 
@@ -45,7 +59,7 @@ Keep future work coarse. Preserve IDs on reorder; include integrated acceptance.
 ## Task source
 
 Keep simple work inline. When independent task maintenance adds value, link
-neighboring tasks.md once explicitly requested and created.
+neighboring `tasks.md` once explicitly requested and created.
 `engflow-tasks` creates it only on request; Plan does not pre-create it. That file
 owns task decomposition/status/evidence. Keep milestone/feature continuity here
 and reference task evidence rather than copying a second status list.
@@ -65,8 +79,8 @@ Link each task to relevant requirement IDs/sections and technical approach or
 existing design sections where useful. Include integration/regression tasks when
 needed; tasks-only refinement does not reopen settled technical choices.
 Add binding interfaces, invariants or file entry points where needed. Steps are
-optional local lists, not a separate tracking system. For affected tasks, cite the
-solution path/section and state the essential execution constraints and checks.
+optional local lists, not a separate tracking system. For affected tasks, cite
+the solution path/section and state essential execution constraints and checks.
 Evidence supports only the conditions it covers; all tasks checked off is not
 milestone or final acceptance.
 
@@ -92,6 +106,10 @@ task evidence instead of keeping duplicate status ledgers.
 - Next concrete action and dependencies:
 
 ## Decisions and discoveries
+
+If no separate `design.md` exists, keep only the compact Plan-owned technical
+decisions needed to explain the delivery route. If Design exists, reference its
+decision IDs and sections; do not duplicate full technical records here.
 
 Keep consequential findings and changes with reasons. Preserve successor references
 for retired tasks, valid historical evidence and reasons evidence became stale.

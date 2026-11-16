@@ -20,8 +20,8 @@ not require using every entrypoint or creating a full document suite.
 | --- | --- |
 | Discuss an idea or consequential uncertainty without writing | [Clarify](../../skills/engflow-clarify/README.md) |
 | Synthesize decisions into requirements and acceptance | [Specify](../../skills/engflow-specify/README.md) |
-| Resolve technical mechanisms or tradeoffs | [Design](../../skills/engflow-design/README.md) |
-| Connect a technical route to delivery and verification | [Plan](../../skills/engflow-plan/README.md) |
+| Run targeted, decision-driven technical design and maintain the consolidated design | [Design](../../skills/engflow-design/README.md) |
+| Build a lightweight technical approach and progressive delivery route | [Plan](../../skills/engflow-plan/README.md) |
 | Maintain a separate task list when useful | [Tasks](../../skills/engflow-tasks/README.md) |
 | Implement, test and review a change | [Implement](../../skills/engflow-implement/README.md) |
 | Check cross-artifact consistency and evidence freshness, read-only | [Converge](../../skills/engflow-converge/README.md) |
@@ -48,10 +48,20 @@ IDs, do not fill gaps or rename existing features, and reuse the same feature
 across sessions. Explicit context wins over `Current feature` in `specs/README.md`;
 ask when the target remains ambiguous.
 
-Spec owns requirements and acceptance; Design owns technical decisions; Plan owns
-the delivery route and feature checkpoint. Separate Tasks owns task state when
-present; otherwise keep it inline in Plan. Use references instead of duplicate
-checklists. Small work needs none of these files. Templates are optional.
+Spec owns requirements and acceptance. When a separate design exists, one
+consolidated `design.md` per feature owns its technical decisions, rationale,
+evidence, decision threads and evolving architecture/code skeleton. Keep multiple
+technical topics in that file; do not create one design document per decision.
+Split a shared ADR/contract only when it has an independently maintained lifecycle
+or shared authority across features.
+
+Plan owns the delivery route, milestones, dependencies and feature checkpoint.
+When `design.md` exists, Plan references it and carries only a concise selected-route
+summary, binding implementation constraints and verification needs. Without a
+separate design, Plan may own a proportional technical approach inside `plan.md`.
+Separate Tasks owns task state when present; otherwise keep it inline in Plan.
+Use references instead of duplicate checklists or competing decision ledgers.
+Small work needs none of these files. Templates are optional.
 
 Research and PoC return conclusions conversationally by default. Explicit saves
 use supplied/project paths, otherwise numbered files under `docs/research/` or
@@ -76,6 +86,8 @@ boundaries; no model runner or permanent result archive is required.
 | Converge: complete, omitted requirement, stale evidence, conflicting authority, limited baseline | Correct primary status; evidence tied to current source; no writes, tests or implicit workers |
 | Clarify followed by an authorized Specify request | Clarify writes nothing; Specify receives actual decisions and preserves scope/acceptance |
 | Resume partial work or encounter missing facts | Preserve valid evidence and pending gates; continue independent work without guessing private facts |
+| Plan followed by targeted Design revision | Design consumes the existing Plan, asks one consequential decision at a time, preserves unaffected decisions, and identifies Plan/Tasks synchronization |
+| Multiple technical decision threads | Keep one feature-level design.md, model decision dependencies, evolve the code skeleton incrementally, and avoid duplicate design content in Plan |
 | Research, PoC or Handoff preview/save | Respect source-only versus experiment authority, requested persistence and outstanding-operation limits |
 
 For Converge, expect CONVERGED for a complete verified scope, GAPS_FOUND for a

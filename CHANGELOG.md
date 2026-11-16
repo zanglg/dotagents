@@ -6,6 +6,15 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Changed
+
+- Add a draft Decision-Driven Progressive Design method shared by Plan and
+  Design: one consequential decision per interaction, dependency-aware decision
+  threads and an incrementally maintained implementation-oriented code skeleton.
+  Keep one consolidated feature-level design.md; Plan references its technical
+  authority and summarizes only delivery-relevant constraints. Without a separate
+  design, Plan may own a proportional technical approach.
+
 ## [0.3.0] - 2026-11-14
 
 ### Added

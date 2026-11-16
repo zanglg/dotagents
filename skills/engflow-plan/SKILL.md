@@ -13,10 +13,12 @@ disable-model-invocation: true
 # Engflow Plan
 
 Turn intended behavior into a grounded technical approach and verifiable delivery
-route for linear execution across sessions. The plan is the entry point for the
-approach, constraints, validation and task references, not a replacement for existing
-authoritative design sources. Leave observed execution state and routine local
-implementation choices to the implementer.
+route for linear execution across sessions. Plan always owns scope, acceptance,
+milestones, dependencies, delivery sequencing and the feature checkpoint. It owns
+a compact technical approach only when no separate Design artifact exists. When
+a feature has `design.md`, that document owns technical decisions; Plan references
+it and carries only the selected route summary, binding implementation constraints
+and verification needs. Design is useful but never a mandatory prerequisite.
 
 ## Feature context
 
@@ -69,12 +71,18 @@ signatures are appropriate for binding contracts; leave routine algorithms and
 helper decomposition to implementation. Do not require code bodies or a fixed TDD
 recipe for every task. A short task can use a short plan or no saved plan.
 
-For complex choices that commit major architecture, shared interfaces, private
-hardware semantics or substantial delivery risk, involve the user with evidence,
-a recommendation, concrete tradeoffs and affected feature paths before dependent
-execution. Persist the resulting decision and constraints in the authorized plan;
-identify external authority sources still needing updates. Do not turn routine
-local choices or already confirmed solutions into repeated approval gates.
+Use the shared design method in lightweight mode for consequential technical
+choices. Build only the decision threads needed for a safe delivery route; their
+dependencies may branch or converge, so do not force a fixed design checklist.
+Select routine, reversible and in-scope choices autonomously. When a consequential
+decision needs user authority, ask one decision question per interaction with its
+evidence, viable alternatives, recommendation, tradeoffs and affected work. Do
+not bundle unrelated questions or repeatedly ask about confirmed choices.
+
+If the uncertainty requires deeper architecture work or broad alternative
+comparison, identify the exact decision and affected route. The user may invoke
+Design explicitly; Plan does not load Design's SKILL.md, create `design.md` or
+invoke another Skill automatically.
 
 Expose unresolved choices, the work they block and the evidence or decision needed.
 Plan an investigation where necessary rather than inventing readiness. Planning
@@ -82,32 +90,67 @@ an experiment grants no authority to execute it.
 
 ## Technical approach and task decomposition
 
-For a new or materially revised route, establish the necessary target context,
-chosen mechanisms, key interfaces/data flow, correctness constraints, relevant
-failure behavior and verification strategy before dependent tasks. Ground supported
-choices in code and effective requirements; record rationale, assumptions and
-material unknowns. Include only detail needed for safe implementation. Do not
-invent architecture, dependencies or a separate Design to fill a template.
+Ground the route in the effective requirements, actual code, confirmed decisions
+and any existing `design.md`. Resolve the minimum technical questions needed for
+safe sequencing before dependent tasks. Do not invent architecture or internals
+to make a plan look complete.
 
-Reuse confirmed decisions and existing design/contracts by relative path and
-section, with essential constraints summarized in the plan. Where no separate
-design is needed, the plan may hold the technical approach directly. It remains
-subject to effective requirements and supplied approval gates; writing a choice
-does not authorize an incompatible change to approved intent.
+### Technical design authority
 
-For unresolved mechanisms, interfaces or consequential technical tradeoffs, read
-and apply [the shared design method](../engflow-design/references/design-core.md).
-Reuse existing sufficient designs and confirmed solutions; routine local choices
-need no special method. Apply the method in this Plan task, not by loading Design's
-SKILL.md, invoking a Skill command or launching a worker. Plan remains responsible
-for technical consistency, decisions, writes and integration.
+- When a feature has `design.md`, it is the authority for technical decisions.
+  Read the relevant sections and reference them by relative path and heading.
+  Plan records only a concise selected-approach summary, binding implementation
+  constraints, relevant interfaces/invariants and verification requirements.
+  Do not copy the full design rationale, alternatives, decision history or code
+  skeleton into `plan.md`.
+- When no separate design exists, Plan may own a proportional technical approach
+  and compact decision record inside `plan.md`. Apply the shared design method
+  directly in this Plan task in lightweight mode. Plan never creates `design.md`
+  merely to reuse the method.
+- Reuse confirmed decisions and existing shared contracts. Do not reopen a settled
+  choice for preference or duplicate its authority in the plan.
+- If Design is explicitly invoked after Plan, Design consumes the existing plan
+  and targets the decisions the user wants reviewed. After a material design
+  change is accepted, reconcile the affected plan summary, constraints, milestones,
+  dependencies and verification before dependent implementation. Design records
+  pending synchronization; Plan does not assume a design revision has synchronized
+  itself automatically.
 
-Include a compact technical result in the plan, or reference an existing authority
-source: mechanism/rationale, interfaces/invariants, verification basis, unknowns
-and user decisions needed. No independent design/report file or experiment follows
-from method reuse. Obtain user decisions for consequential commitments beyond
-authority; a Draft plan or shared prompt does not approve material changes.
-Continue independent ready planning while dependent work remains conditional.
+### Decision thread in Plan
+
+Use one consequential unresolved decision per user interaction. State why it
+matters, relevant evidence and constraints, concrete alternatives, a recommendation,
+tradeoffs and affected work. Wait for the user's answer when their authority is
+required. Resolve routine choices autonomously and record their rationale.
+Represent decision prerequisites and downstream effects; independent decisions
+may progress separately. Do not ask about downstream choices before their
+prerequisites are known.
+
+Record only what the delivery route needs. A compact decision entry should identify
+the decision, status/provenance, selected mechanism or unresolved question,
+essential rationale and affected milestone/task. Use the shared status vocabulary:
+Open, Proposed, Selected, Confirmed, Mandated, Blocked, Deferred, Rejected and
+Superseded. Do not describe an agent-selected choice as user-confirmed.
+
+### Delivery decomposition
+
+Establish the target context, chosen mechanisms, key interfaces/data flow,
+correctness constraints, relevant failure behavior and verification strategy
+before dependent tasks. Specify exact signatures only for binding contracts;
+leave routine algorithms and helper decomposition to implementation.
+
+Use only the hierarchy the work needs:
+- Milestone: a coherent delivered outcome or decisive validation result, with a
+  stable ID, prerequisites, observable acceptance and observed status or reference.
+- Task: an implementable, verifiable unit within a milestone, with a stable
+  plan-wide ID, deliverable, necessary dependencies and completion conditions.
+- Step: an optional local sequence or checkpoint inside a complex task. Use a
+  simple list; no independent status or approval system is required.
+
+Prefer useful behavior or evidence over mechanical splits by file, layer or session.
+A task may span sessions. Specify file entry points and verification methods when
+needed to remove real ambiguity. Keep distant work coarse and detail only what is
+close enough to implement reliably.
 
 Keep tasks inline for simple work. When task volume or independent maintenance
 makes separation useful, explicitly requested `engflow-tasks` can create neighboring
@@ -115,12 +158,13 @@ makes separation useful, explicitly requested `engflow-tasks` can create neighbo
 an existing task source instead of duplicating its state; decomposition needs no
 mandatory separate stage or file. New plans may include inline tasks.
 
-Inline task plans, new or existing, remain valid. Refine their authorized task sections
-when requested, preserving settled choices, stable IDs, actual progress and evidence;
-no migration or Tasks invocation is required. When separate tasks already exist,
-propose affected task IDs/dependencies/checks and pending synchronization in the
-plan rather than silently updating a second live list. Extraction of inline tasks
-requires explicit authority to update both artifacts and leave one task-state source.
+Inline task plans, new or existing, remain valid. Refine their authorized task
+sections when requested, preserving settled choices, stable IDs, actual progress
+and evidence; no migration or Tasks invocation is required. When separate tasks
+already exist, propose affected task IDs/dependencies/checks and pending
+synchronization in the plan rather than silently updating a second live list.
+Extraction of inline tasks requires explicit authority to update both artifacts
+and leave one task-state source.
 
 ## Source investigation
 
@@ -134,17 +178,21 @@ no tests, probes or implementation. Keep the question, target version/configurat
 known evidence, constraints and affected sources explicit. Do not reopen a confirmed
 solution solely to investigate again; routine choices need no separate stage.
 
-Verify consequential findings against sources and integrate them into the
-authorized plan's technical constraints, rationale and references. Revise affected
-inline tasks/dependencies/checks; for separate tasks.md, identify the required task
-updates and next synchronization action without exceeding plan-write authority.
-Correct refuted current assumptions while preserving history; a separate research report alone is not closure. Plan writes remain
-limited to the requested plan: identify stale Spec/design/contracts, decision
-evidence and next synchronization actions without rewriting them. Ask the user
-before changing requirements, acceptance or a user-approved core decision; findings
-alone are not approval. Missing private facts leave affected work conditional,
-not grounds to guess or stop unrelated planning. Implementation and runtime
-verification remain separately authorized work.
+Verify consequential findings against sources. If no separate Design exists,
+integrate supported technical constraints and compact decisions into the plan. If
+`design.md` owns the affected decision, reference the evidence and identify the
+stale design section and pending synchronization; do not rewrite that authority
+from Plan. In either case, revise affected plan summaries, inline tasks,
+dependencies and checks within Plan authority. Keep the question, target
+version/configuration, known evidence and affected sources explicit.
+
+Plan writes remain limited to the requested plan: identify stale Spec, Design or
+shared-contract paths, decision evidence and next synchronization actions without
+rewriting those sources. Ask the user before changing requirements, acceptance or
+a user-approved core decision; findings alone are not approval. Missing private
+facts leave affected work conditional, not grounds to guess or stop unrelated
+planning. Planning an experiment grants no authority to execute it; implementation
+and runtime verification remain separately authorized work.
 
 ## Confirmed solutions and evidence updates
 
@@ -154,29 +202,29 @@ material change. Check applicable scope and consistency; do not replace an appro
 route for preference. If new evidence conflicts with a user-approved core choice,
 identify the conflict and affected work and request a change decision.
 
-Within plan-write authority, inject short solutions into existing decisions and
-inline task constraints. For separate tasks.md, identify affected task constraints
-and pending updates without rewriting that file. Reference longer design/contract or research
-material by relative path and section; summarize required constraints and checks
-rather than copying the whole solution. Record supplied confirmation evidence,
-applicable scope and observable results. Require the implementer to read these
-references before dependent work, and carry them into the authorized task source. A supplied confirmed solution does not become a
-new unapproved technical proposal merely because it is recorded in a Draft plan;
-the plan itself still grants no execution permission.
+When no separate Design exists, record a concise confirmed solution and its
+constraints, provenance and observable checks in the plan's technical approach or
+decision record. When `design.md` exists, keep the complete technical decision
+there; Plan references its path/section and carries only the constraints and checks
+needed by delivery. Do not duplicate the full solution or maintain competing
+decision records.
 
-When findings invalidate a plan assumption, correct its current text and affected
-inline tasks/dependencies/checks while preserving decision history and valid evidence.
-For separate tasks.md, record affected task IDs and pending updates rather than
-copying or overwriting implementation-owned task state.
-Reopen affected completion claims with reasons. Identify stale design/contract
-sources for authorized synchronization; plan-only work does not rewrite them.
-Do not alter effective requirements or acceptance without user agreement.
+Within plan-write authority, update the plan's selected-route summary, milestone
+dependencies and inline task constraints. For separate `tasks.md`, identify
+affected task IDs, constraints and pending updates without rewriting that file.
+When findings invalidate a plan assumption, correct current guidance and affected
+tasks while preserving decision history and valid evidence. Reopen affected
+completion claims with reasons. Identify stale Design/contract sources for
+authorized synchronization; plan-only work does not rewrite them. Do not alter
+effective requirements or acceptance without user agreement.
 
 ## Revision and continuity
 
 Reuse one suitable execution plan, including formats created by other tools.
-This is the technical and delivery entry point; with separate tasks.md, tasks own
-decomposition and task progress while the plan keeps milestone/feature continuity.
+This is the delivery entry point. A separate design.md remains authoritative for
+technical decisions; without one, the plan may own a compact technical approach.
+With separate tasks.md, Tasks owns decomposition and task progress while Plan
+keeps milestone/feature continuity and concise design references/constraints.
 Combined plans remain authoritative for their inline tasks and progress.
 A large objective may reference separately numbered features. Keep shared outcomes,
 cross-feature dependencies and integrated acceptance at the overall entry point;

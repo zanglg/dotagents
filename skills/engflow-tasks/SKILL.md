@@ -11,9 +11,10 @@ disable-model-invocation: true
 # Engflow Tasks
 
 Turn an effective technical plan into work an implementer can execute without
-rediscovering requirements or major design decisions. Tasks owns decomposition;
-Plan owns the technical approach and delivery route; Implement owns observed
-progress, local refinement and validation. Separate tasks.md is optional: use it
+rediscovering requirements or major design decisions. Tasks owns decomposition.
+When a separate `design.md` exists, Design owns technical decisions; otherwise
+Plan owns the compact technical approach. Plan always owns the delivery route.
+Implement owns observed progress, local refinement and validation. Separate tasks.md is optional: use it
 when task volume or independent maintenance adds value; simple new or existing
 plans can keep inline tasks. No Init or workflow engine is required.
 
@@ -83,9 +84,11 @@ stale Plan/Spec/design paths, decision evidence and next synchronization actions
 A task edit alone does not repair those sources or prove implemented behavior.
 
 With separate files, `tasks.md` is the task-state authority. `plan.md` retains the
-approach, milestone route and feature-level checkpoint, linking task evidence rather
-than copying task statuses. Tasks links back to Plan/Spec even if current authority
-does not permit adding a reciprocal link to Plan; report that pending update.
+delivery route and feature-level checkpoint. When `design.md` exists, Plan links
+its technical authority and carries only concise implementation constraints and
+verification needs; without a separate design, Plan may retain its compact technical
+approach. Tasks links back to Plan/Spec and referenced Design even if current
+authority does not permit adding a reciprocal link to Plan; report that pending update.
 
 Existing inline task plans remain valid. Do not create a second live list over
 them. Extract/migrate only with explicit authority to update both sources,

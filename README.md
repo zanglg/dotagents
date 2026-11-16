@@ -11,11 +11,11 @@ evaluation framework or specific agent host.
 | [diagram-aesthetics](skills/diagram-aesthetics/README.md) | Shared visual identity for diagrams and scientific charts, independent of drawing tools and domain notation |
 | [semver-bump](skills/semver-bump/README.md) | SemVer recommendations and confirmed version updates |
 | [engflow-handoff](skills/engflow-handoff/README.md) | Standalone session transfer and safe resumption for coding, research, design or other work |
-| [engflow-plan](skills/engflow-plan/README.md) | Connect requirements to technical approaches, milestone routes and validation; no implementation or ticket publishing |
+| [engflow-plan](skills/engflow-plan/README.md) | Develop a lightweight technical approach, milestone route and validation; consume deeper Design when present |
 | [engflow-tasks](skills/engflow-tasks/README.md) | Decompose a plan into feature tasks.md with stable IDs, dependencies, source constraints and checks |
 | [engflow-implement](skills/engflow-implement/README.md) | Implement, test, review and deliver code; linear milestones and cross-session recovery |
 | [engflow-converge](skills/engflow-converge/README.md) | Read-only assessment of requirement, design, plan, task, implementation and evidence consistency |
-| [engflow-design](skills/engflow-design/README.md) | Technical design independently or within Plan; user participation for consequential decisions |
+| [engflow-design](skills/engflow-design/README.md) | Targeted, decision-driven technical design with one consolidated design.md per feature |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
 | [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
