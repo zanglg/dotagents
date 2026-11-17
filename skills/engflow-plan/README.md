@@ -1,31 +1,20 @@
 # Engflow Plan
 
-User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
+[SKILL.md](SKILL.md) is the authoritative contract.
 
-## Purpose
+Plan turns a goal, effective requirements and available technical context into a
+delivery route. No separate Spec, Design or previous Skill invocation is required.
+Important unresolved choices become explicit prerequisites, not guessed solutions.
+Milestones are the default unit; tasks are optional and should add clarity rather
+than paperwork.
 
-Connect requirements and technical choices to progressive delivery and
-verification. Planning does not authorize code changes or require a tracker.
+Examples:
+- "Plan this feature from the Spec and Design."
+- "Plan this small change using existing conventions; there is no design document."
+- "Plan the investigation and delivery milestones; keep the storage choice open."
+- "Keep the first milestone detailed and later work coarse."
+- "Revise the affected milestones after the design changed."
 
-## Examples
-
-- "Plan this feature from the Spec and code; preview only."
-- "Split partial T3, preserving its evidence and downstream dependencies."
-
-## Inputs and outputs
-
-Provide goals or an existing plan, sources and write limits. Receive a technical
-route, milestones, acceptance checks and unresolved decisions. Keep simple tasks
-inline; reference an existing tasks.md without copying state. The
-[outline](assets/execution-plan.md) is optional.
-
-## Installation and collaboration
-
-Install all sibling `engflow-*` folders together, preserving references.
-Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for composition.
-
-## Validation and references
-
-Trace acceptance through deliverables and integrated checks. Preserve valid work,
-IDs and pending gates. Technical judgment uses the
-[shared design method](../engflow-design/references/design-core.md) within Plan authority.
+Plan owns intended delivery structure. Implement owns observed progress and
+evidence. Use the [execution-plan outline](assets/execution-plan.md) when useful;
+a separate [task outline](assets/tasks.md) is optional.

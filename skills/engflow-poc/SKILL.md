@@ -4,8 +4,9 @@ description: >
   Test a technical premise through a minimal, bounded experiment. Exercise the
   real mechanism and return reproducible evidence with explicit limits. Use on
   explicit experiment request. Other Engflow entrypoints reuse the shared
-  experiment method within their own execution authority. Return results to the caller or conversation; save a durable report
-  only when requested. Not production implementation.
+  experiment method within their own execution authority. Return results to the
+  caller or conversation; save a durable report only when requested.
+  Not production implementation.
 disable-model-invocation: true
 ---
 
@@ -46,18 +47,12 @@ and disclose missing reproducibility material rather than inventing it.
 
 ## Execution and coordination
 
-The shared experiment method governs evidence quality, execution authority,
-stopping and live-state reconciliation. It grants no production edits or publication.
-For an explicitly coordinated PoC task, also preserve the following ownership rules.
+Apply the shared experiment method's stopping, live-state reconciliation and
+cleanup rules before returning or retrying. Report retained artifacts, side effects
+and outstanding operations. PoC adds the following coordination boundaries.
 
 Under a coordinator, obey its scope and exclusive-write rules. Workers start or
 resume read-only until a fresh grant; they do not delegate further or edit the
 coordinator's design/progress record. Return evidence for the coordinator's decisions.
 
-Quiesce experiment processes before returning where possible; identify outstanding
-processes and whether they can still write. A timeout or result message does not
-prove they stopped. Reconcile live state before retrying.
-
-Report retained artifacts and side effects; clean up only experiment-owned resources
-within authority, preserving needed evidence. Do not implement production changes,
-commit, push, publish or manage branches/worktrees.
+Do not implement production changes, commit, push, publish or manage branches/worktrees.

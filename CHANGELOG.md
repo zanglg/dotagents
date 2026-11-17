@@ -6,6 +6,39 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ## [Unreleased]
 
+### Changed
+
+- Make each Engflow capability independently usable from adequate task context.
+  Allow direct implementation of simple requests/Specs and standalone Design or
+  Plan without preceding invocations or placeholder documents. Converge evaluates
+  the task's actual baseline while preserving project-required records and gates.
+- Allow user-directed reconsideration in Clarify while preserving effective
+  decisions until replacement. Extract Converge's assessment method behind an
+  explicit entrypoint reference, with proportional output for focused reviews.
+  Deduplicate PoC lifecycle guidance through the shared experiment method.
+- Keep core entrypoints concise while restoring shared feature paths, stable
+  numbering, persistence and navigation rules under `specs/NNN-short-name/`.
+  Preserve existing combined documents and the single authoritative task record.
+- Clarify user participation in complex design and reopening completed designs
+  for technical preferences. Reconnect shared source-investigation, experiment
+  and implementation-review methods without implicit Skill invocation or reports.
+- Offer Spec → Design → Plan → Implement as a composable feature workflow.
+  Spec owns requirements only; Design owns standard and deep topic-level technical
+  design, decisions, evidence and optional code skeletons; Plan owns delivery
+  milestones and consumes Design; Implement executes and may request re-entrant
+  Design intervention when technical work cannot converge. Preserve explicit user
+  authority and synchronize only affected downstream work.
+- Keep task decomposition optional. Plan may pre-decompose near-term work when
+  useful; Implement performs just-in-time decomposition by default. plan.md always
+  owns Feature/Milestone execution state; a separate tasks.md, when justified,
+  owns the sole detailed Task list and Task-level status/evidence.
+
+### Removed
+
+- Retire the standalone `engflow-tasks` entrypoint; optional ahead-of-time task
+  decomposition is part of Plan, while just-in-time decomposition and execution
+  state belong to Implement.
+
 ## [0.3.0] - 2026-11-14
 
 ### Added

@@ -1,223 +1,77 @@
 ---
 name: engflow-implement
 description: >
-  Implement a request or plan through code, tests and review. Use on explicit
-  request to start or resume implementation. For large or cross-session work,
-  advance through verifiable milestones and maintain one living execution record.
+  Implement an accepted request or delivery plan, then verify and review the
+  result. Work autonomously within the effective requirements, design and
+  execution authority.
 disable-model-invocation: true
 ---
 
 # Engflow Implement
 
-Deliver the requested behavior, not just a patch. Work linearly in the existing
-checkout and branch, preserving user-owned changes. Engflow is installed as a
-group, but no Spec, tracker or prior Skill invocation is required. Follow-up answers continue the task within existing authority
-until the user pauses, ends or redirects it.
+Own **making the agreed behavior work**. Implement a clear request, Spec or plan
+in the existing codebase, honoring effective requirements and design decisions,
+then verify and review the result. No prior Skill invocation is required.
 
-## Judgment and scope
+## Work
 
-Establish observable acceptance, effective requirements and actual source state.
-Distinguish requirements from preferences, decisions from recommendations, and
-evidence from assumptions. Approval does not establish technical feasibility.
+Establish the target, applicable requirements, technical contracts, current
+repository state and permitted effects. Preserve user changes and existing work.
+Simple features and maintenance fixes may proceed directly from a request or Spec
+when behavior and acceptance are clear, existing conventions supply the approach,
+and no consequential design question remains unresolved. Separate Design/Plan
+documents are not prerequisites; do not create them just to start implementation.
+When feature records are involved, read and follow the
+[shared convention](../engflow-specify/references/feature-records.md): normally
+`specs/NNN-short-name/plan.md` holds execution state, with optional `tasks.md`.
 
-Resolve routine choices and local implementation details from code and conventions.
-Ask only for material ambiguity, missing authority or tradeoffs beyond agreed scope;
-bring a recommendation. Do not change requirements or acceptance to make work pass.
+Implement autonomously within the agreed scope. Resolve routine coding choices
+locally. Refine the next milestone into tasks or steps only when that helps
+execution; do not create a second planning system.
 
-Small changes need no saved plan. For large or cross-session work, read
-[the continuity contract](references/continuity.md) and reuse one execution plan.
-Consume suitable plans regardless of their producer. Accept the user's request,
-plan path, task path or feature directory as an entry; the user need not supply
-every file. Resolve the selected feature through explicit context and permitted
-feature navigation, then follow the plan/task references to effective requirements,
-technical design and acceptance. Plan is the technical/delivery entry point;
-tasks.md, when present, is the executable task source, not a replacement for the
-plan's constraints. Read relevant Spec/design sources when available; missing
-optional files alone do not block adequate implementation inputs.
-Maintain task decomposition/progress in tasks.md when present; plan.md owns the
-technical route and feature-level checkpoint, referencing task evidence rather
-than copying statuses. With an existing combined plan, keep task state there.
-Neither `engflow-plan` nor `engflow-tasks` is required for local refinement.
-Cross-milestone restructuring, changes to binding contracts or acceptance, and
-unresolved major technical choices need dedicated planning or design judgment.
-Record the evidence, affected work and next decision needed; obtain agreement for
-material changes before affected execution. Use `engflow-plan` when requested and
-available, or surface the planning need without blocking unrelated authorized work.
-Do not automatically invoke another stage or bypass explicit-only host settings.
+Run proportionate checks as work proceeds, then relevant integration and
+regression checks. Review meaningful changes and the integrated result using the
+[review method](references/review-core.md) and [Git scope guidance](references/scope.md).
+Record actual changes, tests/results, review mode and what remains unverified.
 
-## Confirmed solution intake
+For substantial or resumed work, use the [execution continuity guidance](references/continuity.md)
+to reconcile the record with the actual repository and outstanding operations.
 
-When the user supplies a confirmed or mandated solution, read its original basis
-and the affected requirements, design, plan/tasks and code. Within its scope,
-treat it as the implementation basis; do not repeat Research or request approval
-again just to choose another preferred approach. Check consistency and feasibility.
-New evidence against a user-approved core decision needs an explicit change
-decision before incompatible work, not an unauthorized replacement.
+## When to seek direction
 
-Within write authority, inject short solutions into existing plan decisions and
-affected task constraints. For longer detail, reuse the suitable existing design,
-contract or research source; link relative paths and sections from the plan and
-affected tasks and summarize essential constraints there. Preserve supplied
-confirmation evidence, scope and observable checks without inventing a status
-system. Follow those references before executing dependent tasks. Do not create
-a plan or document layer solely for a bounded fix that needs none.
+For consequential evidence gaps after ordinary diagnosis, apply the
+[shared research method](../engflow-research/references/research-core.md).
+Use the [experiment method](../engflow-poc/references/experiment-core.md) when
+runtime evidence is needed, within existing execution authority. These methods
+do not invoke another Skill or create separate reports.
 
-## Blocker routing
+Resolve ordinary defects and implementation details directly. If a technical
+problem exposes a consequential design choice or cannot be resolved with
+reasonable investigation, stop speculative changes to the affected work.
+Explain the problem, evidence, attempts and viable options, then ask the user
+whether to adjust the design. Continue independent, authorized work where safe.
 
-Reproduce and diagnose ordinary bugs, test failures and build/environment/integration
-friction directly; use bounded checks within existing execution authority. Retry
-with a changed hypothesis or new evidence, not repeated blind attempts. Neither
-routine debugging nor an unfamiliar error alone requires Research or a user gate.
+After an agreed change, reconcile affected delivery work and existing records
+within authority. Routine adjustments need no separate Plan invocation; substantial
+replanning may warrant it. Product intent changes need user agreement and updates
+to any maintained Spec. Missing stage documents alone do not block execution.
+Do not invoke another Skill automatically.
 
-For consequential source-evidence gaps after routine diagnosis, read and apply
-[the shared research method](../engflow-research/references/research-core.md)
-unless the user restricts investigation. Keep the specific question, target state,
-evidence checked, failed hypotheses, constraints and affected sources explicit.
-This is read-only investigation within Implement, not automatic invocation of
-Research's SKILL.md, a report request or permission to change an approved decision.
-Apply evidence standards without expanding access/disclosure. The method does not
-remove separately authorized implementation/tests or require a special gate for
-ordinary diagnosis.
+## Boundaries
 
-When a discriminating experiment is needed, read
-[the shared experiment method](../engflow-poc/references/experiment-core.md).
-Reuse adequate existing execution permission, obtain only missing scope and obey
-pending gates. Keep mutating probes in the current agent, helpers read-only, and
-observations in the owning execution record; no independent PoC report is created.
-Do not load another Skill entrypoint merely to borrow these methods.
+Respect effective requirements, approved decisions, review gates and execution
+permissions. Do not guess missing private facts or claim planned checks passed.
+Destructive, privileged, external or otherwise expanded effects need appropriate
+authority. Preserve user work; do not reset, clean or stash it to simplify execution.
+Commits, pushes, publication and branch/worktree management require separate
+authorization.
 
-For unknown private protocol, register, hardware timing or implementation semantics,
-first inspect accessible documentation/code and attempt bounded relevant diagnosis.
-Never fill the gap with plausible general knowledge. Ask a precise question naming
-the missing fact, evidence checked, affected task and what answer would unblock it.
-Pause only affected/dependent work and continue independent authorized tasks.
-Changing required behavior/acceptance or a user-approved core decision needs the
-user's decision; an ordinary in-scope fix does not.
+Use helpers only within their granted scope; verify returned work and evidence.
+Never treat a helper's report, a task checkbox or a prior test result as proof
+that the current code is correct.
 
-After credible findings or a user decision, correct the original affected
-plan/design/contract assumptions and task constraints within authority, preserving
-evidence and history. Reopen invalidated work, follow the updated references and
-resume implementation and regression checks. Update Spec only for an agreed change
-to requirements/acceptance. A standalone report or a fixed test is not source
-synchronization; disclose missing authority, pending source updates and verification
-limits rather than claiming closure.
+## Completion
 
-## Delivery standard
-
-Before starting the next milestone, check its prerequisites and whether its current
-detail supports safe execution. If it is still coarse, expand it in place into
-verifiable tasks or local steps as needed, within execution and record-write
-authority. This is routine refinement when agreed scope, outcomes, binding contracts,
-acceptance and cross-milestone dependencies remain unchanged; no planner invocation
-or new approval is needed. Keep later work coarse; an executable milestone needs
-no task layer. For ambiguous boundaries, consult [judgment examples](references/judgment.md).
-
-Advance the next ready task, or the milestone when it has no tasks, in the agreed
-linear sequence. Refine local steps against actual code and preserve task deliverables
-and binding interfaces. Use test-first development when useful; verify behavior and
-contracts rather than incidental internals. Run focused checks as changes accumulate.
-
-Review meaningful increments and the final integrated change; review is part of
-Implement's delivery responsibility, not an optional follow-up stage. The separate
-engflow-converge entrypoint is read-only and explicit-only; do not invoke it as a
-mandatory stage. Read and apply
-[the internal review method](references/review-core.md) and
-[Git scope guidance](references/scope.md) directly within this task. Review is part
-of Implement; do not invoke another Skill entrypoint to borrow the method or require
-a separate user invocation for implementation review.
-
-Unless the user or host explicitly restricts all review, every implementation
-receives at least an honest self-review. If review is restricted entirely, respect
-that limit and disclose that no review occurred; do not imply it ran. For significant,
-high-risk or broadly coupled changes, prefer a fresh-context independent reviewer
-when the host supports one and the additional review is proportionate. Check
-that an actual reviewer dispatch tool is available before announcing independent
-review: a wait/status tool alone cannot dispatch
-a reviewer. If dispatch is unavailable, proceed with disclosed self-review.
-Give the reviewer the exact target/baseline, relevant requirements and constraints,
-without leading it toward the author's preferred conclusion. Review helpers remain
-read-only, do not run mutating checks or delegate further; pause edits while they
-inspect. Verify consequential returns against the actual source and counterevidence.
-Claim independent review only after a distinct reviewer was actually dispatched,
-returned findings or an explicit no-findings assessment, and the implementer
-inspected that result. A worker invitation, empty-recipient wait, pending status
-or unsupported tool attempt is not a completed review. If independent review is
-unavailable, unsupported, disproportionate, unconfirmed or restricted, perform
-self-review within scope and disclose that limitation; never imply an independent
-review ran.
-
-Fix substantiated findings within the existing implementation authority, then
-rerun affected tests/checks and re-review material edits against the updated source.
-Do not silently change requirements, approved decisions or scope to make a finding
-disappear; surface consequential changes for the applicable decision. Distinguish
-established defects from open questions and pre-existing issues. Record the reviewed
-scope, review mode, findings/fixes, actual rerun evidence and remaining limits in
-the execution record, or in the delivery response when no record is writable.
-Identify review mode explicitly at delivery: completed independent review with
-returned evidence, actual self-review only, or no review when restricted. Apply
-the same evidence standard to progress messages and final delivery.
-For a completed independent review, identify the actual reviewer and summarize
-its returned assessment so the claim can be checked against the dispatch/result.
-If no independent result was received, state whether it was unavailable, attempted
-but unconfirmed/failed, or not proportionate; do not let a successful self-review
-silently imply an additional reviewer.
-
-Separate implemented, verified, partial and blocked work. Record observed checks
-and evidence, including pre-existing failures. A milestone is complete only when
-its acceptance is supported; whole-task completion also requires integrated
-acceptance and relevant regression checks.
-
-If evidence invalidates a premise or completed result, reopen affected work and
-revise the remaining sequence with reasons. Preserve valid results. Retry only
-with a changed hypothesis or new information; stop at a concrete blocker rather
-than inventing progress.
-
-After an accepted material change, identify affected requirement/design sources
-and their sync status in the existing record, or conversation when no record is
-writable. Update them only within write authority; otherwise keep the decision
-evidence, stale paths and next sync action explicit. Code and Plan updates alone
-do not close source synchronization. Report outstanding sync work at delivery;
-block execution only where unresolved authority or conflicting intent affects it.
-
-## Continuation and steering
-
-Update the same record at meaningful checkpoints and continue ready work without
-routine "continue" gates. Milestones and sessions need not align. On resume,
-reconcile actual code, evidence and outstanding commands before executing.
-
-Status/view requests are read-only; plan-only requests do not authorize execution.
-Preserve pending approval gates across sessions and revisions. Routine refinement
-does not reopen approval, and a reorder does not grant execution permission.
-
-For a requested reorder, verify prerequisites and capture partial work first.
-Update the existing task source and affected plan references within authority,
-preserving stable IDs and valid evidence.
-If dependencies prevent the order, explain the conflict and propose a safe
-alternative.
-
-## Authority and output
-
-The current agent is the only writer. Optional helpers investigate or review
-read-only, do not run mutating checks or delegate further, and return evidence
-for verification. Pause edits during review; work directly if helpers are unavailable.
-The review method is internal to Implement and grants no additional output or write
-authority.
-
-Task-scoped implementation and tests are in scope. Expanded, privileged, destructive
-or external effects require applicable authorization. Other Skills retain their own
-invocation rules. Shared research/experiment references are permitted within
-this task's existing authority; they neither invoke those Skill entrypoints nor
-relax their guards. Reuse adequate execution scope and obtain only missing scope. Mutating probes stay in the
-current agent; helpers remain read-only. Return evidence to the owning record,
-without automatic durable Research/PoC reports.
-Do not orchestrate branches/worktrees or introduce a workspace framework.
-
-Commits, pushes and publication require authority for this work; reuse valid
-authorization but do not infer it from edit permission. Separately requested
-`engflow-handoff` references the record, not a duplicate ledger; it is not required
-for resumption. Refactoring assessment is also explicit-only, not an automatic
-stage of implementation.
-
-Report delivered behavior, actual validation, review limits and unfinished work.
-Include the record path and next action when relevant. Do not promise background
-progress, automatic session recovery or transfer of unpersisted code.
+Report delivered behavior separately from verified behavior. Include actual
+commands and results, review scope, remaining risks, partial work and any
+pending approvals or actions. Never promise automatic background continuation.

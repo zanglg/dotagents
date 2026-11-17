@@ -1,62 +1,86 @@
-# Shared technical design method
+# Technical design method
 
-This reference is reusable reasoning, not a Skill entrypoint, an invocation grant
-or an independent task. The active caller owns its scope, authority, outputs and
-source synchronization. Read and apply it in the current agent; do not load another
-SKILL.md, start a worker or create a design document merely to use this method.
-Project/host restrictions and explicit user limits still apply.
+Design turns effective requirements and knowledge of the existing system into
+a coherent technical solution. Use judgment; this is a reasoning aid, not a
+mandatory checklist or fixed sequence.
 
-## Ground the route
+## Authority
 
-Establish intended behavior, observable acceptance, constraints, actual mechanisms
-and effective decisions. Distinguish requirements, preferences, proposals and
-unverified assumptions. Do not change the problem to fit a preferred solution.
+- Effective requirements define behavior, scope, acceptance and constraints;
+  **Spec** records them when a specification is maintained.
+- **Design** owns the technical approach, architecture, contracts and rationale.
+- **Plan** organizes delivery and any unresolved prerequisites into work.
+- **Implement** changes code and records observed execution.
 
-Choose mechanisms, interfaces, data flow and correctness-critical invariants at
-the depth needed for safe implementation. Explain consequential tradeoffs and
-consider alternatives only when they could change the decision. Leave routine
-algorithms and helper decomposition to implementation.
+Do not use Design to invent product behavior or Plan to settle consequential
+architecture choices without the needed design work.
 
-Use supported in-scope choices autonomously. For material behavior/scope changes,
-user-approved core choices or consequential commitments beyond authority, bring
-the user evidence, a recommendation, alternatives and affected work before dependent
-execution. Approval establishes a decision or risk acceptance, not feasibility.
-Pause affected/dependent work only; continue independent authorized work.
+## Understand the problem
 
-## Preserve confirmed solutions
+Read the request, effective requirements, relevant code, contracts and evidence,
+including existing Spec or Design records when available. Confirm the target
+environment and material constraints. No separate Spec or prior invocation is
+required. Resolve important intent gaps directly, label assumptions and keep
+unsupported parts conditional; do not present a proposal as accepted.
 
-A confirmed or mandated solution is binding within its supplied scope. Inspect its
-basis and relevant sources; check consistency and feasibility without restarting
-settled selection. If new evidence contradicts a user-approved core choice, request
-a change decision before incompatible work, not a preference-based replacement.
+Separate required behavior from user preferences, technical facts and assumptions.
+Ask only when a missing fact or choice materially changes the solution.
 
-Within the caller's write authority, record essential constraints, applicable scope,
-supplied decision evidence and observable checks in the owning artifact. Reference
-longer authority sources rather than creating competing copies. Report pending
-upstream/consumer updates; a proposal or task edit alone does not synchronize them.
+## Choose the right depth
 
-## Evidence and readiness
+Start with the simplest coherent design that satisfies the requirements and fits
+the system. Describe only the relevant architecture, component responsibilities,
+data and interfaces, important flows, invariants, failure behavior and verification.
 
-Resolve viability questions before dependent detail. For substantial source-evidence
-gaps, read [the shared research method](../../engflow-research/references/research-core.md).
-When runtime evidence is necessary, read
-[the shared experiment method](../../engflow-poc/references/experiment-core.md);
-design or planning permission alone authorizes no experiment.
+Deepen a question when its uncertainty or consequences justify it—for example,
+choosing a data structure, concurrency model, consistency boundary, recovery
+strategy, performance trade-off or compatibility contract. A focused deep dive
+may change one part of an existing design; it does not require a full redesign.
 
-Finish when implementation need not rediscover feature semantics, cross-component
-contracts or major choices. State mechanisms, invariants, rationale, verification
-basis, unknowns and required user decisions. If a premise lacks evidence, give a
-conditional route with blocked scope and the discriminating next check.
+Make routine, low-impact, reversible choices autonomously. Involve the user in
+complex or consequential choices, deep exploration, evidence gaps or problems
+without a reliable solution. Bring evidence, attempts, options and a recommendation;
+look up discoverable facts instead of turning every uncertainty into a question.
 
-Check requirement coverage, consistency, failure behavior, interfaces/invariants,
-critical counterevidence and verification adequacy. This is author self-check,
-not independent review, user approval or runtime proof.
+The user may supply a preferred approach or reopen a completed design even when
+the existing solution is sound. Evaluate the requested direction against
+requirements, feasibility and trade-offs. Technical preferences guide selection;
+explicit constraints bind it, but neither proves feasibility. Preserve the current
+effective decision while a replacement is only proposed. User agreement on a
+replacement resolves that decision without an additional approval loop.
 
-## Caller-owned integration
+## Use structure only when it helps
 
-Return or integrate a proportional technical result inside the caller's authorized
-artifact: Plan may hold a compact design section; existing detailed designs/contracts
-remain authoritative through references. Do not create design/report/task files or
-acquire their write authority through this reference. Preserve decision history,
-correct refuted current guidance within scope and mark invalidated evidence with
-reasons. Independent Design's persistence/navigation rules belong to its entrypoint.
+Keep one feature-level `design.md`. Use a Topic or decision record when a
+technical question has meaningful alternatives, dependencies or consequences.
+Do not require Topic IDs, decision graphs, status matrices or a fixed set of
+design sections for every feature.
+
+A code skeleton, diagram or interface contract is useful when it prevents
+implementation from rediscovering an important boundary. Mark whether a
+consequential element is binding, selected by the agent, proposed or illustrative.
+Do not prescribe routine implementation details or write full implementation.
+
+## Evidence and completion
+
+For consequential code or documentation evidence gaps, read and apply the
+[shared research method](../../engflow-research/references/research-core.md).
+Trace relevant sources and versions, seek counterevidence and keep unsupported
+premises conditional. Integrate findings and their decision impact into `design.md`.
+Use the [evidence methods](investigation.md) for runtime questions, only with
+adequate execution authority; a design request alone grants no experiments.
+Reading these references invokes no other Skill or independent report.
+
+Design is sufficient when the implementation can proceed without rediscovering
+important behavior, architecture or contracts. State material assumptions,
+unresolved choices, verification needs and known limitations.
+
+Readiness does not freeze a design. When direction changes, update the affected
+parts of the current design and preserve useful rationale and decision history.
+Identify affected requirements, delivery, implementation and verification; each
+owning activity remains responsible for its records. Reassess only what the change
+could invalidate and distinguish agreed changes from proposals awaiting a decision.
+
+Before delivery, check that the solution addresses effective requirements, fits
+the actual system, exposes important trade-offs and can be verified. This is an author
+self-check, not independent approval.

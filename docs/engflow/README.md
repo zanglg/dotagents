@@ -1,108 +1,122 @@
 # Engflow
 
-Engflow is a host-neutral group of prompt-only engineering skills. Individual
-`SKILL.md` files define behavior; their READMEs provide examples. This guide
-covers only group installation, composition and conventions shared across skills.
+Engflow is a small set of explicit, composable engineering skills. Each
+`SKILL.md` defines one capability; references provide optional depth.
 
-## Installation
+## Core workflow
 
-Install all sibling `skills/engflow-*` folders together in your host's skill
-directory, including references, templates and invocation metadata. Preserve
-relative paths and local customizations. Codex and Pi are possible hosts, not
-dependencies; there is no installer or runtime service.
+| Skill | Responsibility | Question |
+| --- | --- | --- |
+| [Specify](../../skills/engflow-specify/README.md) | Capture intent, scope and observable acceptance. | What should be built? |
+| [Design](../../skills/engflow-design/README.md) | Find and explain a suitable technical solution. | How should it work? |
+| [Plan](../../skills/engflow-plan/README.md) | Organize the solution into deliverable work. | What needs to be done, and in what order? |
+| [Implement](../../skills/engflow-implement/README.md) | Change code and verify the result. | Does it work? |
 
-All Engflow entrypoints require explicit invocation. Installing the group does
-not require using every entrypoint or creating a full document suite.
+Each Skill can start from an adequate request and available context. No preceding
+Skill invocation or complete document set is required. Read existing authoritative
+records when present; do not create missing stage artifacts merely to begin work.
+Install the group together for shared references; independent use does not imply
+that an individual folder has no installation dependencies.
 
-## Choosing an entrypoint
+| Situation | Possible path |
+| --- | --- |
+| Clear small feature or fix | Request or Spec → Implement |
+| A technical question needing a solution | Design alone, optionally followed by Implement |
+| Work needing sequencing or investigation milestones | Plan alone, optionally followed by Implement |
+| A complex feature needing all responsibilities | Spec → Design → Plan → Implement |
+
+These are examples, not enforced transitions. Important missing intent, design
+facts or authority can block dependent work; a missing optional document alone
+cannot. Users may still require particular records or review gates.
+
+The agent resolves routine, low-impact choices. Complex or consequential questions,
+deep exploration, insufficient evidence and problems without a reliable solution
+can involve the user. The user may guide, challenge or redirect any part of the
+work, including reopening a completed design to fit a technical preference.
+Evaluate the new direction and revise affected work; preference or approval does
+not establish feasibility.
+
+## Optional capabilities
 
 | Need | Skill |
 | --- | --- |
-| Discuss an idea or consequential uncertainty without writing | [Clarify](../../skills/engflow-clarify/README.md) |
-| Synthesize decisions into requirements and acceptance | [Specify](../../skills/engflow-specify/README.md) |
-| Resolve technical mechanisms or tradeoffs | [Design](../../skills/engflow-design/README.md) |
-| Connect a technical route to delivery and verification | [Plan](../../skills/engflow-plan/README.md) |
-| Maintain a separate task list when useful | [Tasks](../../skills/engflow-tasks/README.md) |
-| Implement, test and review a change | [Implement](../../skills/engflow-implement/README.md) |
-| Check cross-artifact consistency and evidence freshness, read-only | [Converge](../../skills/engflow-converge/README.md) |
-| Investigate existing sources, without experiments | [Research](../../skills/engflow-research/README.md) |
-| Run an authorized bounded experiment | [PoC](../../skills/engflow-poc/README.md) |
-| Assess worthwhile refactoring without edits | [Refactor Assess](../../skills/engflow-refactor-assess/README.md) |
-| Transfer essential context between sessions | [Handoff](../../skills/engflow-handoff/README.md) |
+| Explore an idea or clarify consequential ambiguity | [Clarify](../../skills/engflow-clarify/README.md) |
+| Investigate sources and existing evidence | [Research](../../skills/engflow-research/README.md) |
+| Test a technical premise with an authorized experiment | [PoC](../../skills/engflow-poc/README.md) |
+| Assess cross-artifact consistency and evidence | [Converge](../../skills/engflow-converge/README.md) |
+| Assess refactoring opportunities without edits | [Refactor Assess](../../skills/engflow-refactor-assess/README.md) |
+| Transfer context between sessions | [Handoff](../../skills/engflow-handoff/README.md) |
 
-A small fix goes directly to Implement. Add clarification, design or planning
-only when the work needs it. Converge, Refactor Assess and Handoff are optional,
-explicit requests; they are not automatic implementation stages. Code review is
-internal to Implement.
+These are independent capabilities, not mandatory workflow stages. Use them
+only when requested or when the active task explicitly permits the method.
+Design, Plan and Implement can read Research's shared method within their current
+task; Design and Implement can use the experiment method within adequate execution
+authority. Method reuse invokes no independent Skill and creates no report.
 
-Plan, Design and Implement can read sibling design, research and experiment
-methods within their own task. Reading a reference invokes no other entrypoint
-and grants no additional output, execution or approval authority.
+## Authority and records
 
-## Documents and continuation
+- **Spec** owns intended behavior, scope, acceptance and user-supplied or
+  externally mandated constraints. It does not choose internal implementation.
+- **Design** owns the technical approach, architecture, contracts and rationale.
+- **Plan** owns delivery milestones, dependencies and planned task definitions.
+- **Implement** owns code changes and observed execution state.
 
-Honor supplied paths and existing project conventions. Otherwise, new feature
-documents use `specs/NNN-short-name/`, with `spec.md`, optional `design.md`,
-`plan.md` and optional `tasks.md` created only as needed. Allocate above retained
-IDs, do not fill gaps or rename existing features, and reuse the same feature
-across sessions. Explicit context wins over `Current feature` in `specs/README.md`;
-ask when the target remains ambiguous.
+Prefer one source of truth for each kind of information. Keep tasks inline in
+`plan.md` by default; use a separate `tasks.md` only when it has clear value.
+Do not duplicate status or evidence across records.
 
-Spec owns requirements and acceptance; Design owns technical decisions; Plan owns
-the delivery route and feature checkpoint. Separate Tasks owns task state when
-present; otherwise keep it inline in Plan. Use references instead of duplicate
-checklists. Small work needs none of these files. Templates are optional.
+Follow the [shared feature-record convention](../../skills/engflow-specify/references/feature-records.md).
+Respect existing project paths and decisions. Otherwise use:
 
-Research and PoC return conclusions conversationally by default. Explicit saves
-use supplied/project paths, otherwise numbered files under `docs/research/` or
-`docs/poc/`. Handoff references existing records and saves to OS temporary storage
-by default. These are conventions for target projects, not directories to
-pre-create in this Skill library.
+```text
+specs/
+  README.md                 # feature index and Current feature
+  NNN-short-name/
+    spec.md                 # requirements and acceptance
+    design.md               # technical solution and evidence
+    plan.md                 # delivery route and execution checkpoint
+    tasks.md                # optional detailed task record
+```
 
-Existing approval gates survive continuation. A plan, task checkbox or generic
-"continue" does not approve a pending decision. Update affected sources only
-within write authority; keep unsynchronized sources and verification limits visible.
+Reuse the same feature across sessions. Allocate new numbers above existing
+directories and retained index identities, starting at `001`; do not fill gaps
+or renumber records. Create only requested, authorized artifacts. Preview changes
+neither files nor navigation. Explicit context wins over the current-feature link.
+A saved plan is not execution permission; approval, write and experiment limits
+remain in force across stages.
 
-## Manual checks
+## Validation
 
-When changing a material Skill contract, choose relevant small tasks in an
-isolated workspace on the host you actually use. Keep the following observable
-boundaries; no model runner or permanent result archive is required.
+When changing a Skill, test the relevant boundaries in realistic tasks:
+- Spec captures behavior without inventing technical decisions.
+- Design can choose a normal solution and deepen a specific technical question.
+- Plan produces an executable route without duplicating design.
+- Implement preserves user work and reports actual checks and limitations.
+- Optional capabilities do not become implicit lifecycle gates.
 
-| Scenario | Inspect actual actions and results |
-| --- | --- |
-| Bounded Implement fix, including untracked source | Authorized files only; real tests; complete review scope; honest review mode |
-| Independent review | Real dispatch, separate reviewer inspection, returned assessment and caller verification; missing exported events are not proof of fabrication |
-| Converge: complete, omitted requirement, stale evidence, conflicting authority, limited baseline | Correct primary status; evidence tied to current source; no writes, tests or implicit workers |
-| Clarify followed by an authorized Specify request | Clarify writes nothing; Specify receives actual decisions and preserves scope/acceptance |
-| Resume partial work or encounter missing facts | Preserve valid evidence and pending gates; continue independent work without guessing private facts |
-| Research, PoC or Handoff preview/save | Respect source-only versus experiment authority, requested persistence and outstanding-operation limits |
+For this workflow, also exercise a user-requested redesign of a sound solution,
+a source-evidence gap, a new numbered feature and continuation of a legacy combined
+plan. Check actual saved paths, evidence integration, affected downstream work and
+preservation of decisions/IDs. Preview must leave files and navigation unchanged.
 
-For Converge, expect CONVERGED for a complete verified scope, GAPS_FOUND for a
-concrete omission, BLOCKED for required stale evidence or conflicting effective
-authority, and PARTIAL for a bounded assessment without a full baseline.
+Also check direct implementation of a simple Spec without Design/Plan files,
+standalone Design from a clear request, and Plan with a pending technical decision.
+Expect no forced preceding invocation, no placeholder documents and no invented
+resolution of important unknowns. Converge should assess a simple completed feature
+against its requirements and current evidence without requiring optional artifacts;
+an explicitly required missing record must still be reported.
 
-Inspect source, diffs, tool results and final responses. A plausible response or
-successful process exit is not a behavioral pass. Preserve meaningful failures
-outside the repository while investigating; removing the old evaluation tooling
-does not make old failures pass or guarantee equivalent coverage. Record a short
-change-specific validation summary in the PR or delivery response.
+Inspect actual changes and evidence. A plausible response or successful process
+exit alone is not a behavioral pass.
 
 ## Migration
 
-| Previous name | Current name |
-| --- | --- |
-| specify | engflow-specify |
-| design | engflow-design |
-| plan-implementation | engflow-plan |
-| implement | engflow-implement |
-| technical-research | engflow-research |
-| poc | engflow-poc |
-| refactor-assess | engflow-refactor-assess |
-| handoff | engflow-handoff |
-
-Standalone Code Review is retired; its method belongs to Implement. Clarify is
-conversation-only; Specify owns authorized Spec writes. Replace older installed
-copies deliberately, preserving customizations and project documents. The
-former workspace/ADR workflow is retired; no automatic migration or legacy
-wrappers are provided. See the root [catalog](../../README.md#available-skills).
+Replace older installed Engflow copies as a group so sibling references remain
+consistent. Preserve project artifacts, stable IDs and local customizations.
+Remove the retired `engflow-tasks` entrypoint from the installed group; Plan now
+owns planned task definitions and Implement owns task execution state. Preserve
+existing `tasks.md` files. Existing combined Spec/Design/Plan documents remain
+valid through their effective sections; do not require extraction into new files.
+The four core Skills define responsibilities; Clarify, Research, PoC, Converge,
+Refactor Assess and Handoff remain optional capabilities. Do not create every
+feature artifact or invoke every capability merely because the group is installed.

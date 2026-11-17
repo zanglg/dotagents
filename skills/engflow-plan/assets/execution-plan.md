@@ -1,110 +1,51 @@
-# <Objective title>
+# <Feature or objective>
 
-Plan status: Draft. This document alone does not authorize execution.
+Status: Draft. This plan describes intended delivery; it is not execution
+permission.
 
-## Objective and acceptance
+## Objective
 
-- Intended behavior, current scope and non-goals:
-- Confirmed deferred scope, if relevant (not current acceptance):
-- Whole-task acceptance:
-- Constraints and authority limits:
-
-## Read first
-
-Link effective requirements, design and actual source. Record essential context
-unavailable there, distinguishing decisions, proposals and unverified assumptions.
-This plan tracks execution; summaries do not override its requirement/design sources.
-For user-confirmed/mandated solutions, give relative source paths and sections,
-supplied confirmation evidence, scope, essential constraints and observable checks.
-Follow the relevant references before dependent work; do not reselect the route
-without authority. Omit extra fields or documents when unnecessary.
-
-## Technical approach (as needed)
-
-Omit settled detail already accessible through the references above. This section
-may hold a compact approach grounded with the shared design method when useful;
-Plan owns its technical result and integration. Method reuse invokes no other Skill. Existing authoritative designs
-stay referenced. No mandatory call, separate file or new architecture is needed.
-
-- Relevant runtime, dependencies and existing implementation entry points:
-- Chosen mechanisms, rationale and confirmed constraints:
-- Interfaces, data flow/model and correctness-critical invariants:
-- Material failure/compatibility/security concerns within scope:
-- Assumptions, evidence gaps and the work they block:
-- Verification strategy tied to effective requirements and system boundaries:
+- Outcome and current scope:
+- Non-goals:
+- Whole-feature acceptance:
+- Requirements source (request, Spec or other effective record):
+- Existing technical decisions or Design, when applicable:
+- Constraints and approval gates:
 
 ## Milestones
 
-Keep future work coarse. Preserve IDs on reorder; include integrated acceptance.
+Keep milestones outcome-oriented and independently verifiable. Detail near-term
+work; leave distant work coarse.
+Include investigation or design work where important choices remain open, with
+dependent delivery conditional on its outcome. Do not invent prerequisite documents.
 
-| ID | Outcome | Prerequisites | Acceptance check | Observed status / evidence |
+| ID | Outcome | Dependencies | Acceptance | Status / evidence |
 | --- | --- | --- | --- | --- |
-| M1 | <Behavior or evidence> | <What must hold> | <How to verify> | Not started |
-| M2 | <Final integration> | <Required increments> | <Whole-task and regression checks> | Not started |
+| M1 | <Deliverable> | <Prerequisites> | <Observable check> | Not started |
+| M2 | <Integrated outcome> | <M1> | <Feature acceptance> | Not started |
 
-## Task source
+## Tasks (optional)
 
-Keep simple work inline. When independent task maintenance adds value, link
-neighboring tasks.md once explicitly requested and created.
-`engflow-tasks` creates it only on request; Plan does not pre-create it. That file
-owns task decomposition/status/evidence. Keep milestone/feature continuity here
-and reference task evidence rather than copying a second status list.
+Add tasks only when they clarify near-term work, ownership or verification.
+Tasks may remain inline here. If a separate `tasks.md` is justified, it becomes
+the sole detailed task record; do not duplicate tasks in both places.
 
-## Inline tasks (when no separate task source)
-
-Create or refine inline tasks when useful and authorized; do not duplicate them
-into a separate live list. Extraction requires authority to update both artifacts
-and retain references, IDs and evidence. Omit this section for separate tasks.md
-or milestone-only plans.
-
-| ID | Milestone | Deliverable | Dependencies | Completion / verification | Observed status / evidence |
+| ID | Milestone | Deliverable | Dependencies | Completion check | Status / evidence |
 | --- | --- | --- | --- | --- | --- |
-| T1 | M1 | <Behavior or evidence> | <Only necessary dependencies> | <Observable conditions> | Not started |
+| T001 | M1 | <Work> | <Prerequisites> | <Observable result> | Not started |
 
-Link each task to relevant requirement IDs/sections and technical approach or
-existing design sections where useful. Include integration/regression tasks when
-needed; tasks-only refinement does not reopen settled technical choices.
-Add binding interfaces, invariants or file entry points where needed. Steps are
-optional local lists, not a separate tracking system. For affected tasks, cite the
-solution path/section and state the essential execution constraints and checks.
-Evidence supports only the conditions it covers; all tasks checked off is not
-milestone or final acceptance.
+## Execution checkpoint
 
-## Plan review, if requested
+Implement maintains observed progress here. Record actual completed and partial
+work, checks and results, blockers, outstanding operations, and the next action.
+If a separate `tasks.md` exists, Task-level state belongs there.
 
-- Pending gate or explicitly approved scope/content:
-- Supplied approval evidence:
-- Proposed material changes and affected work awaiting agreement:
+## Changes and decisions
 
-Omit when review was not requested. Preserve still-effective content and approval;
-do not transfer approval to changed scope or reopen it for routine progress.
+Record material changes, their source and approval status when needed. Spec owns
+requirements; Design owns technical decisions. Keep proposals distinct from
+accepted changes and identify affected work that needs reconciliation.
 
-## Current checkpoint
+## Outcome
 
-Implementation maintains feature-level observations here. Preserve them during
-plan revision; task-level progress/checks stay in tasks.md when present. Reference
-task evidence instead of keeping duplicate status ledgers.
-
-- Last reconciled source/environment state:
-- Verified completion and commands/results:
-- Partial or implemented-but-unverified work:
-- Blockers and outstanding commands/side effects:
-- Next concrete action and dependencies:
-
-## Decisions and discoveries
-
-Keep consequential findings and changes with reasons. Preserve successor references
-for retired tasks, valid historical evidence and reasons evidence became stale.
-Link durable detail rather than copying logs. Do not reuse IDs.
-For accepted material changes, identify affected authority-source paths/sections,
-approval evidence, sync status and next update action or missing write authority.
-Close pending sync work only after checking that sources reflect the accepted
-change and the plan distinguishes intended, implemented and verified behavior.
-Correct refuted current assumptions and affected task constraints/dependencies;
-retain history and mark invalidated evidence. A report alone is not closure:
-follow source repair with implementation and validation, or state the remaining
-limits. Report documentation lag separately from code completion.
-
-## Final outcome
-
-Record delivered behavior, integrated validation, review scope and remaining gaps.
+Record delivered behavior, integrated verification and remaining limitations.

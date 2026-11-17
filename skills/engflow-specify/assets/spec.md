@@ -23,7 +23,9 @@ conditions when useful. Deferred requirements are not current acceptance.
 
 ## Constraints and Dependencies
 
-## Technical Approach (if needed; link existing Design)
+Record only user-supplied or externally mandated constraints, dependencies and
+existing contracts. Technical solutions and implementation design belong in
+`design.md`.
 
 ## Open Questions and Assumptions
 

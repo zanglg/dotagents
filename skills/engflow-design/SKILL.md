@@ -1,114 +1,79 @@
 ---
 name: engflow-design
 description: >
-  Design a feature from goals and actual constraints. Choose technical approaches,
-  involve the user in consequential tradeoffs, and deliver a grounded proposal
-  that guides implementation. Use on explicit design request; other Engflow
-  entrypoints reuse the shared design method without invoking this Skill.
+  Develop a technical solution from a clear goal, requirements and constraints.
+  Use for initial design or a focused deep dive into any technical question.
+  Resolve routine choices directly; involve the user in consequential questions
+  and revisit existing designs when technical direction changes.
 disable-model-invocation: true
 ---
 
 # Engflow Design
 
-Develop a coherent proposal that solves the user's problem and gives implementation
-a reliable direction. Choose the strategy and document structure to fit the task;
-no Spec, Feature or other Skill is required.
+Own **how the solution should work**. Turn effective requirements, the existing
+system and technical constraints into a coherent design. A clear request is a
+valid starting point; no Spec document or prior Skill invocation is required.
 
-Engflow is installed as a complete group; this remains an independently usable,
-explicit entrypoint. Read and apply [the shared design method](references/design-core.md)
-before technical selection or material revision. Plan reads that reference directly
-within its own task; method reuse does not invoke this Skill or grant its writes.
+## Work
 
-## Invocation and participation
+Start with the relevant requirements, current architecture, code and contracts.
+Produce a design proportional to the problem: explain the important components,
+data, interfaces, flows, invariants, failure behavior and verification needs.
 
-An explicit request starts or resumes Design; follow-up answers continue within
-the same authority until the user pauses, ends or redirects it. Keep host invocation
-guards intact. An explicitly requested support/preview can return a focused design
-to a caller without saving a separate file. Independent proposal writes still need
-their actual authorization. Human participation follows decision significance and
-authority, not whether the result is conversational or persisted.
+Make routine, low-impact, reversible technical choices autonomously. Go deeper where
+complexity, uncertainty or consequences justify it. A focused request may examine
+one question—such as a tree versus a map, a concurrency strategy or an interface—
+without redesigning the whole feature.
 
-## Feature context
+Involve the user in complex or consequential questions, deep exploration,
+insufficient evidence or problems without a reliable solution. Explain the
+evidence, attempts, alternatives and recommendation so the user can shape the
+direction. Investigate discoverable facts rather than asking the user to guess.
+Do not loop through speculative options.
 
-In independent use, use the explicit feature ID/path or established conversation
-target. For an unspecified continuation, verify the current-feature link in `specs/README.md`
-(or the project equivalent). Do not infer focus from the largest number or most
-recent file; resolve a missing, stale or conflicting target before affected work.
-Reading another feature as a dependency does not switch the target, and a later
-change to the link does not redirect an already scoped session.
+The user may participate at any point or reopen a completed design to reflect
+their technical preferences; the existing solution need not be defective.
+Assess the new direction's feasibility, costs and affected work. Preferences
+guide selection; explicit constraints bind it. Neither is evidence of feasibility.
+Keep proposed replacements distinct from effective decisions until agreed.
 
-Reuse existing paths. Otherwise, authorized new features default to
-`specs/NNN-short-name/`: use the next number above existing directories and retained
-index identities, starting at `001` with at least three digits; preserve IDs and
-recheck collisions before writing. Create only this capability's requested document
-(`design.md`), without requiring other Skills or creating placeholder artifacts.
-Authorized creation or selection may maintain feature links and `Current feature`
-in the same resolved project index (default `specs/README.md`) unless writes are
-restricted. This is navigation, not progress
-or approval. Creating future/deferred features alone does not change established
-focus; preview/view requests change neither files nor focus.
+For consequential source-evidence gaps, read and apply the
+[shared research method](../engflow-research/references/research-core.md) within
+this task. Integrate source/version references, uncertainty and decision impact
+into the design. For runtime evidence, follow the
+[evidence methods](references/investigation.md) within adequate experiment authority.
+Method reuse invokes no other Skill and creates no independent report.
 
-For an explicitly requested support/preview, inherit the caller's selected feature;
-do not allocate a feature or update navigation through support alone.
+## Principles
 
-## Investigation and readiness
-
-Use the shared design method's evidence, decision and readiness standards. For
-source investigation and separately authorized experiments, read
-[the evidence collaboration contract](references/investigation.md). Apply these
-methods directly in the current Design task; do not automatically invoke Research
-or PoC, create reports or start workers. Keep unsupported routes conditional.
-
-## Proposal and continuity
-
-In independent use, writing the proposal is part of Design. Maintain one authorized draft at meaningful
-decisions, discoveries and pauses, using an appropriate existing document and
-user/project location or the numbered-feature default above. Authorized feature
-navigation writes are in scope. An explicitly requested support/preview returns findings to its caller instead. Preserve
-unrelated content. Preview and no-write requests stay conversational.
-
-Keep the current route, rationale, evidence, unresolved dependencies and next useful
-action sufficient for continuation, not a discussion transcript or second progress
-ledger. Split documents only when independently maintaining them materially helps,
-within write authority. On resume, reconcile the draft with current source,
-instructions and outstanding experiment state; missing context remains a limitation.
-
-## Self-check and document scope
-
-Before delivery, perform a proportionate author self-check against effective
-requirements, actual architecture and available evidence:
-- Trace the chosen mechanism to the required behavior; check that interfaces,
-  ownership, data/control flow and invariants are coherent.
-- Cover material lifecycle and failure behavior, including retries, rollback,
-  concurrency, compatibility, security, resource and operational concerns where
-  relevant to the design.
-- Check consequential alternatives and tradeoffs are explained, assumptions have
-  evidence or remain conditional, and no hidden dependency or unsupported premise
-  is presented as established.
-- Ensure the verification basis exercises important success, failure and boundary
-  behavior, not merely the proposed implementation shape.
-Resolve supported gaps; surface missing private facts or consequential decisions
-rather than guessing. This is author self-check, not independent review or approval.
-Research supplies evidence; it does not approve the design.
-
-Reuse a suitable design for the current independently evolving objective. Use
-feature detail for this delivery and reference shared architecture and constraints.
-Cross-module work does not automatically require a global document. When changing
-a shared mechanism or contract, update its authorized source and link affected
-features; do not maintain competing copies or require fixed document layers.
-For accepted material changes, track affected requirement, shared-contract and
-Plan paths, supplied approval evidence and pending sync actions in the existing
-draft. Update only authorized design sources; report other needed revisions without
-silently rewriting them or invoking another stage. Recheck source consistency before
-closing pending updates; a revised proposal alone does not synchronize its consumers.
-Preserve confirmed deferred scope without designing it prematurely.
+- Effective requirements define behavior; Design selects the technical approach.
+  Honor an existing Spec without requiring one to be created.
+- Keep one coherent feature-level design. Use Topics, decision records, diagrams
+  or code skeletons only when they make a complex problem easier to understand.
+- Preserve the source and status of important decisions. Distinguish binding
+  requirements, user direction, agent choices and proposals.
+- Revisit only the parts affected by new direction or evidence. Preserve sound
+  decisions and work elsewhere.
+- Finish when the implementation can proceed without rediscovering important
+  system behavior or technical contracts.
 
 ## Boundaries
 
-Read-only investigation and authorized document writes are in scope. Experiments
-need separately bounded execution authority. Do not initiate production implementation,
-modify production configuration, commit, push, publish or manage branches/worktrees.
+Read and follow the
+[shared feature-record convention](../engflow-specify/references/feature-records.md).
+Maintain the authorized design in `specs/NNN-short-name/design.md`, reusing the
+existing feature and project paths. Preview stays conversational. Use the
+[design method](references/design-core.md) for deeper reasoning and the
+[outline](assets/design.md) only where useful.
 
-Honor effective requirements and ADRs; do not silently supersede them. New proposals
-are drafts, and substantive revisions do not inherit prior approval. Preserve its
-provenance and report the resulting proposal, readiness limits and remaining decisions.
+Establish enough intended behavior and constraints for the requested design from
+the request, discussion or existing sources. Resolve material ambiguity directly;
+keep unsupported parts conditional rather than requiring a preliminary Spec stage.
+Do not change requirements, define delivery tasks, modify production code or run experiments
+without the relevant authority. Plan consumes the design; Implement owns code
+and execution evidence. Do not invoke another Skill automatically.
+
+Report the design path or preview, chosen approach, rationale, assumptions,
+open questions and affected downstream work. Readiness is not a permanent freeze:
+revise affected decisions when direction changes, preserving useful history.
+Do not claim implementation or verification.

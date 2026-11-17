@@ -1,30 +1,31 @@
 # Engflow Design
 
-User guide; [SKILL.md](SKILL.md) is the authoritative agent contract.
+[SKILL.md](SKILL.md) is the authoritative contract.
 
-## Purpose
+Design develops a technical solution from a clear request, effective requirements
+and the actual system. No Spec document or prior Skill invocation is required.
+The depth should match the problem: ordinary features need a clear standard
+design; consequential questions can receive a focused deep dive. Topics,
+decision records and code skeletons are optional tools, not required structure.
 
-Choose a technical route grounded in requirements and actual system constraints,
-including interfaces, invariants, evidence and consequential tradeoffs.
+The agent resolves routine, low-impact choices. Complex questions, uncertain
+evidence and difficult trade-offs can involve the user. The user may also reopen
+a completed design to fit a preferred technical direction; completion is not a
+freeze, and preference does not prove feasibility.
 
-## Examples
+Authorized design work maintains `specs/NNN-short-name/design.md`, following
+existing project paths and the [feature-record convention](../engflow-specify/references/feature-records.md).
+Preview stays in conversation. Research methods supply evidence within Design;
+no separate Research invocation or report is needed.
 
-- "Compare approaches for live configuration reload; return a preview."
-- "Revise this design after the assumption failed; preserve decision history."
+Examples:
+- "Design this feature using the existing architecture."
+- "Compare a tree and a hash map for this data model."
+- "Design a retry strategy from this description; preview only, no Spec exists."
+- "I prefer an event-driven design; assess the trade-offs and update the proposal."
+- "Revisit only the concurrency strategy; preserve the rest of the design."
 
-## Inputs and outputs
-
-Provide the goal, available sources and constraints; a formal Spec is optional.
-Receive a proposal or authorized design update with rationale, unresolved decisions
-and verification limits. A separate design file is optional.
-
-## Installation and collaboration
-
-Install all sibling `engflow-*` folders together, preserving references.
-Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for composition.
-
-## Validation and references
-
-Use [design judgment](references/design-core.md) and the
-[evidence contract](references/investigation.md). A self-check or proposed
-experiment is not proof of feasibility, permission to execute or user approval.
+Design owns technical decisions. Plan owns delivery sequencing; Implement owns
+code and observed execution state. Use the [design method](references/design-core.md)
+for deeper guidance and [evidence methods](references/investigation.md) when
+source investigation or an authorized experiment is needed.

@@ -2,6 +2,15 @@
 
 Examples illustrate distinctions, not a questionnaire to ask every user.
 
+## User reopens a settled decision
+
+The user previously chose automatic restoration but now wants to reconsider it
+in favor of an explicit restore action. Explore the changed preference and its
+effects on behavior and acceptance; do not demand proof that the old choice was
+wrong. Preserve unaffected decisions. Until the user adopts a replacement, describe
+it as an alternative; after agreement, summarize the accepted change and pending
+Spec update without claiming that any file was changed.
+
 ## Confirmed requirement versus implementation authority
 
 The user says "Tabs must restore after restart; update the Spec, but wait for my
