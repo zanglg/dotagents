@@ -8,6 +8,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Shorten all nine active Engflow Skill entrypoints around purpose, principles,
+  authority boundaries and completion, moving detailed Handoff, PoC and Research
+  record practices into Markdown references and reusing existing methods.
+  Clarify that a confirmed decision or conversational pause is not a Spec
+  write grant; preserve host-independent limitations of prompt-only read-only
+  behavior.
 - Make Specify intent-driven across new and existing Specs. Integrate explanation,
   exploration and clarification into the core capability; keep discussion
   read-only, apply only clearly requested changes, and validate material revisions

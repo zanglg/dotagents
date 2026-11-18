@@ -44,10 +44,15 @@ collisions before writing and preserve existing content and stable IDs.
   links to it. Moving tasks requires authority for both records and preserves
   IDs and evidence, replacing the old live list with references.
 
-Save the requested artifact within write authority and update it at meaningful
-decisions or pauses. Create only needed documents, not empty placeholders for
-later stages. Preview and read-only work create no files, allocate no numbers and
-change no navigation. Report paths and any persistence limits.
+Save only requested artifacts within their actual write authority. For Specify,
+discussion, explanation, a newly confirmed decision or a conversational pause
+does not itself authorize writing a Spec. A clear scoped create/update request
+or existing explicit write grant does; clarify ambiguous action intent first.
+Other Skills preserve their own write and execution gates.
+
+Create only needed documents, not placeholders. Preview and read-only work
+create no files, allocate no numbers and change no navigation. Report paths
+and persistence limits.
 
 When authorized feature creation or selection permits navigation writes, maintain
 the feature link and `Current feature` in the same resolved index. Adding future

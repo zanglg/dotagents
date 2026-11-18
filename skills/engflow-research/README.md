@@ -26,6 +26,6 @@ Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for compo
 
 ## Validation and references
 
-Apply the [investigation method](references/research-core.md); optional helpers
-follow [read-only delegation](references/delegation.md). Check versions and
+Apply the [investigation method](references/research-core.md) and the
+[record convention](references/records.md); optional helpers follow [read-only delegation](references/delegation.md). Check versions and
 inaccessible sources; suggested verification is not an observed result.

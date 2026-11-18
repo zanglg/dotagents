@@ -26,6 +26,7 @@ Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for compo
 
 ## Validation and references
 
-Preserve operation handles, write scope, last observations, unknown effects
+For detailed safe preparation, persistence and resumption, use the
+[handoff method](references/method.md). Preserve operation handles, write scope, last observations, unknown effects
 and retry limits. Temporary files may not survive or transfer. A handoff grants
 no execution authority; Implement can resume an existing plan without one.

@@ -86,6 +86,22 @@ neither files nor navigation. Explicit context wins over the current-feature lin
 A saved plan is not execution permission; approval, write and experiment limits
 remain in force across stages.
 
+## Skill contracts
+
+Keep active `SKILL.md` entrypoints small and centered on **Purpose**,
+**Principles**, **Boundaries** and **Completion**. Put detailed techniques,
+examples, record conventions and failure handling in linked Markdown
+references. A reference is loaded when its method or scenario applies, not
+to turn every task into a mandatory stage. Preserve permission checks and
+high-impact safety invariants in the entrypoint itself.
+
+Shortening a prompt does not strengthen runtime permissions. Specify remains
+a single read/write-capable Skill: explanation and discussion are read-only
+by instruction, not by a separate tool-level permission boundary. Hosts may
+add write approval guards; do not claim such enforcement without evidence.
+Independent source-only capabilities such as Converge remain structurally
+read-only at their Skill contract level.
+
 ## Validation
 
 When changing a Skill, test the relevant boundaries in realistic tasks:
@@ -102,6 +118,10 @@ When changing a Skill, test the relevant boundaries in realistic tasks:
 - Plan produces an executable route without duplicating design.
 - Implement preserves user work and reports actual checks and limitations.
 - Optional capabilities do not become implicit lifecycle gates.
+- Converge, Research and Refactor Assess remain non-mutating; PoC requires
+  bounded experiment authority, and Handoff preserves uncertain live state.
+- A plan or Design request does not grant experiments or implementation;
+  reports and handoffs do not grant new execution authority.
 
 For this workflow, also exercise a user-requested redesign of a sound solution,
 a source-evidence gap, a new numbered feature and continuation of a legacy combined

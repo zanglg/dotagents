@@ -1,58 +1,42 @@
 ---
 name: engflow-poc
 description: >
-  Test a technical premise through a minimal, bounded experiment. Exercise the
-  real mechanism and return reproducible evidence with explicit limits. Use on
-  explicit experiment request. Other Engflow entrypoints reuse the shared
-  experiment method within their own execution authority. Return results to the
-  caller or conversation; save a durable report only when requested.
-  Not production implementation.
+  Test a technical premise with a minimal authorized experiment and return
+  reproducible evidence. Use on explicit experiment request; not production
+  implementation or implicit execution from Design/Plan.
 disable-model-invocation: true
 ---
 
 # Engflow PoC
 
-Resolve a consequential uncertainty with the smallest adequate experiment, not
-a partial implementation of the whole feature. No other Skill or document is required.
+## Purpose
 
-Engflow is installed as a complete group. An explicit PoC request starts this
-entrypoint; follow-up trials reuse its granted scope. Read and apply
-[the shared experiment method](references/experiment-core.md) before any probe.
-Other entrypoints use that reference directly, not an implicit PoC invocation.
-A request to inspect, plan, design or save results alone authorizes no execution.
+Answer a consequential technical uncertainty using the smallest adequate
+experiment. Prior Skills and stage documents are not required.
 
-## Results and persistence
+## Principles
 
-Return results to the coordinating caller, or directly in conversation when used
-independently. The caller integrates consequential evidence into its own authorized
-sources; PoC does not edit the caller's Design or progress record. Calls do not
-automatically create research/experiment reports. Experiment execution may still
-need authorized temporary files; distinguish those from requested durable storage.
+- Before execution, read and follow the
+  [shared experiment method](references/experiment-core.md). Establish the
+  premise, discriminating observations, safe scope and execution authority.
+- Run only authorized probes; distinguish supporting, refuting and
+  inconclusive evidence, actual results and hypothesized outcomes.
+- Record source, environment, commands, inputs, failures, side effects,
+  outstanding operations and limitations needed for reproducibility.
+- Return findings to the caller or conversation. Save a durable report only
+  when explicitly requested, following the [record convention](references/records.md).
+- Reuse a coordinator's scope and exclusive-write rules; do not create a
+  competing writer or assume a returned worker has stopped.
 
-When explicitly asked to retain the experiment, reuse its existing record or the
-specified/project location. Otherwise default to `docs/poc/NNN-short-name/`, with
-`report.md` and, when needed, runnable material under `code/`. Keep only the code,
-inputs and results needed to reproduce and interpret the evidence; no empty code
-directory or fixed report template is required. Report scope, source/environment,
-actual commands/results, meaningful failed trials, conclusions and limitations.
+## Boundaries
 
-For a new experiment record, choose the next number above allocated PoC records,
-starting at `001` with at least three digits. Keep identities stable, do not fill
-gaps, and recheck collisions before writing. Research and feature numbering remain
-independent. Continue the same experiment in place, retaining relevant history;
-preview does not allocate a record. Saving supplied results does not rerun the
-experiment or turn historical evidence into a fresh observation. Link related
-sources without creating a feature or changing its navigation. Return retained paths
-and disclose missing reproducibility material rather than inventing it.
+A design, plan, read-only or save-results request is not experiment execution
+permission. Temporary files may be necessary within authorized experiments,
+but this is not permission to write permanent reports or production code.
+Do not invoke other Skills, implement changes, commit, publish or manage branches.
 
-## Execution and coordination
+## Completion
 
-Apply the shared experiment method's stopping, live-state reconciliation and
-cleanup rules before returning or retrying. Report retained artifacts, side effects
-and outstanding operations. PoC adds the following coordination boundaries.
-
-Under a coordinator, obey its scope and exclusive-write rules. Workers start or
-resume read-only until a fresh grant; they do not delegate further or edit the
-coordinator's design/progress record. Return evidence for the coordinator's decisions.
-
-Do not implement production changes, commit, push, publish or manage branches/worktrees.
+Report evidence, conclusion and confidence limits, executed operations,
+remaining effects, retained paths and what still needs verification. Do not
+claim that a successful probe establishes production readiness.

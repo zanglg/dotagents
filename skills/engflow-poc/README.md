@@ -26,6 +26,7 @@ Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for compo
 
 ## Validation and references
 
-Use the [experiment method](references/experiment-core.md). Distinguish an
+Use the [experiment method](references/experiment-core.md) and
+[record convention](references/records.md). Distinguish an
 inconclusive result from failure, and record uncertain liveness/effects before
 retrying timed-out work. Temporary storage is not a sandbox.

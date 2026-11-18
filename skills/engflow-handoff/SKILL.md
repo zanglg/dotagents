@@ -1,90 +1,39 @@
 ---
 name: engflow-handoff
-description: "Transfer essential context between sessions or resume from a handoff. Reference existing artifacts and preserve only what the next session cannot reliably recover. Use on explicit user request."
+description: "Transfer or resume essential context on explicit request, preserving decisions, source links, outstanding operations and authorization boundaries."
 disable-model-invocation: true
 ---
 
 # Engflow Handoff
 
-Enable a fresh session to continue without losing essential context or duplicating
-accessible records. Use on explicit handoff, save-for-next-session or resume request;
-status questions and context pressure alone do not invoke this Skill.
+## Purpose
 
-No repository, workflow or other Skill is required, including for non-Engflow work.
-When a plan exists, reference it; `engflow-implement` can resume without a handoff.
-Do not automatically invoke other Skills or expand their permissions.
+Enable a new session to continue from essential context without duplicating
+recoverable records. Standalone and non-Engflow tasks are supported; a
+status question or context pressure alone does not invoke Handoff.
 
-## Prepare
+## Principles
 
-Establish the next objective and where work stopped. Ask only when ambiguity
-materially changes the handoff. Inspect relevant artifacts and reference actual
-paths or URLs with their purpose, rather than copying recoverable content.
+- Identify the next objective, stopping point and reliable source links.
+  Preserve only context not safely recoverable from existing records.
+- Distinguish decisions from proposals, observed results from guesses, and
+  pending approval or source updates from completed actions.
+- For outstanding operations, preserve handles, environment, observed liveness,
+  scope, possible effects and the next safe check. A timeout does not prove
+  termination; uncertain effects block conflicting writes and blind retries.
+- On resume, reconcile the handoff with current sources and permissions before
+  taking a next step. A handoff is not approval or proof of current state.
+- Follow the [handoff method](references/method.md) for saving, naming,
+  resumption, outstanding-operation safety and optional outline.
 
-Preserve essential context not reliably recoverable from those sources:
-- User intent, constraints, decisions, rationale and rejected alternatives.
-- Findings, blockers, failed approaches and pending questions or approval gates.
-- Accepted changes awaiting source updates: affected paths, supplied approval
-  evidence and next sync action. Reference an existing record rather than copy it.
-- Outstanding operations whose handles, effects or ownership may be lost between
-  sessions, following the runtime-state guidance below.
+## Boundaries
 
-Distinguish observations and confirmed decisions from proposals and assumptions;
-silence is not approval. When conversation is the primary source, preserve its
-load-bearing detail, not the entire transcript. State the next concrete action
-and essential prerequisites; leave routine environment discovery to the next agent.
+Use only the requested handoff scope. Do not modify referenced project state,
+take ownership of operations, invoke other Skills, commit or publish. Redact
+secrets and sensitive paths. Preview requests write nothing.
 
-### Runtime state that cannot be rediscovered reliably
+## Completion
 
-For an outstanding command, worker, migration or experiment, preserve its handle
-and environment, scope/possible writes, last observed liveness with observation
-context, known or uncertain side effects, and the next safe check. Include any
-exclusive write grant or retry restriction. Never invent handles or fresh status.
-
-A timeout or lost session does not prove termination. Unknown liveness or uncertain
-non-idempotent effects block conflicting writes and blind retries, not independent
-safe work. Reference an existing operation record where sufficient; do not dump logs
-or build a second process ledger. Preparing a handoff does not authorize cancelling,
-restarting or taking ownership of operations. Honor immediate stop requests.
-
-Before delivery, check whether the handoff plus accessible sources is sufficient
-for continuation. Mark it partial when critical context or access is missing.
-
-## Deliver
-
-Unless a destination is specified, save a unique Markdown file in OS temporary
-storage (`TMPDIR`, then `/tmp`; `TEMP` on Windows). Keep the filename convention
-`handoff-YYYY-MM-DD-<project>-<topic-slug>-<unique-suffix>.md`; use `general` if no
-project applies. Use safe ASCII components without separators or sensitive data.
-Never overwrite an existing file; choose another suffix on collision. For durable
-storage use the user's destination or established convention, not an invented path.
-Temporary files are not guaranteed to survive or transfer to another environment.
-
-Report the saved path and a short continuation instruction, not the full file again.
-Preview or conversation-only requests return the complete handoff without writing.
-If saving fails, report that no file was saved and return the content conversationally.
-Redact secrets, including those in paths, URLs or commands. Do not modify referenced
-artifacts, commit, publish or otherwise change project state while preparing a handoff.
-
-## Resume
-
-1. Read the handoff and needed sources. Request missing content/access rather than
-   assuming transfer. Inspect-only requests remain read-only.
-2. Reconcile historical context with current state and supplied approval evidence,
-   including pending source updates. Do not restore obsolete decisions or promote
-   unapproved proposals. A handoff grants no new authority or proof of completion.
-3. Reconcile outstanding operations before conflicting work. A process ID alone may
-   be stale or reused; verify identity, environment and effects, not just existence.
-   If liveness/effects remain unknown, report the blocked action and needed check.
-4. Continue the next applicable action only when requested and within current scope.
-   Do not rewrite the handoff merely because it was read.
-
-## Optional outline
-
-Adapt to the task; omit empty sections and impose no fixed length:
-- **Objective:** next goal and stopping point.
-- **Read first:** source paths/URLs and their purpose.
-- **Unpersisted context:** essential decisions and evidence unavailable there.
-- **Outstanding operations:** handles, scope, observed/unknown state and safe checks.
-- **Open questions:** blockers, pending approval or source updates.
-- **Next action:** first concrete step after source and environment reconciliation.
-- **Continuation instruction:** a short, ready-to-copy instruction for the next agent.
+Return a usable handoff or save it at the authorized destination (temporary
+Markdown by default), with its path, first safe action and known limits.
+If saving fails, return content in conversation and do not claim persistence.
