@@ -7,7 +7,7 @@ Engflow is a small set of explicit, composable engineering skills. Each
 
 | Skill | Responsibility | Question |
 | --- | --- | --- |
-| [Specify](../../skills/engflow-specify/README.md) | Capture intent, scope and observable acceptance. | What should be built? |
+| [Specify](../../skills/engflow-specify/README.md) | Understand, explain and refine intent into behavioral requirements, scope and acceptance. | What should be built? |
 | [Design](../../skills/engflow-design/README.md) | Find and explain a suitable technical solution. | How should it work? |
 | [Plan](../../skills/engflow-plan/README.md) | Organize the solution into deliverable work. | What needs to be done, and in what order? |
 | [Implement](../../skills/engflow-implement/README.md) | Change code and verify the result. | Does it work? |
@@ -40,7 +40,6 @@ not establish feasibility.
 
 | Need | Skill |
 | --- | --- |
-| Explore an idea or clarify consequential ambiguity | [Clarify](../../skills/engflow-clarify/README.md) |
 | Investigate sources and existing evidence | [Research](../../skills/engflow-research/README.md) |
 | Test a technical premise with an authorized experiment | [PoC](../../skills/engflow-poc/README.md) |
 | Assess cross-artifact consistency and evidence | [Converge](../../skills/engflow-converge/README.md) |
@@ -49,9 +48,11 @@ not establish feasibility.
 
 These are independent capabilities, not mandatory workflow stages. Use them
 only when requested or when the active task explicitly permits the method.
-Design, Plan and Implement can read Research's shared method within their current
-task; Design and Implement can use the experiment method within adequate execution
-authority. Method reuse invokes no independent Skill and creates no report.
+Requirement explanation, exploration, clarification and refinement are built
+into Specify; they do not require a separate Clarify Skill. Design, Plan and
+Implement can read Research's shared method within their current task; Design
+and Implement can use the experiment method within adequate execution authority.
+Method reuse invokes no independent Skill and creates no report.
 
 ## Authority and records
 
@@ -89,6 +90,14 @@ remain in force across stages.
 
 When changing a Skill, test the relevant boundaries in realistic tasks:
 - Spec captures behavior without inventing technical decisions.
+- Explain requests read the relevant Spec and clearly separate specified facts,
+  interpretation and undefined behavior without writing files.
+- Discussion, critique and corrections of the agent's understanding do not
+  mutate the formal Spec.
+- Explicit add/change/remove requests update only the authorized Spec scope,
+  preserve IDs and approval history, and trigger a proportionate validation pass.
+- Validate uses a fresh independent reviewer when supported; otherwise it does
+  not claim independent review. Findings do not directly edit the Spec.
 - Design can choose a normal solution and deepen a specific technical question.
 - Plan produces an executable route without duplicating design.
 - Implement preserves user work and reports actual checks and limitations.
@@ -113,10 +122,12 @@ exit alone is not a behavioral pass.
 
 Replace older installed Engflow copies as a group so sibling references remain
 consistent. Preserve project artifacts, stable IDs and local customizations.
-Remove the retired `engflow-tasks` entrypoint from the installed group; Plan now
-owns planned task definitions and Implement owns task execution state. Preserve
+Remove the retired `engflow-tasks` and `engflow-clarify` entrypoints from the
+installed group. Clarification, explanation, discussion and requirement refinement
+are built into Specify. Plan owns planned task definitions and Implement owns
+task execution state. Preserve
 existing `tasks.md` files. Existing combined Spec/Design/Plan documents remain
 valid through their effective sections; do not require extraction into new files.
-The four core Skills define responsibilities; Clarify, Research, PoC, Converge,
-Refactor Assess and Handoff remain optional capabilities. Do not create every
+The four core Skills define responsibilities; Research, PoC, Converge, Refactor
+Assess and Handoff remain optional capabilities. Do not create every
 feature artifact or invoke every capability merely because the group is installed.

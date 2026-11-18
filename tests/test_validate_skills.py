@@ -141,6 +141,20 @@ class ValidatorTests(unittest.TestCase):
         (self.root / "CHANGELOG.md").write_text("engflow-code-review was retired.\n")
         self.assertEqual(self.errors(), [])
 
+    def test_clarify_is_integrated_into_specify(self):
+        clarify = self.root / "skills/engflow-clarify"
+        clarify.mkdir()
+        (clarify / "README.md").write_text("[contract](SKILL.md).\n")
+        (clarify / "SKILL.md").write_text(
+            "---\nname: engflow-clarify\ndescription: >\n  Retired capability.\n"
+            "disable-model-invocation: true\n---\n# Clarify\n"
+        )
+        (clarify / "agents").mkdir()
+        (clarify / "agents/openai.yaml").write_text(
+            "policy:\n  allow_implicit_invocation: false\n"
+        )
+        self.assertTrue(any("retired invocation/folder name" in e for e in self.errors()))
+
     def test_converge_remains_explicit_only(self):
         converge = self.root / "skills/engflow-converge"
         converge.mkdir()

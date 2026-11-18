@@ -14,6 +14,7 @@ from urllib.parse import unquote, urlsplit
 
 LEGACY = {
     "specify", "design", "plan-implementation", "implement", "code-review", "engflow-code-review",
+    "engflow-clarify",
     "technical-research", "poc", "refactor-assess", "handoff",
 }
 NAME = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")

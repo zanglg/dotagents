@@ -8,14 +8,19 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Make Specify intent-driven across new and existing Specs. Integrate explanation,
+  exploration and clarification into the core capability; keep discussion
+  read-only, apply only clearly requested changes, and validate material revisions
+  with an independent reviewer when the host supports subagents.
 - Make each Engflow capability independently usable from adequate task context.
   Allow direct implementation of simple requests/Specs and standalone Design or
   Plan without preceding invocations or placeholder documents. Converge evaluates
   the task's actual baseline while preserving project-required records and gates.
-- Allow user-directed reconsideration in Clarify while preserving effective
-  decisions until replacement. Extract Converge's assessment method behind an
-  explicit entrypoint reference, with proportional output for focused reviews.
-  Deduplicate PoC lifecycle guidance through the shared experiment method.
+- Preserve user-directed reconsideration of settled requirements within Specify
+  while keeping effective decisions until replacement. Extract Converge's
+  assessment method behind an explicit entrypoint reference, with proportional
+  output for focused reviews. Deduplicate PoC lifecycle guidance through the
+  shared experiment method.
 - Keep core entrypoints concise while restoring shared feature paths, stable
   numbering, persistence and navigation rules under `specs/NNN-short-name/`.
   Preserve existing combined documents and the single authoritative task record.
@@ -35,6 +40,8 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Removed
 
+- Retire the standalone `engflow-clarify` entrypoint; explanation, exploration
+  and requirement clarification are now part of Specify.
 - Retire the standalone `engflow-tasks` entrypoint; optional ahead-of-time task
   decomposition is part of Plan, while just-in-time decomposition and execution
   state belong to Implement.

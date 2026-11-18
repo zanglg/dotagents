@@ -2,14 +2,22 @@
 
 [SKILL.md](SKILL.md) is the authoritative contract.
 
-Specify turns user intent and existing evidence into behavioral requirements,
-scope, constraints and observable acceptance. It does not select internal
-technical solutions; Design owns those.
-It can start from a clear request without prior Clarify or project setup.
+Specify is an intent-driven specification-engineering capability. It works with
+new ideas and existing Specs. It understands what the user wants to do, helps
+explore uncertain requirements, explains existing requirements, and refines the
+formal Spec when a change is requested.
 
 Examples:
-- "Turn this discussion into a Spec preview."
-- "Update the Spec with these decisions and preserve existing IDs."
+- "Create a Spec from this discussion."
+- "What does REQ-012 mean? Give me an example."
+- "I think this permission rule is wrong. Let's discuss alternatives."
+- "Add Google OAuth as a secondary login method and update the Spec."
+- "That's not what I meant; users can only export their own data."
+
+Explanation and discussion are read-only. Clear requests to create or change the
+Spec can proceed without a redundant confirmation. Ambiguous intent is clarified
+before writing. Material Spec creation and revisions receive a proportionate
+quality check; an independent reviewer is used when the host supports subagents.
 
 Reuse the selected feature and project conventions. The
 [Spec outline](assets/spec.md) is optional. A saved Spec does not authorize

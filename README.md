@@ -17,8 +17,7 @@ evaluation framework or specific agent host.
 | [engflow-design](skills/engflow-design/README.md) | Technical design with routine agent choices and user participation in consequential questions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
-| [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
-| [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
+| [engflow-specify](skills/engflow-specify/README.md) | Intent-driven specification engineering: understand, explain, explore, refine and validate new or existing Specs |
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 ## Installation
