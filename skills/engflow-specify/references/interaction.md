@@ -104,6 +104,39 @@ meaningful options when helpful, and give a recommendation with its tradeoff
 when there is a sound basis. Do not make the user answer every conceivable edge
 case or repeat information already available.
 
+## Independent validation and revision re-check
+
+For substantial Specs, use a fresh read-only reviewer when the host supports
+subagents. Keep the review input bounded to the effective requirements and
+decisions, applicable constraints, current Spec, and sources directly affected
+by the requested scope. Do not prime the reviewer with the author's preferred
+interpretation, tentative discussion, unaccepted proposals or a desired verdict.
+Include only enough scope context to identify what is being reviewed.
+
+Ask the reviewer to identify evidence-backed coverage gaps, contradictions,
+ambiguity, missing important edge behavior, weak testability and scope drift.
+The reviewer may inspect the supplied sources and report findings, but must not
+edit files, decide unresolved product intent, promote proposals to requirements,
+or treat its recommendations as user approval.
+
+Triage findings by ownership:
+- Resolve factual or traceable consistency issues from authoritative sources.
+- Present consequential product-intent choices to the user with a recommendation
+  and impact; the reviewer cannot choose on the user's behalf.
+- Keep unsupported or low-impact suggestions out of the effective Spec.
+
+After a substantive Spec revision, run a targeted read-only re-check of the
+changed requirements and their affected dependencies. Verify that prior
+material findings are resolved and that the revision introduced no new conflict,
+ambiguity or coverage regression. A fresh reviewer is preferred when available;
+provide prior finding IDs or neutral descriptions only as re-check targets, not
+as a preferred fix or expected verdict. Cosmetic edits do not require a full
+re-review. Findings still do not authorize edits or product decisions.
+
+If subagents are unavailable, perform an author self-check and label it as such;
+do not claim independent validation. A validation pass is evidence about the
+reviewed scope, not user approval or proof of feasibility.
+
 ## Keep working context lightweight
 
 Do not create a separate YAML decision ledger, interview record or other state

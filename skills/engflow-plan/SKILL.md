@@ -39,7 +39,12 @@ only if helpful. Previews stay in conversation.
 
 Do not make consequential architecture decisions, change requirements,
 implement code, run mutating checks, publish tasks or assume that saving a
-plan grants execution approval. Do not invoke other Skills automatically.
+plan grants execution approval. Silence, acknowledgment, or a generic request
+to continue does not approve a material change to scope, delivery approach or
+commitments. Continue within existing authorization; keep affected work
+conditional or ask for explicit approval of the specific change. Approval of
+a plan change does not itself authorize execution. Do not invoke other Skills
+automatically.
 
 ## Completion
 

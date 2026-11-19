@@ -139,6 +139,33 @@ resolution of important unknowns. Converge should assess a simple completed feat
 against its requirements and current evidence without requiring optional artifacts;
 an explicitly required missing record must still be reported.
 
+### Design-to-implementation behavior scenarios
+
+Use these as behavioral acceptance scenarios when checking the Design and
+Implement contracts:
+
+**Illustrative structure may change**
+
+Given Design shows an illustrative class layout such as
+`OrderService -> OrderRepository`, and explicitly does not make those names or
+the directory layout binding, Implement may use
+`OrderHandler -> OrderStore` without asking for approval. It must preserve
+effective interfaces, observable behavior and binding invariants. Review must
+not report a contract violation merely because illustrative names or file
+organization differ.
+
+**A binding interface cannot be silently changed**
+
+Given Design establishes an effective binding interface, such as
+`PaymentGateway.charge(amount: Money): Promise<PaymentResult>`, and
+implementation appears to require a different signature or semantic contract,
+Implement must not silently substitute the new interface. It must present the
+technical evidence, alternatives and impact; pause dependent changes; and
+reconcile the affected Design decision with the appropriate decision authority
+before proceeding. After agreement, update the effective Design contract and
+verify the implementation against the revised contract. Independent work that
+does not depend on the disputed contract may continue when safe and authorized.
+
 Inspect actual changes and evidence. A plausible response or successful process
 exit alone is not a behavioral pass.
 

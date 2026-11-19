@@ -8,6 +8,12 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Restore Plan's explicit approval boundary: silence, acknowledgment or a
+  generic continuation request does not approve material scope, approach or
+  commitment changes. Add bounded independent Specify review inputs, read-only
+  reviewer authority and targeted re-checks after substantive revisions. Add
+  Design-to-Implement behavior scenarios for illustrative structure changes
+  and binding interface deviations, without expanding Skill entrypoints.
 - Support optional Design implementation blueprints for material architecture
   drift, separating effective binding contracts from illustrative skeletons
   and open proposals. Implement and review check contract conformance and
