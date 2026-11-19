@@ -39,6 +39,14 @@ Use a focused Topic when a consequential question needs alternatives or evidence
 - Evidence and remaining uncertainty:
 - Consequences for the design:
 
+## Implementation blueprint (optional)
+
+Only when it reduces material implementation drift, add a diagram, important
+interfaces/invariants or a short illustrative code skeleton. Label effective
+**binding contracts**, **illustrative structure** and **open proposals**, with
+the decision source for consequential contracts. Do not require exact file/class
+layout or write production code.
+
 ## Verification
 
 Describe the important behaviors, boundaries and failure cases that must be

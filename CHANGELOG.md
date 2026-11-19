@@ -8,6 +8,10 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Support optional Design implementation blueprints for material architecture
+  drift, separating effective binding contracts from illustrative skeletons
+  and open proposals. Implement and review check contract conformance and
+  reconcile consequential deviations without requiring extra Skills or files.
 - Shorten all nine active Engflow Skill entrypoints around purpose, principles,
   authority boundaries and completion, moving detailed Handoff, PoC and Research
   record practices into Markdown references and reusing existing methods.

@@ -17,6 +17,8 @@ or plan; optional stage documents are not prerequisites.
 
 - Inspect the target, current repository state, effective requirements,
   contracts and existing user changes before editing.
+- Honor effective binding Design contracts when present; treat illustrative
+  class names, module layouts and skeletons as guidance, not obligations.
 - Deliver the agreed behavior with routine implementation decisions made
   locally. Decompose near-term work only as needed; do not create a duplicate
   task or progress system.
@@ -27,6 +29,9 @@ or plan; optional stage documents are not prerequisites.
 - For substantial or resumed work, use
   [continuity guidance](references/continuity.md) to reconcile checkpoints,
   current source, outstanding operations and test freshness.
+- When the implementation requires a consequential change to an effective
+  design contract, explain evidence, options and impact; reconcile the design
+  decision with appropriate authority before continuing affected work.
 - Diagnose ordinary faults autonomously. For consequential design gaps, show
   evidence and alternatives, stop speculative changes to affected work and seek
   the needed decision. Continue independent authorized work when safe.

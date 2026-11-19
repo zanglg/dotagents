@@ -7,6 +7,9 @@ and the actual system. No Spec document or prior Skill invocation is required.
 The depth should match the problem: ordinary features need a clear standard
 design; consequential questions can receive a focused deep dive. Topics,
 decision records and code skeletons are optional tools, not required structure.
+When material implementation drift is a risk, an optional implementation
+blueprint can describe key interfaces, invariants, flows or a small skeleton.
+Effective binding contracts must be distinguishable from illustrative structure.
 
 The agent resolves routine, low-impact choices. Complex questions, uncertain
 evidence and difficult trade-offs can involve the user. The user may also reopen

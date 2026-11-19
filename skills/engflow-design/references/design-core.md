@@ -57,9 +57,34 @@ Do not require Topic IDs, decision graphs, status matrices or a fixed set of
 design sections for every feature.
 
 A code skeleton, diagram or interface contract is useful when it prevents
-implementation from rediscovering an important boundary. Mark whether a
-consequential element is binding, selected by the agent, proposed or illustrative.
-Do not prescribe routine implementation details or write full implementation.
+implementation from rediscovering an important boundary. Do not prescribe
+routine implementation details or write full implementation.
+
+### Optional implementation blueprint
+
+Select only the detail necessary to reduce material implementation ambiguity:
+- **Conceptual:** the technical route and rationale.
+- **Structural:** components, interfaces, data/control flows, invariants,
+  transaction boundaries and failure/recovery behavior.
+- **Skeleton:** brief interface signatures, type definitions or pseudocode
+  that make a consequential boundary less ambiguous.
+
+These are depth options, not mandatory stages or separate artifacts. Keep
+the blueprint within the current `design.md` or conversational preview.
+Classify consequential elements:
+- **Effective binding contracts:** accepted or otherwise authorized technical
+  decisions, public interfaces and invariants that Implement must preserve.
+  Identify source and scope. Agent-selected routine decisions can be effective
+  within delegated authority; authorship alone does not establish binding status.
+- **Illustrative structure:** optional diagrams, type examples, file locations,
+  class names and pseudocode; these do not mandate exact implementation unless
+  separately adopted as contracts.
+- **Open proposals:** choices or assumptions not yet effective; do not silently
+  promote these to implementation obligations.
+
+If implementation needs a consequential departure from a binding contract,
+reconcile the affected decision and authorization before dependent work proceeds.
+Routine changes to illustrative structure require no design amendment.
 
 ## Evidence and completion
 

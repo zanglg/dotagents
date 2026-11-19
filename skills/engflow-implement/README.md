@@ -3,7 +3,9 @@
 [SKILL.md](SKILL.md) is the authoritative contract.
 
 Implement turns a clear request, Spec or plan into working, verified code, honoring
-existing decisions. Simple features and fixes need no separate Design or Plan and
+existing decisions and effective binding Design contracts when present.
+Illustrative design blueprints guide the work without requiring exact class or
+file layouts. Simple features and fixes need no separate Design or Plan and
 no previous Skill invocation. Important unresolved design questions still need
 resolution; the absence of an optional document is not itself such a question.
 

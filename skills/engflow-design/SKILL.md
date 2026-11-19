@@ -28,6 +28,10 @@ whole-feature redesign.
   feasibility.
 - Preserve sound decisions outside the affected area. Do not replace an
   effective decision with a proposal without agreement.
+- When material implementation drift is likely, provide an optional blueprint of
+  key interfaces, boundaries, flows or illustrative code skeletons. Separate
+  effective binding design contracts from examples and unresolved decisions;
+  do not prescribe routine file or class structure.
 - Use the [design method](references/design-core.md) for detailed reasoning
   and [evidence guidance](references/investigation.md) when investigation helps.
 
@@ -40,7 +44,9 @@ bounded experiment needs its own execution authority. Reading a method does not
 invoke another Skill or grant new permissions.
 
 Do not invent product requirements, redefine acceptance, assign delivery tasks,
-modify production code or run unauthorized experiments. Plan owns delivery;
+create production source files or run unauthorized experiments. Design may
+include illustrative code in `design.md`; actual scaffolding is Implement's
+responsibility unless separately authorized. Plan owns delivery;
 Implement owns code and observed evidence.
 
 ## Completion

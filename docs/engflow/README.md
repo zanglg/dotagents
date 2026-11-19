@@ -115,6 +115,10 @@ When changing a Skill, test the relevant boundaries in realistic tasks:
 - Validate uses a fresh independent reviewer when supported; otherwise it does
   not claim independent review. Findings do not directly edit the Spec.
 - Design can choose a normal solution and deepen a specific technical question.
+  An optional blueprint distinguishes binding contracts, illustrative structure
+  and open proposals when that reduces meaningful implementation drift.
+- Implement checks effective design contracts and reconciles consequential
+  deviations; illustrative skeletons are not mandatory source layouts.
 - Plan produces an executable route without duplicating design.
 - Implement preserves user work and reports actual checks and limitations.
 - Optional capabilities do not become implicit lifecycle gates.
