@@ -34,8 +34,11 @@ Retaining earlier results does not rerun an experiment or make old evidence fres
 Honor the caller's writer/delegation restrictions; this reference adds none. Implement
 keeps mutating probes in the current agent and its helpers read-only. Other callers
 also default to the current agent. A read-only helper cannot acquire execution or
-write authority by reading this method. Any separately authorized worker must have
-an explicit exclusive scope; no recursive delegation or competing writers.
+write authority by reading this method. Workers start read-only. Any worker
+permitted to run mutating probes must receive an explicit, exclusive write grant
+before execution. Pausing or returning a result expires that grant; on resume,
+the worker remains read-only until the coordinator issues a fresh grant. No
+recursive delegation or competing writers.
 
 Stop on sufficient evidence, exhausted budget, revoked permission or a concrete
 blocker. Retry with a changed hypothesis or new information, not blind repetition.

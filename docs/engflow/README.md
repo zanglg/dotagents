@@ -126,6 +126,11 @@ When changing a Skill, test the relevant boundaries in realistic tasks:
   bounded experiment authority, and Handoff preserves uncertain live state.
 - A plan or Design request does not grant experiments or implementation;
   reports and handoffs do not grant new execution authority.
+- Handoff inspection changes no project files; an explicit request to resume
+  and finish a patch can proceed after reconciling current state and permissions.
+- A paused or returned PoC worker resumes read-only until it receives a fresh,
+  exclusive write grant. Implement loads the shared experiment method before
+  any probe and does not delegate mutating probes.
 
 For this workflow, also exercise a user-requested redesign of a sound solution,
 a source-evidence gap, a new numbered feature and continuation of a legacy combined

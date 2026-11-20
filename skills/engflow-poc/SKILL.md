@@ -25,8 +25,9 @@ experiment. Prior Skills and stage documents are not required.
   outstanding operations and limitations needed for reproducibility.
 - Return findings to the caller or conversation. Save a durable report only
   when explicitly requested, following the [record convention](references/records.md).
-- Reuse a coordinator's scope and exclusive-write rules; do not create a
-  competing writer or assume a returned worker has stopped.
+- Workers start or resume read-only until the coordinator gives a fresh,
+  exclusive write grant. Do not create a competing writer or assume a returned
+  worker has stopped.
 
 ## Boundaries
 

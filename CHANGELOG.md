@@ -23,7 +23,9 @@ This project follows Semantic Versioning and uses Conventional Commits.
   record practices into Markdown references and reusing existing methods.
   Clarify that a confirmed decision or conversational pause is not a Spec
   write grant; preserve host-independent limitations of prompt-only read-only
-  behavior.
+  behavior. Preserve explicitly authorized Handoff resumption, require fresh
+  exclusive write grants for resumed PoC workers, and require Implement to
+  load the shared experiment method before probing.
 - Make Specify intent-driven across new and existing Specs. Integrate explanation,
   exploration and clarification into the core capability; keep discussion
   read-only, apply only clearly requested changes, and validate material revisions

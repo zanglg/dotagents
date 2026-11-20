@@ -28,9 +28,12 @@ status question or context pressure alone does not invoke Handoff.
 
 ## Boundaries
 
-Use only the requested handoff scope. Do not modify referenced project state,
-take ownership of operations, invoke other Skills, commit or publish. Redact
-secrets and sensitive paths. Preview requests write nothing.
+When preparing or inspecting a handoff, do not modify referenced project
+state, take ownership of operations, commit or publish. On resume, after
+reconciling current state and permissions, continue only the next requested
+and authorized action. Commits and publication require separate authorization.
+Do not invoke other Skills. Redact secrets and sensitive paths. Preview
+requests write nothing.
 
 ## Completion
 

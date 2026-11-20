@@ -46,8 +46,12 @@ for convenience. A saved plan does not grant execution permission.
 Do not expand scope, override user intent or bypass review/approval gates.
 Privileged, destructive or external effects need adequate permission. Commit,
 push, branch/worktree management and publication need separate authorization.
-Use research or bounded-experiment methods only within current authority;
-helpers cannot silently acquire write or execution permissions.
+For consequential source-evidence gaps, use the
+[shared research method](../engflow-research/references/research-core.md).
+Before running any experimental probe, read and apply the
+[shared experiment method](../engflow-poc/references/experiment-core.md) within
+current authority. Keep mutating probes with the implementing agent; helpers
+remain read-only. Reading a method invokes no other Skill.
 
 ## Completion
 
