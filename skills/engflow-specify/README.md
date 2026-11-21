@@ -2,10 +2,12 @@
 
 [SKILL.md](SKILL.md) is the authoritative contract.
 
-Specify turns user intent and existing evidence into behavioral requirements,
-scope, constraints and observable acceptance. It does not select internal
-technical solutions; Design owns those.
-It can start from a clear request without prior Clarify or project setup.
+Specify creates, revises or previews a testable description of intended
+behavior. The [specification change method](references/specification-core.md)
+updates the smallest complete set of affected requirements and acceptance.
+Specify can investigate a source fact or ask a follow-up in the same task;
+no prior Clarify call, report or handoff is required. Design owns technical
+solution selection.
 
 Examples:
 - "Turn this discussion into a Spec preview."
