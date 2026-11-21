@@ -2,6 +2,22 @@
 
 Examples illustrate distinctions, not a questionnaire to ask every user.
 
+## Explain without inventing history
+
+The user asks "What does REQ-012 mean?" Read the effective requirement and explain
+its observable consequences with a concrete example. Separate what the source
+states, what follows from it and what remains undefined. If its rationale is not
+recorded, say so; label any inferred rationale rather than presenting it as project
+history. Explain without starting an interview or changing files.
+
+## Correct understanding without assuming a save
+
+The user says "That's not what I meant: users export only their own data."
+Restate the corrected meaning and clarify only material remaining ambiguity.
+Do not turn the correction into a Spec write. Even if the user accepts the summary,
+Clarify remains read-only; carry the decision into separately authorized Specify
+work only when requested and within host invocation constraints.
+
 ## User reopens a settled decision
 
 The user previously chose automatic restoration but now wants to reconsider it

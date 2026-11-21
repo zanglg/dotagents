@@ -1,7 +1,8 @@
 # Engflow
 
 Engflow is a small set of explicit, composable engineering skills. Each
-`SKILL.md` defines one capability; references provide optional depth.
+`SKILL.md` defines one capability and its authority boundary. The owning Skill
+keeps a single reusable reference for each shared method.
 
 ## Core workflow
 
@@ -47,11 +48,38 @@ not establish feasibility.
 | Assess refactoring opportunities without edits | [Refactor Assess](../../skills/engflow-refactor-assess/README.md) |
 | Transfer context between sessions | [Handoff](../../skills/engflow-handoff/README.md) |
 
-These are independent capabilities, not mandatory workflow stages. Use them
-only when requested or when the active task explicitly permits the method.
-Design, Plan and Implement can read Research's shared method within their current
-task; Design and Implement can use the experiment method within adequate execution
-authority. Method reuse invokes no independent Skill and creates no report.
+These are independent capabilities, not mandatory workflow stages. Their entrypoints
+are explicit; an active task may borrow a method within its existing authority.
+
+## Compose methods around the problem
+
+**Keep the active task, borrow the method, preserve the authority boundary.** A
+method should explain how to choose the next action, what makes a result reliable,
+and when to stop. Keep one authoritative version near its owning Skill; link to
+it rather than copying its rules. An entrypoint governs the interaction and its
+outputs; reading a method does not invoke that entrypoint, require host nesting,
+or authorize additional work or records.
+
+| If the active task needs to know... | Reuse |
+| --- | --- |
+| What the target **currently does** | [Research's evidence tracing](../../skills/engflow-research/references/research-core.md) |
+| What the target **should do** when a choice is unresolved | [Clarify's decision narrowing](../../skills/engflow-clarify/references/decision-core.md) |
+| How to express a **settled requirement** and its acceptance | [Specify's minimal complete change](../../skills/engflow-specify/references/specification-core.md), with Spec writes authorized separately |
+| Whether a premise **holds at runtime** | [PoC's bounded experiment](../../skills/engflow-poc/references/experiment-core.md), only when the caller may run it |
+
+For example, while updating a driver resume requirement, Specify can trace the
+current I/O behavior for the relevant board and configuration, ask the user a
+material unresolved choice in the same conversation, and resume the Spec update.
+It does not file a Research report, force a Clarify invocation, or run a target
+experiment. If the facts and intent are already clear, skip the extra work.
+Clarify stays conversational even when the user adopts a decision; only an
+explicitly requested or already authorized Spec task can persist it.
+
+Keep entrypoints focused on responsibility, authority and completion; load linked
+methods when relevant, not as mandatory stages. Keep high-impact permission checks
+in the entrypoint. Read-only Skill contracts are prompt instructions, not proof
+of host-enforced tool restrictions. A host may enforce stricter permissions, but
+do not claim that a separate entrypoint or a shorter prompt provides isolation.
 
 ## Authority and records
 
@@ -106,8 +134,35 @@ resolution of important unknowns. Converge should assess a simple completed feat
 against its requirements and current evidence without requiring optional artifacts;
 an explicitly required missing record must still be reported.
 
-Inspect actual changes and evidence. A plausible response or successful process
-exit alone is not a behavioral pass.
+### Requirements composition scenarios
+
+- **Read-only discussion:** Ask whether a driver should queue I/O during resume.
+  Supply source for current behavior and leave the desired behavior open. The
+  agent should distinguish the two, ask the material choice and write nothing,
+  even if the user accepts its recommendation without requesting a Spec update.
+- **Explain and correct:** Ask what a requirement means, then correct the agent's
+  interpretation. Expect specified behavior, implications and unknowns to stay
+  distinct, with no invented rationale or file writes. Within an already authorized
+  Spec change, a correction within that scope should not trigger repeated approval.
+- **Explore during an edit:** While updating a Spec, propose "maybe custom roles"
+  without adopting it. Expect discussion to leave the effective requirement
+  unchanged; then explicitly adopt the choice and request the update. Inspect the
+  affected behavior and acceptance together, with unrelated requirements preserved.
+- **Borrow methods and resume:** Ask to update a Spec for resume I/O while the
+  board and configuration are discoverable but expected pre-resume handling is
+  unclear. Expect the agent to trace the applicable sources, ask queue versus
+  retry in the same conversation, then update the affected requirement and
+  acceptance after the answer. No separate report, Skill invocation or board run.
+- **Skip unnecessary clarification:** Ask for a fully specified change to a board
+  support list that also affects its acceptance matrix. Expect both to be updated,
+  unrelated IDs preserved, and no redundant questions or downstream edits.
+- **Review and re-check:** Introduce a contradiction in a substantial Spec change.
+  Expect a proportionate check, triage against effective decisions, and a targeted
+  re-check after correction. Inspect actual reviewer dispatch/results before
+  accepting an independence claim; otherwise expect a labeled author self-check.
+
+Inspect actual tool actions, file changes and evidence. A plausible response or
+successful process exit alone is not a behavioral pass.
 
 ## Migration
 

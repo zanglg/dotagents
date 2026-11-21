@@ -8,6 +8,15 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Make requirements work composable around three reusable methods: Clarify
+  narrows consequential decisions, Research traces source evidence, and Specify
+  makes the smallest complete change to behavior and acceptance. Specify can
+  investigate facts and ask follow-up questions in the same task. Preserve the
+  read-only discussion boundary and require scoped authority for Spec writes.
+- Add context-sensitive explanation, discussion and correction examples without
+  merging Clarify into Specify. Keep write intent distinct from decision agreement;
+  use proportionate Spec review, neutral reviewer inputs and targeted re-checks,
+  with honest self-check versus independent-review reporting.
 - Make each Engflow capability independently usable from adequate task context.
   Allow direct implementation of simple requests/Specs and standalone Design or
   Plan without preceding invocations or placeholder documents. Converge evaluates

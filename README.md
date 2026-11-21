@@ -17,15 +17,16 @@ evaluation framework or specific agent host.
 | [engflow-design](skills/engflow-design/README.md) | Technical design with routine agent choices and user participation in consequential questions |
 | [engflow-poc](skills/engflow-poc/README.md) | Minimal authorized experiments that test technical premises and return reproducible, qualified evidence |
 | [engflow-research](skills/engflow-research/README.md) | Source-driven investigation of concrete technical questions, with evidence-backed explanations and judgments; no experiment execution |
-| [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and requirement clarification; conversational decisions and change summaries for later specification |
-| [engflow-specify](skills/engflow-specify/README.md) | Synthesize existing discussion and evidence into a specification or preview; no workspace setup required |
+| [engflow-clarify](skills/engflow-clarify/README.md) | Read-only discovery and explanation; resolve consequential choices in conversation |
+| [engflow-specify](skills/engflow-specify/README.md) | Create, revise or preview a Spec by updating behavior and affected acceptance together |
 | [engflow-refactor-assess](skills/engflow-refactor-assess/README.md) | Standalone read-only assessment of existing code and actionable refactoring recommendations |
 
 ## Installation
 
 Install all `skills/engflow-*` folders together, preserving sibling names and
-references. Each entrypoint is independently usable on an explicit request;
-installation dependencies do not impose workflow stages. Compose
+references. Each entrypoint is independently usable on an explicit request.
+Borrow shared methods inside the active task without invoking their Skill or
+expanding authority; installation dependencies do not impose workflow stages. Compose
 **Spec → Design → Plan → Implement** when the work benefits from all four.
 A simple request or Spec can go directly to Implement without Design/Plan files.
 Design can examine one technical question in depth at any point; this does not

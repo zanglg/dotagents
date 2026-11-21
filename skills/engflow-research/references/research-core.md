@@ -7,7 +7,12 @@ execution, access/disclosure expansion or permission to change approved decision
 It does not forbid tests separately authorized for an Implement task; those are
 caller-owned verification, not read-only source investigation.
 
-## Evidence standard
+## Trace the smallest sufficient evidence chain
+
+Frame a claim that would answer the question and identify the target it must
+hold for: relevant version, build, configuration, hardware or environment.
+Find the sources that can distinguish plausible answers; start with evidence
+most likely to confirm or overturn the claim.
 
 Ground claims in the target's actual implementation, applicable first-party
 specifications and existing observations. General knowledge guides inspection;
@@ -34,9 +39,10 @@ where useful.
 
 ## Integration and helpers
 
-The caller verifies consequential claims, incorporates evidence into its authorized
-plan/design/task/code work and identifies stale sources needing synchronization.
-Evidence is advisory, not design approval or a grant to change requirements.
+The caller verifies consequential claims and integrates evidence only into its
+authorized result or records. Separate what the system currently does from
+what a requirement says it should do. Evidence is not a product decision, design
+approval or a grant to change requirements.
 A report alone does not close invalid assumptions or prove a fix.
 
 Optional investigation helpers are read-only, do not execute probes, write reports

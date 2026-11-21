@@ -26,6 +26,8 @@ Invoke explicitly; see the [group guide](../../docs/engflow/README.md) for compo
 
 ## Validation and references
 
-Apply the [investigation method](references/research-core.md); optional helpers
-follow [read-only delegation](references/delegation.md). Check versions and
-inaccessible sources; suggested verification is not an observed result.
+The [investigation method](references/research-core.md) can be reused in
+another Skill without invoking Research or saving a report. Optional helpers
+follow [read-only delegation](references/delegation.md); authorized reports
+follow the [record convention](references/records.md). Check target versions;
+suggested verification is not an observed result.
