@@ -15,24 +15,17 @@ assessment, not implementation, general code review or approval to merge.
 
 ## Scope and method
 
-Start from the supplied feature directory, source paths or implementation target.
-Establish the target revision, included work and exclusions; ask if the target is
-ambiguous instead of selecting by newest directory or current branch.
+Resolve the supplied target, revision, included work and exclusions. Ask when
+ambiguous. Apply the [assessment method](references/assessment.md): for each
+material requirement or contract, trace what the code does and which current
+evidence covers it. Locate the first unsupported or conflicting link so the
+owner knows what needs correcting.
 
-Read and apply the [assessment method](references/assessment.md) before judging
-coverage or reporting a status. Resolve effective decisions, trace material
-requirements through design, delivery and implementation, and check that validation
-evidence applies to the actual source state. Choose investigation depth to fit the
-scope; a checklist or passing test suite alone does not establish convergence.
-
-Determine the necessary baseline from the requested scope, effective requirements,
-contracts and project obligations. A clear request or simple Spec plus code and
-current evidence may suffice. No prior Skill invocation is required. Apply the
-[feature-record convention](../engflow-specify/references/feature-records.md)
-read-only: effective sections in existing combined documents are valid inputs.
-Missing required substance is a gap or blocker; absent optional Design, Plan or
-task documents alone do not force PARTIAL or BLOCKED. Disclose genuine coverage
-limits and preserve any explicit project requirement for those records.
+Use the [feature-record convention](../engflow-specify/references/feature-records.md)
+read-only. Derive the baseline from effective decisions and project obligations.
+A clear request or simple Spec, code and current evidence may suffice. Accept
+effective sections of combined records. Check required substance and explicitly
+required records even when the delivery route is short.
 
 ## Boundaries
 

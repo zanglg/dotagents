@@ -16,22 +16,15 @@ Do not automatically invoke other Skills or expand their permissions.
 
 ## Prepare
 
-Establish the next objective and where work stopped. Ask only when ambiguity
-materially changes the handoff. Inspect relevant artifacts and reference actual
-paths or URLs with their purpose, rather than copying recoverable content.
+State the next objective, where work stopped and the first safe action with its
+prerequisites. Reference accessible sources by path or URL and purpose. Ask
+only if ambiguity changes continuation. Capture what a fresh session could not
+recover: decisions and their rationale, rejected alternatives, failed attempts,
+blockers and outstanding operations.
 
-Preserve essential context not reliably recoverable from those sources:
-- User intent, constraints, decisions, rationale and rejected alternatives.
-- Findings, blockers, failed approaches and pending questions or approval gates.
-- Accepted changes awaiting source updates: affected paths, supplied approval
-  evidence and next sync action. Reference an existing record rather than copy it.
-- Outstanding operations whose handles, effects or ownership may be lost between
-  sessions, following the runtime-state guidance below.
-
-Distinguish observations and confirmed decisions from proposals and assumptions;
-silence is not approval. When conversation is the primary source, preserve its
-load-bearing detail, not the entire transcript. State the next concrete action
-and essential prerequisites; leave routine environment discovery to the next agent.
+Distinguish proposals from accepted changes. For an agreed change awaiting a
+source update, preserve the decision evidence, affected paths, pending gates
+and next action. Mark the handoff partial if essential sources are inaccessible.
 
 ### Runtime state that cannot be rediscovered reliably
 
@@ -46,8 +39,8 @@ safe work. Reference an existing operation record where sufficient; do not dump 
 or build a second process ledger. Preparing a handoff does not authorize cancelling,
 restarting or taking ownership of operations. Honor immediate stop requests.
 
-Before delivery, check whether the handoff plus accessible sources is sufficient
-for continuation. Mark it partial when critical context or access is missing.
+Check that a fresh reader can tell what to do next and what must be verified
+before acting.
 
 ## Deliver
 
@@ -77,14 +70,3 @@ artifacts, commit, publish or otherwise change project state while preparing a h
    If liveness/effects remain unknown, report the blocked action and needed check.
 4. Continue the next applicable action only when requested and within current scope.
    Do not rewrite the handoff merely because it was read.
-
-## Optional outline
-
-Adapt to the task; omit empty sections and impose no fixed length:
-- **Objective:** next goal and stopping point.
-- **Read first:** source paths/URLs and their purpose.
-- **Unpersisted context:** essential decisions and evidence unavailable there.
-- **Outstanding operations:** handles, scope, observed/unknown state and safe checks.
-- **Open questions:** blockers, pending approval or source updates.
-- **Next action:** first concrete step after source and environment reconciliation.
-- **Continuation instruction:** a short, ready-to-copy instruction for the next agent.

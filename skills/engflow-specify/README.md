@@ -8,6 +8,9 @@ technical solutions; Design owns those.
 It can start from a clear request without prior Clarify or project setup.
 
 Examples:
+- "Could the cursor expire?" Explore consequences and check existing contracts in conversation.
+- "Record cursor expiry as an open question." Save it with that status.
+- "Use a 24-hour expiry and update the Spec." Revise the affected requirement and acceptance.
 - "Turn this discussion into a Spec preview."
 - "Update the Spec with these decisions and preserve existing IDs."
 

@@ -47,11 +47,13 @@ not establish feasibility.
 | Assess refactoring opportunities without edits | [Refactor Assess](../../skills/engflow-refactor-assess/README.md) |
 | Transfer context between sessions | [Handoff](../../skills/engflow-handoff/README.md) |
 
-These are independent capabilities, not mandatory workflow stages. Use them
-only when requested or when the active task explicitly permits the method.
-Design, Plan and Implement can read Research's shared method within their current
-task; Design and Implement can use the experiment method within adequate execution
-authority. Method reuse invokes no independent Skill and creates no report.
+Each entrypoint requires an explicit request. Within an active task, Specify,
+Design, Plan and Implement identify factual uncertainties that could change
+their outcome and apply the [shared investigation method](../../skills/engflow-research/references/research-core.md)
+when needed. The active Skill uses the finding in its own deliverable under
+its existing permissions. Reading the method starts no separate Research task
+or report. Design and Implement can also use the experiment method within
+adequate execution authority.
 
 ## Authority and records
 
@@ -105,6 +107,23 @@ Expect no forced preceding invocation, no placeholder documents and no invented
 resolution of important unknowns. Converge should assess a simple completed feature
 against its requirements and current evidence without requiring optional artifacts;
 an explicitly required missing record must still be reported.
+
+Exercise Specify with both a clear behavior request and a request to preserve
+old file formats. For the latter, supply a supported-format list and a reader
+that also accepts an undocumented format. Check that Specify uses the first
+request directly and, for the second, checks the sources and surfaces the open
+compatibility decision. During an authorized edit, ask whether to support that
+format and inspect the diff: discussion and read-only research alone should
+leave the Spec and index untouched. Then decide to support it and request the
+update. Check that Specify records the decision and its acceptance once.
+
+To exercise Design and Implement together, give a reviewer a design in which
+the event log assigns a per-stream sequence on append. Compare two changes:
+one moves sequence allocation into independent producers while keeping the
+public signature, the other swaps a private lookup index while preserving all
+required behavior. The reviewer should locate the ownership change and its
+effect on ordering, and accept the index substitution if the evidence supports
+the guarantees. The design should supply enough context to explain both calls.
 
 Inspect actual changes and evidence. A plausible response or successful process
 exit alone is not a behavioral pass.

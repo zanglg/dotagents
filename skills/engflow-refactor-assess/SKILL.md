@@ -11,35 +11,17 @@ disable-model-invocation: true
 
 # Engflow Refactor Assess
 
-Identify changes that make existing code easier to understand, change or test.
-Choose the investigation strategy to fit the question, not a fixed set of
-diagnostic dimensions. No Feature, Spec, setup or other Skill is required.
+On an explicit maintainability or refactoring review, start with a maintenance
+operation: what is hard to understand, change or test, and where does the cost
+arise? Trace the burden across callers and contracts. A smell or metric can
+prompt inspection, but needs a concrete consequence to support a finding.
+No feature documents or earlier Skill are required.
 
-Use only when the user explicitly requests a refactoring assessment,
-code simplification review, or maintainability review. An implementation
-request or observed code complexity alone does not trigger this Skill.
-
-Unlike Engflow Implement's internal code review, assess whether existing code
-merits a behavior-preserving structural change, not whether a particular patch is correct. Findings may inform
-Design or Plan when explicitly adopted; they do not become requirements or tasks
-merely by being reported. Engflow installs as a complete group, but this assessment
-requires no prior invocation of another entrypoint.
-
-## Judgment standard
-
-Recommend a refactoring only when inspected evidence shows a concrete maintenance
-burden and the proposed change offers a worthwhile net improvement. Explain what
-becomes easier and why that benefit outweighs migration cost, added indirection
-and regression risk. "Cleaner" or "more modular" alone is not a justification.
-
-Evaluate complexity across the affected system, not just the edited code.
-Preserve observable behavior and necessary contracts; distinguish behavior changes
-from refactoring. Respect project conventions and effective architectural decisions.
-
-Treat code smells and metrics as investigation cues, not findings. Prefer the
-smallest coherent change that addresses the demonstrated burden, not speculative
-needs. Leaving the code unchanged is a valid conclusion. Use [judgment examples](references/judgment.md)
-to distinguish demonstrated maintenance benefit from stylistic preference.
+Prefer the smallest change with a worthwhile net benefit across the affected
+system. Preserve observable behavior, architectural decisions and project
+conventions. Weigh the work saved against migration, indirection and regression
+risk. Leaving the code as it stands is a valid outcome. See the
+[judgment examples](references/judgment.md) for borderline cases.
 
 ## Investigation and evidence
 

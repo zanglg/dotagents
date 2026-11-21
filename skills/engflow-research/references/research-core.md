@@ -9,7 +9,8 @@ caller-owned verification, not read-only source investigation.
 
 ## Evidence standard
 
-Ground claims in the target's actual implementation, applicable first-party
+Start with the question and identify which decision or conclusion depends on
+the answer. Ground claims in the target's actual implementation, applicable first-party
 specifications and existing observations. General knowledge guides inspection;
 it does not establish private protocol, hardware or target-specific facts.
 
@@ -34,8 +35,8 @@ where useful.
 
 ## Integration and helpers
 
-The caller verifies consequential claims, incorporates evidence into its authorized
-plan/design/task/code work and identifies stale sources needing synchronization.
+The caller verifies consequential claims, applies findings where they affect
+its own deliverable and identifies stale sources needing synchronization.
 Evidence is advisory, not design approval or a grant to change requirements.
 A report alone does not close invalid assumptions or prove a fix.
 

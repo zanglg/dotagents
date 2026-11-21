@@ -12,8 +12,10 @@ value.
 
 ## Proposed solution
 
-Describe the chosen approach and why it fits. Include only the components,
-responsibilities, data, interfaces and flows that matter.
+Trace the main flow through the responsible components. Show the key data
+structures and interfaces where their semantics constrain implementation.
+Explain which guarantees must survive a redesign and why. For a focused
+question, show its place in the existing flow.
 
 ## Important details
 

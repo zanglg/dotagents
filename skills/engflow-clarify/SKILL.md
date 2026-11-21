@@ -23,22 +23,14 @@ summary tied to that feature's source paths; no directory or artifact is created
 
 ## Explore or clarify
 
-For an early idea, establish the problem, intended users, useful outcomes,
-first-delivery scope, constraints and consequential tradeoffs. Challenge the
-assumptions behind the request with concrete scenarios and alternatives.
-For an existing specification, focus on material gaps, contradictions, edge
-behavior and acceptance ambiguity; do not restart discovery without cause.
-Adapt as the discussion develops rather than making the user select a mode.
+For an early idea, use concrete scenarios to uncover users, outcomes, scope
+and constraints. For an existing Spec, focus on choices that change behavior
+or acceptance. Ask the next question whose answer would change a decision.
+Offer a recommendation with its tradeoff when useful.
 
-Ask the smallest useful set of questions, grounded in what is already known.
-Prefer one consequential question at a time when answers determine the next.
-Offer a recommendation and its tradeoff when useful; do not turn supported,
-ordinary choices into an interview. Accept explicit user decisions as premises.
-Do not reopen settled questions without cause. The user may reconsider them or
-change direction even when the earlier choice remains sound. Revisit affected
-decisions on that request, new evidence or a concrete conflict; explain impacts
-and keep alternatives distinct from effective decisions until agreed. Never
-invent answers to complete a questionnaire.
+Carry settled decisions forward. Revisit one when the user redirects the work,
+new evidence emerges or a conflict appears. Explain whose choice it is, what
+would change and which decision stays effective until a replacement is agreed.
 
 Distinguish requirements, preferences, recommendations and unverified assumptions.
 Keep decision certainty separate from delivery scope: a confirmed requirement may

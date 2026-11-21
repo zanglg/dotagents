@@ -9,40 +9,33 @@ disable-model-invocation: true
 
 # Engflow Specify
 
-Define **what should be built**, not how it should be implemented.
-Start from a request or available discussion; no prior Clarify or other Skill
-invocation, project setup or existing feature documents are required.
+Start with the request, settled decisions and available sources. Describe who
+needs which observable outcome, under what conditions, and what is in scope
+for this delivery. State exclusions and deferred work so a reviewer can spot
+a later change in scope.
 
-Read the relevant discussion, existing Spec and supporting sources. Synthesize
-the user's intent into a concise, testable description of behavior, scope,
-non-goals, constraints and observable acceptance.
+When the user explores a possibility, discuss it in conversation, even during
+an authorized Spec edit. Investigate relevant facts read-only and keep the
+current requirement in effect while the choice is open. If asked to save an
+open question or draft, label it accordingly. Apply a settled change within
+existing write authority without asking for the same decision again.
 
-## Principles
+Give each material requirement an observable acceptance condition, including
+edge behavior where it changes the outcome. Preserve the source and authority
+of requirements, preferences and external constraints. Identify factual assumptions
+that could change scope or acceptance. When one is uncertain, use the
+[source-investigation method](../engflow-research/references/research-core.md)
+and tie the finding to the affected requirement. Distinguish observed behavior
+from promised behavior. Ask the user about material choices the evidence leaves
+open, and make remaining assumptions visible.
+Leave internal structures, interfaces and technical choices to Design.
 
-- Reuse settled decisions and existing context. Ask only when an ambiguity
-  materially changes behavior, scope or acceptance.
-- Distinguish requirements, preferences, external constraints and assumptions.
-  Preserve their source and authority.
-- Make acceptance observable. Include material edge cases without specifying
-  internal design.
-- Keep deferred work separate from current scope.
-- Do not invent product intent or select internal data structures, architecture,
-  interfaces or implementation details. Those belong to Design.
+Follow the [feature-record convention](references/feature-records.md). Return
+previews in conversation. For authorized writes, reuse the feature's Spec or
+default to `specs/NNN-short-name/spec.md`. Preserve existing content, IDs and
+approval history. A proposed change needs its own decision. Identify affected
+acceptance and downstream records awaiting revision.
 
-## Boundaries
-
-Read and follow the [shared feature-record convention](references/feature-records.md).
-Create or update the selected feature's `spec.md` within write authority;
-the default is `specs/NNN-short-name/spec.md`. A preview stays in conversation.
-Preserve existing content, stable IDs and approval history. A proposed revision
-does not inherit approval, and changing Spec does not automatically update Design
-or Plan.
-
-Do not start technical design, experiments or implementation. Do not create
-unrequested artifacts, manage branches, commit or publish.
-
-## Completion
-
-The Spec is useful when the intended behavior and scope are clear, material
-requirements have observable acceptance, and unresolved assumptions or decisions
-are visible. Report the result, path and remaining questions.
+Report the result, saved path if applicable and open questions. Stay within
+Spec work. Design, experiments, implementation, branch management, commits
+and publication are outside this scope.

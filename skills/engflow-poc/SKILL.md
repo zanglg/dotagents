@@ -12,22 +12,21 @@ disable-model-invocation: true
 
 # Engflow PoC
 
-Resolve a consequential uncertainty with the smallest adequate experiment, not
-a partial implementation of the whole feature. No other Skill or document is required.
+State the premise and which observation would distinguish competing answers.
+Read and apply the [experiment method](references/experiment-core.md) before
+any probe. Exercise the smallest real mechanism that can answer the question.
+Report whether the premise held, failed or remains unresolved under the tested
+conditions. A broken harness leaves the premise open.
 
-Engflow is installed as a complete group. An explicit PoC request starts this
-entrypoint; follow-up trials reuse its granted scope. Read and apply
-[the shared experiment method](references/experiment-core.md) before any probe.
-Other entrypoints use that reference directly, not an implicit PoC invocation.
-A request to inspect, plan, design or save results alone authorizes no execution.
+An explicit PoC request starts this entrypoint. Reuse its authorized scope for
+follow-up trials. Other callers can borrow the method within their own scope.
+A request to inspect, design, plan or save results alone authorizes no run.
 
 ## Results and persistence
 
-Return results to the coordinating caller, or directly in conversation when used
-independently. The caller integrates consequential evidence into its own authorized
-sources; PoC does not edit the caller's Design or progress record. Calls do not
-automatically create research/experiment reports. Experiment execution may still
-need authorized temporary files; distinguish those from requested durable storage.
+Return evidence to the caller or conversation. The caller updates its own
+design or progress record. Temporary experiment writes require execution scope.
+Durable reports require an explicit save request.
 
 When explicitly asked to retain the experiment, reuse its existing record or the
 specified/project location. Otherwise default to `docs/poc/NNN-short-name/`, with
@@ -47,9 +46,8 @@ and disclose missing reproducibility material rather than inventing it.
 
 ## Execution and coordination
 
-Apply the shared experiment method's stopping, live-state reconciliation and
-cleanup rules before returning or retrying. Report retained artifacts, side effects
-and outstanding operations. PoC adds the following coordination boundaries.
+Before returning or retrying, reconcile live operations and cleanup under the
+experiment method. Report retained artifacts, side effects and outstanding work.
 
 Under a coordinator, obey its scope and exclusive-write rules. Workers start or
 resume read-only until a fresh grant; they do not delegate further or edit the

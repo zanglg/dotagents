@@ -9,63 +9,38 @@ disable-model-invocation: true
 
 # Engflow Plan
 
-Define **how the work will be delivered**. Translate the goal, effective requirements
-and available technical context into an ordered, verifiable route. No prior Skill
-invocation or separate Spec/Design document is required.
+Turn the goal, effective requirements and available technical decisions into
+a delivery route. Start from the request and relevant code or existing records.
+Reference design decisions where they constrain delivery.
 
-## Work
+## Choose the route
 
-Read the request, relevant code and available Spec, Design or delivery records. Identify
-the outcomes that must be delivered, their real dependencies and how each
-milestone and the whole feature will be accepted.
+Work back from observable whole-feature acceptance. For each useful milestone,
+name its outcome, how to check it and which earlier result it actually needs.
+This lets a reader see what can run independently and what would break if the
+work were reordered. Detail near-term tasks only where they clarify delivery,
+ownership or verification. Implement can refine them as evidence arrives.
 
-Read and follow the
-[shared feature-record convention](../engflow-specify/references/feature-records.md).
-Save authorized planning work to `specs/NNN-short-name/plan.md`, reusing existing
-project paths. Preview stays conversational. The
-[plan outline](assets/execution-plan.md) and [task outline](assets/tasks.md) are optional.
+Resolve routine sequencing locally. Clarify material intent gaps. For missing
+source evidence, apply the [research method](../engflow-research/references/research-core.md)
+within this task. Where a consequential technical choice remains open, plan
+the investigation or decision and keep only dependent work conditional.
 
-Use milestones as the default planning unit. Add tasks only when they clarify
-near-term deliverables, ownership, dependencies or verification. Keep distant
-work coarse; Implement can refine the next milestone as the code becomes clear.
+## Maintain the plan
 
-Reuse the existing plan and stable IDs. Keep task definitions inline in
-`plan.md` by default. A separate `tasks.md` is optional and should exist only
-when separate tracking has clear value.
+Follow the [feature-record convention](../engflow-specify/references/feature-records.md).
+Reuse the plan and stable IDs. Default to `specs/NNN-short-name/plan.md` with
+inline tasks. Use a separate `tasks.md` only when separate tracking adds value.
+The [plan outline](assets/execution-plan.md) and [task outline](assets/tasks.md)
+are optional. Keep previews in conversation and save only authorized records.
 
-For consequential source-evidence gaps, apply the
-[shared research method](../engflow-research/references/research-core.md) within
-this task. Integrate findings into delivery dependencies and verification;
-consequential unresolved technical selection needs design work, not an assumed answer.
+Plan owns intended work. Implement owns observed progress and evidence.
+When direction changes, revise affected dependencies and acceptance while
+retaining valid execution observations. Preserve approval gates. A saved plan,
+silence or a generic continuation grants no new authority. Stay within source
+inspection and planning writes. Exclude implementation, mutating checks, ticket
+publication and automatic Skill invocation.
 
-## Principles
-
-- Preserve effective acceptance and existing design contracts; reference their rationale
-  instead of copying it.
-- Resolve routine planning details using existing architecture and conventions.
-  Clarify material intent gaps directly. For important unresolved technical choices,
-  identify the needed design or investigation work and keep dependent milestones
-  conditional; continue independent planning. Do not require a completed design
-  before planning the work needed to obtain one.
-- Make dependencies and acceptance explicit, but do not invent progress or
-  decompose work for its own sake.
-- Revise only affected work when scope or design changes. Preserve valid
-  execution observations and evidence.
-
-## Boundaries
-
-Plan may inspect sources and update authorized planning records. It does not
-make consequential architecture choices, implement code, run mutating checks, publish tickets,
-or treat a saved plan as execution permission. Preserve approval gates; silence
-or a generic request to continue does not approve a material change.
-
-Plan owns intended milestones and task definitions. Implement owns observed
-status and execution evidence. Keep one authoritative task record.
-Do not invoke another Skill automatically or require one for routine planning.
-
-## Completion
-
-The plan is ready when the delivery route, meaningful dependencies and
-observable acceptance are clear enough for the next ready work. Distinguish an
-executable delivery route from conditional work awaiting decisions. Report the plan path,
-milestones, unresolved decisions and any authorization limits.
+Report the route, next ready milestone, work awaiting decisions, authorization
+limits and any saved path. The reader should see how completing the milestones
+will establish integrated acceptance.

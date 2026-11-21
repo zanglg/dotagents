@@ -8,6 +8,14 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Reuse the shared Research method within Specify when a factual uncertainty
+  affects scope or acceptance. Keep exploratory proposals conversational until
+  settled or explicitly requested as draft material.
+- Condense Engflow Design around how to resolve technical choices, involve the
+  user in tradeoffs and revisit accepted decisions. Show architectural
+  responsibilities and key interfaces so Implement can review affected guarantees.
+- Streamline the remaining Engflow entrypoints around observable acceptance,
+  delivery dependencies, evidence limits and safe continuation.
 - Make each Engflow capability independently usable from adequate task context.
   Allow direct implementation of simple requests/Specs and standalone Design or
   Plan without preceding invocations or placeholder documents. Converge evaluates

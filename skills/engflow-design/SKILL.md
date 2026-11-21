@@ -1,79 +1,52 @@
 ---
 name: engflow-design
 description: >
-  Develop a technical solution from a clear goal, requirements and constraints.
-  Use for initial design or a focused deep dive into any technical question.
-  Resolve routine choices directly; involve the user in consequential questions
-  and revisit existing designs when technical direction changes.
+  Choose and explain a technical approach for a feature, resolve a focused
+  design question, or revisit an existing decision when direction changes.
 disable-model-invocation: true
 ---
 
 # Engflow Design
 
-Own **how the solution should work**. Turn effective requirements, the existing
-system and technical constraints into a coherent design. A clear request is a
-valid starting point; no Spec document or prior Skill invocation is required.
+Start from the request, effective requirements and actual system. A clear goal
+is enough to begin. Choose the simplest approach that fits the constraints and
+existing contracts. For a focused question, design just the affected part.
 
-## Work
+## Make the decision
 
-Start with the relevant requirements, current architecture, code and contracts.
-Produce a design proportional to the problem: explain the important components,
-data, interfaces, flows, invariants, failure behavior and verification needs.
+Resolve local, reversible choices from existing conventions. Investigate facts
+that could change the choice. For consequential source gaps, apply the
+[research method](../engflow-research/references/research-core.md) and tie the
+conclusion to the relevant source and version. If the answer depends on runtime
+behavior, use the [experiment guidance](references/investigation.md) only within
+granted execution scope. A design request alone authorizes no probe.
 
-Make routine, low-impact, reversible technical choices autonomously. Go deeper where
-complexity, uncertainty or consequences justify it. A focused request may examine
-one question—such as a tree versus a map, a concurrency strategy or an interface—
-without redesigning the whole feature.
+Resolve ambiguity that changes intended behavior with the user. When viable
+options differ on an unsettled priority, or investigation
+leaves no reliable solution, bring the user the tradeoff, evidence, attempts and
+recommendation. Keep dependent conclusions conditional. Users can reopen any
+decision. Assess feasibility even for a preferred approach, honor explicit
+constraints and keep the effective decision until a replacement is agreed.
+Revise only what the change affects and identify downstream work to reconcile.
+See [design examples](references/design-core.md) for close calls.
 
-Involve the user in complex or consequential questions, deep exploration,
-insufficient evidence or problems without a reliable solution. Explain the
-evidence, attempts, alternatives and recommendation so the user can shape the
-direction. Investigate discoverable facts rather than asking the user to guess.
-Do not loop through speculative options.
+## Deliver the design
 
-The user may participate at any point or reopen a completed design to reflect
-their technical preferences; the existing solution need not be defective.
-Assess the new direction's feasibility, costs and affected work. Preferences
-guide selection; explicit constraints bind it. Neither is evidence of feasibility.
-Keep proposed replacements distinct from effective decisions until agreed.
+Show how the main parts work together, who owns each important decision or
+state transition, and why those boundaries matter. For a focused design, trace
+only the affected path. Explain the contracts, failure behavior and how to
+verify them. Show the
+key data structures and interfaces when their shape or semantics matter to the
+solution. Use the smallest useful schema, signature or sketch, and distinguish
+binding guarantees from illustrative details.
+Identify the source and status of consequential decisions and any open assumptions.
+Distinguish proposed checks from observed results.
+A reader should be able to trace the design and tell which future changes
+would break an architectural decision and which details may vary. Leave product scope, delivery tasks and code to their owners.
 
-For consequential source-evidence gaps, read and apply the
-[shared research method](../engflow-research/references/research-core.md) within
-this task. Integrate source/version references, uncertainty and decision impact
-into the design. For runtime evidence, follow the
-[evidence methods](references/investigation.md) within adequate experiment authority.
-Method reuse invokes no other Skill and creates no independent report.
-
-## Principles
-
-- Effective requirements define behavior; Design selects the technical approach.
-  Honor an existing Spec without requiring one to be created.
-- Keep one coherent feature-level design. Use Topics, decision records, diagrams
-  or code skeletons only when they make a complex problem easier to understand.
-- Preserve the source and status of important decisions. Distinguish binding
-  requirements, user direction, agent choices and proposals.
-- Revisit only the parts affected by new direction or evidence. Preserve sound
-  decisions and work elsewhere.
-- Finish when the implementation can proceed without rediscovering important
-  system behavior or technical contracts.
-
-## Boundaries
-
-Read and follow the
-[shared feature-record convention](../engflow-specify/references/feature-records.md).
-Maintain the authorized design in `specs/NNN-short-name/design.md`, reusing the
-existing feature and project paths. Preview stays conversational. Use the
-[design method](references/design-core.md) for deeper reasoning and the
-[outline](assets/design.md) only where useful.
-
-Establish enough intended behavior and constraints for the requested design from
-the request, discussion or existing sources. Resolve material ambiguity directly;
-keep unsupported parts conditional rather than requiring a preliminary Spec stage.
-Do not change requirements, define delivery tasks, modify production code or run experiments
-without the relevant authority. Plan consumes the design; Implement owns code
-and execution evidence. Do not invoke another Skill automatically.
-
-Report the design path or preview, chosen approach, rationale, assumptions,
-open questions and affected downstream work. Readiness is not a permanent freeze:
-revise affected decisions when direction changes, preserving useful history.
-Do not claim implementation or verification.
+Return a preview in conversation. For feature records, follow the
+[shared convention](../engflow-specify/references/feature-records.md) and save
+only within write authority. Maintain one feature design at its existing path
+or the default `specs/NNN-short-name/design.md`. Report the path when saved.
+Use the [outline](assets/design.md) if useful. Borrowing a method stays within
+Design's scope without invoking another Skill or creating a separate report.

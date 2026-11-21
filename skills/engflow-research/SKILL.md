@@ -11,17 +11,9 @@ disable-model-invocation: true
 
 # Engflow Research
 
-Answer the user's technical question with a defensible explanation.
-Choose the investigation strategy and answer structure to fit the question;
-no predefined research category, workflow or document setup is required.
-
-Engflow is installed as a complete group; this entrypoint is independently usable
-on an explicit Research request. Read and apply
-[the shared source-investigation method](references/research-core.md) before
-investigating. Other entrypoints read that method directly in their own tasks;
-they do not automatically invoke this Skill or acquire its report-write scope.
-Explicit support requests can return scoped findings to a caller. Honor host
-invocation guards and current access/disclosure restrictions.
+On an explicit research request, answer the question using the
+[source-investigation method](references/research-core.md) within the host's
+access and disclosure limits.
 
 ## Results and persistence
 
