@@ -24,6 +24,10 @@ or reject an otherwise useful review.
 
 Prioritize material defects introduced or exposed by the change:
 - Functional correctness and observable requirement/contract coverage.
+- Preservation of effective architectural responsibilities, state ownership and
+  invariants, even when public signatures and tests are unchanged. Apply the
+  [design contract guidance](../../engflow-design/references/design-core.md#preserve-architectural-guarantees);
+  do not report differences from illustrative sketches alone as violations.
 - Failure paths, error handling, state transitions and data integrity.
 - Resource lifecycle, cleanup, concurrency, races and idempotency.
 - Security, trust boundaries, authorization and sensitive-data handling.

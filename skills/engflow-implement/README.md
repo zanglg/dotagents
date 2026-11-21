@@ -6,6 +6,10 @@ Implement turns a clear request, Spec or plan into working, verified code, honor
 existing decisions. Simple features and fixes need no separate Design or Plan and
 no previous Skill invocation. Important unresolved design questions still need
 resolution; the absence of an optional document is not itself such a question.
+Check architectural responsibilities and invariants, not just signatures and tests.
+Preserving effective guarantees allows routine internal substitutions; consequential
+contract changes need a decision before dependent work continues. Illustrative
+class names and file layouts are not implementation obligations.
 
 Examples:
 - "Implement this plan, run the relevant tests and review the change."

@@ -13,6 +13,11 @@ This project follows Semantic Versioning and uses Conventional Commits.
   makes the smallest complete change to behavior and acceptance. Specify can
   investigate facts and ask follow-up questions in the same task. Preserve the
   read-only discussion boundary and require scoped authority for Spec writes.
+- Strengthen Design-to-Implement fidelity around state ownership, responsibility
+  boundaries and invariants, not just signatures and passing tests. Distinguish
+  effective binding guarantees, illustrative sketches and open proposals; reconcile
+  consequential departures before dependent work while allowing safe private
+  substitutions. Share one contract reference across design and implementation review.
 - Add context-sensitive explanation, discussion and correction examples without
   merging Clarify into Specify. Keep write intent distinct from decision agreement;
   use proportionate Spec review, neutral reviewer inputs and targeted re-checks,

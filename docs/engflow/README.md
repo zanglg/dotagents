@@ -66,6 +66,7 @@ or authorize additional work or records.
 | What the target **should do** when a choice is unresolved | [Clarify's decision narrowing](../../skills/engflow-clarify/references/decision-core.md) |
 | How to express a **settled requirement** and its acceptance | [Specify's minimal complete change](../../skills/engflow-specify/references/specification-core.md), with Spec writes authorized separately |
 | Whether a premise **holds at runtime** | [PoC's bounded experiment](../../skills/engflow-poc/references/experiment-core.md), only when the caller may run it |
+| Which architectural guarantees an implementation **must preserve** | [Design's contract guidance](../../skills/engflow-design/references/design-core.md#preserve-architectural-guarantees) |
 
 For example, while updating a driver resume requirement, Specify can trace the
 current I/O behavior for the relevant board and configuration, ask the user a
@@ -117,7 +118,10 @@ remain in force across stages.
 
 When changing a Skill, test the relevant boundaries in realistic tasks:
 - Spec captures behavior without inventing technical decisions.
-- Design can choose a normal solution and deepen a specific technical question.
+- Design can choose a normal solution and deepen a specific technical question;
+  explain state ownership, responsibility boundaries and where guarantees hold.
+- Implement and review preserve effective architectural guarantees while allowing
+  routine substitutions and changes to illustrative names or layouts.
 - Plan produces an executable route without duplicating design.
 - Implement preserves user work and reports actual checks and limitations.
 - Optional capabilities do not become implicit lifecycle gates.
@@ -160,6 +164,23 @@ an explicitly required missing record must still be reported.
   Expect a proportionate check, triage against effective decisions, and a targeted
   re-check after correction. Inspect actual reviewer dispatch/results before
   accepting an independence claim; otherwise expect a labeled author self-check.
+
+### Design-to-implementation scenarios
+
+- **Responsibility drift despite stable signatures:** Supply a design where the
+  event log owns atomic per-stream sequence allocation on append. Move allocation
+  to independent producers without changing the public signature. Expect review
+  to identify the effective ownership decision and its ordering/concurrency impact,
+  even if existing tests pass. Implement must pause dependent changes and reconcile
+  the decision and any authorized Design update before continuing. Independent safe
+  work may proceed; approval of the idea is not authority for unrelated writes.
+- **Safe private substitution:** Replace a private lookup index while preserving
+  effective ownership, ordering, freshness and other guarantees. Expect a routine
+  implementation choice, not a forced Design invocation or amendment.
+- **Illustrative structure:** Change class names or file layout shown only as an
+  example. Expect no contract violation solely for those differences. Conversely,
+  changing an effective binding interface's signature or semantics requires
+  reconciliation even if its illustrative surrounding structure is unchanged.
 
 Inspect actual tool actions, file changes and evidence. A plausible response or
 successful process exit alone is not a behavioral pass.

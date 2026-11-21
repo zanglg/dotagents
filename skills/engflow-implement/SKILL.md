@@ -27,7 +27,11 @@ When feature records are involved, read and follow the
 
 Implement autonomously within the agreed scope. Resolve routine coding choices
 locally. Refine the next milestone into tasks or steps only when that helps
-execution; do not create a second planning system.
+execution; do not create a second planning system. Trace changed paths against
+[effective architectural guarantees](../engflow-design/references/design-core.md#preserve-architectural-guarantees):
+check state ownership, responsibility boundaries and where invariants are enforced,
+even when signatures and tests still agree. Routine substitutions and changes to
+illustrative sketches need no design amendment when those guarantees are preserved.
 
 Run proportionate checks as work proceeds, then relevant integration and
 regression checks. Review meaningful changes and the integrated result using the
@@ -45,11 +49,11 @@ Use the [experiment method](../engflow-poc/references/experiment-core.md) when
 runtime evidence is needed, within existing execution authority. These methods
 do not invoke another Skill or create separate reports.
 
-Resolve ordinary defects and implementation details directly. If a technical
-problem exposes a consequential design choice or cannot be resolved with
-reasonable investigation, stop speculative changes to the affected work.
-Explain the problem, evidence, attempts and viable options, then ask the user
-whether to adjust the design. Continue independent, authorized work where safe.
+Resolve ordinary defects and implementation details directly. If work requires
+a consequential departure from an effective design guarantee, or reasonable
+investigation leaves no reliable solution, pause dependent changes. Explain the
+conflict, evidence, attempts, options and impact; seek the needed decision before
+continuing affected work. Continue independent, authorized work where safe.
 
 After an agreed change, reconcile affected delivery work and existing records
 within authority. Routine adjustments need no separate Plan invocation; substantial

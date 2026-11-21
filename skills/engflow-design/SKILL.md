@@ -17,8 +17,10 @@ valid starting point; no Spec document or prior Skill invocation is required.
 ## Work
 
 Start with the relevant requirements, current architecture, code and contracts.
-Produce a design proportional to the problem: explain the important components,
-data, interfaces, flows, invariants, failure behavior and verification needs.
+Produce a design proportional to the problem: trace the important flows through
+components, state transitions and failure paths. Explain who owns each important
+state or responsibility, where its guarantees are enforced and how to verify them.
+Show key data structures or interfaces when their semantics constrain the solution.
 
 Make routine, low-impact, reversible technical choices autonomously. Go deeper where
 complexity, uncertainty or consequences justify it. A focused request may examine
@@ -50,8 +52,11 @@ Method reuse invokes no other Skill and creates no independent report.
   Honor an existing Spec without requiring one to be created.
 - Keep one coherent feature-level design. Use Topics, decision records, diagrams
   or code skeletons only when they make a complex problem easier to understand.
-- Preserve the source and status of important decisions. Distinguish binding
-  requirements, user direction, agent choices and proposals.
+- Preserve the source, scope and authority of important decisions. Distinguish
+  effective binding guarantees from illustrative structures and open proposals;
+  agent authorship alone does not make a detail binding. Use the
+  [contract guidance](references/design-core.md#preserve-architectural-guarantees)
+  when the distinction matters.
 - Revisit only the parts affected by new direction or evidence. Preserve sound
   decisions and work elsewhere.
 - Finish when the implementation can proceed without rediscovering important

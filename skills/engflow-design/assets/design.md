@@ -12,8 +12,10 @@ value.
 
 ## Proposed solution
 
-Describe the chosen approach and why it fits. Include only the components,
-responsibilities, data, interfaces and flows that matter.
+Describe the chosen approach and why it fits. Trace the main flow through the
+responsible components: who owns state and where each important guarantee is
+enforced. Show data structures or interfaces where their semantics matter.
+For a focused question, trace only the affected path.
 
 ## Important details
 
@@ -22,9 +24,13 @@ Add subsections only where useful, for example:
 - Data structures and ownership
 - Interfaces and compatibility
 - State transitions and concurrency
-- Invariants and consistency
+- Invariants, consistency and responsibility boundaries
 - Failure, recovery and resource lifecycle
 - Performance, security and operations
+
+For consequential elements, identify the source, scope and authority of effective
+binding guarantees; distinguish illustrative details and open proposals. Sketches
+are optional and do not mandate routine names, file layouts or class structures.
 
 ## Deep dives (optional)
 

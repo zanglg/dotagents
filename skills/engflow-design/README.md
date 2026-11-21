@@ -7,6 +7,10 @@ and the actual system. No Spec document or prior Skill invocation is required.
 The depth should match the problem: ordinary features need a clear standard
 design; consequential questions can receive a focused deep dive. Topics,
 decision records and code skeletons are optional tools, not required structure.
+Trace important flows, state ownership and where guarantees are enforced. The
+[contract guidance](references/design-core.md#preserve-architectural-guarantees)
+distinguishes effective binding decisions from illustrative details and proposals;
+implementation should preserve guarantees, not copy a sketch's names or layout.
 
 The agent resolves routine, low-impact choices. Complex questions, uncertain
 evidence and difficult trade-offs can involve the user. The user may also reopen
