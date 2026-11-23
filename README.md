@@ -43,8 +43,9 @@ development; do not inject it as a global policy into target projects.
 - Skill-local `references/`, `assets/` and `agents/`: methods, optional templates
   and host invocation metadata. Keep these with their owning skill.
 - `docs/engflow/README.md`: group installation, composition and validation guidance.
-- `scripts/validate_skills.py` and `tests/test_validate_skills.py`: optional
-  repository maintenance checks, not Skill runtime dependencies.
+- `scripts/validate_skills.py`, `tests/test_validate_skills.py` and
+  `tests/test_engflow_contracts.py`: optional repository structural checks,
+  not Skill runtime dependencies or proof of agent behavior.
 
 Keep credentials, caches, machine configuration, temporary handoffs and session
 transcripts outside Git. Reusable handoff instructions belong in their Skill;
