@@ -17,8 +17,7 @@ or plan; optional stage documents are not prerequisites.
 
 - Inspect the target, current repository state, effective requirements,
   contracts and existing user changes before editing.
-- Honor effective binding Design contracts when present; treat illustrative
-  class names, module layouts and skeletons as guidance, not obligations.
+- Trace changed code against [effective architectural guarantees](../engflow-design/references/design-core.md#preserve-architectural-guarantees). Check who owns state, where consequential decisions are made, and where invariants are enforced—even if public signatures and tests still pass. Treat illustrative names, layouts and skeletons as guidance, not obligations.
 - Deliver the agreed behavior with routine implementation decisions made
   locally. Decompose near-term work only as needed; do not create a duplicate
   task or progress system.
