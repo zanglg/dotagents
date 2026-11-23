@@ -27,18 +27,15 @@ independent requirements when useful. If an unresolved choice prevents a
 coherent revision, leave the affected requirement unchanged and explain the
 blocker; record open items only within an authorized update or preview.
 
-## Keep discussion and write intent distinct
+## Establish authorized change intent
 
-Interpret the current message in context, not by keywords. During an authorized
-Spec edit, "Maybe custom roles would help" opens a choice; discuss it without
-replacing the effective requirement. "Use custom roles; update the Spec" settles
-the choice and requests a change. Ask only about consequential missing details.
+Follow [interaction guidance](interaction.md) to classify the user's current
+intent and [Specify authority boundaries](../SKILL.md#boundaries) to apply the
+write-permission rule. This method defines how to make an authorized Spec change;
+it does not independently grant permission.
 
-"That's not what I meant: users export only their own data" corrects the agent's
-understanding. It is not new write authority by itself. If the active task already
-authorizes that scoped Spec change, apply the correction without asking for the
-same permission again. Otherwise discuss it or clarify the desired action before
-editing. A request to explain a requirement does not authorize revising it.
+Once the change is authorized, update the smallest complete set of affected
+requirements and acceptance criteria using the method below.
 
 ## Change behavior and acceptance together
 
