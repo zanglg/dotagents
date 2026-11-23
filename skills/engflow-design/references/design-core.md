@@ -71,20 +71,36 @@ Select only the detail necessary to reduce material implementation ambiguity:
 
 These are depth options, not mandatory stages or separate artifacts. Keep
 the blueprint within the current `design.md` or conversational preview.
-Classify consequential elements:
-- **Effective binding contracts:** accepted or otherwise authorized technical
-  decisions, public interfaces and invariants that Implement must preserve.
-  Identify source and scope. Agent-selected routine decisions can be effective
-  within delegated authority; authorship alone does not establish binding status.
-- **Illustrative structure:** optional diagrams, type examples, file locations,
-  class names and pseudocode; these do not mandate exact implementation unless
-  separately adopted as contracts.
-- **Open proposals:** choices or assumptions not yet effective; do not silently
-  promote these to implementation obligations.
+Use [architectural guarantee guidance](#preserve-architectural-guarantees)
+to classify binding contracts, illustrative structure and open proposals.
 
-If implementation needs a consequential departure from a binding contract,
-reconcile the affected decision and authorization before dependent work proceeds.
-Routine changes to illustrative structure require no design amendment.
+## Preserve architectural guarantees
+
+Trace the relevant flow: who owns state, makes decisions and enforces each
+important invariant, including failure and recovery. Explain why those boundaries
+matter. Classify consequential elements by their source, scope and authority:
+
+- **Effective binding guarantees:** accepted or otherwise authorized contracts,
+  responsibility boundaries and invariants that implementation must preserve.
+  Routine agent choices can be effective within delegated authority; authorship
+  alone does not establish binding status.
+- **Illustrative details:** examples, private layouts, names and pseudocode that
+  may vary without changing the effective guarantees.
+- **Open proposals:** alternatives and assumptions that are not yet effective;
+  do not silently turn them into implementation obligations.
+
+For example, a design gives the event log responsibility for assigning a
+per-stream sequence atomically on append. Moving allocation to independent
+producers changes that architectural decision, even with the same public signature
+and passing tests. Explain the ordering and concurrency impact, and reconcile the
+consequential decision with the appropriate authority before dependent work proceeds.
+Update affected Design material only within write authority; continue independent
+safe work. A private lookup-index substitution needs no design amendment if it
+preserves the effective ownership, ordering, freshness and other guarantees.
+
+Likewise, changing illustrative class names or file locations alone is not a
+contract violation. A reviewer must identify the effective decision and concrete
+impact, not demand textual fidelity to a sketch.
 
 ## Evidence and completion
 
