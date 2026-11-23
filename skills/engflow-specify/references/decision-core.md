@@ -1,10 +1,11 @@
 # Decision narrowing
 
 Use this method when the answer to a question could alter the active task's
-behavior, scope, constraints or acceptance. The current agent asks the user
-directly. Reusing this method neither invokes a separate Skill nor expands
-caller authority. A read-only discussion remains read-only. Specify owns this
-method after retirement of the standalone Clarify entrypoint.
+behavior, scope, constraints or acceptance. This reference defines how to
+sequence and converge consequential decisions. Use [interaction guidance](interaction.md)
+to classify the user's current intent and [Specify authority boundaries](../SKILL.md#boundaries)
+to determine whether a write is authorized. Reusing this method invokes no
+separate Skill and expands no caller authority.
 
 ## Choose the next question
 
@@ -41,5 +42,4 @@ Leave settled decisions in force until a replacement is accepted. Reopen them
 on user direction, new evidence or a concrete conflict; preserve unrelated
 decisions. Separate confirmed but deferred behavior from current acceptance.
 A deadline is not authorization to schedule work; feasibility and write or
-execution permission remain separate from agreement. See
-[interaction examples](interaction.md) for these distinctions.
+execution permission remain separate from agreement.
