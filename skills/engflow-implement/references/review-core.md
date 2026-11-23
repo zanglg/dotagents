@@ -24,9 +24,12 @@ or reject an otherwise useful review.
 
 Prioritize material defects introduced or exposed by the change:
 - Functional correctness and observable requirement/contract coverage.
-- Conformance with effective binding Design contracts (when present), such as
-  interfaces and invariants. Do not treat illustrative skeletons, file layouts
-  or class names as mandatory unless expressly adopted.
+- Preservation of effective architectural responsibilities, state ownership,
+  decision boundaries and invariants, even if public signatures and tests remain
+  unchanged. Apply the [design contract method](../../engflow-design/references/design-core.md#preserve-architectural-guarantees);
+  do not report differences from illustrative sketches, file layouts or class
+  names alone as violations. Identify the effective decision, actual deviation
+  and its impact before classifying a contract failure.
 - Failure paths, error handling, state transitions and data integrity.
 - Resource lifecycle, cleanup, concurrency, races and idempotency.
 - Security, trust boundaries, authorization and sensitive-data handling.
