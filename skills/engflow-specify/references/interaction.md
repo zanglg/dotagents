@@ -2,7 +2,9 @@
 
 These examples illustrate intent judgment. They are not a command syntax or a
 questionnaire to apply mechanically. Interpret each message in its conversation
-and project context.
+and project context. This is the authoritative reference for user-intent
+classification examples; `SKILL.md` remains authoritative for write permissions
+and scope boundaries.
 
 ## Understand what the user wants now
 
