@@ -31,7 +31,9 @@ whole-feature redesign.
 - When material implementation drift is likely, provide an optional blueprint of
   key interfaces, boundaries, flows or illustrative code skeletons. Separate
   effective binding design contracts from examples and unresolved decisions;
-  do not prescribe routine file or class structure.
+  [trace architectural guarantees](references/design-core.md#preserve-architectural-guarantees)
+  through ownership, responsibility and invariant enforcement. Do not prescribe
+  routine file or class structure.
 - Use the [design method](references/design-core.md) for detailed reasoning
   and [evidence guidance](references/investigation.md) when investigation helps.
 
