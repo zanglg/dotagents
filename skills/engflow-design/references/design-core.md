@@ -76,9 +76,9 @@ to classify binding contracts, illustrative structure and open proposals.
 
 ## Preserve architectural guarantees
 
-Trace the relevant flow: who owns state, makes decisions and enforces each
-important invariant, including failure and recovery. Explain why those boundaries
-matter. Classify consequential elements by their source, scope and authority:
+Trace the relevant flow: state ownership, responsibility for key decisions,
+and where each important invariant is enforced, including failure and recovery.
+Explain why those boundaries matter. Classify consequential elements by their source, scope and authority:
 
 - **Effective binding guarantees:** accepted or otherwise authorized contracts,
   responsibility boundaries and invariants that implementation must preserve.
