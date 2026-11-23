@@ -32,6 +32,11 @@ another Skill or a fixed sequence of interaction modes.
 - **Validate:** After generation or material revision, check intent coverage,
   contradictions, missing/edge behavior, ambiguity, testability and scope drift.
 
+Use the [decision-narrowing method](references/decision-core.md) to resolve
+consequential choices and the [specification-change method](references/specification-core.md)
+to change intended behavior and acceptance together. Borrowing either method
+invokes no separate Skill and grants no new authority.
+
 ## Boundaries
 
 Explanation, discussion and correction of the agent's understanding are
