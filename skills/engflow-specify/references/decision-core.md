@@ -2,9 +2,9 @@
 
 Use this method when the answer to a question could alter the active task's
 behavior, scope, constraints or acceptance. The current agent asks the user
-directly. Reusing this method neither invokes a separate Skill nor expands the caller's
-authority. A read-only discussion remains read-only. Specify owns this method after
-retirement of the standalone Clarify entrypoint.
+directly. Reusing this method neither invokes a separate Skill nor expands
+caller authority. A read-only discussion remains read-only. Specify owns this
+method after retirement of the standalone Clarify entrypoint.
 
 ## Choose the next question
 
