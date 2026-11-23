@@ -8,6 +8,13 @@ This project follows Semantic Versioning and uses Conventional Commits.
 
 ### Changed
 
+- Integrate intent-driven Specify with composable decision narrowing and
+  specification-change methods, without restoring the retired Clarify entrypoint.
+  Reinforce Design-to-Implement contract fidelity for state ownership,
+  responsibility boundaries and invariants even when signatures/tests pass.
+  Document host-level behavior scenarios and add deterministic integration
+  contract guardrails; no model behavior pass is implied.
+
 - Restore Plan's explicit approval boundary: silence, acknowledgment or a
   generic continuation request does not approve material scope, approach or
   commitment changes. Add bounded independent Specify review inputs, read-only
