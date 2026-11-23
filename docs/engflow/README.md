@@ -54,6 +54,28 @@ Implement can read Research's shared method within their current task; Design
 and Implement can use the experiment method within adequate execution authority.
 Method reuse invokes no independent Skill and creates no report.
 
+
+## Compose methods without invoking more Skills
+
+Keep the active task and its authority; borrow only the method needed for a
+material uncertainty. Each method has one owning Skill and an authoritative
+reference. Reading a reference does not start its owning entrypoint, create a
+report, grant a write or run an experiment.
+
+| Question in the active task | Reusable method |
+| --- | --- |
+| What does the target **currently do**? | [Research: source investigation](../../skills/engflow-research/references/research-core.md) |
+| What **should it do** when a product decision remains open? | [Specify: decision narrowing](../../skills/engflow-specify/references/decision-core.md) |
+| How do I change **effective behavior and acceptance together**? | [Specify: specification change](../../skills/engflow-specify/references/specification-core.md) |
+| Does a technical premise **hold at runtime**? | [PoC: bounded experiment](../../skills/engflow-poc/references/experiment-core.md), only with execution authority |
+| What **architectural guarantees** must code preserve? | [Design: binding contract guidance](../../skills/engflow-design/references/design-core.md#preserve-architectural-guarantees) |
+
+An active Specify discussion can look up existing behavior, narrow a consequential
+choice and continue an authorized Spec update without invoking Clarify or Research.
+A discussed or agreed decision does not itself grant a write. Design, Plan and
+Implement may borrow these methods only within their existing permissions.
+Do not manufacture separate stage artifacts merely to document method reuse.
+
 ## Authority and records
 
 - **Spec** owns intended behavior, scope, acceptance and user-supplied or
@@ -144,6 +166,34 @@ resolution of important unknowns. Converge should assess a simple completed feat
 against its requirements and current evidence without requiring optional artifacts;
 an explicitly required missing record must still be reported.
 
+### Requirements composition behavior scenarios
+
+Run these on the target agent host against a temporary fixture. Inspect actual
+file diffs, tool calls and reviewer dispatch; a plausible final reply is not
+evidence that the boundary was respected.
+
+- **Explain and correct:** Ask what an existing REQ means, then correct the
+  agent's interpretation. Expect explicit text versus implications versus
+  undefined behavior, no invented rationale and no writes.
+- **Explore, then commit:** Say "Maybe custom roles would help" during a Spec
+  discussion. Expect alternatives and no file changes. Then say "Use custom
+  roles; update this Spec." Expect the smallest complete affected requirement
+  and acceptance change, with unrelated IDs and approval evidence preserved.
+- **Borrow evidence and decision methods:** Request a driver-resume Spec edit;
+  supply discoverable board behavior but leave queue-versus-retry unresolved.
+  Expect the agent to inspect sources and ask the key decision within Specify,
+  then make an authorized scoped change without a Research report, separate
+  Clarify invocation or experiment.
+- **Skip unnecessary clarification:** Provide an unambiguous board support change
+  that affects acceptance. Expect a direct Spec update, not an interview.
+- **Validate and re-check:** Introduce a material contradiction in an authorized
+  Spec revision. Expect an independent read-only review when actually available,
+  scoped evidence-backed findings and a targeted re-check after correction.
+  Otherwise expect an honest self-check, never a fabricated independent review.
+- **Authorization and deferral:** Agree with an agent recommendation but do not
+  request a save; expect no writes. Separately confirm a future requirement is
+  deferred; expect it excluded from current acceptance after an authorized update.
+
 ### Design-to-implementation behavior scenarios
 
 Use these as behavioral acceptance scenarios when checking the Design and
@@ -158,6 +208,20 @@ the directory layout binding, Implement may use
 effective interfaces, observable behavior and binding invariants. Review must
 not report a contract violation merely because illustrative names or file
 organization differ.
+
+**Responsibility drift despite unchanged signatures**
+
+Given Design binds atomic per-stream sequence allocation to the event log on
+append, have Implement move allocation to independent producers without changing
+the public method signature. Expect review to identify the effective state owner,
+the ordering/concurrency guarantee and the concrete departure even if tests pass.
+Pause dependent implementation until the decision is reconciled.
+
+**Safe private substitution**
+
+Given an internal lookup index is illustrative, replace it while preserving
+state ownership, ordering, freshness and all effective guarantees. Expect no
+unnecessary Design amendment or contract violation.
 
 **A binding interface cannot be silently changed**
 
