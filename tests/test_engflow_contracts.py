@@ -48,7 +48,21 @@ class EngflowIntegrationContracts(unittest.TestCase):
         self.assertIn("### Requirements composition behavior scenarios", guide)
         self.assertIn("**Responsibility drift despite unchanged signatures**", guide)
         self.assertIn("**Safe private substitution**", guide)
-        self.assertIn("Inspect actual file diffs, tool calls and reviewer dispatch", guide)
+        self.assertIn("file diffs, tool calls and reviewer dispatch", guide)
+
+    def test_workflow_execution_and_authority_boundaries(self):
+        plan = read("skills/engflow-plan/SKILL.md")
+        implement = read("skills/engflow-implement/SKILL.md")
+        converge = read("skills/engflow-converge/SKILL.md")
+        research = read("skills/engflow-research/SKILL.md")
+        poc = read("skills/engflow-poc/SKILL.md")
+        handoff = read("skills/engflow-handoff/SKILL.md")
+        self.assertIn("Silence, acknowledgment", plan)
+        self.assertIn("experiment method", implement)
+        self.assertIn("Strictly **read-only**", converge)
+        self.assertIn("Research is source-only", research)
+        self.assertIn("exclusive write grant", poc)
+        self.assertIn("On resume, after", handoff)
 
     def test_no_active_reference_to_retired_clarify_entrypoint(self):
         for file in (ROOT / "skills").glob("engflow-*/**/*.md"):
